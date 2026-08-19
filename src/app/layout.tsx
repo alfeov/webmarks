@@ -1,6 +1,8 @@
 import type { Metadata } from 'next'
 import localFont from 'next/font/local'
+
 import { cn } from '@/shared/lib/utils'
+
 import './globals.css'
 
 const fontExcalidraw = localFont({

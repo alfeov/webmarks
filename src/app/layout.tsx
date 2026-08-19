@@ -1,9 +1,13 @@
 import type { Metadata } from 'next'
 import localFont from 'next/font/local'
+import Link from 'next/link'
 
 import { cn } from '@/shared/lib/utils'
+import { TooltipProvider } from '@/shared/ui/tooltip'
 
-import './globals.css'
+import './styles/index.css'
+import { AppSidebar } from '@/widgets/sidebar/ui/AppSidebar'
+import { Profile } from '@/widgets/profile/ui/Profile'
 
 const fontExcalidraw = localFont({
   src: '../shared/assets/fonts/Excalifont-Regular.woff2',
@@ -20,7 +24,27 @@ export default function RootLayout({ children }: LayoutProps<'/'>) {
       lang='en'
       className={cn('h-full', 'antialiased', fontExcalidraw.className)}
     >
-      <body className='min-h-full flex flex-col'>{children}</body>
+      <body className='min-h-full flex flex-col'>
+        <TooltipProvider>
+          <header className='border-b'>
+            <div className='flex items-center justify-between px-[30px] md:px-[40px] h-(--header-height)'>
+              <Link href='/'>
+                <h1 className='text-[30px] font-bold'>WebMarks</h1>
+              </Link>
+              <Profile />
+            </div>
+          </header>
+
+          <main className='h-full'>
+            <div className='flex'>
+              <aside>
+                <AppSidebar />
+              </aside>
+              {children}
+            </div>
+          </main>
+        </TooltipProvider>
+      </body>
     </html>
   )
 }

@@ -3,12 +3,13 @@ import localFont from 'next/font/local'
 import Link from 'next/link'
 
 import { cn } from '@/shared/lib/utils'
+import { ScrollArea } from '@/shared/ui/scroll-area'
+import { Toaster } from '@/shared/ui/toast'
 import { TooltipProvider } from '@/shared/ui/tooltip'
 import { Profile } from '@/widgets/profile/ui/Profile'
 import { AppSidebar } from '@/widgets/sidebar/ui/AppSidebar'
 
 import './styles/index.css'
-import { ScrollArea } from '@/shared/ui/scroll-area'
 
 const fontExcalidraw = localFont({
   src: '../shared/assets/fonts/Excalifont-Regular.woff2',
@@ -45,6 +46,7 @@ export default function RootLayout({ children }: LayoutProps<'/'>) {
             </div>
           </main>
         </TooltipProvider>
+        <Toaster />
       </body>
     </html>
   )

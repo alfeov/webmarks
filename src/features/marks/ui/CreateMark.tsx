@@ -1,12 +1,28 @@
-import { Button } from '@/shared/ui/button'
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from '@/shared/ui/dialog'
 
-import { Plus } from 'lucide-react'
+import { CreateMarkButton } from './CreateMarkButton'
+import { CreateMarkForm } from './CreateMarkForm'
 
 export function CreateMark() {
   return (
-    <Button>
-      New WebMark
-      <Plus data-icon='inline-end' />
-    </Button>
+    <Dialog>
+      <DialogTrigger render={<CreateMarkButton data-slot='dialog-trigger' />} />
+      <DialogContent>
+        <DialogHeader>
+          <DialogTitle>Create new WebMark</DialogTitle>
+          <DialogDescription>
+            Insert url below to create new WebMark
+          </DialogDescription>
+        </DialogHeader>
+        <CreateMarkForm />
+      </DialogContent>
+    </Dialog>
   )
 }

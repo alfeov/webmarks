@@ -4,10 +4,11 @@ import Link from 'next/link'
 
 import { cn } from '@/shared/lib/utils'
 import { TooltipProvider } from '@/shared/ui/tooltip'
+import { Profile } from '@/widgets/profile/ui/Profile'
+import { AppSidebar } from '@/widgets/sidebar/ui/AppSidebar'
 
 import './styles/index.css'
-import { AppSidebar } from '@/widgets/sidebar/ui/AppSidebar'
-import { Profile } from '@/widgets/profile/ui/Profile'
+import { ScrollArea } from '@/shared/ui/scroll-area'
 
 const fontExcalidraw = localFont({
   src: '../shared/assets/fonts/Excalifont-Regular.woff2',
@@ -24,7 +25,7 @@ export default function RootLayout({ children }: LayoutProps<'/'>) {
       lang='en'
       className={cn('h-full', 'antialiased', fontExcalidraw.className)}
     >
-      <body className='min-h-full flex flex-col'>
+      <body className='min-h-full max-h- flex flex-col'>
         <TooltipProvider>
           <header className='border-b'>
             <div className='flex items-center justify-between px-[30px] md:px-[40px] h-(--header-height)'>
@@ -35,12 +36,12 @@ export default function RootLayout({ children }: LayoutProps<'/'>) {
             </div>
           </header>
 
-          <main className='h-full'>
-            <div className='flex'>
+          <main>
+            <div className='flex h-(--content-height)'>
               <aside>
                 <AppSidebar />
               </aside>
-              {children}
+              <ScrollArea className='h-full w-full'>{children}</ScrollArea>
             </div>
           </main>
         </TooltipProvider>

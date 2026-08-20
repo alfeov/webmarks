@@ -1,4 +1,4 @@
 :root {
   --header-height: 60px;
-  --sidebar-height: calc(100dvh - var(--header-height));
+  --content-height: calc(100dvh - 1px - var(--header-height));
 }

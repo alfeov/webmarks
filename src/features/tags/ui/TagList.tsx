@@ -15,7 +15,7 @@ export function TagList() {
   return (
     <SidebarGroup>
       <SidebarGroupLabel className='text-[16px]'>Tags</SidebarGroupLabel>
-      <SidebarGroupAction>
+      <SidebarGroupAction aria-label='create tag'>
         <Plus />
       </SidebarGroupAction>
       <SidebarMenu>

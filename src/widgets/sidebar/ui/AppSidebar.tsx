@@ -13,8 +13,8 @@ import {
 
 export function AppSidebar() {
   return (
-    <SidebarProvider className='items-start min-h-(--sidebar-height)'>
-      <Sidebar collapsible='none' className='hidden md:flex m-h-full'>
+    <SidebarProvider className='items-start border-r min-h-full'>
+      <Sidebar collapsible='none' className='hidden md:flex bg-(--background)'>
         <SidebarHeader>
           <SidebarGroup>
             <SidebarGroupLabel className='text-[16px]'>Main</SidebarGroupLabel>

@@ -24,7 +24,7 @@ export function TagItem({ title }: TagItemProps) {
       <DropdownMenu>
         <DropdownMenuTrigger
           render={
-            <SidebarMenuAction>
+            <SidebarMenuAction aria-label='tag menu'>
               <LucideEllipsis />
             </SidebarMenuAction>
           }

@@ -7,8 +7,10 @@ import {
   DialogTrigger,
 } from '@/shared/ui/dialog'
 
+import { MetaProvider } from '../model/MetaContext'
 import { CreateMarkButton } from './CreateMarkButton'
 import { CreateMarkForm } from './CreateMarkForm'
+import { LoadMetaForm } from './LoadMetaForm'
 
 export function CreateMark() {
   return (
@@ -18,10 +20,14 @@ export function CreateMark() {
         <DialogHeader>
           <DialogTitle>Create new WebMark</DialogTitle>
           <DialogDescription>
-            Insert url below to create new WebMark
+            Insert data below to create new WebMark
           </DialogDescription>
         </DialogHeader>
-        <CreateMarkForm />
+
+        <MetaProvider>
+          <LoadMetaForm />
+          <CreateMarkForm />
+        </MetaProvider>
       </DialogContent>
     </Dialog>
   )

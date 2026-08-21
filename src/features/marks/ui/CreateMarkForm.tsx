@@ -1,53 +1,58 @@
 'use client'
 
-import { useActionState, useEffect } from 'react'
+import { use } from 'react'
+import { useForm } from 'react-hook-form'
 
-import { Button } from '@/shared/ui/button'
-import {
-  InputGroup,
-  InputGroupAddon,
-  InputGroupButton,
-  InputGroupInput,
-} from '@/shared/ui/input-group'
-import { showErrorToast } from '@/shared/utils/showErrorToast'
+import { Field, FieldLabel, FieldLegend, FieldSet } from '@/shared/ui/field'
+import { Input } from '@/shared/ui/input'
 
-import { createWebMark } from '../model/createWebMark'
-
-import { ClipboardPaste } from 'lucide-react'
-
-const initialState = {
-  error: '',
-}
-
+import { MetaContext } from '../model/MetaContext'
 export function CreateMarkForm() {
-  const [state, formAction, isPending] = useActionState(
-    createWebMark,
-    initialState,
-  )
+  const metaContext = use(MetaContext)
 
-  useEffect(() => {
-    if (state?.error) {
-      showErrorToast(state.error)
-    }
-  }, [state?.error])
+  console.log(metaContext?.meta)
+  const { register, handleSubmit } = useForm({
+    values: metaContext?.meta,
+  })
 
   return (
-    <form id='createMarkForm' action={formAction} className='grid gap-[30px]'>
-      <InputGroup>
-        <InputGroupInput
-          placeholder='Search WebMark...'
-          name='url'
-          aria-invalid={Boolean(state?.error)}
-        />
-        <InputGroupAddon align='inline-end'>
-          <InputGroupButton aria-label='search mark' size='icon-xs'>
-            <ClipboardPaste />
-          </InputGroupButton>
-        </InputGroupAddon>
-      </InputGroup>
-      <Button type='submit' form='createMarkForm' disabled={isPending}>
-        {isPending ? 'Creating...' : 'Create WebMark'}
-      </Button>
+    <form>
+      <FieldSet>
+        <FieldSet>
+          <FieldLegend>Required Fields</FieldLegend>
+          <Field>
+            <FieldLabel className='req'>Title</FieldLabel>
+            <Input placeholder='WebMark' {...register('title')} />
+            {/* <FieldError></FieldError> */}
+          </Field>
+          <Field>
+            <FieldLabel className='req'>URL</FieldLabel>
+            <Input placeholder='https://webmarks.com' {...register('url')} />
+            {/* <FieldError></FieldError> */}
+          </Field>
+          <Field>
+            <FieldLabel className='req'>Description</FieldLabel>
+            <Input
+              placeholder='Some cool description to your link'
+              {...register('description')}
+            />
+            {/* <FieldError></FieldError> */}
+          </Field>
+        </FieldSet>
+        <FieldSet>
+          <FieldLegend>Images Fields (Optional)</FieldLegend>
+          <Field>
+            <FieldLabel>Logo URL (Preferred over Image URL)</FieldLabel>
+            <Input placeholder='https://logo.com' {...register('logo.url')} />
+            {/* <FieldError></FieldError> */}
+          </Field>
+          <Field>
+            <FieldLabel>Image URL</FieldLabel>
+            <Input placeholder='https://image.com' {...register('image.url')} />
+            {/* <FieldError></FieldError> */}
+          </Field>
+        </FieldSet>
+      </FieldSet>
     </form>
   )
 }

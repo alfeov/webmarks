@@ -1,0 +1,18 @@
+model WebMark {
+  id          String   @id @default(cuid())
+  title       String
+  url         String
+  description String?
+  publisher   String?
+  author      String?
+  logoUrl     String?  @map("logo_url")
+  imageUrl    String?  @map("image_url")
+  createdAt   DateTime @default(now()) @map("created_at")
+
+  userId String @map("user_id")
+  user   User   @relation(fields: [userId], references: [id])
+
+  tags Tag[]
+
+  @@map("webmarks")
+}

@@ -7,6 +7,7 @@ import { prisma } from '@/shared/lib/prisma'
 
 import { LOGIN_FORMDATA } from './constants'
 import { LoginFormSchema } from './LoginFormSchema'
+import { createSession } from './session'
 
 type FormState =
   | {
@@ -33,27 +34,32 @@ export async function login(prevState: FormState, formData: FormData) {
 
   const { email, password } = validatedFields.data
 
-  const data = await prisma.user.findUnique({
+  const user = await prisma.user.findUnique({
     where: {
       email,
     },
   })
-
-  if (!data)
+  if (!user)
     return {
       message: "User with this email doesn't exist",
     }
 
-  const isPasswordMatch = await bcrypt.compare(password, data.password)
+  const isPasswordMatch = await bcrypt.compare(password, user.password)
   if (!isPasswordMatch)
     return {
       message: 'Incorrect password!',
     }
 
+  await createSession({
+    avatarUrl: user.avatarUrl,
+    userId: user.id,
+    username: user.username,
+  })
+
   return {
     isSuccess: true,
     message:
       'You have successfully enter to your account: ' +
-      (data.username ?? data.email),
+      (user.username ?? user.email),
   }
 }

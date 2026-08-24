@@ -20,6 +20,7 @@ const eslintConfig = defineConfig([
         'warn',
         {
           groups: [
+            ['server-only'], // 0.
             ['^@?\\w'], // 1. Frameworks, libs
             ['^@\/'], // 2. FSD
             ['^\\.'], // 3. Relative imports

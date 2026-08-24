@@ -1,3 +1,8 @@
+'use client'
+
+import { use } from 'react'
+
+import { AuthDialogSettersContext } from '@/features/auth/model/AuthDialogContext'
 import { Avatar, AvatarFallback, AvatarImage } from '@/shared/ui/avatar'
 import { Button } from '@/shared/ui/button'
 import {
@@ -10,6 +15,8 @@ import {
 } from '@/shared/ui/dropdown-menu'
 
 export function Profile() {
+  const setters = use(AuthDialogSettersContext)
+
   return (
     <DropdownMenu>
       <DropdownMenuTrigger
@@ -22,11 +29,14 @@ export function Profile() {
           </Button>
         }
       />
-
       <DropdownMenuContent>
         <DropdownMenuGroup>
-          <DropdownMenuItem>Log In</DropdownMenuItem>
-          <DropdownMenuItem>Sing In</DropdownMenuItem>
+          <DropdownMenuItem onClick={setters?.openLoginDialog}>
+            Login
+          </DropdownMenuItem>
+          <DropdownMenuItem onClick={setters?.openSignupDialog}>
+            Signup
+          </DropdownMenuItem>
         </DropdownMenuGroup>
         <DropdownMenuSeparator />
         <DropdownMenuGroup>

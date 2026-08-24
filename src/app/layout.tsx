@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import localFont from 'next/font/local'
 import Link from 'next/link'
 
+import { AuthDialogProvider } from '@/features/auth/model/AuthDialogContext'
 import { cn } from '@/shared/lib/utils'
 import { ScrollArea } from '@/shared/ui/scroll-area'
 import { Toaster } from '@/shared/ui/toast'
@@ -28,25 +29,27 @@ export default function RootLayout({ children }: LayoutProps<'/'>) {
     >
       <body className='min-h-full max-h- flex flex-col'>
         <TooltipProvider>
-          <header className='border-b'>
-            <div className='flex items-center justify-between px-[30px] md:px-[40px] h-(--header-height)'>
-              <Link href='/'>
-                <h1 className='text-[30px] font-bold'>WebMarks</h1>
-              </Link>
-              <Profile />
-            </div>
-          </header>
+          <AuthDialogProvider>
+            <header className='border-b'>
+              <div className='flex items-center justify-between px-[30px] md:px-[40px] h-(--header-height)'>
+                <Link href='/'>
+                  <h1 className='text-[30px] font-bold'>WebMarks</h1>
+                </Link>
+                <Profile />
+              </div>
+            </header>
 
-          <main>
-            <div className='flex h-(--content-height)'>
-              <aside>
-                <AppSidebar />
-              </aside>
-              <ScrollArea className='h-full w-full'>{children}</ScrollArea>
-            </div>
-          </main>
+            <main>
+              <div className='flex h-(--content-height)'>
+                <aside>
+                  <AppSidebar />
+                </aside>
+                <ScrollArea className='h-full w-full'>{children}</ScrollArea>
+              </div>
+            </main>
+            <Toaster />
+          </AuthDialogProvider>
         </TooltipProvider>
-        <Toaster />
       </body>
     </html>
   )

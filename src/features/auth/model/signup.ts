@@ -1,12 +1,19 @@
 'use server'
 
+import bcrypt from 'bcrypt'
 import { flattenError } from 'zod'
 
+import { prisma } from '@/shared/lib/prisma'
+import { Prisma } from '@/shared/lib/prisma/generated/client'
+
+import { SIGNUP_FORMDATA } from './constants'
 import { SignupFormSchema } from './SignupFormSchema'
 
 type FormState =
   | {
+      isSuccess?: boolean
       errors?: {
+        username?: string[]
         email?: string[]
         password?: string[]
         confirmPassword?: string[]
@@ -16,12 +23,11 @@ type FormState =
   | undefined
 
 export async function signup(prevState: FormState, formData: FormData) {
-  const { email, password, confirmPassword } = Object.fromEntries(formData)
-
   const validatedFields = SignupFormSchema.safeParse({
-    email,
-    password,
-    confirmPassword,
+    username: formData.get(SIGNUP_FORMDATA.USERNAME),
+    email: formData.get(SIGNUP_FORMDATA.EMAIL),
+    password: formData.get(SIGNUP_FORMDATA.PASSWORD),
+    confirmPassword: formData.get(SIGNUP_FORMDATA.CONFIRM_PASSWORD),
   })
 
   if (!validatedFields.success) {
@@ -30,5 +36,35 @@ export async function signup(prevState: FormState, formData: FormData) {
     }
   }
 
-  return undefined
+  try {
+    const { username, email, password } = validatedFields.data
+    const hashedPassword = await bcrypt.hash(password, 10)
+
+    const data = await prisma.user.create({
+      data: {
+        username,
+        email,
+        password: hashedPassword,
+      },
+    })
+
+    return {
+      isSuccess: true,
+      message:
+        'You have successfully create account: ' +
+        (data.username ?? data.email),
+    }
+  } catch (error) {
+    console.error(error)
+    if (error instanceof Prisma.PrismaClientKnownRequestError) {
+      if (error.code === 'P2002')
+        return {
+          message: 'User with this email already exist',
+        }
+      return {
+        message: 'An error occurred while creating your account',
+      }
+    }
+    return { message: 'Unknown internal error' }
+  }
 }

@@ -6,12 +6,15 @@ import { Button } from '@/shared/ui/button'
 import { FieldSet } from '@/shared/ui/field'
 import { InputField } from '@/shared/ui/InputField'
 
+import { LOGIN_FORMDATA } from '../model/constants'
 import { login } from '../model/login'
+import { useAuthToastManager } from '../model/useAuthToastManager'
 
 type LoginFormProps = React.ComponentProps<'form'>
 
 export function LoginForm({ ...props }: LoginFormProps) {
   const [state, formAction, isPending] = useActionState(login, undefined)
+  useAuthToastManager(state?.message, state?.isSuccess)
 
   return (
     <form className='flex flex-col gap-[20px]' {...props} action={formAction}>
@@ -20,15 +23,15 @@ export function LoginForm({ ...props }: LoginFormProps) {
           label='Email'
           placeholder='Enter your email address'
           type='text'
-          name='email'
-          errors={state?.errors.email}
+          name={LOGIN_FORMDATA.EMAIL}
+          errors={state?.errors?.email}
         />
         <InputField
           label='Password'
           placeholder='Enter your password'
           type='password'
-          name='password'
-          errors={state?.errors.password}
+          name={LOGIN_FORMDATA.PASSWORD}
+          errors={state?.errors?.password}
         />
         <Button type='submit'>Login</Button>
       </FieldSet>

@@ -13,6 +13,8 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from '@/shared/ui/dropdown-menu'
+import { deleteSession } from '@/features/auth/model/session'
+import { logout } from '@/features/auth/model/logout'
 
 export function Profile() {
   const setters = use(AuthDialogSettersContext)
@@ -40,7 +42,11 @@ export function Profile() {
         </DropdownMenuGroup>
         <DropdownMenuSeparator />
         <DropdownMenuGroup>
-          <DropdownMenuItem variant='destructive'>Log out</DropdownMenuItem>
+          <form action={logout}>
+            <button className='w-full' type='submit'>
+              <DropdownMenuItem variant='destructive'>Log out</DropdownMenuItem>
+            </button>
+          </form>
         </DropdownMenuGroup>
       </DropdownMenuContent>
     </DropdownMenu>

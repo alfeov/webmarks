@@ -1,6 +1,6 @@
 import z from 'zod'
 
-export const passwordSchema = z
+export const PasswordSchema = z
   .string()
   .regex(/^[A-Za-z0-9]+$/, 'Only english letters and numbers allowed')
   .regex(/[A-Z]/, 'At least one uppercase letter')

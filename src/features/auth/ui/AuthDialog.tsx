@@ -61,17 +61,10 @@ export function AuthDialog() {
             </span>
           </DialogDescription>
         </DialogHeader>
-        {authDialogState === 'login' ? (
-          <LoginForm id='auth-form' />
-        ) : (
-          <SignupForm id='auth-form' />
-        )}
+        {authDialogState === 'login' ? <LoginForm /> : <SignupForm />}
         <DialogFooter>
           <Button onClick={setters?.closeAuthDialog} variant='outline'>
             Close
-          </Button>
-          <Button type='submit' form='auth-form'>
-            {authDialogState === 'login' ? 'Login' : 'Sign Up'}
           </Button>
         </DialogFooter>
       </DialogContent>

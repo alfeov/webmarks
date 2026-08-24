@@ -1,11 +1,11 @@
 import z from 'zod'
 
-import { passwordSchema } from '@/shared/utils/passwordSchema'
+import { PasswordSchema } from '@/shared/utils/PasswordSchema'
 
-export const signupSchema = z
+export const SignupFormSchema = z
   .object({
     email: z.email('Email is not correct'),
-    password: passwordSchema,
+    password: PasswordSchema,
     confirmPassword: z.string(),
   })
   .refine((data) => data.confirmPassword === data.password, {

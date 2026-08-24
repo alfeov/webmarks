@@ -3,21 +3,21 @@ import { Input } from '@/shared/ui/input'
 
 interface InputFieldProps extends React.ComponentProps<'input'> {
   label: string
-  error?: string
+  errors?: string[]
   className?: string
 }
 
 export function InputField({
   label,
-  error,
+  errors,
   className,
   ...props
 }: InputFieldProps) {
   return (
-    <Field data-invalid={!!error} className={className}>
+    <Field data-invalid={Boolean(errors?.length)} className={className}>
       <FieldLabel>{label}</FieldLabel>
-      <Input aria-invalid={!!error} {...props} />
-      <FieldError>{error}</FieldError>
+      <Input aria-invalid={Boolean(errors?.length)} {...props} />
+      <FieldError errors={errors?.map((error) => ({ message: error }))} />
     </Field>
   )
 }

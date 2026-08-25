@@ -11,6 +11,7 @@ import {
 import { LoginMenuItem } from './LoginMenuItem'
 import { LogoutMenuItem } from './LogoutMenuItem'
 import { SignupMenuItem } from './SignupMenuItem'
+
 import { FaceSlightlyFrowning, FaceSlightlySmiling } from 'lucide-react'
 
 export async function Profile() {

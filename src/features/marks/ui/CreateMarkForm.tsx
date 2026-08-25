@@ -1,57 +1,82 @@
 'use client'
 
-import { use } from 'react'
+import { use, useActionState, useEffect, useTransition } from 'react'
 import { useForm } from 'react-hook-form'
 
-import { Field, FieldLabel, FieldLegend, FieldSet } from '@/shared/ui/field'
-import { Input } from '@/shared/ui/input'
+import { Button } from '@/shared/ui/button'
+import { FieldLegend, FieldSet } from '@/shared/ui/field'
+import { InputField } from '@/shared/ui/InputField'
+import { showErrorToast } from '@/shared/utils/showErrorToast'
+import { showSuccessToast } from '@/shared/utils/showSuccessToast'
 
+import { createMark } from '../model/createMark'
 import { MetaContext } from '../model/MetaContext'
+
 export function CreateMarkForm() {
   const metaContext = use(MetaContext)
+  if (!metaContext)
+    throw new Error('Component must be wrapped in ContextProvider')
 
-  console.log(metaContext?.meta)
   const { register, handleSubmit } = useForm({
-    values: metaContext?.meta,
+    values: metaContext.meta,
+  })
+  const [state, formAction, isPending] = useActionState(createMark, undefined)
+  const [_, startTransition] = useTransition()
+
+  const onSubmit = handleSubmit((data) => {
+    startTransition(() => formAction(data))
   })
 
+  useEffect(() => {
+    if (state?.message) {
+      if (state?.isSuccess) {
+        showSuccessToast(state.message)
+        return
+      }
+      showErrorToast(state.message)
+    }
+  }, [state?.message, state?.isSuccess])
+
   return (
-    <form>
-      <FieldSet>
+    <form onSubmit={onSubmit}>
+      <FieldSet disabled={isPending}>
         <FieldSet>
           <FieldLegend>Required Fields</FieldLegend>
-          <Field>
-            <FieldLabel className='req'>Title</FieldLabel>
-            <Input placeholder='WebMark' {...register('title')} />
-            {/* <FieldError></FieldError> */}
-          </Field>
-          <Field>
-            <FieldLabel className='req'>URL</FieldLabel>
-            <Input placeholder='https://webmarks.com' {...register('url')} />
-            {/* <FieldError></FieldError> */}
-          </Field>
-          <Field>
-            <FieldLabel className='req'>Description</FieldLabel>
-            <Input
-              placeholder='Some cool description to your link'
-              {...register('description')}
-            />
-            {/* <FieldError></FieldError> */}
-          </Field>
+          <InputField
+            label='Title'
+            placeholder='WebMark'
+            errors={state?.errors?.title}
+            {...register('title')}
+            req
+          />
+          <InputField
+            label='URL'
+            placeholder='https://webmarks.com'
+            errors={state?.errors?.url}
+            {...register('url')}
+            req
+          />
+          <InputField
+            label='Description'
+            placeholder='Some cool description to your link'
+            errors={state?.errors?.description}
+            {...register('description')}
+            req
+          />
         </FieldSet>
         <FieldSet>
           <FieldLegend>Images Fields (Optional)</FieldLegend>
-          <Field>
-            <FieldLabel>Logo URL (Preferred over Image URL)</FieldLabel>
-            <Input placeholder='https://logo.com' {...register('logo.url')} />
-            {/* <FieldError></FieldError> */}
-          </Field>
-          <Field>
-            <FieldLabel>Image URL</FieldLabel>
-            <Input placeholder='https://image.com' {...register('image.url')} />
-            {/* <FieldError></FieldError> */}
-          </Field>
+          <InputField
+            label='Logo URL'
+            placeholder='https://logo.com'
+            errors={state?.errors?.logoUrl}
+            {...register('logoUrl')}
+          />
         </FieldSet>
+        <p className='text-sm font-normal text-destructive empty:hidden'>
+          {!state?.isSuccess && state?.message}
+        </p>
+        <Button type='submit'>Create WebMark</Button>
       </FieldSet>
     </form>
   )

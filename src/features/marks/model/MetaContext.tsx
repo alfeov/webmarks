@@ -1,24 +1,19 @@
 'use client'
 
-import mql, { MicrolinkError, MqlResponseData } from '@microlink/mql'
+import mql, { MicrolinkError } from '@microlink/mql'
 import { createContext, useState } from 'react'
 
 export const MetaContext = createContext<null | ContextValue>(null)
 
-const initialState: MqlResponseData = {
+const initialState = {
   title: '',
   url: '',
   description: '',
-  logo: {
-    url: '',
-  },
-  image: {
-    url: '',
-  },
+  logoUrl: '',
 }
 
 export interface ContextValue {
-  meta: typeof initialState
+  meta: CreateMark
   loadMeta: (
     prevState: unknown,
     formData: FormData,
@@ -26,7 +21,7 @@ export interface ContextValue {
 }
 
 export function MetaProvider({ children }: { children: React.ReactNode }) {
-  const [meta, setMeta] = useState(initialState)
+  const [meta, setMeta] = useState<CreateMark>(initialState)
 
   async function loadMeta(prevState: unknown, formData: FormData) {
     const { url } = Object.fromEntries(formData)
@@ -38,7 +33,13 @@ export function MetaProvider({ children }: { children: React.ReactNode }) {
         const { data } = await mql(webmarkUrl.toString(), {
           meta: true,
         })
-        setMeta(data)
+        setMeta({
+          title: data.title ?? '',
+          url: data.url ?? '',
+          description: data.description ?? '',
+          logoUrl: data.logo?.url ?? '',
+        })
+
         return { error: '' }
       } catch (error) {
         if (error instanceof MicrolinkError) {

@@ -11,3 +11,10 @@ interface Mark {
     url: string
   }
 }
+
+interface CreateMark {
+  title: string
+  url: string
+  description: string
+  logoUrl: string
+}

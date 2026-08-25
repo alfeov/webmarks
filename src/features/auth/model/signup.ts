@@ -7,8 +7,8 @@ import { prisma } from '@/shared/lib/prisma'
 import { Prisma } from '@/shared/lib/prisma/generated/client'
 
 import { SIGNUP_FORMDATA } from './constants'
-import { SignupFormSchema } from './SignupFormSchema'
 import { createSession } from './session'
+import { SignupFormSchema } from './SignupFormSchema'
 
 type FormState =
   | {

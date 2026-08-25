@@ -18,12 +18,14 @@ import { ClipboardPaste, CloudDownload } from 'lucide-react'
 const initialState = {
   error: '',
 }
-const fallbackFn = async () => ({ error: '' })
 
 export function LoadMetaForm() {
   const metaContext = use(MetaContext)
+  if (!metaContext)
+    throw new Error('Component must be wrapped in ContextProvider')
+
   const [state, formAction, isPending] = useActionState(
-    metaContext?.loadMeta ?? fallbackFn,
+    metaContext.loadMeta,
     initialState,
   )
 

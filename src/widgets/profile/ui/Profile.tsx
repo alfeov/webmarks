@@ -1,39 +1,49 @@
+import { verifySession } from '@/features/auth/model/session'
 import { Avatar, AvatarFallback, AvatarImage } from '@/shared/ui/avatar'
 import { Button } from '@/shared/ui/button'
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuGroup,
-  DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from '@/shared/ui/dropdown-menu'
 
 import { LoginMenuItem } from './LoginMenuItem'
 import { LogoutMenuItem } from './LogoutMenuItem'
 import { SignupMenuItem } from './SignupMenuItem'
+import { FaceSlightlyFrowning, FaceSlightlySmiling } from 'lucide-react'
 
-export function Profile() {
+export async function Profile() {
+  const session = await verifySession()
+
   return (
     <DropdownMenu>
       <DropdownMenuTrigger
         render={
           <Button variant='ghost' size='icon' className='rounded-full'>
             <Avatar size='lg'>
-              <AvatarImage src='https://github.com/shadcn.png' alt='shadcn' />
-              <AvatarFallback>???</AvatarFallback>
+              <AvatarImage
+                src={session?.avatarUrl || 'errorSrc'} // to handle AvatarFallback
+                alt={session?.username || 'empty avatar'}
+              />
+              <AvatarFallback>
+                {session ? <FaceSlightlySmiling /> : <FaceSlightlyFrowning />}
+              </AvatarFallback>
             </Avatar>
           </Button>
         }
       />
       <DropdownMenuContent>
-        <DropdownMenuGroup>
-          <SignupMenuItem />
-          <LoginMenuItem />
-        </DropdownMenuGroup>
-        <DropdownMenuSeparator />
-        <DropdownMenuGroup>
-          <LogoutMenuItem />
-        </DropdownMenuGroup>
+        {session ? (
+          <DropdownMenuGroup>
+            <LogoutMenuItem />
+          </DropdownMenuGroup>
+        ) : (
+          <DropdownMenuGroup>
+            <SignupMenuItem />
+            <LoginMenuItem />
+          </DropdownMenuGroup>
+        )}
       </DropdownMenuContent>
     </DropdownMenu>
   )

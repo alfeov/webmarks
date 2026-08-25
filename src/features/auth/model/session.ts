@@ -29,6 +29,7 @@ export const decrypt = async (jwt: string = '') => {
     return payload
   } catch (error) {
     console.error('Failed to verify session: ' + error)
+    return null
   }
 }
 
@@ -74,7 +75,5 @@ export async function deleteSession() {
 export async function verifySession() {
   const cookie = (await cookies()).get(SESSION_COOKIE_KEY)?.value
   const session = await decrypt(cookie)
-
-  if (session?.userId) return { isAuth: true, userId: session.userId }
-  return { isAuth: false }
+  return session
 }

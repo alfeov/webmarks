@@ -6,8 +6,8 @@ import { Button } from '@/shared/ui/button'
 import { FieldSet } from '@/shared/ui/field'
 import { InputField } from '@/shared/ui/InputField'
 
+import { login } from '../api/login'
 import { LOGIN_FORMDATA } from '../model/constants'
-import { login } from '../model/login'
 import { useAuthToastManager } from '../model/useAuthToastManager'
 
 type LoginFormProps = React.ComponentProps<'form'>

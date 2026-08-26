@@ -6,9 +6,9 @@ import { flattenError } from 'zod'
 import { prisma } from '@/shared/lib/prisma'
 import { Prisma } from '@/shared/lib/prisma/generated/client'
 
-import { SIGNUP_FORMDATA } from './constants'
-import { createSession } from './session'
-import { SignupFormSchema } from './SignupFormSchema'
+import { SIGNUP_FORMDATA } from '../model/constants'
+import { createSession } from '../model/session'
+import { SignupFormSchema } from '../model/SignupFormSchema'
 
 type FormState =
   | {
@@ -33,6 +33,7 @@ export async function signup(prevState: FormState, formData: FormData) {
 
   if (!validatedFields.success) {
     return {
+      isSuccess: false,
       errors: flattenError(validatedFields.error).fieldErrors,
     }
   }

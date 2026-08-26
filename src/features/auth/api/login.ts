@@ -5,9 +5,9 @@ import { flattenError } from 'zod'
 
 import { prisma } from '@/shared/lib/prisma'
 
-import { LOGIN_FORMDATA } from './constants'
-import { LoginFormSchema } from './LoginFormSchema'
-import { createSession } from './session'
+import { LOGIN_FORMDATA } from '../model/constants'
+import { LoginFormSchema } from '../model/LoginFormSchema'
+import { createSession } from '../model/session'
 
 type FormState =
   | {

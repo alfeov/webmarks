@@ -2,7 +2,6 @@ import { Avatar, AvatarFallback, AvatarImage } from '@/shared/ui/avatar'
 import { Button } from '@/shared/ui/button'
 import {
   Card,
-  CardAction,
   CardContent,
   CardDescription,
   CardFooter,
@@ -26,8 +25,6 @@ interface MarkItemProps extends Mark {
 export function MarkItem({
   title,
   description,
-  author,
-  publisher,
   image,
   logo,
   url,

@@ -1,6 +1,6 @@
 'use client'
 
-import { use, useActionState, useEffect } from 'react'
+import { use, useEffect } from 'react'
 
 import { Field, FieldError, FieldLabel } from '@/shared/ui/field'
 import {
@@ -15,19 +15,12 @@ import { MetaContext } from '../model/MetaContext'
 
 import { ClipboardPaste, CloudDownload } from 'lucide-react'
 
-const initialState = {
-  error: '',
-}
-
 export function LoadMetaForm() {
   const metaContext = use(MetaContext)
   if (!metaContext)
     throw new Error('Component must be wrapped in ContextProvider')
 
-  const [state, formAction, isPending] = useActionState(
-    metaContext.loadMeta,
-    initialState,
-  )
+  const { state, formAction, isPending } = metaContext
 
   useEffect(() => {
     if (state.error) {

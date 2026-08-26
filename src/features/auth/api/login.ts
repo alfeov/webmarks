@@ -9,16 +9,20 @@ import { LOGIN_FORMDATA } from '../model/constants'
 import { LoginFormSchema } from '../model/LoginFormSchema'
 import { createSession } from '../model/session'
 
-type FormState =
-  | {
-      isSuccess?: boolean
-      errors?: {
-        email?: string[]
-        password?: string[]
-      }
-      message?: string
-    }
-  | undefined
+type FormState = {
+  isSuccess: boolean
+  errors: {
+    email?: string[]
+    password?: string[]
+  } | null
+  message: string | null
+}
+
+export const initialState: FormState = {
+  isSuccess: true,
+  errors: null,
+  message: null,
+}
 
 export async function login(prevState: FormState, formData: FormData) {
   const validatedFields = LoginFormSchema.safeParse({
@@ -28,7 +32,9 @@ export async function login(prevState: FormState, formData: FormData) {
 
   if (!validatedFields.success) {
     return {
+      isSuccess: false,
       errors: flattenError(validatedFields.error).fieldErrors,
+      message: 'Please fix the highlighted fields',
     }
   }
 
@@ -41,12 +47,16 @@ export async function login(prevState: FormState, formData: FormData) {
   })
   if (!user)
     return {
+      isSuccess: false,
+      errors: null,
       message: "User with this email doesn't exist",
     }
 
   const isPasswordMatch = await bcrypt.compare(password, user.password)
   if (!isPasswordMatch)
     return {
+      isSuccess: false,
+      errors: null,
       message: 'Incorrect password!',
     }
 
@@ -58,6 +68,7 @@ export async function login(prevState: FormState, formData: FormData) {
 
   return {
     isSuccess: true,
+    errors: null,
     message:
       'You have successfully enter to your account: ' +
       (user.username ?? user.email),

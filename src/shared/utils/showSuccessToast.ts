@@ -1,7 +1,7 @@
 import { toast } from '../ui/toast'
 
 export function showSuccessToast(message: string) {
-  toast.add({
+  return toast.add({
     type: 'success',
     title: 'Success!',
     description: message,

@@ -2,22 +2,22 @@
 
 import { useActionState } from 'react'
 
+import { useNotificationManager } from '@/shared/lib/useNotificationManager'
 import { Button } from '@/shared/ui/button'
 import { FieldSet } from '@/shared/ui/field'
 import { InputField } from '@/shared/ui/InputField'
 
-import { signup } from '../api/signup'
+import { initialState, signup } from '../api/signup'
 import { SIGNUP_FORMDATA } from '../model/constants'
-import { useAuthToastManager } from '../model/useAuthToastManager'
+import { useOnAuth } from '../model/useOnAuth'
 
-type SignupFormProps = React.ComponentProps<'form'>
-
-export function SignupForm({ ...props }: SignupFormProps) {
-  const [state, formAction, isPending] = useActionState(signup, undefined)
-  useAuthToastManager(state?.message, state?.isSuccess)
+export function SignupForm() {
+  const [state, formAction, isPending] = useActionState(signup, initialState)
+  useNotificationManager(state.message, state.isSuccess)
+  useOnAuth(state.isSuccess)
 
   return (
-    <form className='flex flex-col gap-[20px]' {...props} action={formAction}>
+    <form className='flex flex-col gap-[20px]' action={formAction}>
       <FieldSet disabled={isPending}>
         <InputField
           label='Username'

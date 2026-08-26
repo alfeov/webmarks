@@ -10,18 +10,22 @@ import { SIGNUP_FORMDATA } from '../model/constants'
 import { createSession } from '../model/session'
 import { SignupFormSchema } from '../model/SignupFormSchema'
 
-type FormState =
-  | {
-      isSuccess?: boolean
-      errors?: {
-        username?: string[]
-        email?: string[]
-        password?: string[]
-        confirmPassword?: string[]
-      }
-      message?: string
-    }
-  | undefined
+type FormState = {
+  isSuccess: boolean
+  errors: {
+    username?: string[]
+    email?: string[]
+    password?: string[]
+    confirmPassword?: string[]
+  } | null
+  message: string | null
+}
+
+export const initialState: FormState = {
+  isSuccess: true,
+  errors: null,
+  message: null,
+}
 
 export async function signup(prevState: FormState, formData: FormData) {
   const validatedFields = SignupFormSchema.safeParse({
@@ -35,6 +39,7 @@ export async function signup(prevState: FormState, formData: FormData) {
     return {
       isSuccess: false,
       errors: flattenError(validatedFields.error).fieldErrors,
+      message: 'Please fix the highlighted fields',
     }
   }
 
@@ -58,21 +63,22 @@ export async function signup(prevState: FormState, formData: FormData) {
 
     return {
       isSuccess: true,
+      errors: null,
       message:
         'You have successfully create account: ' +
         (data.username ?? data.email),
     }
   } catch (error) {
     console.error(error)
+    const result = {
+      isSuccess: false,
+      errors: null,
+      message: 'An internal error occurred while creating your account',
+    }
     if (error instanceof Prisma.PrismaClientKnownRequestError) {
       if (error.code === 'P2002')
-        return {
-          message: 'User with this email already exist',
-        }
-      return {
-        message: 'An error occurred while creating your account',
-      }
+        result.message = 'User with this email already exist'
     }
-    return { message: 'Unknown internal error' }
+    return result
   }
 }

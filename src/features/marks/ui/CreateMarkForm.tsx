@@ -3,13 +3,13 @@
 import { use, useActionState, useTransition } from 'react'
 import { useForm } from 'react-hook-form'
 
+import { useNotificationManager } from '@/shared/lib/useNotificationManager'
 import { Button } from '@/shared/ui/button'
 import { FieldLegend, FieldSet } from '@/shared/ui/field'
 import { InputField } from '@/shared/ui/InputField'
 
 import { createMark, initialState } from '../api/createMark'
 import { MetaContext } from '../model/MetaContext'
-import { useMarksToastManager } from '../model/useMarksToastManager'
 
 export function CreateMarkForm() {
   const metaContext = use(MetaContext)
@@ -29,7 +29,7 @@ export function CreateMarkForm() {
     startTransition(() => formAction(data))
   })
 
-  useMarksToastManager(state.message, state.isSuccess)
+  useNotificationManager(state.message, state.isSuccess)
 
   return (
     <form onSubmit={onSubmit}>

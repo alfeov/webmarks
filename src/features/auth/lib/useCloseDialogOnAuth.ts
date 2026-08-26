@@ -1,8 +1,8 @@
 import { use, useEffect } from 'react'
 
-import { AuthDialogSettersContext } from './AuthDialogContext'
+import { AuthDialogSettersContext } from '../model/AuthDialogContext'
 
-export function useOnAuth(isAuth: boolean) {
+export function useCloseDialogOnAuth(isAuth: boolean) {
   const authDialogSetters = use(AuthDialogSettersContext)
 
   useEffect(() => {

@@ -8,11 +8,11 @@ import { FieldSet } from '@/shared/ui/field'
 import { InputField } from '@/shared/ui/InputField'
 
 import { login } from '../api/login'
-import { LOGIN_FORMDATA } from '../model/constants'
-import { useOnAuth } from '../model/useOnAuth'
+import { LOGIN_FORMDATA } from '../lib/constants'
+import { useCloseDialogOnAuth } from '../lib/useCloseDialogOnAuth'
 
 export const initialState = {
-  isSuccess: true,
+  isSuccess: false,
   errors: null,
   message: null,
 }
@@ -23,7 +23,7 @@ export function LoginForm() {
     FormData
   >(login, initialState)
   useNotificationManager(state.message, state.isSuccess)
-  useOnAuth(state.isSuccess)
+  useCloseDialogOnAuth(state.isSuccess)
 
   return (
     <form className='flex flex-col gap-[20px]' action={formAction}>

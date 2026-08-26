@@ -1,67 +1,38 @@
 'use server'
 
-import bcrypt from 'bcrypt'
-import { flattenError } from 'zod'
-
-import { prisma } from '@/shared/lib/prisma'
-import { Prisma } from '@/shared/lib/prisma/generated/client'
+import { createResult } from '@/shared/lib/createResult'
 import { createSession } from '@/shared/lib/session'
 
-import { SIGNUP_FORMDATA } from '../model/constants'
-import { SignupFormSchema } from '../model/SignupFormSchema'
+import { validateSignupFormData } from '../lib/validation/validateSignupFormData'
+import { createUser } from './createUser'
 
 export async function signup(prevState: SignupFormState, formData: FormData) {
-  const validatedFields = SignupFormSchema.safeParse({
-    username: formData.get(SIGNUP_FORMDATA.USERNAME),
-    email: formData.get(SIGNUP_FORMDATA.EMAIL),
-    password: formData.get(SIGNUP_FORMDATA.PASSWORD),
-    confirmPassword: formData.get(SIGNUP_FORMDATA.CONFIRM_PASSWORD),
+  // zod validation
+  const { validatedData, errors, message } = validateSignupFormData(formData)
+  if (!validatedData)
+    return createResult({
+      errors,
+      message,
+    })
+
+  // hash password and create user in DB
+  const { user, error } = await createUser(validatedData)
+  if (!user)
+    return createResult({
+      message: error,
+    })
+
+  // creation session
+  await createSession({
+    avatarUrl: user.avatarUrl,
+    userId: user.id,
+    username: user.username,
   })
 
-  if (!validatedFields.success) {
-    return {
-      isSuccess: false,
-      errors: flattenError(validatedFields.error).fieldErrors,
-      message: 'Please fix the highlighted fields',
-    }
-  }
-
-  try {
-    const { username, email, password } = validatedFields.data
-    const hashedPassword = await bcrypt.hash(password, 10)
-
-    const data = await prisma.user.create({
-      data: {
-        username,
-        email,
-        password: hashedPassword,
-      },
-    })
-
-    await createSession({
-      avatarUrl: data.avatarUrl,
-      userId: data.id,
-      username: data.username,
-    })
-
-    return {
-      isSuccess: true,
-      errors: null,
-      message:
-        'You have successfully create account: ' +
-        (data.username ?? data.email),
-    }
-  } catch (error) {
-    console.error(error)
-    const result = {
-      isSuccess: false,
-      errors: null,
-      message: 'An internal error occurred while creating your account',
-    }
-    if (error instanceof Prisma.PrismaClientKnownRequestError) {
-      if (error.code === 'P2002')
-        result.message = 'User with this email already exist'
-    }
-    return result
-  }
+  // return success response
+  return createResult({
+    isSuccess: true,
+    message:
+      'You have successfully create account: ' + (user.username ?? user.email),
+  })
 }

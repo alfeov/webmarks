@@ -1,5 +1,5 @@
-import { verifySession } from '@/features/auth/model/session'
 import { prisma } from '@/shared/lib/prisma'
+import { verifySession } from '@/shared/lib/session'
 
 export async function loadMarks() {
   const session = await verifySession()

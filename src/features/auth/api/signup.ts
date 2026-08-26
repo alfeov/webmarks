@@ -5,9 +5,9 @@ import { flattenError } from 'zod'
 
 import { prisma } from '@/shared/lib/prisma'
 import { Prisma } from '@/shared/lib/prisma/generated/client'
+import { createSession } from '@/shared/lib/session'
 
 import { SIGNUP_FORMDATA } from '../model/constants'
-import { createSession } from '../model/session'
 import { SignupFormSchema } from '../model/SignupFormSchema'
 
 export async function signup(prevState: SignupFormState, formData: FormData) {

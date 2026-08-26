@@ -2,7 +2,7 @@
 
 import { redirect } from 'next/navigation'
 
-import { deleteSession } from '../model/session'
+import { deleteSession } from '@/shared/lib/session'
 
 export async function logout() {
   await deleteSession()

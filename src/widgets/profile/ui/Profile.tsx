@@ -1,4 +1,4 @@
-import { verifySession } from '@/features/auth/model/session'
+import { verifySession } from '@/shared/lib/session'
 import { Avatar, AvatarFallback, AvatarImage } from '@/shared/ui/avatar'
 import { Button } from '@/shared/ui/button'
 import {

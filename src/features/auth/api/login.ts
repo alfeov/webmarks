@@ -4,10 +4,10 @@ import bcrypt from 'bcrypt'
 import { flattenError } from 'zod'
 
 import { prisma } from '@/shared/lib/prisma'
+import { createSession } from '@/shared/lib/session'
 
 import { LOGIN_FORMDATA } from '../model/constants'
 import { LoginFormSchema } from '../model/LoginFormSchema'
-import { createSession } from '../model/session'
 
 export async function login(prevState: LoginFormState, formData: FormData) {
   const validatedFields = LoginFormSchema.safeParse({

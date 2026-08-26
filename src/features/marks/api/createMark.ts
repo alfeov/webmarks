@@ -2,9 +2,9 @@
 
 import { flattenError } from 'zod'
 
-import { verifySession } from '@/features/auth/model/session'
 import { prisma } from '@/shared/lib/prisma'
 import { Prisma } from '@/shared/lib/prisma/generated/client'
+import { verifySession } from '@/shared/lib/session'
 
 import { MarkFormSchema } from '../model/MarkFormSchema'
 

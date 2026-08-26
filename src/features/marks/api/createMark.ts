@@ -8,24 +8,10 @@ import { Prisma } from '@/shared/lib/prisma/generated/client'
 
 import { MarkFormSchema } from '../model/MarkFormSchema'
 
-type FormState = {
-  isSuccess: boolean
-  errors: {
-    title?: string[]
-    url?: string[]
-    description?: string[]
-    logoUrl?: string[]
-  } | null
-  message: string | null
-}
-
-export const initialState: FormState = {
-  isSuccess: true,
-  errors: null,
-  message: null,
-}
-
-export async function createMark(prevState: FormState, data: CreateMark) {
+export async function createMark(
+  prevState: CreateMarkFormState,
+  data: CreateMark,
+) {
   const validatedFields = MarkFormSchema.safeParse(data)
 
   if (!validatedFields.success)

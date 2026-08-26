@@ -18,3 +18,19 @@ interface CreateMark {
   description: string
   logoUrl: string
 }
+
+interface CreateMarkFormState {
+  isSuccess: boolean
+  errors: {
+    title?: string[]
+    url?: string[]
+    description?: string[]
+    logoUrl?: string[]
+  } | null
+  message: string | null
+}
+
+interface LoadMetaFormState {
+  error: string | null
+  data: CreateMark | null
+}

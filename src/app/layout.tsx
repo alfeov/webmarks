@@ -2,13 +2,12 @@ import type { Metadata } from 'next'
 import localFont from 'next/font/local'
 import Link from 'next/link'
 
-import { AuthDialogProvider } from '@/features/auth/model/AuthDialogContext'
 import { cn } from '@/shared/lib/utils'
 import { ScrollArea } from '@/shared/ui/scroll-area'
-import { Toaster } from '@/shared/ui/toast'
-import { TooltipProvider } from '@/shared/ui/tooltip'
 import { Profile } from '@/widgets/profile/ui/Profile'
 import { AppSidebar } from '@/widgets/sidebar/ui/AppSidebar'
+
+import { Providers } from './_providers/Providers'
 
 import './styles/index.css'
 
@@ -27,30 +26,27 @@ export default function RootLayout({ children }: LayoutProps<'/'>) {
       lang='en'
       className={cn('h-full', 'antialiased', fontExcalidraw.className)}
     >
-      <body className='min-h-full max-h- flex flex-col'>
-        <TooltipProvider>
-          <AuthDialogProvider>
-            <header className='border-b'>
-              <div className='flex items-center justify-between px-[30px] md:px-[40px] h-(--header-height)'>
-                <Link href='/'>
-                  <h1 className='text-[30px] font-bold'>WebMarks</h1>
-                </Link>
-                <Profile />
-              </div>
-            </header>
+      <Providers>
+        <body className='min-h-full max-h- flex flex-col'>
+          <header className='border-b'>
+            <div className='flex items-center justify-between px-[30px] md:px-[40px] h-(--header-height)'>
+              <Link href='/'>
+                <h1 className='text-[30px] font-bold'>WebMarks</h1>
+              </Link>
+              <Profile />
+            </div>
+          </header>
 
-            <main>
-              <div className='flex h-(--content-height)'>
-                <aside>
-                  <AppSidebar />
-                </aside>
-                <ScrollArea className='h-full w-full'>{children}</ScrollArea>
-              </div>
-            </main>
-            <Toaster />
-          </AuthDialogProvider>
-        </TooltipProvider>
-      </body>
+          <main>
+            <div className='flex h-(--content-height)'>
+              <aside>
+                <AppSidebar />
+              </aside>
+              <ScrollArea className='h-full w-full'>{children}</ScrollArea>
+            </div>
+          </main>
+        </body>
+      </Providers>
     </html>
   )
 }

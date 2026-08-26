@@ -1,21 +1,9 @@
 import mql, { MicrolinkError } from '@microlink/mql'
 
-export interface FormState {
-  error: string | null
-  data: CreateMark | null
-}
-
-export const initialState: FormState = {
-  error: null,
-  data: {
-    title: '',
-    url: '',
-    description: '',
-    logoUrl: '',
-  },
-}
-
-export async function loadMeta(prevState: FormState, formData: FormData) {
+export async function loadMeta(
+  prevState: LoadMetaFormState,
+  formData: FormData,
+) {
   const { url } = Object.fromEntries(formData)
 
   const cleanUrl = url.toString().trim()

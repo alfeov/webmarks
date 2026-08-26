@@ -8,8 +8,14 @@ import { Button } from '@/shared/ui/button'
 import { FieldLegend, FieldSet } from '@/shared/ui/field'
 import { InputField } from '@/shared/ui/InputField'
 
-import { createMark, initialState } from '../api/createMark'
+import { createMark } from '../api/createMark'
 import { MetaContext } from '../model/MetaContext'
+
+export const initialState = {
+  isSuccess: true,
+  errors: null,
+  message: null,
+}
 
 export function CreateMarkForm() {
   const metaContext = use(MetaContext)
@@ -19,10 +25,10 @@ export function CreateMarkForm() {
   const { register, handleSubmit } = useForm({
     values: metaContext.state.data ?? undefined,
   })
-  const [state, formAction, isPending] = useActionState(
-    createMark,
-    initialState,
-  )
+  const [state, formAction, isPending] = useActionState<
+    CreateMarkFormState,
+    CreateMark
+  >(createMark, initialState)
   const [_, startTransition] = useTransition()
 
   const onSubmit = handleSubmit((data) => {

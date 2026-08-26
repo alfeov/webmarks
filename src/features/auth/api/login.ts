@@ -9,22 +9,7 @@ import { LOGIN_FORMDATA } from '../model/constants'
 import { LoginFormSchema } from '../model/LoginFormSchema'
 import { createSession } from '../model/session'
 
-type FormState = {
-  isSuccess: boolean
-  errors: {
-    email?: string[]
-    password?: string[]
-  } | null
-  message: string | null
-}
-
-export const initialState: FormState = {
-  isSuccess: true,
-  errors: null,
-  message: null,
-}
-
-export async function login(prevState: FormState, formData: FormData) {
+export async function login(prevState: LoginFormState, formData: FormData) {
   const validatedFields = LoginFormSchema.safeParse({
     email: formData.get(LOGIN_FORMDATA.EMAIL),
     password: formData.get(LOGIN_FORMDATA.PASSWORD),

@@ -7,12 +7,21 @@ import { Button } from '@/shared/ui/button'
 import { FieldSet } from '@/shared/ui/field'
 import { InputField } from '@/shared/ui/InputField'
 
-import { initialState, login } from '../api/login'
+import { login } from '../api/login'
 import { LOGIN_FORMDATA } from '../model/constants'
 import { useOnAuth } from '../model/useOnAuth'
 
+export const initialState = {
+  isSuccess: true,
+  errors: null,
+  message: null,
+}
+
 export function LoginForm() {
-  const [state, formAction, isPending] = useActionState(login, initialState)
+  const [state, formAction, isPending] = useActionState<
+    LoginFormState,
+    FormData
+  >(login, initialState)
   useNotificationManager(state.message, state.isSuccess)
   useOnAuth(state.isSuccess)
 

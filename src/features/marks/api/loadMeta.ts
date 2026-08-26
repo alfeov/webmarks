@@ -1,4 +1,6 @@
-import mql, { MicrolinkError } from '@microlink/mql'
+'use server'
+
+import { getMQLMeta } from './getMQLMeta'
 
 export async function loadMeta(
   prevState: LoadMetaFormState,
@@ -11,29 +13,17 @@ export async function loadMeta(
     return { data: null, error: 'Do not provide empty URL' }
   }
 
-  try {
-    const { data } = await mql(cleanUrl, {
-      meta: true,
-    })
+  const { data, error } = await getMQLMeta(cleanUrl)
 
-    return {
-      data: {
-        title: data.title ?? '',
-        url: data.url ?? '',
-        description: data.description ?? '',
-        logoUrl: data.logo?.url ?? '',
-      },
-      error: null,
-    }
-  } catch (error) {
-    console.error(error)
-    const result = {
-      data: null,
-      error: 'Unknown internal error',
-    }
-    if (error instanceof MicrolinkError) {
-      result.error = error.data?.url ?? 'Unknown internal error'
-    }
-    return result
+  if (!data) return { data: null, error }
+
+  return {
+    data: {
+      title: data.title ?? '',
+      url: data.url ?? '',
+      description: data.description ?? '',
+      logoUrl: data.logo?.url ?? '',
+    },
+    error: null,
   }
 }

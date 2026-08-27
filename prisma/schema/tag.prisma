@@ -2,7 +2,11 @@ model Tag {
   id    String @id @default(cuid())
   title String
 
+  userId String @map("user_id")
+  user   User   @relation(fields: [userId], references: [id])
+
   webmarks WebMark[]
 
+  @@unique([title, userId])
   @@map("tags")
 }

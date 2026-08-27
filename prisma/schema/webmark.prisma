@@ -1,7 +1,7 @@
 model WebMark {
   id          String   @id @default(cuid())
   title       String
-  url         String   @unique
+  url         String
   description String
   pinned      Boolean  @default(false)
   logoUrl     String?  @map("logo_url")
@@ -12,5 +12,6 @@ model WebMark {
 
   tags Tag[]
 
+  @@unique([url, userId])
   @@map("webmarks")
 }

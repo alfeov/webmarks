@@ -1,16 +1,16 @@
 'use client'
 
-import { createContext, useActionState } from 'react'
+import { createContext, use, useActionState } from 'react'
 
 import { loadMeta } from '../api/loadMeta'
 
-export const MetaContext = createContext<null | ContextValue>(null)
-
-export interface ContextValue {
+type MetaContextValue = {
   state: LoadMetaFormState
   formAction: (payload: FormData) => void
   isPending: boolean
 }
+
+const MetaContext = createContext<null | MetaContextValue>(null)
 
 export const initialState = {
   error: null,
@@ -33,4 +33,13 @@ export function MetaProvider({ children }: { children: React.ReactNode }) {
       {children}
     </MetaContext>
   )
+}
+
+export function useMetaContext() {
+  const meta = use(MetaContext)
+  if (!meta)
+    throw new Error(
+      'Component must be wrapped in ContextProvider to use this hook',
+    )
+  return meta
 }

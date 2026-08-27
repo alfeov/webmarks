@@ -1,2 +1,2 @@
-tsc --noEmit
+pn type
 pn nano-staged

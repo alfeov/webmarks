@@ -1,6 +1,6 @@
 'use client'
 
-import { use, useEffect } from 'react'
+import { useEffect } from 'react'
 
 import { Field, FieldError, FieldLabel } from '@/shared/ui/field'
 import {
@@ -11,27 +11,27 @@ import {
 } from '@/shared/ui/input-group'
 import { showErrorToast } from '@/shared/utils/showErrorToast'
 
-import { MetaContext } from '../model/MetaContext'
+import { useMetaContext } from '../model/MetaContext'
 
 import { ClipboardPaste, CloudDownload } from 'lucide-react'
 
 export function LoadMetaForm() {
-  const metaContext = use(MetaContext)
-  if (!metaContext)
-    throw new Error('Component must be wrapped in ContextProvider')
-
-  const { state, formAction, isPending } = metaContext
+  const {
+    state: { error },
+    formAction,
+    isPending,
+  } = useMetaContext()
 
   useEffect(() => {
-    if (state.error) {
-      showErrorToast(state.error)
+    if (error) {
+      showErrorToast(error)
     }
-  }, [state.error])
+  }, [error])
 
   return (
     <form className='grid gap-[30px]' action={formAction}>
       <fieldset disabled={isPending}>
-        <Field data-invalid={Boolean(state.error)}>
+        <Field data-invalid={Boolean(error)}>
           <FieldLabel>Insert url and autoload data</FieldLabel>
           <InputGroup>
             <InputGroupAddon>
@@ -43,7 +43,7 @@ export function LoadMetaForm() {
             <InputGroupInput
               placeholder='Search Meta by URL...'
               name='url'
-              aria-invalid={Boolean(state.error)}
+              aria-invalid={Boolean(error)}
             />
 
             <InputGroupAddon align='inline-end'>
@@ -57,7 +57,7 @@ export function LoadMetaForm() {
               </InputGroupButton>
             </InputGroupAddon>
           </InputGroup>
-          {state.error && <FieldError>{state.error}</FieldError>}
+          {error && <FieldError>{error}</FieldError>}
         </Field>
       </fieldset>
     </form>

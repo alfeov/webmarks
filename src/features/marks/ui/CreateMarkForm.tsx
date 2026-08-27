@@ -1,6 +1,6 @@
 'use client'
 
-import { use, useActionState, useTransition } from 'react'
+import { useActionState, useTransition } from 'react'
 import { useForm } from 'react-hook-form'
 
 import { useNotificationManager } from '@/shared/lib/useNotificationManager'
@@ -9,7 +9,7 @@ import { FieldLegend, FieldSet } from '@/shared/ui/field'
 import { InputField } from '@/shared/ui/InputField'
 
 import { createMark } from '../api/createMark'
-import { MetaContext } from '../model/MetaContext'
+import { useMetaContext } from '../model/MetaContext'
 
 export const initialState = {
   isSuccess: true,
@@ -18,12 +18,10 @@ export const initialState = {
 }
 
 export function CreateMarkForm() {
-  const metaContext = use(MetaContext)
-  if (!metaContext)
-    throw new Error('Component must be wrapped in ContextProvider')
+  const meta = useMetaContext()
 
   const { register, handleSubmit } = useForm({
-    values: metaContext.state.data ?? undefined,
+    values: meta.state.data ?? undefined,
   })
   const [state, formAction, isPending] = useActionState<
     CreateMarkFormState,

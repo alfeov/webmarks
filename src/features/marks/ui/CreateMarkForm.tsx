@@ -1,38 +1,15 @@
 'use client'
 
-import { useActionState, useTransition } from 'react'
-import { useForm } from 'react-hook-form'
-
 import { useNotificationManager } from '@/shared/lib/useNotificationManager'
 import { Button } from '@/shared/ui/button'
 import { FieldLegend, FieldSet } from '@/shared/ui/field'
 import { InputField } from '@/shared/ui/InputField'
 
-import { createMark } from '../api/createMark'
-import { useMetaContext } from '../model/MetaContext'
-
-export const initialState = {
-  isSuccess: true,
-  errors: null,
-  message: null,
-}
+import { CREATE_MARK_FORMDATA } from '../lib/constants'
+import { useCreateMarkForm } from '../lib/useCreateMarkForm'
 
 export function CreateMarkForm() {
-  const meta = useMetaContext()
-
-  const { register, handleSubmit } = useForm({
-    values: meta.state.data ?? undefined,
-  })
-  const [state, formAction, isPending] = useActionState<
-    CreateMarkFormState,
-    CreateMark
-  >(createMark, initialState)
-  const [_, startTransition] = useTransition()
-
-  const onSubmit = handleSubmit((data) => {
-    startTransition(() => formAction(data))
-  })
-
+  const { state, isPending, onSubmit, register } = useCreateMarkForm()
   useNotificationManager(state.message, state.isSuccess)
 
   return (
@@ -44,21 +21,21 @@ export function CreateMarkForm() {
             label='Title'
             placeholder='WebMark'
             errors={state.errors?.title}
-            {...register('title')}
+            {...register(CREATE_MARK_FORMDATA.TITLE)}
             req
           />
           <InputField
             label='URL'
             placeholder='https://webmarks.com'
             errors={state.errors?.url}
-            {...register('url')}
+            {...register(CREATE_MARK_FORMDATA.URL)}
             req
           />
           <InputField
             label='Description'
             placeholder='Some cool description to your link'
             errors={state.errors?.description}
-            {...register('description')}
+            {...register(CREATE_MARK_FORMDATA.DESCRIPTION)}
             req
           />
         </FieldSet>
@@ -68,7 +45,7 @@ export function CreateMarkForm() {
             label='Logo URL'
             placeholder='https://logo.com'
             errors={state.errors?.logoUrl}
-            {...register('logoUrl')}
+            {...register(CREATE_MARK_FORMDATA.LOGO_URL)}
           />
         </FieldSet>
         <p className='text-sm font-normal text-destructive empty:hidden'>

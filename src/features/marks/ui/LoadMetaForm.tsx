@@ -11,6 +11,7 @@ import {
 } from '@/shared/ui/input-group'
 import { showErrorToast } from '@/shared/utils/showErrorToast'
 
+import { LOAD_META_FORMDATA } from '../lib/constants'
 import { useMetaContext } from '../model/MetaContext'
 
 import { ClipboardPaste, CloudDownload } from 'lucide-react'
@@ -42,7 +43,7 @@ export function LoadMetaForm() {
 
             <InputGroupInput
               placeholder='Search Meta by URL...'
-              name='url'
+              name={LOAD_META_FORMDATA.URL}
               aria-invalid={Boolean(error)}
             />
 

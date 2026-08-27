@@ -1,14 +1,15 @@
 'use server'
 
+import { LOAD_META_FORMDATA } from '../lib/constants'
 import { getMQLMeta } from './getMQLMeta'
 
 export async function loadMeta(
   prevState: LoadMetaFormState,
   formData: FormData,
 ) {
-  const { url } = Object.fromEntries(formData)
+  const url = formData.get(LOAD_META_FORMDATA.URL)
 
-  const cleanUrl = url.toString().trim()
+  const cleanUrl = url?.toString().trim()
   if (!cleanUrl) {
     return { data: null, error: 'Do not provide empty URL' }
   }

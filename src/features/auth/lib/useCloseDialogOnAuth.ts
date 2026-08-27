@@ -1,11 +1,11 @@
 import { useEffect } from 'react'
 
-import { useAuthDialogActionsContext } from '../model/AuthDialogContext'
+import { useAuthDialogContext } from '../model/AuthDialogContext'
 
 export function useCloseDialogOnAuth(isAuth: boolean) {
-  const authDialogActions = useAuthDialogActionsContext()
+  const { closeAuthDialog } = useAuthDialogContext()
 
   useEffect(() => {
-    if (isAuth) authDialogActions.closeAuthDialog()
-  }, [isAuth, authDialogActions])
+    if (isAuth) closeAuthDialog()
+  }, [isAuth, closeAuthDialog])
 }

@@ -4,55 +4,48 @@ import { createContext, use, useState } from 'react'
 
 import { AuthDialog } from '../ui/AuthDialog'
 
-type AuthDialogState = 'close' | 'login' | 'signup'
-type AuthDialogActions = {
+type AuthDialogContextValue = {
+  mode: 'closed' | 'login' | 'signup'
   closeAuthDialog: () => void
   openLoginDialog: () => void
   openSignupDialog: () => void
 }
 
-const AuthDialogStateContext = createContext<null | AuthDialogState>(null)
-const AuthDialogActionsContext = createContext<null | AuthDialogActions>(null)
+const AuthDialogContext = createContext<null | AuthDialogContextValue>(null)
 
 export function AuthDialogProvider({
   children,
 }: {
   children: React.ReactNode
 }) {
-  const [authDialog, setAuthDialog] = useState<AuthDialogState>('close')
+  const [authDialog, setAuthDialog] =
+    useState<AuthDialogContextValue['mode']>('closed')
 
-  const closeAuthDialog = () => setAuthDialog('close')
+  const closeAuthDialog = () => setAuthDialog('closed')
   const openLoginDialog = () => setAuthDialog('login')
   const openSignupDialog = () => setAuthDialog('signup')
 
   return (
-    <AuthDialogStateContext value={authDialog}>
-      <AuthDialogActionsContext
-        value={{ closeAuthDialog, openLoginDialog, openSignupDialog }}
-      >
-        <AuthDialog />
-        {children}
-      </AuthDialogActionsContext>
-    </AuthDialogStateContext>
+    <AuthDialogContext
+      value={{
+        mode: authDialog,
+        closeAuthDialog,
+        openLoginDialog,
+        openSignupDialog,
+      }}
+    >
+      <AuthDialog />
+      {children}
+    </AuthDialogContext>
   )
 }
 
-export function useAuthDialogStateContext() {
-  const authDialogState = use(AuthDialogStateContext)
-  if (!authDialogState)
+export function useAuthDialogContext() {
+  const authDialog = use(AuthDialogContext)
+  if (!authDialog)
     throw new Error(
       'Component must be wrapped in ContextProvider to use this hook',
     )
 
-  return authDialogState
-}
-
-export function useAuthDialogActionsContext() {
-  const authDialogActions = use(AuthDialogActionsContext)
-  if (!authDialogActions)
-    throw new Error(
-      'Component must be wrapped in ContextProvider to use this hook',
-    )
-
-  return authDialogActions
+  return authDialog
 }

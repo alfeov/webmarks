@@ -1,20 +1,18 @@
 'use client'
 
-import { createContext, useState } from 'react'
+import { createContext, use, useState } from 'react'
 
 import { AuthDialog } from '../ui/AuthDialog'
 
 type AuthDialogState = 'close' | 'login' | 'signup'
-type AuthDialogSetters = {
+type AuthDialogActions = {
   closeAuthDialog: () => void
   openLoginDialog: () => void
   openSignupDialog: () => void
 }
 
-export const AuthDialogStateContext = createContext<AuthDialogState>('close')
-export const AuthDialogSettersContext = createContext<null | AuthDialogSetters>(
-  null,
-)
+const AuthDialogStateContext = createContext<null | AuthDialogState>(null)
+const AuthDialogActionsContext = createContext<null | AuthDialogActions>(null)
 
 export function AuthDialogProvider({
   children,
@@ -29,12 +27,32 @@ export function AuthDialogProvider({
 
   return (
     <AuthDialogStateContext value={authDialog}>
-      <AuthDialogSettersContext
+      <AuthDialogActionsContext
         value={{ closeAuthDialog, openLoginDialog, openSignupDialog }}
       >
         <AuthDialog />
         {children}
-      </AuthDialogSettersContext>
+      </AuthDialogActionsContext>
     </AuthDialogStateContext>
   )
+}
+
+export function useAuthDialogStateContext() {
+  const authDialogState = use(AuthDialogStateContext)
+  if (!authDialogState)
+    throw new Error(
+      'Component must be wrapped in ContextProvider to use this hook',
+    )
+
+  return authDialogState
+}
+
+export function useAuthDialogActionsContext() {
+  const authDialogActions = use(AuthDialogActionsContext)
+  if (!authDialogActions)
+    throw new Error(
+      'Component must be wrapped in ContextProvider to use this hook',
+    )
+
+  return authDialogActions
 }

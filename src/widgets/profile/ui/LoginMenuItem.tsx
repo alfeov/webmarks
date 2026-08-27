@@ -1,15 +1,13 @@
 'use client'
 
-import { use } from 'react'
-
-import { AuthDialogSettersContext } from '@/features/auth/model/AuthDialogContext'
+import { useAuthDialogActionsContext } from '@/features/auth/model/AuthDialogContext'
 import { DropdownMenuItem } from '@/shared/ui/dropdown-menu'
 
 export function LoginMenuItem() {
-  const setters = use(AuthDialogSettersContext)
+  const authDialogActions = useAuthDialogActionsContext()
 
   return (
-    <DropdownMenuItem onClick={setters?.openLoginDialog}>
+    <DropdownMenuItem onClick={authDialogActions.openLoginDialog}>
       Login
     </DropdownMenuItem>
   )

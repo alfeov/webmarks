@@ -1,7 +1,5 @@
 'use client'
 
-import { use } from 'react'
-
 import { Button } from '@/shared/ui/button'
 import {
   Dialog,
@@ -13,15 +11,15 @@ import {
 } from '@/shared/ui/dialog'
 
 import {
-  AuthDialogSettersContext,
-  AuthDialogStateContext,
+  useAuthDialogActionsContext,
+  useAuthDialogStateContext,
 } from '../model/AuthDialogContext'
 import { LoginForm } from './LoginForm'
 import { SignupForm } from './SignupForm'
 
 export function AuthDialog() {
-  const authDialogState = use(AuthDialogStateContext)
-  const setters = use(AuthDialogSettersContext)
+  const authDialogState = useAuthDialogStateContext()
+  const authDialogActions = useAuthDialogActionsContext()
 
   return (
     <Dialog
@@ -51,8 +49,8 @@ export function AuthDialog() {
                 variant='link'
                 onClick={
                   authDialogState === 'login'
-                    ? setters?.openSignupDialog
-                    : setters?.openLoginDialog
+                    ? authDialogActions.openSignupDialog
+                    : authDialogActions.openLoginDialog
                 }
                 className='h-auto'
               >
@@ -63,7 +61,7 @@ export function AuthDialog() {
         </DialogHeader>
         {authDialogState === 'login' ? <LoginForm /> : <SignupForm />}
         <DialogFooter>
-          <Button onClick={setters?.closeAuthDialog} variant='outline'>
+          <Button onClick={authDialogActions.closeAuthDialog} variant='outline'>
             Close
           </Button>
         </DialogFooter>

@@ -3,17 +3,27 @@ import { verifySession } from '@/shared/lib/session'
 
 export async function loadMarks() {
   const session = await verifySession()
-
-  if (!session) return { message: 'To view marks you must be auth' }
+  if (!session) return { marks: [], message: 'To view marks you must be auth' }
 
   const marks = await prisma.webMark.findMany({
     where: {
       userId: session.userId,
     },
-    orderBy: {
-      createdAt: 'desc',
+    orderBy: [
+      {
+        pinned: 'desc',
+      },
+      {
+        createdAt: 'desc',
+      },
+    ],
+    include: {
+      tags: true,
     },
   })
 
-  if (marks.length === 0) return { message: 'There are no WebMarks yet' }
+  if (marks.length === 0)
+    return { marks: [], message: 'There are no WebMarks yet' }
+
+  return { marks, message: null }
 }

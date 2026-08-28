@@ -1,25 +1,19 @@
-interface Mark {
-  title: string
-  description: string
-  author: string
-  publisher: string
-  image: {
-    url: string
-  }
-  url: string
-  logo: {
-    url: string
-  }
-}
+import { Prisma } from '@/shared/lib/prisma/generated/client'
 
-interface CreateMark {
+export type WebMarkWithTags = Prisma.WebMarkGetPayload<{
+  include: {
+    tags: true
+  }
+}>
+
+export interface CreateMark {
   title: string
   url: string
   description: string
   logoUrl: string
 }
 
-interface CreateMarkFormState {
+export interface CreateMarkFormState {
   isSuccess: boolean
   errors: {
     title?: string[]
@@ -30,7 +24,7 @@ interface CreateMarkFormState {
   message: string | null
 }
 
-interface LoadMetaFormState {
+export interface LoadMetaFormState {
   error: string | null
   data: CreateMark | null
 }

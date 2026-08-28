@@ -1,4 +1,5 @@
 import { Avatar, AvatarFallback, AvatarImage } from '@/shared/ui/avatar'
+import { Badge } from '@/shared/ui/badge'
 import { Button } from '@/shared/ui/button'
 import {
   Card,
@@ -16,25 +17,47 @@ import {
   DropdownMenuTrigger,
 } from '@/shared/ui/dropdown-menu'
 
-import { LucideEllipsis } from 'lucide-react'
+import { WebMarkWithTags } from '../model/types'
 
-interface MarkItemProps extends Mark {
-  children?: React.ReactNode
-}
+import { LucideEllipsis, Pin } from 'lucide-react'
+
+const tags = [
+  {
+    id: 1,
+    title: 'Programming',
+  },
+  {
+    id: 2,
+    title: 'Work',
+  },
+  {
+    id: 3,
+    title: 'Shopping',
+  },
+  {
+    id: 4,
+    title: 'Home',
+  },
+  {
+    id: 5,
+    title: 'CSS',
+  },
+]
 
 export function MarkItem({
   title,
   description,
-  image,
-  logo,
+  pinned,
+  logoUrl,
   url,
-}: MarkItemProps) {
+  // tags,
+}: WebMarkWithTags) {
   return (
     <Card className='max-h-min'>
       <CardHeader>
         <div className='flex items-center gap-[10px] overflow-hidden'>
           <Avatar size='lg'>
-            <AvatarImage src={image.url ?? logo.url} />
+            <AvatarImage src={logoUrl ?? 'errorSrc'} />
             <AvatarFallback>L</AvatarFallback>
           </Avatar>
           <div className='grow overflow-hidden'>
@@ -59,7 +82,7 @@ export function MarkItem({
             />
             <DropdownMenuContent>
               <DropdownMenuGroup>
-                <DropdownMenuItem>Pin</DropdownMenuItem>
+                <DropdownMenuItem>{pinned ? 'Unpin' : 'Pin'}</DropdownMenuItem>
                 <DropdownMenuItem>Tags</DropdownMenuItem>
                 <DropdownMenuItem>Copy Link</DropdownMenuItem>
                 <DropdownMenuItem>Change</DropdownMenuItem>
@@ -69,7 +92,14 @@ export function MarkItem({
         </div>
       </CardHeader>
       <CardContent>{description}</CardContent>
-      <CardFooter></CardFooter>
+      <CardFooter className='justify-between gap-[20px]'>
+        <div className='flex flex-wrap gap-[10px]'>
+          {tags.map((tag) => (
+            <Badge key={tag.id}>{tag.title}</Badge>
+          ))}
+        </div>
+        {pinned && <Pin className='rotate-45 w-[20px] mr-[8px]' />}
+      </CardFooter>
     </Card>
   )
 }

@@ -1,6 +1,7 @@
 'use server'
 
 import { LOAD_META_FORMDATA } from '../lib/constants'
+import { LoadMetaFormState } from '../model/types'
 import { getMQLMeta } from './getMQLMeta'
 
 export async function loadMeta(

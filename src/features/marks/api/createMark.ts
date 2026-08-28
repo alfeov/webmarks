@@ -7,6 +7,7 @@ import { Prisma } from '@/shared/lib/prisma/generated/client'
 import { verifySession } from '@/shared/lib/session'
 
 import { MarkFormSchema } from '../model/MarkFormSchema'
+import { CreateMark, CreateMarkFormState } from '../model/types'
 
 export async function createMark(
   prevState: CreateMarkFormState,

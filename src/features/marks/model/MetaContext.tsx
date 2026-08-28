@@ -2,7 +2,7 @@
 
 import { createContext, use, useActionState } from 'react'
 
-import { loadMeta } from '../api/loadMeta'
+import { loadMetaAction } from '../api/loadMetaAction'
 import { LoadMetaFormState } from './types'
 
 type MetaContextValue = {
@@ -27,7 +27,7 @@ export function MetaProvider({ children }: { children: React.ReactNode }) {
   const [state, formAction, isPending] = useActionState<
     LoadMetaFormState,
     FormData
-  >(loadMeta, initialState)
+  >(loadMetaAction, initialState)
 
   return (
     <MetaContext value={{ state, formAction, isPending }}>

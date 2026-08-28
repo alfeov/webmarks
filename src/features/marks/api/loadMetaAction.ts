@@ -4,7 +4,7 @@ import { LOAD_META_FORMDATA } from '../lib/constants'
 import { LoadMetaFormState } from '../model/types'
 import { getMQLMeta } from './getMQLMeta'
 
-export async function loadMeta(
+export async function loadMetaAction(
   prevState: LoadMetaFormState,
   formData: FormData,
 ) {

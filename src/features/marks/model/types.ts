@@ -1,4 +1,5 @@
 import { Prisma } from '@/shared/lib/prisma/generated/client'
+import { WebMarkCreateInput } from '@/shared/lib/prisma/generated/models'
 
 export type WebMarkWithTags = Prisma.WebMarkGetPayload<{
   include: {
@@ -6,12 +7,10 @@ export type WebMarkWithTags = Prisma.WebMarkGetPayload<{
   }
 }>
 
-export interface CreateMark {
-  title: string
-  url: string
-  description: string
-  logoUrl: string
-}
+export type CreateMark = Pick<
+  WebMarkCreateInput,
+  'title' | 'description' | 'url' | 'logoUrl'
+>
 
 export interface CreateMarkFormState {
   isSuccess: boolean

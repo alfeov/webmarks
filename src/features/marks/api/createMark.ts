@@ -1,40 +1,18 @@
-'use server'
-
-import { flattenError } from 'zod'
-
 import { prisma } from '@/shared/lib/prisma'
 import { Prisma } from '@/shared/lib/prisma/generated/client'
-import { verifySession } from '@/shared/lib/session'
+import { WebMarkUncheckedCreateInput } from '@/shared/lib/prisma/generated/models'
 
-import { MarkFormSchema } from '../model/MarkFormSchema'
-import { CreateMark, CreateMarkFormState } from '../model/types'
-
-export async function createMark(
-  prevState: CreateMarkFormState,
-  data: CreateMark,
-) {
-  const validatedFields = MarkFormSchema.safeParse(data)
-
-  if (!validatedFields.success)
-    return {
-      isSuccess: false,
-      errors: flattenError(validatedFields.error).fieldErrors,
-      message: 'Please fix the highlighted fields',
-    }
-
-  const session = await verifySession()
-  if (!session)
-    return {
-      isSuccess: false,
-      errors: null,
-      message: 'To create WebMarks you must login to account',
-    }
-
+export async function createMark({
+  title,
+  description,
+  url,
+  logoUrl,
+  userId,
+}: WebMarkUncheckedCreateInput) {
   try {
-    const { title, description, url, logoUrl } = validatedFields.data
-    await prisma.webMark.create({
+    const mark = await prisma.webMark.create({
       data: {
-        userId: session.userId,
+        userId,
         title,
         url,
         description,
@@ -43,22 +21,22 @@ export async function createMark(
     })
 
     return {
-      isSuccess: true,
-      errors: null,
-      message: 'Webmark has been successfully created',
+      mark,
+      error: null,
     }
   } catch (error) {
     console.error(error)
-    const result = {
-      isSuccess: false,
-      errors: null,
-      message: 'An internal error occurred while creating WebMark',
-    }
     if (error instanceof Prisma.PrismaClientKnownRequestError) {
       if (error.code === 'P2002') {
-        result.message = 'WebMark with this URL already exist!'
+        return {
+          mark: null,
+          error: 'WebMark with this URL already exist!',
+        }
       }
     }
-    return result
+    return {
+      mark: null,
+      error: 'An internal error occurred while creating WebMark',
+    }
   }
 }

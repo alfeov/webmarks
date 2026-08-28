@@ -1,7 +1,7 @@
 import { startTransition, useActionState } from 'react'
 import { useForm } from 'react-hook-form'
 
-import { createMark } from '../api/createMark'
+import { createMarkAction } from '../api/createMarkAction'
 import { useMetaContext } from '../model/MetaContext'
 import { CreateMark, CreateMarkFormState } from '../model/types'
 
@@ -20,7 +20,7 @@ export function useCreateMarkForm() {
   const [state, formAction, isPending] = useActionState<
     CreateMarkFormState,
     CreateMark
-  >(createMark, initialState)
+  >(createMarkAction, initialState)
 
   const onSubmit = handleSubmit((data) => {
     startTransition(() => formAction(data))

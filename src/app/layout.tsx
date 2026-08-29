@@ -25,6 +25,7 @@ export default function RootLayout({ children }: LayoutProps<'/'>) {
     <html
       lang='en'
       className={cn('h-full', 'antialiased', fontExcalidraw.className)}
+      data-scroll-behavior='smooth'
     >
       <Providers>
         <body className='min-h-full max-h- flex flex-col'>

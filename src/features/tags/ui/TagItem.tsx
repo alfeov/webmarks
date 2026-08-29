@@ -1,3 +1,6 @@
+import Link from 'next/link'
+
+import { Tag } from '@/shared/lib/prisma/generated/client'
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -13,14 +16,14 @@ import {
 
 import { LucideEllipsis } from 'lucide-react'
 
-interface TagItemProps {
-  title: string
-}
+type TagItemProps = Tag
 
 export function TagItem({ title }: TagItemProps) {
   return (
     <SidebarMenuItem>
-      <SidebarMenuButton>{title}</SidebarMenuButton>
+      <Link href={title}>
+        <SidebarMenuButton>{title}</SidebarMenuButton>
+      </Link>
       <DropdownMenu>
         <DropdownMenuTrigger
           render={

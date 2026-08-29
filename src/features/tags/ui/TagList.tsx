@@ -4,19 +4,20 @@ import {
   SidebarMenu,
 } from '@/shared/ui/sidebar'
 
+import { loadTags } from '../api/loadTags'
 import { TagDialog } from './TagDialog'
 import { TagItem } from './TagItem'
 
-const tags = ['Tag 1', 'Tag 2', 'Tag 3', 'Tag 4']
+export async function TagList() {
+  const { tags, message } = await loadTags()
 
-export function TagList() {
   return (
     <SidebarGroup>
       <SidebarGroupLabel className='text-[16px]'>Tags</SidebarGroupLabel>
       <TagDialog />
       <SidebarMenu>
         {tags.map((tag) => (
-          <TagItem key={tag} title={tag} />
+          <TagItem key={tag.id} {...tag} />
         ))}
       </SidebarMenu>
     </SidebarGroup>

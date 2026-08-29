@@ -1,3 +1,7 @@
+'use client'
+
+import { usePathname } from 'next/navigation'
+
 import {
   Empty,
   EmptyDescription,
@@ -8,16 +12,18 @@ import {
 
 import { CircleX } from 'lucide-react'
 
-export function NotFoundMessage() {
+export function NotFoundPage() {
+  const pathname = usePathname()
+
   return (
-    <Empty>
+    <Empty className='h-full'>
       <EmptyHeader>
         <EmptyMedia variant='icon'>
           <CircleX className='size-6' />
         </EmptyMedia>
         <EmptyTitle>404 - Not Found</EmptyTitle>
         <EmptyDescription>
-          The page you&apos;re looking for doesn&apos;t exist.
+          Page with path {pathname} you&apos;re looking for doesn&apos;t exist.
         </EmptyDescription>
       </EmptyHeader>
     </Empty>

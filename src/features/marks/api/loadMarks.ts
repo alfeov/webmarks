@@ -1,13 +1,24 @@
+import 'server-only'
+
 import { prisma } from '@/shared/lib/prisma'
 import { verifySession } from '@/shared/lib/session'
 
-export async function loadMarks() {
+interface LoadMarksParams {
+  tagTitle?: string
+}
+
+export async function loadMarks({ tagTitle }: LoadMarksParams) {
   const session = await verifySession()
   if (!session) return { marks: [], message: 'To view marks you must be auth' }
 
   const marks = await prisma.webMark.findMany({
     where: {
       userId: session.userId,
+      tags: {
+        some: {
+          title: tagTitle,
+        },
+      },
     },
     orderBy: [
       {

@@ -1,3 +1,5 @@
+import Link from 'next/link'
+
 import { TagList } from '@/features/tags/ui/TagList'
 import {
   Sidebar,
@@ -20,7 +22,9 @@ export function AppSidebar() {
             <SidebarGroupLabel className='text-[16px]'>Main</SidebarGroupLabel>
             <SidebarMenu>
               <SidebarMenuItem>
-                <SidebarMenuButton>Show All WebMarks</SidebarMenuButton>
+                <Link href='/'>
+                  <SidebarMenuButton>Show All WebMarks</SidebarMenuButton>
+                </Link>
               </SidebarMenuItem>
             </SidebarMenu>
           </SidebarGroup>

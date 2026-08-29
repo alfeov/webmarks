@@ -4,8 +4,8 @@ import { MarkItem } from '@/features/marks/ui/MarkItem'
 import { SearchMark } from '@/features/marks/ui/SearchMark'
 import { ErrorEmpty } from '@/shared/ui/ErrorEmpty'
 
-export async function MarksList() {
-  const { marks, message } = await loadMarks()
+export async function MarksList({ tagTitle }: { tagTitle?: string }) {
+  const { marks, message } = await loadMarks({ tagTitle })
 
   return (
     <div className='p-[30px] flex flex-col gap-[30px] h-full'>

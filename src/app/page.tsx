@@ -1,5 +1,1 @@
-import { MarksPage } from '@/_pages/MarksPage'
-
-export default function Home() {
-  return <MarksPage />
-}
+export { AllMarksPage as default } from '@/_pages/AllMarksPage'

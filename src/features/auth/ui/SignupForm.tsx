@@ -7,7 +7,7 @@ import { Button } from '@/shared/ui/button'
 import { FieldSet } from '@/shared/ui/field'
 import { InputField } from '@/shared/ui/InputField'
 
-import { signup } from '../api/signup'
+import { signupAction } from '../api/signupAction'
 import { SIGNUP_FORMDATA } from '../lib/constants'
 import { useCloseDialogOnAuth } from '../lib/useCloseDialogOnAuth'
 
@@ -21,7 +21,7 @@ export function SignupForm() {
   const [state, formAction, isPending] = useActionState<
     SignupFormState,
     FormData
-  >(signup, initialState)
+  >(signupAction, initialState)
   useNotificationManager(state.message, state.isSuccess)
   useCloseDialogOnAuth(state.isSuccess)
 

@@ -1,9 +1,8 @@
 'use server'
 
-import { flattenError } from 'zod'
-
 import { createResult } from '@/shared/lib/createResult'
 import { verifySession } from '@/shared/lib/session'
+import { validateFormData } from '@/shared/lib/validateFormData'
 
 import { MarkFormSchema } from '../lib/MarkFormSchema'
 import { CreateMark, CreateMarkFormState } from '../model/types'
@@ -21,16 +20,19 @@ export async function createMarkAction(
     })
 
   // zod validation
-  const validatedFields = MarkFormSchema.safeParse(data)
-  if (!validatedFields.success)
+  const { validatedData, validationErrors } = validateFormData(
+    data,
+    MarkFormSchema,
+  )
+  if (!validatedData)
     return createResult({
-      errors: flattenError(validatedFields.error).fieldErrors,
+      errors: validationErrors,
       message: 'Please fix the highlighted fields',
     })
 
   // webmark creation
   const { mark, error } = await createMark({
-    ...validatedFields.data,
+    ...validatedData,
     userId: session.userId,
   })
   if (!mark)

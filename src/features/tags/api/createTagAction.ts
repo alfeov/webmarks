@@ -1,9 +1,8 @@
 'use server'
 
-import { flattenError } from 'zod'
-
 import { createResult } from '@/shared/lib/createResult'
 import { verifySession } from '@/shared/lib/session'
+import { validateFormData } from '@/shared/lib/validateFormData'
 
 import { TagFormSchema } from '../lib/TagFormSchema'
 import { CreateTagFormState } from '../model/types'
@@ -21,17 +20,19 @@ export async function createTagAction(
     })
 
   // zod validation
-  const rawData = Object.fromEntries(formData)
-  const validatedFields = TagFormSchema.safeParse(rawData)
-  if (!validatedFields.success)
+  const { validatedData, validationErrors } = validateFormData(
+    formData,
+    TagFormSchema,
+  )
+  if (!validatedData)
     return createResult({
       message: 'Please fix highlighted fields',
-      errors: flattenError(validatedFields.error).fieldErrors,
+      errors: validationErrors,
     })
 
   // creating tag in DB
   const { tag, error } = await createTag({
-    ...validatedFields.data,
+    ...validatedData,
     userId: session.userId,
   })
   if (!tag)

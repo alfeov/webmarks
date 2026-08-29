@@ -2,17 +2,24 @@
 
 import { createResult } from '@/shared/lib/createResult'
 import { createSession } from '@/shared/lib/session'
+import { validateFormData } from '@/shared/lib/validateFormData'
 
-import { validateLoginFormData } from '../lib/validation/validateLoginFormData'
+import { LoginFormSchema } from '../lib/validation/LoginFormSchema'
 import { verifyUser } from './verifyUser'
 
-export async function login(prevState: LoginFormState, formData: FormData) {
+export async function loginAction(
+  prevState: LoginFormState,
+  formData: FormData,
+) {
   // zod validation
-  const { validatedData, errors, message } = validateLoginFormData(formData)
+  const { validatedData, validationErrors } = validateFormData(
+    formData,
+    LoginFormSchema,
+  )
   if (!validatedData)
     return createResult({
-      errors,
-      message,
+      errors: validationErrors,
+      message: 'Please fix the highlighted fields',
     })
 
   // finding user in db and compare password

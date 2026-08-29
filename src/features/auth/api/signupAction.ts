@@ -2,17 +2,24 @@
 
 import { createResult } from '@/shared/lib/createResult'
 import { createSession } from '@/shared/lib/session'
+import { validateFormData } from '@/shared/lib/validateFormData'
 
-import { validateSignupFormData } from '../lib/validation/validateSignupFormData'
+import { SignupFormSchema } from '../lib/validation/SignupFormSchema'
 import { createUser } from './createUser'
 
-export async function signup(prevState: SignupFormState, formData: FormData) {
+export async function signupAction(
+  prevState: SignupFormState,
+  formData: FormData,
+) {
   // zod validation
-  const { validatedData, errors, message } = validateSignupFormData(formData)
+  const { validatedData, validationErrors } = validateFormData(
+    formData,
+    SignupFormSchema,
+  )
   if (!validatedData)
     return createResult({
-      errors,
-      message,
+      errors: validationErrors,
+      message: 'Please fix the highlighted fields',
     })
 
   // hash password and create user in DB

@@ -1,7 +1,7 @@
-import { MarksList } from '@/widgets/marks-list/ui/MarksList'
+import { Marks } from '@/widgets/marks/ui/Marks'
 
 export async function MarksByTagPage({ params }: PageProps<'/[tag]'>) {
   const { tag } = await params
 
-  return <MarksList tagTitle={tag} />
+  return <Marks tagTitle={tag} />
 }

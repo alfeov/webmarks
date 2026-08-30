@@ -1,5 +1,7 @@
 'use server'
 
+import { updateTag } from 'next/cache'
+
 import { createResult } from '@/shared/lib/createResult'
 import { verifySession } from '@/shared/lib/session'
 import { validateFormData } from '@/shared/lib/validateFormData'
@@ -39,6 +41,9 @@ export async function createMarkAction(
     return createResult({
       message: error,
     })
+
+  // revalidation
+  updateTag(`marks-${session.userId}`) // todo revalidate by tag
 
   // return success response
   return createResult({

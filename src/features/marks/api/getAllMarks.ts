@@ -1,24 +1,25 @@
 import 'server-only'
 
-import { prisma } from '@/shared/lib/prisma'
-import { verifySession } from '@/shared/lib/session'
+import { cacheLife, cacheTag } from 'next/cache'
 
-interface LoadMarksParams {
-  tagTitle?: string
+import { prisma } from '@/shared/lib/prisma'
+import { WebMark } from '@/shared/lib/prisma/generated/client'
+
+interface GetAllMarksParams {
+  userId?: WebMark['userId']
 }
 
-export async function loadMarks({ tagTitle }: LoadMarksParams) {
-  const session = await verifySession()
-  if (!session) return { marks: [], message: 'To view marks you must be auth' }
+export async function getAllMarks({ userId }: GetAllMarksParams) {
+  'use cache'
+
+  cacheTag(`marks-${userId}`)
+  cacheLife('days')
+
+  if (!userId) return { marks: [], message: 'To view marks you must be auth' }
 
   const marks = await prisma.webMark.findMany({
     where: {
-      userId: session.userId,
-      tags: {
-        some: {
-          title: tagTitle,
-        },
-      },
+      userId,
     },
     orderBy: [
       {

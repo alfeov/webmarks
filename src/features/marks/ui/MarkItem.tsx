@@ -21,39 +21,16 @@ import { WebMarkWithTags } from '../model/types'
 
 import { LucideEllipsis, Pin } from 'lucide-react'
 
-const tags = [
-  {
-    id: 1,
-    title: 'Programming',
-  },
-  {
-    id: 2,
-    title: 'Work',
-  },
-  {
-    id: 3,
-    title: 'Shopping',
-  },
-  {
-    id: 4,
-    title: 'Home',
-  },
-  {
-    id: 5,
-    title: 'CSS',
-  },
-]
-
 export function MarkItem({
   title,
   description,
   pinned,
   logoUrl,
   url,
-  // tags,
+  tags,
 }: WebMarkWithTags) {
   return (
-    <Card className='max-h-min'>
+    <Card>
       <CardHeader>
         <div className='flex items-center gap-[10px] overflow-hidden'>
           <Avatar size='lg'>
@@ -91,13 +68,15 @@ export function MarkItem({
           </DropdownMenu>
         </div>
       </CardHeader>
-      <CardContent>{description}</CardContent>
-      <CardFooter className='justify-between gap-[20px]'>
-        <div className='flex flex-wrap gap-[10px]'>
-          {tags.map((tag) => (
-            <Badge key={tag.id}>{tag.title}</Badge>
-          ))}
-        </div>
+      <CardContent className='grow'>{description}</CardContent>
+      <CardFooter className='justify-between gap-[20px] empty:hidden'>
+        {Boolean(tags.length) && (
+          <div className='flex flex-wrap gap-[10px]'>
+            {tags.map((tag) => (
+              <Badge key={tag.id}>{tag.title}</Badge>
+            ))}
+          </div>
+        )}
         {pinned && <Pin className='rotate-45 w-[20px] mr-[8px]' />}
       </CardFooter>
     </Card>

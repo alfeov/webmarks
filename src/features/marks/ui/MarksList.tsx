@@ -4,6 +4,7 @@ import { ErrorEmpty } from '@/shared/ui/ErrorEmpty'
 
 import { getAllMarks } from '../api/getAllMarks'
 import { getMarksByTag } from '../api/getMarksByTag'
+import { MarksGrid } from './MarksGrid'
 
 export async function MarksList({ tagTitle }: { tagTitle?: string }) {
   const session = await verifySession()
@@ -16,11 +17,11 @@ export async function MarksList({ tagTitle }: { tagTitle?: string }) {
   return (
     <div className='h-full'>
       {Boolean(marks.length) ? (
-        <div className='grid lg:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-[30px] content-start'>
+        <MarksGrid>
           {marks.map((mark) => (
             <MarkItem key={mark.id} {...mark} />
           ))}
-        </div>
+        </MarksGrid>
       ) : (
         <ErrorEmpty>{message}</ErrorEmpty>
       )}

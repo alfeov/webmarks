@@ -2,7 +2,7 @@ import { MarkItem } from '@/features/marks/ui/MarkItem'
 import { verifySession } from '@/shared/lib/session'
 import { ErrorEmpty } from '@/shared/ui/ErrorEmpty'
 
-import { getAllMarks } from '../api/getAllMarks'
+import { getAllUserMarks } from '../api/getAllUserMarks'
 import { getMarksByTag } from '../api/getMarksByTag'
 import { MarksGrid } from './MarksGrid'
 
@@ -10,7 +10,7 @@ export async function MarksList({ tag }: { tag?: string }) {
   const session = await verifySession()
   const { marks, message } = tag
     ? await getMarksByTag({ userId: session?.userId, tagTitle: tag })
-    : await getAllMarks({
+    : await getAllUserMarks({
         userId: session?.userId,
       })
 

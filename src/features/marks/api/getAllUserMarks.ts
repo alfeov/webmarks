@@ -5,11 +5,11 @@ import { cacheLife, cacheTag } from 'next/cache'
 import { prisma } from '@/shared/lib/prisma'
 import { WebMark } from '@/shared/lib/prisma/generated/client'
 
-interface GetAllMarksParams {
+interface GetAllUserMarksParams {
   userId?: WebMark['userId']
 }
 
-export async function getAllMarks({ userId }: GetAllMarksParams) {
+export async function getAllUserMarks({ userId }: GetAllUserMarksParams) {
   'use cache'
 
   cacheTag(`marks-${userId}`)

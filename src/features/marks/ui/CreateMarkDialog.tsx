@@ -12,7 +12,7 @@ import { CreateMarkButton } from './CreateMarkButton'
 import { CreateMarkForm } from './CreateMarkForm'
 import { LoadMetaForm } from './LoadMetaForm'
 
-export function CreateMark() {
+export function CreateMarkDialog() {
   return (
     <Dialog>
       <DialogTrigger render={<CreateMarkButton data-slot='dialog-trigger' />} />

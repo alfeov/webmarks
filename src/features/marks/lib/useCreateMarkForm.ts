@@ -1,3 +1,5 @@
+'use client'
+
 import { startTransition, useActionState } from 'react'
 import { useForm } from 'react-hook-form'
 

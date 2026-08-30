@@ -1,6 +1,6 @@
 import { Suspense } from 'react'
 
-import { CreateMark } from '@/features/marks/ui/CreateMark'
+import { CreateMarkDialog } from '@/features/marks/ui/CreateMarkDialog'
 import { MarksList } from '@/features/marks/ui/MarksList'
 import { MarksListSkeleton } from '@/features/marks/ui/MarksListSkeleton'
 import { SearchMark } from '@/features/marks/ui/SearchMark'
@@ -25,7 +25,7 @@ export async function Marks({ params }: MarksProps) {
         <Suspense fallback={<SearchMarkSkeleton />}>
           <SearchMark />
         </Suspense>
-        <CreateMark />
+        <CreateMarkDialog />
       </div>
       <Suspense fallback={<MarksListSkeleton />}>
         <MarksList tag={tag} />

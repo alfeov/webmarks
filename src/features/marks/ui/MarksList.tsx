@@ -6,10 +6,10 @@ import { getAllMarks } from '../api/getAllMarks'
 import { getMarksByTag } from '../api/getMarksByTag'
 import { MarksGrid } from './MarksGrid'
 
-export async function MarksList({ tagTitle }: { tagTitle?: string }) {
+export async function MarksList({ tag }: { tag?: string }) {
   const session = await verifySession()
-  const { marks, message } = tagTitle
-    ? await getMarksByTag({ userId: session?.userId, tagTitle })
+  const { marks, message } = tag
+    ? await getMarksByTag({ userId: session?.userId, tagTitle: tag })
     : await getAllMarks({
         userId: session?.userId,
       })

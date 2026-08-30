@@ -1,10 +1,12 @@
 import type { Metadata } from 'next'
 import localFont from 'next/font/local'
 import Link from 'next/link'
+import { Suspense } from 'react'
 
 import { cn } from '@/shared/lib/utils'
 import { ScrollArea } from '@/shared/ui/scroll-area'
 import { Profile } from '@/widgets/profile/ui/Profile'
+import { ProfileSkeleton } from '@/widgets/profile/ui/ProfileSkeleton'
 import { AppSidebar } from '@/widgets/sidebar/ui/AppSidebar'
 
 import { Providers } from './_providers/Providers'
@@ -34,7 +36,9 @@ export default function RootLayout({ children }: LayoutProps<'/'>) {
               <Link href='/'>
                 <h1 className='text-[30px] font-bold'>WebMarks</h1>
               </Link>
-              <Profile />
+              <Suspense fallback={<ProfileSkeleton />}>
+                <Profile />
+              </Suspense>
             </div>
           </header>
 

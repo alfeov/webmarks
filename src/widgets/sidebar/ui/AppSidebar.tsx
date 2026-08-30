@@ -1,36 +1,22 @@
-import Link from 'next/link'
-
-import { TagList } from '@/features/tags/ui/TagList'
 import {
   Sidebar,
   SidebarContent,
-  SidebarGroup,
-  SidebarGroupLabel,
   SidebarHeader,
-  SidebarMenu,
-  SidebarMenuButton,
-  SidebarMenuItem,
   SidebarProvider,
 } from '@/shared/ui/sidebar'
+
+import { AllMarksSidebarGroup } from './AllMarksSidebarGroup'
+import { TagsSidebarGroup } from './TagsSidebarGroup'
 
 export function AppSidebar() {
   return (
     <SidebarProvider className='items-start border-r min-h-full'>
       <Sidebar collapsible='none' className='hidden md:flex bg-(--background)'>
         <SidebarHeader>
-          <SidebarGroup>
-            <SidebarGroupLabel className='text-[16px]'>Main</SidebarGroupLabel>
-            <SidebarMenu>
-              <SidebarMenuItem>
-                <Link href='/'>
-                  <SidebarMenuButton>Show All WebMarks</SidebarMenuButton>
-                </Link>
-              </SidebarMenuItem>
-            </SidebarMenu>
-          </SidebarGroup>
+          <AllMarksSidebarGroup />
         </SidebarHeader>
         <SidebarContent>
-          <TagList />
+          <TagsSidebarGroup />
         </SidebarContent>
       </Sidebar>
     </SidebarProvider>

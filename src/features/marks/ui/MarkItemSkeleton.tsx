@@ -1,3 +1,4 @@
+import { AvatarSkeleton } from '@/shared/ui/AvatarSkeleton'
 import { Card, CardContent, CardFooter, CardHeader } from '@/shared/ui/card'
 import { Skeleton } from '@/shared/ui/skeleton'
 
@@ -6,7 +7,7 @@ export function MarkItemSkeleton() {
     <Card>
       <CardHeader>
         <div className='flex items-center gap-[10px]'>
-          <Skeleton className='size-10 rounded-full' />
+          <AvatarSkeleton size='lg' />
           <div className='grow grid gap-[10px]'>
             <Skeleton className='h-4 w-3/4' />
             <Skeleton className='h-4 w-2/3' />

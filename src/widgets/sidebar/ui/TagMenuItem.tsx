@@ -16,9 +16,9 @@ import {
 
 import { LucideEllipsis } from 'lucide-react'
 
-type TagItemProps = Tag
+type TagMenuItemProps = Tag
 
-export function TagItem({ title }: TagItemProps) {
+export function TagMenuItem({ title }: TagMenuItemProps) {
   return (
     <SidebarMenuItem>
       <Link href={title}>

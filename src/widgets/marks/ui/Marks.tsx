@@ -1,10 +1,11 @@
 import { Suspense } from 'react'
 
-import { CreateMarkDialog } from '@/features/marks/ui/CreateMarkDialog'
-import { MarksList } from '@/features/marks/ui/MarksList'
-import { MarksListSkeleton } from '@/features/marks/ui/MarksListSkeleton'
-import { SearchMark } from '@/features/marks/ui/SearchMark'
-import { SearchMarkSkeleton } from '@/features/marks/ui/SearchMarkSkeleton'
+import { CreateMarkDialog } from '@/features/create-mark/ui/CreateMarkDialog'
+import { SearchMark } from '@/features/search-mark/ui/SearchMark'
+import { SearchMarkSkeleton } from '@/features/search-mark/ui/SearchMarkSkeleton'
+
+import { MarkList } from './MarkList'
+import { MarksListSkeleton } from './MarkListSkeleton'
 
 interface MarksProps {
   params?: Promise<{
@@ -28,7 +29,7 @@ export async function Marks({ params }: MarksProps) {
         <CreateMarkDialog />
       </div>
       <Suspense fallback={<MarksListSkeleton />}>
-        <MarksList tag={tag} />
+        <MarkList tag={tag} />
       </Suspense>
     </div>
   )

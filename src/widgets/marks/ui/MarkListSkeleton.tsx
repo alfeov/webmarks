@@ -1,12 +1,13 @@
-import { MarkItemSkeleton } from './MarkItemSkeleton'
-import { MarksGrid } from './MarksGrid'
+import { MarkItemSkeleton } from '@/entities/mark/ui/MarkItemSkeleton'
+
+import { MarkGrid } from './MarkGrid'
 
 export function MarksListSkeleton() {
   return (
-    <MarksGrid>
+    <MarkGrid>
       {Array.from({ length: 10 }).map((_, i) => (
         <MarkItemSkeleton key={i} />
       ))}
-    </MarksGrid>
+    </MarkGrid>
   )
 }

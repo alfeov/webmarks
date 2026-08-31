@@ -2,7 +2,8 @@
 
 import { createContext, use, useActionState } from 'react'
 
-import { loadMetaAction } from '../api/loadMetaAction'
+import { loadMetaAction } from '@/features/create-mark/api/loadMetaAction'
+
 import { LoadMetaFormState } from './types'
 
 type MetaContextValue = {

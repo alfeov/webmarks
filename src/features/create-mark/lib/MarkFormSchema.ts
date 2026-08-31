@@ -1,6 +1,6 @@
 import z from 'zod'
 
-import { CREATE_MARK_FORMDATA } from '../lib/constants'
+import { CREATE_MARK_FORMDATA } from './constants'
 
 export const MarkFormSchema = z.object({
   [CREATE_MARK_FORMDATA.TITLE]: z

@@ -1,6 +1,6 @@
 import { Suspense } from 'react'
 
-import { TagDialog } from '@/features/tags/ui/TagDialog'
+import { TagDialog } from '@/features/create-tag/ui/TagDialog'
 import { SidebarGroup, SidebarGroupLabel } from '@/shared/ui/sidebar'
 
 import { SidebarMenuListSkeleton } from './SidebarMenuListSkeleton'

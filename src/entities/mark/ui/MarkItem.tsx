@@ -1,6 +1,5 @@
 import { Avatar, AvatarFallback, AvatarImage } from '@/shared/ui/avatar'
 import { Badge } from '@/shared/ui/badge'
-import { Button } from '@/shared/ui/button'
 import {
   Card,
   CardContent,
@@ -9,28 +8,24 @@ import {
   CardHeader,
   CardTitle,
 } from '@/shared/ui/card'
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuGroup,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-} from '@/shared/ui/dropdown-menu'
 
 import { WebMarkWithTags } from '../model/types'
-import { MarkTagsMenuItem } from './MarkTagsMenuItem'
 
-import { LucideEllipsis, Pin } from 'lucide-react'
+import { Pin } from 'lucide-react'
+
+type MarkItemProps = WebMarkWithTags & {
+  children: React.ReactNode
+}
 
 export function MarkItem({
-  id,
   title,
   description,
   pinned,
   logoUrl,
   url,
   tags,
-}: WebMarkWithTags) {
+  children,
+}: MarkItemProps) {
   return (
     <Card>
       <CardHeader>
@@ -45,28 +40,7 @@ export function MarkItem({
               {url.split('://')[1] || 'Incorrect Link'}
             </CardDescription>
           </div>
-          <DropdownMenu>
-            <DropdownMenuTrigger
-              render={
-                <Button
-                  size='icon-sm'
-                  variant='ghost'
-                  data-slot='dropdown-menu-trigger'
-                  aria-label='mark menu'
-                >
-                  <LucideEllipsis />
-                </Button>
-              }
-            />
-            <DropdownMenuContent>
-              <DropdownMenuGroup>
-                <DropdownMenuItem>{pinned ? 'Unpin' : 'Pin'}</DropdownMenuItem>
-                <MarkTagsMenuItem markTags={tags} />
-                <DropdownMenuItem>Copy Link</DropdownMenuItem>
-                <DropdownMenuItem>Change</DropdownMenuItem>
-              </DropdownMenuGroup>
-            </DropdownMenuContent>
-          </DropdownMenu>
+          {children}
         </div>
       </CardHeader>
       <CardContent className='grow'>{description}</CardContent>

@@ -21,7 +21,7 @@ export async function MarkList({ tag }: { tag?: string }) {
         <MarkGrid>
           {marks.map((mark) => (
             <MarkItem key={mark.id} {...mark}>
-              <MarkDropdownMenu pinned={mark.pinned} tags={mark.tags} />
+              <MarkDropdownMenu {...mark} />
             </MarkItem>
           ))}
         </MarkGrid>

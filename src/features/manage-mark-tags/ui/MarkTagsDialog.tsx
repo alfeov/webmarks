@@ -9,16 +9,14 @@ import {
   DialogTitle,
 } from '@/shared/ui/dialog'
 
+import { useMarkTagsDialogContext } from '../model/MarkTagsDialogContext'
 import { MarkTagsForm } from './MarkTagsForm'
 
-type MarkTagsDialogProps = {
-  isOpen: boolean
-  closeDialog: () => void
-}
+export function MarkTagsDialog() {
+  const { isDialogOpen, closeDialog } = useMarkTagsDialogContext()
 
-export function MarkTagsDialog({ isOpen, closeDialog }: MarkTagsDialogProps) {
   return (
-    <Dialog open={isOpen}>
+    <Dialog open={isDialogOpen}>
       <DialogContent showCloseButton={false}>
         <DialogHeader>
           <DialogTitle>WebMark Tags</DialogTitle>

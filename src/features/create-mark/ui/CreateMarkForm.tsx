@@ -2,6 +2,7 @@
 
 import { useNotificationManager } from '@/shared/lib/useNotificationManager'
 import { Button } from '@/shared/ui/button'
+import { ErrorText } from '@/shared/ui/ErrorText'
 import { FieldLegend, FieldSet } from '@/shared/ui/field'
 import { InputField } from '@/shared/ui/InputField'
 
@@ -48,9 +49,7 @@ export function CreateMarkForm() {
             {...register(CREATE_MARK_FORMDATA.LOGO_URL)}
           />
         </FieldSet>
-        <p className='text-sm font-normal text-destructive empty:hidden'>
-          {!state.isSuccess && state.message}
-        </p>
+        <ErrorText>{!state.isSuccess && state.message}</ErrorText>
         <Button type='submit'>Create WebMark</Button>
       </FieldSet>
     </form>

@@ -2,13 +2,11 @@
 
 import { createContext, use, useState } from 'react'
 
-import { Tag } from '@/shared/lib/prisma/generated/client'
-
 import { MarkTagsDialog } from '../ui/MarkTagsDialog'
 
 export type MarkTagsDialogValue = {
-  markTags: Tag[]
-  openDialog: (markTags: Tag[]) => void
+  isDialogOpen: boolean
+  openDialog: () => void
   closeDialog: () => void
 }
 
@@ -19,19 +17,15 @@ export function MarkTagsDialogProvider({
 }: {
   children: React.ReactNode
 }) {
-  const [markTags, setMarkTags] = useState<Tag[]>([])
   const [isDialogOpen, setIsDialogOpen] = useState(false)
 
-  const openDialog = (markTags: Tag[]) => {
-    setMarkTags(markTags)
-    setIsDialogOpen(true)
-  }
+  const openDialog = () => setIsDialogOpen(true)
   const closeDialog = () => setIsDialogOpen(false)
 
   return (
-    <MarkTagsDialogContext value={{ markTags, openDialog, closeDialog }}>
+    <MarkTagsDialogContext value={{ isDialogOpen, openDialog, closeDialog }}>
       {children}
-      <MarkTagsDialog isOpen={isDialogOpen} closeDialog={closeDialog} />
+      <MarkTagsDialog />
     </MarkTagsDialogContext>
   )
 }

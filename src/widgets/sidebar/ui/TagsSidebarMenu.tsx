@@ -1,12 +1,12 @@
-import { getAllUserTags } from '@/features/tags/api/getAllUserTags'
-import { verifySession } from '@/shared/lib/session'
+'use client'
+
+import { useTagsContext } from '@/entities/tag/model/TagsContext'
 import { SidebarMenu } from '@/shared/ui/sidebar'
 
 import { TagMenuItem } from './TagMenuItem'
 
-export async function TagsSidebarMenu() {
-  const session = await verifySession()
-  const { tags } = await getAllUserTags({ userId: session?.userId })
+export function TagsSidebarMenu() {
+  const { tags } = useTagsContext()
 
   return (
     <SidebarMenu>

@@ -18,10 +18,12 @@ import {
 } from '@/shared/ui/dropdown-menu'
 
 import { WebMarkWithTags } from '../model/types'
+import { MarkTagsMenuItem } from './MarkTagsMenuItem'
 
 import { LucideEllipsis, Pin } from 'lucide-react'
 
 export function MarkItem({
+  id,
   title,
   description,
   pinned,
@@ -43,7 +45,6 @@ export function MarkItem({
               {url.split('://')[1] || 'Incorrect Link'}
             </CardDescription>
           </div>
-
           <DropdownMenu>
             <DropdownMenuTrigger
               render={
@@ -60,7 +61,7 @@ export function MarkItem({
             <DropdownMenuContent>
               <DropdownMenuGroup>
                 <DropdownMenuItem>{pinned ? 'Unpin' : 'Pin'}</DropdownMenuItem>
-                <DropdownMenuItem>Tags</DropdownMenuItem>
+                <MarkTagsMenuItem markTags={tags} />
                 <DropdownMenuItem>Copy Link</DropdownMenuItem>
                 <DropdownMenuItem>Change</DropdownMenuItem>
               </DropdownMenuGroup>

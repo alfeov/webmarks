@@ -5,6 +5,7 @@ import { Suspense } from 'react'
 
 import { cn } from '@/shared/lib/utils'
 import { ScrollArea } from '@/shared/ui/scroll-area'
+import { SpinnerEmpty } from '@/shared/ui/SpinerEmpty'
 import { Profile } from '@/widgets/profile/ui/Profile'
 import { ProfileSkeleton } from '@/widgets/profile/ui/ProfileSkeleton'
 import { AppSidebar } from '@/widgets/sidebar/ui/AppSidebar'
@@ -29,29 +30,31 @@ export default function RootLayout({ children }: LayoutProps<'/'>) {
       className={cn('h-full', 'antialiased', fontExcalidraw.className)}
       data-scroll-behavior='smooth'
     >
-      <Providers>
-        <body className='min-h-full max-h- flex flex-col'>
-          <header className='border-b'>
-            <div className='flex items-center justify-between px-[30px] md:px-[40px] h-(--header-height)'>
-              <Link href='/'>
-                <h1 className='text-[30px] font-bold'>WebMarks</h1>
-              </Link>
-              <Suspense fallback={<ProfileSkeleton />}>
-                <Profile />
-              </Suspense>
-            </div>
-          </header>
+      <body className='min-h-full max-h- flex flex-col'>
+        <Suspense fallback={<SpinnerEmpty>App Initialization</SpinnerEmpty>}>
+          <Providers>
+            <header className='border-b'>
+              <div className='flex items-center justify-between px-[30px] md:px-[40px] h-(--header-height)'>
+                <Link href='/'>
+                  <h1 className='text-[30px] font-bold'>WebMarks</h1>
+                </Link>
+                <Suspense fallback={<ProfileSkeleton />}>
+                  <Profile />
+                </Suspense>
+              </div>
+            </header>
 
-          <main>
-            <div className='flex h-(--content-height)'>
-              <aside>
-                <AppSidebar />
-              </aside>
-              <ScrollArea className='h-full w-full'>{children}</ScrollArea>
-            </div>
-          </main>
-        </body>
-      </Providers>
+            <main>
+              <div className='flex h-(--content-height)'>
+                <aside>
+                  <AppSidebar />
+                </aside>
+                <ScrollArea className='h-full w-full'>{children}</ScrollArea>
+              </div>
+            </main>
+          </Providers>
+        </Suspense>
+      </body>
     </html>
   )
 }

@@ -1,26 +1,23 @@
 'use client'
 
-import { createContext, Dispatch, SetStateAction, use, useState } from 'react'
+import { createContext, use } from 'react'
 
 import { Tag } from '@/shared/lib/prisma/generated/client'
 
 type TagsContextValue = {
   tags: Tag[]
-  setTags: Dispatch<SetStateAction<Tag[]>>
 }
 
 const TagsContext = createContext<null | TagsContextValue>(null)
 
 export function TagsProvider({
-  initialTags = [],
+  tags = [],
   children,
 }: {
-  initialTags: Tag[]
+  tags: Tag[]
   children: React.ReactNode
 }) {
-  const [tags, setTags] = useState<Tag[]>(initialTags)
-
-  return <TagsContext value={{ tags, setTags }}>{children}</TagsContext>
+  return <TagsContext value={{ tags }}>{children}</TagsContext>
 }
 
 export function useTagsContext() {

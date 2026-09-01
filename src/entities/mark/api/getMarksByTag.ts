@@ -11,7 +11,7 @@ interface GetMarksByTagParams {
 export async function getMarksByTag({ userId, tagId }: GetMarksByTagParams) {
   'use cache'
 
-  cacheTag(`marks-${userId}-${tagId}`)
+  cacheTag(`marks-${userId}`)
   cacheLife('days')
 
   if (!userId) return { marks: [], message: 'To view marks you must be auth' }

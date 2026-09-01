@@ -13,7 +13,7 @@ export async function Providers({ children }: { children: React.ReactNode }) {
 
   return (
     <TooltipProvider>
-      <TagsProvider initialTags={tags}>
+      <TagsProvider tags={tags}>
         <ActiveMarkProvider>
           <AuthDialogProvider>
             <MarkTagsDialogProvider>{children}</MarkTagsDialogProvider>

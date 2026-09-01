@@ -1,6 +1,6 @@
 'use server'
 
-import { revalidateTag, updateTag } from 'next/cache'
+import { updateTag } from 'next/cache'
 
 import { createResult } from '@/shared/lib/createResult'
 import { verifySession } from '@/shared/lib/session'
@@ -50,9 +50,6 @@ export async function createMarkAction(
     })
 
   // revalidation
-  if (validatedData.defaultTagId) {
-    updateTag(`marks-${session.userId}-${validatedData.defaultTagId}`)
-  }
   updateTag(`marks-${session.userId}`)
 
   // return success response

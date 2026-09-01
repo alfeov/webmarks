@@ -6,3 +6,4 @@ export const PasswordSchema = z
   .regex(/[A-Z]/, 'At least one uppercase letter')
   .regex(/[0-9]/, 'At least one digit')
   .min(8, 'At least 8 characters')
+  .max(72, 'Maximum 72 characters')

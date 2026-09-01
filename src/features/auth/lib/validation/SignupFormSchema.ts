@@ -1,15 +1,13 @@
 import z from 'zod'
 
+import { UsernameSchema } from '@/shared/lib/UsernameSchema'
 import { PasswordSchema } from '@/shared/utils/PasswordSchema'
 
 import { SIGNUP_FORMDATA } from '../constants'
 
 export const SignupFormSchema = z
   .object({
-    [SIGNUP_FORMDATA.USERNAME]: z
-      .string()
-      .trim()
-      .min(5, 'At least 5 characters'),
+    [SIGNUP_FORMDATA.USERNAME]: UsernameSchema,
     [SIGNUP_FORMDATA.EMAIL]: z.email('Email is not correct'),
     [SIGNUP_FORMDATA.PASSWORD]: PasswordSchema,
     [SIGNUP_FORMDATA.CONFIRM_PASSWORD]: z.string(),

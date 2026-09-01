@@ -18,9 +18,13 @@ export function SearchMark() {
   return (
     <Form action={pathname ?? '/'}>
       <InputGroup>
-        <InputGroupInput placeholder='Search WebMark...' />
+        <InputGroupInput name='query' placeholder='Search WebMark...' />
         <InputGroupAddon align='inline-end'>
-          <InputGroupButton aria-label='search mark' size='icon-xs'>
+          <InputGroupButton
+            type='submit'
+            aria-label='search mark'
+            size='icon-xs'
+          >
             <SearchIcon />
           </InputGroupButton>
         </InputGroupAddon>

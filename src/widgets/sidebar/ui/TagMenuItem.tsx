@@ -24,7 +24,9 @@ export function TagMenuItem({ id, title }: TagMenuItemProps) {
   return (
     <SidebarMenuItem>
       <Link href={id}>
-        <SidebarMenuButton>{title}</SidebarMenuButton>
+        <SidebarMenuButton>
+          <span className='truncate'>{title}</span>
+        </SidebarMenuButton>
       </Link>
       <DropdownMenu>
         <DropdownMenuTrigger

@@ -1,5 +1,4 @@
-import { getAllUserMarks } from '@/entities/mark/api/getAllUserMarks'
-import { getMarksByTag } from '@/entities/mark/api/getMarksByTag'
+import { getUserMarks } from '@/entities/mark/api/getUserMarks'
 import { MarkItem } from '@/entities/mark/ui/MarkItem'
 import { Tag } from '@/shared/lib/prisma/generated/client'
 import { verifySession } from '@/shared/lib/session'
@@ -8,13 +7,18 @@ import { ErrorEmpty } from '@/shared/ui/ErrorEmpty'
 import { MarkDropdownMenu } from './MarkDropdownMenu'
 import { MarkGrid } from './MarkGrid'
 
-export async function MarkList({ tagId }: { tagId?: Tag['id'] }) {
+interface MarkListProps {
+  tagId?: Tag['id']
+  query?: string
+}
+
+export async function MarkList({ query, tagId }: MarkListProps) {
   const session = await verifySession()
-  const { marks, message } = tagId
-    ? await getMarksByTag({ userId: session?.userId, tagId })
-    : await getAllUserMarks({
-        userId: session?.userId,
-      })
+  const { marks, message } = await getUserMarks({
+    query,
+    userId: session?.userId,
+    tagId,
+  })
 
   return (
     <div className='h-full'>

@@ -12,13 +12,23 @@ interface MarksProps {
   params?: Promise<{
     tagId: Tag['id']
   }>
+  searchParams?: Promise<{
+    query?: string | string[]
+  }>
 }
 
-export async function Marks({ params }: MarksProps) {
+export async function Marks({ params, searchParams }: MarksProps) {
   let tagId = undefined
   if (params) {
     const resolvedParams = await params
     tagId = resolvedParams.tagId
+  }
+  let query = undefined
+  if (searchParams) {
+    const resolvedSearchParams = await searchParams
+    query = Array.isArray(resolvedSearchParams.query)
+      ? resolvedSearchParams.query[0]
+      : resolvedSearchParams.query
   }
 
   return (
@@ -30,7 +40,7 @@ export async function Marks({ params }: MarksProps) {
         <CreateMarkDialog />
       </div>
       <Suspense fallback={<MarksListSkeleton />}>
-        <MarkList tagId={tagId} />
+        <MarkList tagId={tagId} query={query} />
       </Suspense>
     </div>
   )

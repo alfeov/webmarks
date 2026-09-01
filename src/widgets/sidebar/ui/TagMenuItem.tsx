@@ -20,10 +20,10 @@ import { LucideEllipsis } from 'lucide-react'
 
 type TagMenuItemProps = Tag
 
-export function TagMenuItem({ title }: TagMenuItemProps) {
+export function TagMenuItem({ id, title }: TagMenuItemProps) {
   return (
     <SidebarMenuItem>
-      <Link href={title}>
+      <Link href={id}>
         <SidebarMenuButton>{title}</SidebarMenuButton>
       </Link>
       <DropdownMenu>

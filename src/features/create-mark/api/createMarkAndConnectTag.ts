@@ -1,17 +1,29 @@
+import { getUserTag } from '@/entities/tag/api/getUserTag'
 import { prisma } from '@/shared/lib/prisma'
-import { Prisma } from '@/shared/lib/prisma/generated/client'
+import { Prisma, Tag } from '@/shared/lib/prisma/generated/client'
 import { WebMarkUncheckedCreateInput } from '@/shared/lib/prisma/generated/models'
 
-type CreateMarkParams = WebMarkUncheckedCreateInput
+type CreateMarkAndConnectTagParams = WebMarkUncheckedCreateInput & {
+  tagId: Tag['id']
+}
 
-export async function createMark({
+export async function createMarkAndConnectTag({
   title,
   description,
   url,
   logoUrl,
   userId,
-}: CreateMarkParams) {
+  tagId,
+}: CreateMarkAndConnectTagParams) {
   try {
+    const { error, tag } = await getUserTag({ id: tagId, userId })
+    if (!tag) {
+      return {
+        mark: null,
+        error,
+      }
+    }
+
     const mark = await prisma.webMark.create({
       data: {
         userId,
@@ -19,6 +31,11 @@ export async function createMark({
         url,
         description,
         logoUrl: logoUrl ?? null,
+        tags: {
+          connect: {
+            id: tag.id,
+          },
+        },
       },
     })
 

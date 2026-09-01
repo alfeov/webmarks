@@ -1,9 +1,9 @@
-import { CUIDsSchema } from './CUIDsSchema'
+import { IdsSchema } from './IdsSchema'
 
 export function validateMarkTagsForm(formData: FormData) {
   const rawData = Array.from(formData.values())
 
-  const validatedValues = CUIDsSchema.safeParse(rawData)
+  const validatedValues = IdsSchema.safeParse(rawData)
   if (!validatedValues.success)
     return {
       markId: null,

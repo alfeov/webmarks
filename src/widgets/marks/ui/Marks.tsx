@@ -3,21 +3,22 @@ import { Suspense } from 'react'
 import { CreateMarkDialog } from '@/features/create-mark/ui/CreateMarkDialog'
 import { SearchMark } from '@/features/search-mark/ui/SearchMark'
 import { SearchMarkSkeleton } from '@/features/search-mark/ui/SearchMarkSkeleton'
+import { Tag } from '@/shared/lib/prisma/generated/client'
 
 import { MarkList } from './MarkList'
 import { MarksListSkeleton } from './MarkListSkeleton'
 
 interface MarksProps {
   params?: Promise<{
-    tag: string
+    tagId: Tag['id']
   }>
 }
 
 export async function Marks({ params }: MarksProps) {
-  let tag = undefined
+  let tagId = undefined
   if (params) {
     const resolvedParams = await params
-    tag = resolvedParams.tag
+    tagId = resolvedParams.tagId
   }
 
   return (
@@ -29,7 +30,7 @@ export async function Marks({ params }: MarksProps) {
         <CreateMarkDialog />
       </div>
       <Suspense fallback={<MarksListSkeleton />}>
-        <MarkList tag={tag} />
+        <MarkList tagId={tagId} />
       </Suspense>
     </div>
   )

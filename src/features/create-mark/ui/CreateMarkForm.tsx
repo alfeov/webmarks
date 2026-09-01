@@ -1,6 +1,10 @@
 'use client'
 
+import { useParams } from 'next/navigation'
+
+import { useTagsContext } from '@/entities/tag/model/TagsContext'
 import { useNotificationManager } from '@/shared/lib/useNotificationManager'
+import { BadgeField } from '@/shared/ui/BadgeField'
 import { Button } from '@/shared/ui/button'
 import { ErrorText } from '@/shared/ui/ErrorText'
 import { FieldLegend, FieldSet } from '@/shared/ui/field'
@@ -10,8 +14,15 @@ import { CREATE_MARK_FORMDATA } from '../lib/constants'
 import { useCreateMarkForm } from '../lib/useCreateMarkForm'
 
 export function CreateMarkForm() {
-  const { state, isPending, onSubmit, register } = useCreateMarkForm()
+  const params = useParams<{ tagId?: string }>()
+
+  const { state, isPending, onSubmit, register } = useCreateMarkForm({
+    defaultTagId: params.tagId,
+  })
   useNotificationManager(state.message, state.isSuccess)
+
+  const { tags } = useTagsContext()
+  const activeTagTitle = tags.find((tag) => tag.id === params.tagId)?.title
 
   return (
     <form onSubmit={onSubmit}>
@@ -41,13 +52,23 @@ export function CreateMarkForm() {
           />
         </FieldSet>
         <FieldSet>
-          <FieldLegend>Images Fields (Optional)</FieldLegend>
+          <FieldLegend>Optional Fields</FieldLegend>
           <InputField
             label='Logo URL'
             placeholder='https://logo.com'
             errors={state.errors?.logoUrl}
             {...register(CREATE_MARK_FORMDATA.LOGO_URL)}
           />
+          {/* default tag according to page params */}
+          {params.tagId && activeTagTitle && (
+            <BadgeField
+              hidden
+              label='Default Tag:'
+              badgeLabel={activeTagTitle}
+              errors={state.errors?.defaultTagId}
+              {...register(CREATE_MARK_FORMDATA.DEFAULT_TAG_ID)}
+            />
+          )}
         </FieldSet>
         <ErrorText>{!state.isSuccess && state.message}</ErrorText>
         <Button type='submit'>Create WebMark</Button>

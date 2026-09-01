@@ -1,5 +1,7 @@
 import z from 'zod'
 
+import { IdSchema } from '@/shared/lib/IdSchema'
+
 import { CREATE_MARK_FORMDATA } from './constants'
 
 export const MarkFormSchema = z.object({
@@ -13,4 +15,5 @@ export const MarkFormSchema = z.object({
     .trim()
     .min(10, 'At least 10 characters'),
   [CREATE_MARK_FORMDATA.LOGO_URL]: z.url('Not correct URL').optional(),
+  [CREATE_MARK_FORMDATA.DEFAULT_TAG_ID]: IdSchema.optional(),
 })

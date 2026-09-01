@@ -1,6 +1,6 @@
 'use server'
 
-import { updateTag } from 'next/cache'
+import { revalidateTag, updateTag } from 'next/cache'
 
 import { createResult } from '@/shared/lib/createResult'
 import { verifySession } from '@/shared/lib/session'
@@ -9,6 +9,7 @@ import { validateFormData } from '@/shared/lib/validateFormData'
 import { MarkFormSchema } from '../lib/MarkFormSchema'
 import { CreateMark, CreateMarkFormState } from '../model/types'
 import { createMark } from './createMark'
+import { createMarkAndConnectTag } from './createMarkAndConnectTag'
 
 export async function createMarkAction(
   prevState: CreateMarkFormState,
@@ -33,17 +34,26 @@ export async function createMarkAction(
     })
 
   // webmark creation
-  const { mark, error } = await createMark({
-    ...validatedData,
-    userId: session.userId,
-  })
+  const { mark, error } = validatedData.defaultTagId
+    ? await createMarkAndConnectTag({
+        ...validatedData,
+        tagId: validatedData.defaultTagId,
+        userId: session.userId,
+      })
+    : await createMark({
+        ...validatedData,
+        userId: session.userId,
+      })
   if (!mark)
     return createResult({
       message: error,
     })
 
   // revalidation
-  updateTag(`marks-${session.userId}`) // todo revalidate by tag
+  if (validatedData.defaultTagId) {
+    updateTag(`marks-${session.userId}-${validatedData.defaultTagId}`)
+  }
+  updateTag(`marks-${session.userId}`)
 
   // return success response
   return createResult({

@@ -5,13 +5,13 @@ import { Tag, WebMark } from '@/shared/lib/prisma/generated/client'
 
 interface GetMarksByTagParams {
   userId?: WebMark['userId']
-  tagTitle: Tag['title']
+  tagId: Tag['id']
 }
 
-export async function getMarksByTag({ userId, tagTitle }: GetMarksByTagParams) {
+export async function getMarksByTag({ userId, tagId }: GetMarksByTagParams) {
   'use cache'
 
-  cacheTag(`marks-${userId}`, `marks-${userId}-${tagTitle}`)
+  cacheTag(`marks-${userId}-${tagId}`)
   cacheLife('days')
 
   if (!userId) return { marks: [], message: 'To view marks you must be auth' }
@@ -21,7 +21,7 @@ export async function getMarksByTag({ userId, tagTitle }: GetMarksByTagParams) {
       userId,
       tags: {
         some: {
-          title: tagTitle,
+          id: tagId,
         },
       },
     },

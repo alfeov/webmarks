@@ -2,9 +2,9 @@
 
 import { updateTag } from 'next/cache'
 
-import { createResult } from '@/shared/lib/createResult'
 import { verifySession } from '@/shared/lib/session'
-import { validateFormData } from '@/shared/lib/validateFormData'
+import { createResult } from '@/shared/lib/utils/createResult'
+import { validateFormData } from '@/shared/lib/utils/validateFormData'
 
 import { MarkFormSchema } from '../lib/MarkFormSchema'
 import { CreateMark, CreateMarkFormState } from '../model/types'

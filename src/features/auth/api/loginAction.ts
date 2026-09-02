@@ -1,8 +1,8 @@
 'use server'
 
-import { createResult } from '@/shared/lib/createResult'
 import { createSession } from '@/shared/lib/session'
-import { validateFormData } from '@/shared/lib/validateFormData'
+import { createResult } from '@/shared/lib/utils/createResult'
+import { validateFormData } from '@/shared/lib/utils/validateFormData'
 
 import { LoginFormSchema } from '../lib/validation/LoginFormSchema'
 import { verifyUser } from './verifyUser'

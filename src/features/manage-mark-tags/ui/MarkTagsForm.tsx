@@ -4,9 +4,9 @@ import { useActionState } from 'react'
 
 import { useActiveMarkContext } from '@/entities/mark/model/ActiveMarkContext'
 import { useTagsContext } from '@/entities/tag/model/TagsContext'
-import { useNotificationManager } from '@/shared/lib/useNotificationManager'
+import { useNotificationManager } from '@/shared/lib/hooks/useNotificationManager'
 import { Button } from '@/shared/ui/button'
-import { FieldSet } from '@/shared/ui/field'
+import { FieldDescription, FieldLegend, FieldSet } from '@/shared/ui/field'
 
 import { setMarkTagsAction } from '../api/setMarkTagsAction'
 import { MarkTagsFormState } from '../model/types'
@@ -29,6 +29,8 @@ export function MarkTagsForm() {
   return (
     <form action={formAction}>
       <FieldSet className='gap-3' disabled={isPending}>
+        <FieldLegend>WebMark Tags</FieldLegend>
+        <FieldDescription>Select Tags to WebMark</FieldDescription>
         <input name='markId' defaultValue={activeMark?.id} hidden />
         {tags.map((tag) => {
           const hasTag = activeMark?.tags.some(

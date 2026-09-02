@@ -2,7 +2,7 @@
 
 import { useActionState } from 'react'
 
-import { useNotificationManager } from '@/shared/lib/useNotificationManager'
+import { useNotificationManager } from '@/shared/lib/hooks/useNotificationManager'
 import { Button } from '@/shared/ui/button'
 import { FieldSet } from '@/shared/ui/field'
 import { InputField } from '@/shared/ui/InputField'

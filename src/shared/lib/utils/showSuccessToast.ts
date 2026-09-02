@@ -1,4 +1,4 @@
-import { toast } from '../ui/toast'
+import { toast } from '../../ui/toast'
 
 export function showSuccessToast(message: string) {
   return toast.add({

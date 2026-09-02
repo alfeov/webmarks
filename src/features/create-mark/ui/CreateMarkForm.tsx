@@ -3,7 +3,7 @@
 import { useParams } from 'next/navigation'
 
 import { useTagsContext } from '@/entities/tag/model/TagsContext'
-import { useNotificationManager } from '@/shared/lib/useNotificationManager'
+import { useNotificationManager } from '@/shared/lib/hooks/useNotificationManager'
 import { BadgeField } from '@/shared/ui/BadgeField'
 import { Button } from '@/shared/ui/button'
 import { ErrorText } from '@/shared/ui/ErrorText'

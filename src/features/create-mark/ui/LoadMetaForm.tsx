@@ -2,7 +2,7 @@
 
 import { useEffect } from 'react'
 
-import { showErrorToast } from '@/shared/lib/showErrorToast'
+import { showErrorToast } from '@/shared/lib/utils/showErrorToast'
 import { Field, FieldError, FieldLabel } from '@/shared/ui/field'
 import {
   InputGroup,

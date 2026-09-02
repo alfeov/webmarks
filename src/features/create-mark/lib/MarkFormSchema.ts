@@ -1,7 +1,7 @@
 import z from 'zod'
 
-import { IdSchema } from '@/shared/lib/IdSchema'
-import { UrlSchema } from '@/shared/lib/UrlSchema'
+import { IdSchema } from '@/shared/lib/schemas/IdSchema'
+import { UrlSchema } from '@/shared/lib/schemas/UrlSchema'
 
 import { CREATE_MARK_FORMDATA } from './constants'
 

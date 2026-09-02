@@ -1,8 +1,9 @@
 'use client'
 
-import { createContext, use } from 'react'
+import { createContext } from 'react'
 
 import { Tag } from '@/shared/lib/prisma/generated/client'
+import { createUseContextHook } from '@/shared/lib/utils/createUseContextHook'
 
 type TagsContextValue = {
   tags: Tag[]
@@ -20,12 +21,4 @@ export function TagsProvider({
   return <TagsContext value={{ tags }}>{children}</TagsContext>
 }
 
-export function useTagsContext() {
-  const tagsContext = use(TagsContext)
-  if (!tagsContext)
-    throw new Error(
-      'Component must be wrapped in ContextProvider to use this hook',
-    )
-
-  return tagsContext
-}
+export const useTagsContext = createUseContextHook(TagsContext)

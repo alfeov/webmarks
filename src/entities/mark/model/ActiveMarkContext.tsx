@@ -4,9 +4,10 @@ import {
   createContext,
   type Dispatch,
   type SetStateAction,
-  use,
   useState,
 } from 'react'
+
+import { createUseContextHook } from '@/shared/lib/utils/createUseContextHook'
 
 import { WebMarkWithTags } from './types'
 
@@ -31,12 +32,4 @@ export function ActiveMarkProvider({
   )
 }
 
-export function useActiveMarkContext() {
-  const activeMark = use(ActiveMarkContext)
-  if (!activeMark)
-    throw new Error(
-      'Component must be wrapped in ContextProvider to use this hook',
-    )
-
-  return activeMark
-}
+export const useActiveMarkContext = createUseContextHook(ActiveMarkContext)

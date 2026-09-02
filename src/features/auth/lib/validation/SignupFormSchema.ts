@@ -1,7 +1,7 @@
 import z from 'zod'
 
-import { PasswordSchema } from '@/shared/lib/PasswordSchema'
-import { UsernameSchema } from '@/shared/lib/UsernameSchema'
+import { PasswordSchema } from '@/shared/lib/schemas/PasswordSchema'
+import { UsernameSchema } from '@/shared/lib/schemas/UsernameSchema'
 
 import { SIGNUP_FORMDATA } from '../constants'
 

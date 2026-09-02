@@ -1,8 +1,9 @@
 'use client'
 
-import { createContext, use, useActionState } from 'react'
+import { createContext, useActionState } from 'react'
 
 import { loadMetaAction } from '@/features/create-mark/api/loadMetaAction'
+import { createUseContextHook } from '@/shared/lib/utils/createUseContextHook'
 
 import { LoadMetaFormState } from './types'
 
@@ -37,11 +38,4 @@ export function MetaProvider({ children }: { children: React.ReactNode }) {
   )
 }
 
-export function useMetaContext() {
-  const meta = use(MetaContext)
-  if (!meta)
-    throw new Error(
-      'Component must be wrapped in ContextProvider to use this hook',
-    )
-  return meta
-}
+export const useMetaContext = createUseContextHook(MetaContext)

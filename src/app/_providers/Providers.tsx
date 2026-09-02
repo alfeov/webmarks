@@ -2,7 +2,7 @@ import { ActiveMarkProvider } from '@/entities/mark/model/ActiveMarkContext'
 import { getAllUserTags } from '@/entities/tag/api/getAllUserTags'
 import { TagsProvider } from '@/entities/tag/model/TagsContext'
 import { AuthDialogProvider } from '@/features/auth/model/AuthDialogContext'
-import { MarkTagsDialogProvider } from '@/features/manage-mark-tags/model/MarkTagsDialogContext'
+import { DialogProvider } from '@/shared/lib/contexts/DialogContext'
 import { verifySession } from '@/shared/lib/session'
 import { Toaster } from '@/shared/ui/toast'
 import { TooltipProvider } from '@/shared/ui/tooltip'
@@ -15,10 +15,12 @@ export async function Providers({ children }: { children: React.ReactNode }) {
     <TooltipProvider>
       <TagsProvider tags={tags}>
         <ActiveMarkProvider>
-          <AuthDialogProvider>
-            <MarkTagsDialogProvider>{children}</MarkTagsDialogProvider>
-            <Toaster />
-          </AuthDialogProvider>
+          <DialogProvider>
+            <AuthDialogProvider>
+              {children}
+              <Toaster />
+            </AuthDialogProvider>
+          </DialogProvider>
         </ActiveMarkProvider>
       </TagsProvider>
     </TooltipProvider>

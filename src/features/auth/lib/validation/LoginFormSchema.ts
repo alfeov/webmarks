@@ -1,6 +1,6 @@
 import z from 'zod'
 
-import { PasswordSchema } from '@/shared/lib/PasswordSchema'
+import { PasswordSchema } from '@/shared/lib/schemas/PasswordSchema'
 
 import { LOGIN_FORMDATA } from '../constants'
 

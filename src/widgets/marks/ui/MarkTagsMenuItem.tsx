@@ -2,13 +2,14 @@
 
 import { useActiveMarkContext } from '@/entities/mark/model/ActiveMarkContext'
 import { WebMarkWithTags } from '@/entities/mark/model/types'
-import { useMarkTagsDialogContext } from '@/features/manage-mark-tags/model/MarkTagsDialogContext'
+import { MarkTagsForm } from '@/features/manage-mark-tags/ui/MarkTagsForm'
+import { useDialogContext } from '@/shared/lib/contexts/DialogContext'
 import { DropdownMenuItem } from '@/shared/ui/dropdown-menu'
 
 type MarkTagsDropdownItemProps = WebMarkWithTags
 
 export function MarkTagsDropdownItem({ ...mark }: MarkTagsDropdownItemProps) {
-  const { openDialog } = useMarkTagsDialogContext()
+  const { openDialog } = useDialogContext()
   const { setActiveMark } = useActiveMarkContext()
 
   return (
@@ -16,7 +17,7 @@ export function MarkTagsDropdownItem({ ...mark }: MarkTagsDropdownItemProps) {
       <DropdownMenuItem
         data-slot='dialog-trigger'
         onClick={() => {
-          openDialog()
+          openDialog(<MarkTagsForm />)
           setActiveMark(mark)
         }}
       >

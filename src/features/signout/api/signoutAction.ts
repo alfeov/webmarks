@@ -4,8 +4,8 @@ import { redirect } from 'next/navigation'
 
 import { deleteSession } from '@/shared/lib/session'
 
-export async function logoutAction() {
+export async function signoutAction() {
   await deleteSession()
 
-  redirect('/')
+  redirect('/', 'replace')
 }

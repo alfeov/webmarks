@@ -4,17 +4,18 @@ import { createSession } from '@/shared/lib/session'
 import { createResult } from '@/shared/lib/utils/createResult'
 import { validateFormData } from '@/shared/lib/utils/validateFormData'
 
-import { LoginFormSchema } from '../lib/validation/LoginFormSchema'
+import { SigninFormSchema } from '../lib/SigninFormSchema'
+import type { SigninFormState } from '../model/types'
 import { verifyUser } from './verifyUser'
 
-export async function loginAction(
-  prevState: LoginFormState,
+export async function signinAction(
+  prevState: SigninFormState,
   formData: FormData,
 ) {
   // zod validation
   const { validatedData, validationErrors } = validateFormData(
     formData,
-    LoginFormSchema,
+    SigninFormSchema,
   )
   if (!validatedData)
     return createResult({

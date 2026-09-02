@@ -1,7 +1,6 @@
 import { ActiveMarkProvider } from '@/entities/mark/model/ActiveMarkContext'
 import { getAllUserTags } from '@/entities/tag/api/getAllUserTags'
 import { TagsProvider } from '@/entities/tag/model/TagsContext'
-import { AuthDialogProvider } from '@/features/auth/model/AuthDialogContext'
 import { DialogProvider } from '@/shared/lib/contexts/DialogContext'
 import { verifySession } from '@/shared/lib/session'
 import { Toaster } from '@/shared/ui/toast'
@@ -16,10 +15,8 @@ export async function Providers({ children }: { children: React.ReactNode }) {
       <TagsProvider tags={tags}>
         <ActiveMarkProvider>
           <DialogProvider>
-            <AuthDialogProvider>
-              {children}
-              <Toaster />
-            </AuthDialogProvider>
+            {children}
+            <Toaster />
           </DialogProvider>
         </ActiveMarkProvider>
       </TagsProvider>

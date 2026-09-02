@@ -8,8 +8,8 @@ import {
   DropdownMenuTrigger,
 } from '@/shared/ui/dropdown-menu'
 
-import { LoginMenuItem } from './LoginMenuItem'
-import { LogoutMenuItem } from './LogoutMenuItem'
+import { LoginMenuItem } from './SigninMenuItem'
+import { SignoutMenuItem } from './SignoutMenuItem'
 import { SignupMenuItem } from './SignupMenuItem'
 
 import { FaceSlightlyFrowning, FaceSlightlySmiling } from 'lucide-react'
@@ -37,7 +37,7 @@ export async function Profile() {
       <DropdownMenuContent>
         {session ? (
           <DropdownMenuGroup>
-            <LogoutMenuItem />
+            <SignoutMenuItem />
           </DropdownMenuGroup>
         ) : (
           <DropdownMenuGroup>

@@ -5,6 +5,7 @@ import { useRender } from '@base-ui/react/use-render'
 import { cva, type VariantProps } from 'class-variance-authority'
 import * as React from 'react'
 
+import { useIsMobile } from '@/shared/lib/use-mobile'
 import { cn } from '@/shared/lib/utils'
 import { Button } from '@/shared/ui/button'
 import { Input } from '@/shared/ui/input'
@@ -18,7 +19,6 @@ import {
 } from '@/shared/ui/sheet'
 import { Skeleton } from '@/shared/ui/skeleton'
 import { Tooltip, TooltipContent, TooltipTrigger } from '@/shared/ui/tooltip'
-import { useIsMobile } from '@/shared/utils/use-mobile'
 
 import { PanelLeftIcon } from 'lucide-react'
 

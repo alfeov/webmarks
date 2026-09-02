@@ -5,9 +5,9 @@ import { WebMarkWithTags } from '@/entities/mark/model/types'
 import { useMarkTagsDialogContext } from '@/features/manage-mark-tags/model/MarkTagsDialogContext'
 import { DropdownMenuItem } from '@/shared/ui/dropdown-menu'
 
-type MarkTagsMenuItemProps = WebMarkWithTags
+type MarkTagsDropdownItemProps = WebMarkWithTags
 
-export function MarkTagsMenuItem({ ...mark }: MarkTagsMenuItemProps) {
+export function MarkTagsDropdownItem({ ...mark }: MarkTagsDropdownItemProps) {
   const { openDialog } = useMarkTagsDialogContext()
   const { setActiveMark } = useActiveMarkContext()
 

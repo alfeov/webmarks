@@ -1,7 +1,7 @@
 import { useEffect } from 'react'
 
-import { showErrorToast } from '@/shared/utils/showErrorToast'
-import { showSuccessToast } from '@/shared/utils/showSuccessToast'
+import { showErrorToast } from '@/shared/lib/showErrorToast'
+import { showSuccessToast } from '@/shared/lib/showSuccessToast'
 
 export function useNotificationManager(
   message: string | null,

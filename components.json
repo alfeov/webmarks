@@ -17,7 +17,7 @@
     "ui": "@/shared/ui",
     "lib": "@/shared/lib",
     "utils": "@/shared/lib/utils",
-    "hooks": "@/shared/utils"
+    "hooks": "@/shared/lib"
   },
   "menuColor": "default",
   "menuAccent": "subtle",

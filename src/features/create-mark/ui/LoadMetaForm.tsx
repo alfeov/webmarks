@@ -2,6 +2,7 @@
 
 import { useEffect } from 'react'
 
+import { showErrorToast } from '@/shared/lib/showErrorToast'
 import { Field, FieldError, FieldLabel } from '@/shared/ui/field'
 import {
   InputGroup,
@@ -9,7 +10,6 @@ import {
   InputGroupButton,
   InputGroupInput,
 } from '@/shared/ui/input-group'
-import { showErrorToast } from '@/shared/utils/showErrorToast'
 
 import { LOAD_META_FORMDATA } from '../lib/constants'
 import { useMetaContext } from '../model/MetaContext'

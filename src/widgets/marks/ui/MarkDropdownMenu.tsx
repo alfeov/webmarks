@@ -7,7 +7,7 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from '@/shared/ui/dropdown-menu'
-import { MarkTagsMenuItem } from '@/widgets/marks/ui/MarkTagsMenuItem'
+import { MarkTagsDropdownItem } from '@/widgets/marks/ui/MarkTagsMenuItem'
 
 import { LucideEllipsis } from 'lucide-react'
 
@@ -31,7 +31,7 @@ export function MarkDropdownMenu({ ...mark }: MarkDropDownMenuProps) {
       <DropdownMenuContent>
         <DropdownMenuGroup>
           <DropdownMenuItem>{mark.pinned ? 'Unpin' : 'Pin'}</DropdownMenuItem>
-          <MarkTagsMenuItem {...mark} />
+          <MarkTagsDropdownItem {...mark} />
           <DropdownMenuItem>Copy Link</DropdownMenuItem>
           <DropdownMenuItem>Change</DropdownMenuItem>
         </DropdownMenuGroup>

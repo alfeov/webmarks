@@ -3,7 +3,7 @@
 import { useTagsContext } from '@/entities/tag/model/TagsContext'
 import { SidebarMenu } from '@/shared/ui/sidebar'
 
-import { TagMenuItem } from './TagMenuItem'
+import { TagSidebarMenuItem } from './TagSidebarMenuItem'
 
 export function TagsSidebarMenu() {
   const { tags } = useTagsContext()
@@ -11,7 +11,7 @@ export function TagsSidebarMenu() {
   return (
     <SidebarMenu>
       {tags.map((tag) => (
-        <TagMenuItem key={tag.id} {...tag} />
+        <TagSidebarMenuItem key={tag.id} {...tag} />
       ))}
     </SidebarMenu>
   )

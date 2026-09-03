@@ -4,12 +4,12 @@ import { updateTag } from 'next/cache'
 
 import { verifySession } from '@/shared/lib/session'
 
-import { validateMarkTagsForm } from '../lib/validateMarkTagsForm'
-import { MarkTagsFormState } from '../model/types'
+import { validateChangeMarkTagsForm } from '../lib/validateChangeMarkTagsForm'
+import { ChangeMarkTagsFormState } from '../model/types'
 import { setMarkTags } from './setMarkTags'
 
-export async function setMarkTagsAction(
-  prevState: MarkTagsFormState,
+export async function changeMarkTagsAction(
+  prevState: ChangeMarkTagsFormState,
   formData: FormData,
 ) {
   // check auth
@@ -21,7 +21,8 @@ export async function setMarkTagsAction(
     }
 
   // zod validation
-  const { markId, tagIds, validationError } = validateMarkTagsForm(formData)
+  const { markId, tagIds, validationError } =
+    validateChangeMarkTagsForm(formData)
   if (!markId || !tagIds)
     return {
       isSuccess: false,

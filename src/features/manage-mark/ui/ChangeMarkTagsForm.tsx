@@ -9,22 +9,22 @@ import { useNotificationManager } from '@/shared/lib/hooks/useNotificationManage
 import { Button } from '@/shared/ui/button'
 import { FieldDescription, FieldLegend, FieldSet } from '@/shared/ui/field'
 
-import { setMarkTagsAction } from '../api/setMarkTagsAction'
-import { MarkTagsFormState } from '../model/types'
+import { changeMarkTagsAction } from '../api/changeMarkTagsAction'
+import { ChangeMarkTagsFormState } from '../model/types'
 import { MarkTagItem } from './MarkTagItem'
 
-const initialState: MarkTagsFormState = {
+const initialState: ChangeMarkTagsFormState = {
   isSuccess: false,
   message: null,
 }
 
-export function MarkTagsForm() {
+export function ChangeMarkTagsForm() {
   const { tags } = useTagsContext()
   const { activeMark } = useActiveMarkContext()
   const [state, formAction, isPending] = useActionState<
-    MarkTagsFormState,
+    ChangeMarkTagsFormState,
     FormData
-  >(setMarkTagsAction, initialState)
+  >(changeMarkTagsAction, initialState)
   useCloseDialogOn(state.isSuccess)
   useNotificationManager(state.message, state.isSuccess)
 

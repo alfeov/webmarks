@@ -4,7 +4,7 @@ import { Tag } from '@/shared/lib/prisma/generated/client'
 import { verifySession } from '@/shared/lib/session'
 import { ErrorEmpty } from '@/shared/ui/ErrorEmpty'
 
-import { MarkDropdownMenu } from './MarkDropdownMenu'
+import { MarkDropdownMenu } from '../../../features/manage-mark/ui/MarkDropdownMenu'
 import { MarkGrid } from './MarkGrid'
 
 interface MarkListProps {

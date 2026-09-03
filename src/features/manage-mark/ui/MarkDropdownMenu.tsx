@@ -1,4 +1,5 @@
 import { WebMarkWithTags } from '@/entities/mark/model/types'
+import { ChangeMarkTagsDropdownItem } from '@/features/manage-mark/ui/ChangeMarkTagsDropdownItem'
 import { Button } from '@/shared/ui/button'
 import {
   DropdownMenu,
@@ -7,7 +8,8 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from '@/shared/ui/dropdown-menu'
-import { MarkTagsDropdownItem } from '@/widgets/marks/ui/MarkTagsMenuItem'
+
+import { PinMarkDropdownItem } from './PinMarkDropdownItem'
 
 import { LucideEllipsis } from 'lucide-react'
 
@@ -30,10 +32,12 @@ export function MarkDropdownMenu({ ...mark }: MarkDropDownMenuProps) {
       />
       <DropdownMenuContent>
         <DropdownMenuGroup>
-          <DropdownMenuItem>{mark.pinned ? 'Unpin' : 'Pin'}</DropdownMenuItem>
-          <MarkTagsDropdownItem {...mark} />
+          <DropdownMenuItem>Open WebMark</DropdownMenuItem>
           <DropdownMenuItem>Copy Link</DropdownMenuItem>
+          <ChangeMarkTagsDropdownItem {...mark} />
+          <PinMarkDropdownItem id={mark.id} pinned={mark.pinned} />
           <DropdownMenuItem>Change</DropdownMenuItem>
+          <DropdownMenuItem>Delete</DropdownMenuItem>
         </DropdownMenuGroup>
       </DropdownMenuContent>
     </DropdownMenu>

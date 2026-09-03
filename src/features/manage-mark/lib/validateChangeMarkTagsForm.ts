@@ -1,6 +1,6 @@
 import { IdsSchema } from './IdsSchema'
 
-export function validateMarkTagsForm(formData: FormData) {
+export function validateChangeMarkTagsForm(formData: FormData) {
   const rawData = Array.from(formData.values())
 
   const validatedValues = IdsSchema.safeParse(rawData)

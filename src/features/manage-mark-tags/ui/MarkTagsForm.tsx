@@ -33,7 +33,7 @@ export function MarkTagsForm() {
       <FieldSet className='gap-3' disabled={isPending}>
         <FieldLegend>WebMark Tags</FieldLegend>
         <FieldDescription>Select Tags to WebMark</FieldDescription>
-        <input name='markId' defaultValue={activeMark?.id} hidden />
+        <input name='markId' value={activeMark?.id} hidden readOnly />
         {tags.map((tag) => {
           const hasTag = activeMark?.tags.some(
             (markTag) => markTag.id === tag.id,

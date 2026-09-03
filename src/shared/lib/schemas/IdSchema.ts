@@ -1,3 +1,3 @@
 import z from 'zod'
 
-export const IdSchema = z.cuid2()
+export const IdSchema = z.cuid2('Provided ID is not correct')

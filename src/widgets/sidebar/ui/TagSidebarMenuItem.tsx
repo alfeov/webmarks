@@ -1,5 +1,3 @@
-'use client'
-
 import Link from 'next/link'
 
 import { TagDropdownMenu } from '@/features/manage-tag/ui/TagDropdownMenu'
@@ -17,7 +15,7 @@ export function TagSidebarMenuItem({ id, title }: TagSidebarMenuItemProps) {
         </SidebarMenuButton>
       </Link>
       <div className='absolute top-1/2 -translate-y-1/2 right-1 flex aspect-square w-6 items-center justify-center rounded-xl'>
-        <TagDropdownMenu />
+        <TagDropdownMenu tagId={id} />
       </div>
     </SidebarMenuItem>
   )

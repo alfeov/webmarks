@@ -10,7 +10,7 @@ import { useMetaContext } from '../model/MetaContext'
 import { CreateMark, CreateMarkFormState } from '../model/types'
 
 export const initialState = {
-  isSuccess: true,
+  isSuccess: false,
   errors: null,
   message: null,
 }

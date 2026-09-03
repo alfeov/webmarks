@@ -3,6 +3,7 @@
 import { useParams } from 'next/navigation'
 
 import { useTagsContext } from '@/entities/tag/model/TagsContext'
+import { useCloseDialogOn } from '@/shared/lib/hooks/useCloseDialogOn'
 import { useNotificationManager } from '@/shared/lib/hooks/useNotificationManager'
 import { BadgeField } from '@/shared/ui/BadgeField'
 import { Button } from '@/shared/ui/button'
@@ -20,6 +21,7 @@ export function CreateMarkForm() {
     defaultTagId: params.tagId,
   })
   useNotificationManager(state.message, state.isSuccess)
+  useCloseDialogOn(state.isSuccess)
 
   const { tags } = useTagsContext()
   const activeTagTitle = tags.find((tag) => tag.id === params.tagId)?.title

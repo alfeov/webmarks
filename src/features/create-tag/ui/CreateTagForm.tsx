@@ -2,9 +2,10 @@
 
 import { useActionState } from 'react'
 
+import { useCloseDialogOn } from '@/shared/lib/hooks/useCloseDialogOn'
 import { useNotificationManager } from '@/shared/lib/hooks/useNotificationManager'
 import { Button } from '@/shared/ui/button'
-import { FieldSet } from '@/shared/ui/field'
+import { FieldDescription, FieldLegend, FieldSet } from '@/shared/ui/field'
 import { InputField } from '@/shared/ui/InputField'
 
 import { createTagAction } from '../api/createTagAction'
@@ -23,10 +24,13 @@ export function CreateTagForm() {
     FormData
   >(createTagAction, initialState)
   useNotificationManager(state.message, state.isSuccess)
+  useCloseDialogOn(state.isSuccess)
 
   return (
     <form action={formAction}>
       <FieldSet disabled={isPending}>
+        <FieldLegend>Create new Tag</FieldLegend>
+        <FieldDescription>Insert data below to create new Tag</FieldDescription>
         <InputField
           label='Title'
           req

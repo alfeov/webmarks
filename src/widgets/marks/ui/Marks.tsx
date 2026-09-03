@@ -1,6 +1,6 @@
 import { Suspense } from 'react'
 
-import { CreateMarkDialog } from '@/features/create-mark/ui/CreateMarkDialog'
+import { CreateMarkButton } from '@/features/create-mark/ui/CreateMarkButton'
 import { SearchMark } from '@/features/search-mark/ui/SearchMark'
 import { SearchMarkSkeleton } from '@/features/search-mark/ui/SearchMarkSkeleton'
 import { Tag } from '@/shared/lib/prisma/generated/client'
@@ -37,7 +37,7 @@ export async function Marks({ params, searchParams }: MarksProps) {
         <Suspense fallback={<SearchMarkSkeleton />}>
           <SearchMark />
         </Suspense>
-        <CreateMarkDialog />
+        <CreateMarkButton />
       </div>
       <Suspense fallback={<MarksListSkeleton />}>
         <MarkList tagId={tagId} query={query} />

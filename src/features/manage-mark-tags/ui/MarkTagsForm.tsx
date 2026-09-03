@@ -4,6 +4,7 @@ import { useActionState } from 'react'
 
 import { useActiveMarkContext } from '@/entities/mark/model/ActiveMarkContext'
 import { useTagsContext } from '@/entities/tag/model/TagsContext'
+import { useCloseDialogOn } from '@/shared/lib/hooks/useCloseDialogOn'
 import { useNotificationManager } from '@/shared/lib/hooks/useNotificationManager'
 import { Button } from '@/shared/ui/button'
 import { FieldDescription, FieldLegend, FieldSet } from '@/shared/ui/field'
@@ -13,7 +14,7 @@ import { MarkTagsFormState } from '../model/types'
 import { MarkTagItem } from './MarkTagItem'
 
 const initialState: MarkTagsFormState = {
-  isSuccess: true,
+  isSuccess: false,
   message: null,
 }
 
@@ -24,6 +25,7 @@ export function MarkTagsForm() {
     MarkTagsFormState,
     FormData
   >(setMarkTagsAction, initialState)
+  useCloseDialogOn(state.isSuccess)
   useNotificationManager(state.message, state.isSuccess)
 
   return (

@@ -7,7 +7,7 @@ import { verifySession } from '@/shared/lib/session'
 import { validateFormData } from '@/shared/lib/utils/validateFormData'
 
 import { DeleteTagFormSchema } from '../lib/DeleteTagFormSchema'
-import { DeleteTagFormState } from '../model/types'
+import type { DeleteTagFormState } from '../model/types'
 import { deleteTag } from './deleteTag'
 
 export async function deleteTagAction(

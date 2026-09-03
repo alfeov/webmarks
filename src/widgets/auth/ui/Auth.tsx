@@ -16,7 +16,7 @@ export function Auth({ initialMode }: { initialMode: Mode }) {
         {mode === 'signin' ? 'Login to your account' : 'Create new account'}
       </FieldLegend>
       <FieldDescription>
-        Enter fields below to
+        Please fill in the fields below to
         {mode === 'signin' ? ' login to your account' : ' create new account'}
         <br />
         <span className='flex justify-between'>

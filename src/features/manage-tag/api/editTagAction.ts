@@ -6,25 +6,25 @@ import { verifySession } from '@/shared/lib/session'
 import { createResult } from '@/shared/lib/utils/createResult'
 import { validateFormData } from '@/shared/lib/utils/validateFormData'
 
-import { CreateTagFormSchema } from '../lib/CreateTagFormSchema'
-import { CreateTagFormState } from '../model/types'
-import { createTag } from './createTag'
+import { EditTagFormSchema } from '../lib/EditTagFormSchema'
+import type { EditTagFormState } from '../model/types'
+import { updateUserTag } from './updateUserTag'
 
-export async function createTagAction(
-  prevState: CreateTagFormState,
+export async function editTagAction(
+  prevState: EditTagFormState,
   formData: FormData,
 ) {
   // check auth
   const session = await verifySession()
   if (!session)
     return createResult({
-      message: 'To create tags you must be auth',
+      message: 'To edit tags you must be auth',
     })
 
   // zod validation
   const { validatedData, validationErrors } = validateFormData(
     formData,
-    CreateTagFormSchema,
+    EditTagFormSchema,
   )
   if (!validatedData)
     return createResult({
@@ -32,22 +32,20 @@ export async function createTagAction(
       errors: validationErrors,
     })
 
-  // creating tag in DB
-  const { tag, error } = await createTag({
-    ...validatedData,
+  // update tag in DB
+  const {} = updateUserTag({
+    id: validatedData.id,
+    newTitle: validatedData.title,
     userId: session.userId,
   })
-  if (!tag)
-    return createResult({
-      message: error,
-    })
 
   // revalidation
   updateTag(`tags-${session.userId}`)
+  updateTag(`marks-${session.userId}`)
 
   // return success response
   return createResult({
     isSuccess: true,
-    message: 'Tag has been successfully created',
+    message: 'Tag has been successfully edited',
   })
 }

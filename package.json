@@ -12,7 +12,6 @@
     "shad": "pnx shadcn@latest add",
     "prisma:view": "prisma studio",
     "prisma:apply-migrations": "prisma migrate deploy",
-    "prisma:generate-types": "prisma generate",
     "prepare": "husky"
   },
   "dependencies": {

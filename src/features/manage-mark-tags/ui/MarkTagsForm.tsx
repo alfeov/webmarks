@@ -39,7 +39,13 @@ export function MarkTagsForm() {
             (markTag) => markTag.id === tag.id,
           )
 
-          return <MarkTagItem key={tag.id} {...tag} defaultChecked={hasTag} />
+          return (
+            <MarkTagItem
+              key={`${tag.id}-${tag.updatedAt}`}
+              {...tag}
+              defaultChecked={hasTag}
+            />
+          )
         })}
         <Button type='submit'>Apply Tags</Button>
       </FieldSet>

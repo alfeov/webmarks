@@ -11,7 +11,7 @@ export function CreateMark() {
     <FieldGroup>
       <FieldLegend>Create new WebMark</FieldLegend>
       <FieldDescription>
-        Insert data below to create new WebMark
+        Please fill in the fields below to create new WebMark
       </FieldDescription>
       <MetaProvider>
         <LoadMetaForm />

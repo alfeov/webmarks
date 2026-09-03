@@ -9,10 +9,13 @@ import {
 } from '@/shared/ui/dropdown-menu'
 
 import { DeleteTagDropdownItem } from './DeleteTagDropdownItem'
+import { EditTagDropdownItem } from './EditTagDropdownItem'
 
 import { LucideEllipsis } from 'lucide-react'
 
-export function TagDropdownMenu({ tagId }: { tagId: Tag['id'] }) {
+type TagDropdownMenuProps = Tag
+
+export function TagDropdownMenu({ ...tag }: TagDropdownMenuProps) {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger
@@ -28,8 +31,8 @@ export function TagDropdownMenu({ tagId }: { tagId: Tag['id'] }) {
       />
       <DropdownMenuContent>
         <DropdownMenuGroup>
-          <DeleteTagDropdownItem tagId={tagId} />
-          <DropdownMenuItem>Change</DropdownMenuItem>
+          <DeleteTagDropdownItem tagId={tag.id} />
+          <EditTagDropdownItem {...tag} />
           <DropdownMenuItem>Share</DropdownMenuItem>
         </DropdownMenuGroup>
       </DropdownMenuContent>

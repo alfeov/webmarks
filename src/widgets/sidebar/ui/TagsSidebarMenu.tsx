@@ -11,7 +11,7 @@ export async function TagsSidebarMenu() {
   return (
     <SidebarMenu>
       {tags.map((tag) => (
-        <TagSidebarMenuItem key={tag.id} {...tag} />
+        <TagSidebarMenuItem key={`${tag.id}-${tag.updatedAt}`} {...tag} />
       ))}
     </SidebarMenu>
   )

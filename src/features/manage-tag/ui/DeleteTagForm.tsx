@@ -11,7 +11,7 @@ import { FieldDescription, FieldLegend, FieldSet } from '@/shared/ui/field'
 
 import { deleteTagAction } from '../api/deleteTagAction'
 import { DELETE_TAG_FORMDATA } from '../lib/constants'
-import { DeleteTagFormState } from '../model/types'
+import type { DeleteTagFormState } from '../model/types'
 
 const initialState: DeleteTagFormState = {
   isSuccess: false,

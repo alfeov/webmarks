@@ -1,11 +1,13 @@
 model WebMark {
-  id          String   @id @default(cuid())
+  id          String  @id @default(cuid())
   title       String
   url         String
   description String
-  pinned      Boolean  @default(false)
-  logoUrl     String?  @map("logo_url")
-  createdAt   DateTime @default(now()) @map("created_at")
+  pinned      Boolean @default(false)
+  logoUrl     String? @map("logo_url")
+
+  updatedAt DateTime @default(now()) @updatedAt @map("update_at")
+  createdAt DateTime @default(now()) @map("created_at")
 
   userId String @map("user_id")
   user   User   @relation(fields: [userId], references: [id])

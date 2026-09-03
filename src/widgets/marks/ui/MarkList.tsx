@@ -25,7 +25,7 @@ export async function MarkList({ query, tagId }: MarkListProps) {
       {Boolean(marks.length) ? (
         <MarkGrid>
           {marks.map((mark) => (
-            <MarkItem key={mark.id} {...mark}>
+            <MarkItem key={`${mark.id}-${mark.updatedAt}`} {...mark}>
               <MarkDropdownMenu {...mark} />
             </MarkItem>
           ))}

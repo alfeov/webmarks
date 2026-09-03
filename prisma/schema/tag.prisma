@@ -2,6 +2,9 @@ model Tag {
   id    String @id @default(cuid())
   title String
 
+  updatedAt DateTime @default(now()) @updatedAt @map("update_at")
+  createdAt DateTime @default(now()) @map("created_at")
+
   userId String @map("user_id")
   user   User   @relation(fields: [userId], references: [id])
 

@@ -6,16 +6,16 @@ import { SidebarMenuButton, SidebarMenuItem } from '@/shared/ui/sidebar'
 
 type TagSidebarMenuItemProps = Tag
 
-export function TagSidebarMenuItem({ id, title }: TagSidebarMenuItemProps) {
+export function TagSidebarMenuItem({ ...tag }: TagSidebarMenuItemProps) {
   return (
     <SidebarMenuItem>
-      <Link href={id} className='rounded-xl w-full'>
+      <Link href={tag.id} className='rounded-xl w-full'>
         <SidebarMenuButton className='pr-8'>
-          <span className='truncate'>{title}</span>
+          <span className='truncate'>{tag.title}</span>
         </SidebarMenuButton>
       </Link>
       <div className='absolute top-1/2 -translate-y-1/2 right-1 flex aspect-square w-6 items-center justify-center rounded-xl'>
-        <TagDropdownMenu tagId={id} />
+        <TagDropdownMenu {...tag} />
       </div>
     </SidebarMenuItem>
   )

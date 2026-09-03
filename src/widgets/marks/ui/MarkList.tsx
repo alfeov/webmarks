@@ -8,16 +8,23 @@ import { MarkDropdownMenu } from '../../../features/manage-mark/ui/MarkDropdownM
 import { MarkGrid } from './MarkGrid'
 
 interface MarkListProps {
-  tagId?: Tag['id']
-  query?: string
+  params?: Promise<{
+    tagId: Tag['id']
+  }>
+  searchParams?: Promise<{
+    query?: string | string[]
+  }>
 }
 
-export async function MarkList({ query, tagId }: MarkListProps) {
+export async function MarkList({ params, searchParams }: MarkListProps) {
+  const tagId = (await params)?.tagId
+  const query = (await searchParams)?.query
+
   const session = await verifySession()
   const { marks, message } = await getUserMarks({
-    query,
-    userId: session?.userId,
     tagId,
+    query: Array.isArray(query) ? query[0] : query,
+    userId: session?.userId,
   })
 
   return (

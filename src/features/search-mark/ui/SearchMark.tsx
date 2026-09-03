@@ -1,7 +1,4 @@
-'use client'
-
 import Form from 'next/form'
-import { usePathname } from 'next/navigation'
 
 import {
   InputGroup,
@@ -13,10 +10,8 @@ import {
 import { SearchIcon } from 'lucide-react'
 
 export function SearchMark() {
-  const pathname = usePathname()
-
   return (
-    <Form action={pathname ?? '/'}>
+    <Form action=''>
       <InputGroup>
         <InputGroupInput name='query' placeholder='Search WebMark...' />
         <InputGroupAddon align='inline-end'>

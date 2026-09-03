@@ -1,7 +1,3 @@
-'use client'
-
-import { usePathname } from 'next/navigation'
-
 import {
   Empty,
   EmptyDescription,
@@ -13,8 +9,6 @@ import {
 import { CircleX } from 'lucide-react'
 
 export function NotFoundPage() {
-  const pathname = usePathname()
-
   return (
     <Empty className='h-full'>
       <EmptyHeader>
@@ -23,7 +17,7 @@ export function NotFoundPage() {
         </EmptyMedia>
         <EmptyTitle>404 - Not Found</EmptyTitle>
         <EmptyDescription>
-          Page with path {pathname} you&apos;re looking for doesn&apos;t exist.
+          Page with you&apos;re looking for doesn&apos;t exist.
         </EmptyDescription>
       </EmptyHeader>
     </Empty>

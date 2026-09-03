@@ -16,8 +16,10 @@ export async function toggleMarkPinAction({
   // check user
   const session = await verifySession()
   if (!session) {
-    console.error('pinMarkAction: To pin WebMark user must be auth')
-    return
+    return {
+      isSuccess: false,
+      message: 'To pin WebMark user must be auth',
+    }
   }
 
   // toggling webmark pinned state
@@ -28,10 +30,18 @@ export async function toggleMarkPinAction({
     userId: session.userId,
   })
   if (error) {
-    console.error('pinMarkAction: ' + error)
-    return
+    return {
+      isSuccess: false,
+      message: error,
+    }
   }
 
   // revalidation
   updateTag(`marks-${session.userId}`)
+
+  // return success result
+  return {
+    isSuccess: true,
+    message: 'Mark has been successfully pinned',
+  }
 }

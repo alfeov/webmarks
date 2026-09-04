@@ -26,7 +26,7 @@ export function EditTagForm({ ...tag }: EditTagFormProps) {
     EditTagFormState,
     FormData
   >(editTagAction, initialState)
-  useNotificationManager(state.message, state.isSuccess)
+  useNotificationManager(state.message, state.isSuccess, !isPending)
   useCloseDialogOn(state.isSuccess)
 
   return (

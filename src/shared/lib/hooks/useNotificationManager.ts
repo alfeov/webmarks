@@ -1,17 +1,17 @@
 import { useEffect } from 'react'
 
-import { showErrorToast } from '@/shared/lib/utils/showErrorToast'
-import { showSuccessToast } from '@/shared/lib/utils/showSuccessToast'
+import { showToast } from '../utils/showToast'
 
 export function useNotificationManager(
   message: string | null,
   isSuccess: boolean,
+  notificationTrigger: boolean,
 ) {
   useEffect(() => {
-    if (message) {
-      const toastId = isSuccess
-        ? showSuccessToast(message)
-        : showErrorToast(message)
+    if (notificationTrigger) {
+      if (message) {
+        showToast(message, isSuccess)
+      }
     }
-  }, [message, isSuccess])
+  }, [message, isSuccess, notificationTrigger])
 }

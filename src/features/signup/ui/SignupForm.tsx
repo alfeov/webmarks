@@ -23,7 +23,7 @@ export function SignupForm() {
     SignupFormState,
     FormData
   >(signupAction, initialState)
-  useNotificationManager(state.message, state.isSuccess)
+  useNotificationManager(state.message, state.isSuccess, !isPending)
   useCloseDialogOn(state.isSuccess)
 
   return (

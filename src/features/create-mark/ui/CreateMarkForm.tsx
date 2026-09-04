@@ -20,7 +20,7 @@ export function CreateMarkForm() {
   const { state, isPending, onSubmit, register } = useCreateMarkForm({
     defaultTagId: params.tagId,
   })
-  useNotificationManager(state.message, state.isSuccess)
+  useNotificationManager(state.message, state.isSuccess, !isPending)
   useCloseDialogOn(state.isSuccess)
 
   const { tags } = useTagsContext()

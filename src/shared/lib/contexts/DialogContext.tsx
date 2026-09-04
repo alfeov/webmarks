@@ -23,7 +23,6 @@ export function DialogProvider({ children }: { children: React.ReactNode }) {
     setIsDialogOpen(true)
   }
   const closeDialog = () => {
-    setDialogContent(null)
     setIsDialogOpen(false)
   }
 

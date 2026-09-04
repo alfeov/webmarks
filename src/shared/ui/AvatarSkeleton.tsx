@@ -8,7 +8,7 @@ export function AvatarSkeleton({ size = 'default' }: AvatarSkeletonProps) {
   return (
     <Skeleton
       data-size={size}
-      className='rounded-full size-8 data-[size=lg]:size-10 data-[size=sm]:size-6'
+      className='rounded-[50%] size-8 data-[size=lg]:size-10 data-[size=sm]:size-6'
     />
   )
 }

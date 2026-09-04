@@ -25,7 +25,7 @@ export function DeleteTagForm({ tagId }: { tagId: Tag['id'] }) {
     DeleteTagFormState,
     FormData
   >(deleteTagAction, initialState)
-  useNotificationManager(state.message, state.isSuccess)
+  useNotificationManager(state.message, state.isSuccess, !isPending)
   useCloseDialogOn(state.isSuccess)
 
   return (

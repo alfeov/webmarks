@@ -2,7 +2,7 @@
 
 import { useEffect } from 'react'
 
-import { showErrorToast } from '@/shared/lib/utils/showErrorToast'
+import { showToast } from '@/shared/lib/utils/showToast'
 import { Field, FieldError, FieldLabel } from '@/shared/ui/field'
 import {
   InputGroup,
@@ -25,7 +25,7 @@ export function LoadMetaForm() {
 
   useEffect(() => {
     if (error) {
-      showErrorToast(error)
+      showToast(error)
     }
   }, [error])
 

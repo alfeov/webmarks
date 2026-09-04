@@ -23,7 +23,7 @@ export function CreateTagForm() {
     CreateTagFormState,
     FormData
   >(createTagAction, initialState)
-  useNotificationManager(state.message, state.isSuccess)
+  useNotificationManager(state.message, state.isSuccess, !isPending)
   useCloseDialogOn(state.isSuccess)
 
   return (

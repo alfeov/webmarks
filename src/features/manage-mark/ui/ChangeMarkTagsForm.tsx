@@ -26,7 +26,7 @@ export function ChangeMarkTagsForm() {
     FormData
   >(changeMarkTagsAction, initialState)
   useCloseDialogOn(state.isSuccess)
-  useNotificationManager(state.message, state.isSuccess)
+  useNotificationManager(state.message, state.isSuccess, !isPending)
 
   return (
     <form action={formAction}>

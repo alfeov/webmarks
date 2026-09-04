@@ -4,6 +4,7 @@ import { CloseDialogButton } from '@/shared/ui/CloseDialogButton'
 import { Dialog, DialogContent } from '@/shared/ui/dialog'
 
 import { useDialogContext } from '../lib/contexts/DialogContext'
+import { Button } from './button'
 
 export function UniversalDialog({
   dialogContent,
@@ -14,9 +15,12 @@ export function UniversalDialog({
 
   return (
     <Dialog open={isDialogOpen}>
-      <DialogContent showCloseButton={false}>
-        {dialogContent}
+      <DialogContent showCloseButton={false} className='gap-3'>
         <CloseDialogButton onClick={closeDialog} />
+        {dialogContent}
+        <Button variant='outline' onClick={closeDialog}>
+          Close Dialog
+        </Button>
       </DialogContent>
     </Dialog>
   )

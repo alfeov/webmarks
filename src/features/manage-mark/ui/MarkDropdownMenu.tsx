@@ -9,6 +9,8 @@ import {
   DropdownMenuTrigger,
 } from '@/shared/ui/dropdown-menu'
 
+import { CopyLinkDropdownItem } from './CopyLinkDropdownItem'
+import { OpenMarkDropdownItem } from './OpenMarkDropdownItem'
 import { PinMarkDropdownItem } from './PinMarkDropdownItem'
 
 import { LucideEllipsis } from 'lucide-react'
@@ -32,8 +34,8 @@ export function MarkDropdownMenu({ ...mark }: MarkDropDownMenuProps) {
       />
       <DropdownMenuContent>
         <DropdownMenuGroup>
-          <DropdownMenuItem>Open WebMark</DropdownMenuItem>
-          <DropdownMenuItem>Copy Link</DropdownMenuItem>
+          <OpenMarkDropdownItem url={mark.url} />
+          <CopyLinkDropdownItem url={mark.url} />
           <ChangeMarkTagsDropdownItem {...mark} />
           <PinMarkDropdownItem id={mark.id} pinned={mark.pinned} />
           <DropdownMenuItem>Change</DropdownMenuItem>

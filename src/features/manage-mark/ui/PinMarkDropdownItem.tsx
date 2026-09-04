@@ -2,6 +2,7 @@
 
 import { useActionState } from 'react'
 
+import { useFetchingIndicatorManager } from '@/shared/lib/hooks/useFetchingIndicatorManager'
 import { WebMark } from '@/shared/lib/prisma/generated/client'
 import { DropdownMenuItem } from '@/shared/ui/dropdown-menu'
 
@@ -20,6 +21,7 @@ export function PinMarkDropdownItem({ id, pinned }: PinMarkDropdownItemProps) {
     toggleMarkPinAction.bind(null, { id, pinned }),
     initialState,
   )
+  useFetchingIndicatorManager(isPending)
 
   return (
     <form action={formAction}>

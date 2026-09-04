@@ -6,7 +6,7 @@ import { UniversalDialog } from '@/shared/ui/UniversalDialog'
 
 import { createUseContextHook } from '../utils/createUseContextHook'
 
-export type DialogContextValue = {
+type DialogContextValue = {
   isDialogOpen: boolean
   openDialog: (dialogContent: React.ReactNode) => void
   closeDialog: () => void

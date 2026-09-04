@@ -10,6 +10,7 @@ import {
 } from '@/shared/ui/dropdown-menu'
 
 import { CopyLinkDropdownItem } from './CopyLinkDropdownItem'
+import { DeleteMarkDropdownItem } from './DeleteMarkDropdownItem'
 import { OpenMarkDropdownItem } from './OpenMarkDropdownItem'
 import { PinMarkDropdownItem } from './PinMarkDropdownItem'
 
@@ -39,7 +40,7 @@ export function MarkDropdownMenu({ ...mark }: MarkDropDownMenuProps) {
           <ChangeMarkTagsDropdownItem {...mark} />
           <PinMarkDropdownItem id={mark.id} pinned={mark.pinned} />
           <DropdownMenuItem>Change</DropdownMenuItem>
-          <DropdownMenuItem>Delete</DropdownMenuItem>
+          <DeleteMarkDropdownItem id={mark.id} />
         </DropdownMenuGroup>
       </DropdownMenuContent>
     </DropdownMenu>

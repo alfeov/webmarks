@@ -2,10 +2,11 @@
 
 import { useActionState } from 'react'
 
-import { useActiveMarkContext } from '@/entities/mark/model/ActiveMarkContext'
+import { WebMarkWithTags } from '@/entities/mark/model/types'
 import { useTagsContext } from '@/entities/tag/model/TagsContext'
 import { useCloseDialogOn } from '@/shared/lib/hooks/useCloseDialogOn'
 import { useNotificationManager } from '@/shared/lib/hooks/useNotificationManager'
+import { WebMark } from '@/shared/lib/prisma/generated/client'
 import { Button } from '@/shared/ui/button'
 import { FieldDescription, FieldLegend, FieldSet } from '@/shared/ui/field'
 
@@ -18,13 +19,18 @@ const initialState: ChangeMarkTagsFormState = {
   message: null,
 }
 
-export function ChangeMarkTagsForm() {
+export function ChangeMarkTagsForm({
+  markId,
+  markTags,
+}: {
+  markId: WebMark['id']
+  markTags: WebMarkWithTags['tags']
+}) {
   const { tags } = useTagsContext()
-  const { activeMark } = useActiveMarkContext()
-  const [state, formAction, isPending] = useActionState<
-    ChangeMarkTagsFormState,
-    FormData
-  >(changeMarkTagsAction, initialState)
+  const [state, formAction, isPending] = useActionState(
+    changeMarkTagsAction.bind(null, markId),
+    initialState,
+  )
   useCloseDialogOn(state.isSuccess)
   useNotificationManager(state.message, state.isSuccess, !isPending)
 
@@ -33,11 +39,8 @@ export function ChangeMarkTagsForm() {
       <FieldSet className='gap-3' disabled={isPending}>
         <FieldLegend>WebMark Tags</FieldLegend>
         <FieldDescription>Select Tags to WebMark</FieldDescription>
-        <input name='markId' value={activeMark?.id} hidden readOnly />
         {tags.map((tag) => {
-          const hasTag = activeMark?.tags.some(
-            (markTag) => markTag.id === tag.id,
-          )
+          const hasTag = markTags.some((markTag) => markTag.id === tag.id)
 
           return (
             <MarkTagItem

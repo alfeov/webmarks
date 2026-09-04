@@ -2,6 +2,7 @@
 
 import { updateTag } from 'next/cache'
 
+import { Tag } from '@/shared/lib/prisma/generated/client'
 import { verifySession } from '@/shared/lib/session'
 import { createResult } from '@/shared/lib/utils/createResult'
 import { validateFormData } from '@/shared/lib/utils/validateFormData'
@@ -11,6 +12,7 @@ import type { EditTagFormState } from '../model/types'
 import { updateUserTag } from './updateUserTag'
 
 export async function editTagAction(
+  id: Tag['id'],
   prevState: EditTagFormState,
   formData: FormData,
 ) {
@@ -34,7 +36,7 @@ export async function editTagAction(
 
   // update tag in DB
   const {} = updateUserTag({
-    id: validatedData.id,
+    id,
     newTitle: validatedData.title,
     userId: session.userId,
   })

@@ -1,15 +1,14 @@
 import { prisma } from '@/shared/lib/prisma'
 import { Prisma, Tag } from '@/shared/lib/prisma/generated/client'
 
-interface DeleteTagParams {
-  id: Tag['id']
-}
+type DeleteTagParams = Pick<Tag, 'id' | 'userId'>
 
-export async function deleteTag({ id }: DeleteTagParams) {
+export async function deleteUserTag({ id, userId }: DeleteTagParams) {
   try {
     await prisma.tag.delete({
       where: {
         id,
+        userId,
       },
     })
     return {
@@ -20,12 +19,12 @@ export async function deleteTag({ id }: DeleteTagParams) {
     if (error instanceof Prisma.PrismaClientKnownRequestError) {
       if (error.code === 'P2025') {
         return {
-          error: `Seems like Tag with id ${id} doesn't exist!`,
+          error: `Seems like this user doesn't have Tag with id ${id}`,
         }
       }
     }
     return {
-      error: 'An internal error occurred while creating WebMark',
+      error: 'An internal error occurred while deleting Tag',
     }
   }
 }

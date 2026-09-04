@@ -26,7 +26,7 @@ export async function createTag({ title, userId }: TagUncheckedCreateInput) {
     }
     return {
       tag: null,
-      error: 'An internal error occurred while creation',
+      error: 'An internal error occurred while creating Tag',
     }
   }
 }

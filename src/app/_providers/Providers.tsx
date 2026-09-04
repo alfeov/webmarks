@@ -1,4 +1,3 @@
-import { ActiveMarkProvider } from '@/entities/mark/model/ActiveMarkContext'
 import { getAllUserTags } from '@/entities/tag/api/getAllUserTags'
 import { TagsProvider } from '@/entities/tag/model/TagsContext'
 import { DialogProvider } from '@/shared/lib/contexts/DialogContext'
@@ -15,12 +14,10 @@ export async function Providers({ children }: { children: React.ReactNode }) {
     <TooltipProvider>
       <FetchingIndicatorProvider>
         <TagsProvider tags={tags}>
-          <ActiveMarkProvider>
-            <DialogProvider>
-              {children}
-              <Toaster />
-            </DialogProvider>
-          </ActiveMarkProvider>
+          <DialogProvider>
+            {children}
+            <Toaster />
+          </DialogProvider>
         </TagsProvider>
       </FetchingIndicatorProvider>
     </TooltipProvider>

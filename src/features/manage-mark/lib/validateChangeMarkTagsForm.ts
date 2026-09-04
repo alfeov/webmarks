@@ -6,14 +6,12 @@ export function validateChangeMarkTagsForm(formData: FormData) {
   const validatedValues = IdsSchema.safeParse(rawData)
   if (!validatedValues.success)
     return {
-      markId: null,
       tagIds: null,
       validationError: 'Provided incorrect Ids data',
     }
 
   return {
-    markId: validatedValues.data[0],
-    tagIds: validatedValues.data.slice(1),
+    tagIds: validatedValues.data,
     validationError: null,
   }
 }

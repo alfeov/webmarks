@@ -15,17 +15,17 @@ import type { EditTagFormState } from '../model/types'
 
 type EditTagFormProps = Tag
 
-const initialState = {
+const initialState: EditTagFormState = {
   isSuccess: false,
   errors: null,
   message: null,
 }
 
 export function EditTagForm({ ...tag }: EditTagFormProps) {
-  const [state, formAction, isPending] = useActionState<
-    EditTagFormState,
-    FormData
-  >(editTagAction, initialState)
+  const [state, formAction, isPending] = useActionState(
+    editTagAction.bind(null, tag.id),
+    initialState,
+  )
   useNotificationManager(state.message, state.isSuccess, !isPending)
   useCloseDialogOn(state.isSuccess)
 

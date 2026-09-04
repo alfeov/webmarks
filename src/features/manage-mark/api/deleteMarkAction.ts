@@ -1,14 +1,13 @@
 'use server'
 
 import { updateTag } from 'next/cache'
-import { redirect } from 'next/navigation'
 
-import { Tag } from '@/shared/lib/prisma/generated/client'
+import { WebMark } from '@/shared/lib/prisma/generated/client'
 import { verifySession } from '@/shared/lib/session'
 
-import { deleteUserTag } from './deleteUserTag'
+import { deleteUserMark } from './deleteUserMark'
 
-export async function deleteTagAction(id: Tag['id'], isOnTagPage: boolean) {
+export async function deleteMarkAction(id: WebMark['id']) {
   // check auth
   const session = await verifySession()
   if (!session)
@@ -17,8 +16,8 @@ export async function deleteTagAction(id: Tag['id'], isOnTagPage: boolean) {
       message: 'To delete you must be auth',
     }
 
-  // delete tag in db
-  const { error } = await deleteUserTag({
+  // delete mark in db
+  const { error } = await deleteUserMark({
     id,
     userId: session.userId,
   })
@@ -29,15 +28,11 @@ export async function deleteTagAction(id: Tag['id'], isOnTagPage: boolean) {
     }
 
   // revalidation
-  updateTag(`tags-${session.userId}`)
   updateTag(`marks-${session.userId}`)
-
-  // redirection
-  if (isOnTagPage) redirect('/')
 
   // return success response
   return {
     isSuccess: true,
-    message: 'Tag has been successfully deleted!',
+    message: 'WebMark has been successfully deleted!',
   }
 }

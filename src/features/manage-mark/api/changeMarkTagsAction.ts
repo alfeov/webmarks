@@ -2,6 +2,7 @@
 
 import { updateTag } from 'next/cache'
 
+import { WebMark } from '@/shared/lib/prisma/generated/client'
 import { verifySession } from '@/shared/lib/session'
 
 import { validateChangeMarkTagsForm } from '../lib/validateChangeMarkTagsForm'
@@ -9,9 +10,16 @@ import { ChangeMarkTagsFormState } from '../model/types'
 import { setMarkTags } from './setMarkTags'
 
 export async function changeMarkTagsAction(
+  markId: WebMark['id'] | undefined,
   prevState: ChangeMarkTagsFormState,
   formData: FormData,
 ) {
+  if (!markId)
+    return {
+      isSuccess: false,
+      message: 'Mark ID has not been provided',
+    }
+
   // check auth
   const session = await verifySession()
   if (!session)
@@ -21,9 +29,8 @@ export async function changeMarkTagsAction(
     }
 
   // zod validation
-  const { markId, tagIds, validationError } =
-    validateChangeMarkTagsForm(formData)
-  if (!markId || !tagIds)
+  const { tagIds, validationError } = validateChangeMarkTagsForm(formData)
+  if (!tagIds)
     return {
       isSuccess: false,
       message: validationError,

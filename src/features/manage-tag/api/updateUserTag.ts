@@ -40,7 +40,7 @@ export async function updateUserTag({
     console.error(error)
     return {
       tag: null,
-      error: 'An internal error occurred while creating WebMark',
+      error: 'An internal error occurred while updating Tag',
     }
   }
 }

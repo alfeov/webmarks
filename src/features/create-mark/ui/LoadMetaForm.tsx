@@ -1,7 +1,8 @@
 'use client'
 
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 
+import { paste } from '@/shared/lib/utils/paste'
 import { showToast } from '@/shared/lib/utils/showToast'
 import { Field, FieldError, FieldLabel } from '@/shared/ui/field'
 import {
@@ -17,6 +18,8 @@ import { useMetaContext } from '../model/MetaContext'
 import { ClipboardPaste, CloudDownload } from 'lucide-react'
 
 export function LoadMetaForm() {
+  const [url, setUrl] = useState('')
+
   const {
     state: { error },
     formAction,
@@ -29,6 +32,15 @@ export function LoadMetaForm() {
     }
   }, [error])
 
+  const handlePasteClick = async () => {
+    const data = await paste()
+    if (!data.clipText) {
+      showToast(data.error ?? 'Unknown error')
+      return
+    }
+    setUrl(data.clipText)
+  }
+
   return (
     <form className='grid gap-[30px]' action={formAction}>
       <fieldset disabled={isPending}>
@@ -36,7 +48,10 @@ export function LoadMetaForm() {
           <FieldLabel>Insert url and autoload data</FieldLabel>
           <InputGroup>
             <InputGroupAddon>
-              <InputGroupButton aria-label='search mark'>
+              <InputGroupButton
+                aria-label='search mark'
+                onClick={handlePasteClick}
+              >
                 <ClipboardPaste /> Paste
               </InputGroupButton>
             </InputGroupAddon>
@@ -45,6 +60,8 @@ export function LoadMetaForm() {
               placeholder='Search Meta by URL...'
               name={LOAD_META_FORMDATA.URL}
               aria-invalid={Boolean(error)}
+              value={url}
+              onChange={(e) => setUrl(e.target.value)}
             />
 
             <InputGroupAddon align='inline-end'>

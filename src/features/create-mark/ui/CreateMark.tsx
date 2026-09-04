@@ -1,6 +1,6 @@
 'use client'
 
-import { FieldDescription, FieldGroup, FieldLegend } from '@/shared/ui/field'
+import { FieldDescription, FieldLegend, FieldSet } from '@/shared/ui/field'
 
 import { MetaProvider } from '../model/MetaContext'
 import { CreateMarkForm } from './CreateMarkForm'
@@ -8,7 +8,7 @@ import { LoadMetaForm } from './LoadMetaForm'
 
 export function CreateMark() {
   return (
-    <FieldGroup>
+    <FieldSet>
       <FieldLegend>Create new WebMark</FieldLegend>
       <FieldDescription>
         Please fill in the fields below to create new WebMark
@@ -17,6 +17,6 @@ export function CreateMark() {
         <LoadMetaForm />
         <CreateMarkForm />
       </MetaProvider>
-    </FieldGroup>
+    </FieldSet>
   )
 }

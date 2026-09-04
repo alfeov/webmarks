@@ -1,3 +1,5 @@
+'use client'
+
 import { Tag } from '@/shared/lib/prisma/generated/client'
 import { Button } from '@/shared/ui/button'
 import {

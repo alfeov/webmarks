@@ -17,7 +17,12 @@ export async function getMQLMeta(url: string) {
       error: 'Unknown internal error',
     }
     if (error instanceof MicrolinkError) {
-      result.error = error.data?.url ?? 'Unknown internal error'
+      if (error.data?.url?.includes('uses antibot protection')) {
+        result.error =
+          'This URL uses antibot protection, please insert data in the fields below'
+      } else {
+        result.error = error.data?.url ?? 'Unknown internal error'
+      }
     }
     return result
   }

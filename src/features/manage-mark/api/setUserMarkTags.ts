@@ -33,13 +33,14 @@ export async function setUserMarkTags({
       if (error.code === 'P2025') {
         return {
           mark: null,
-          error: "Seems like WebMark/Provided Tag(-s) doesn't exist",
+          error:
+            "Seems like current user doesn't have this WebMark/Provided Tag(-s) doesn't exist",
         }
       }
     }
     return {
       mark: null,
-      error: 'An internal error occurred while connecting WebMark with Tag(-s)',
+      error: 'An internal error occurred while applying Tag(-s) to WebMark',
     }
   }
 }

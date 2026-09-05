@@ -18,7 +18,7 @@ export async function toggleMarkPinAction({
   if (!session) {
     return {
       isSuccess: false,
-      message: 'To pin WebMark user must be auth',
+      message: 'To pin WebMark you must be auth',
     }
   }
 

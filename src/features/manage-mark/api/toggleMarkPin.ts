@@ -33,7 +33,7 @@ export async function toggleMarkPin({
     console.error(error)
     return {
       mark: null,
-      error: 'An internal error occurred while creating WebMark',
+      error: 'An internal error occurred while attach pin to WebMark',
     }
   }
 }

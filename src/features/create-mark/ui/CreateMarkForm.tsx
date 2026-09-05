@@ -7,7 +7,6 @@ import { useCloseDialogOn } from '@/shared/lib/hooks/useCloseDialogOn'
 import { useNotificationManager } from '@/shared/lib/hooks/useNotificationManager'
 import { BadgeField } from '@/shared/ui/BadgeField'
 import { Button } from '@/shared/ui/button'
-import { ErrorText } from '@/shared/ui/ErrorText'
 import { FieldLegend, FieldSet } from '@/shared/ui/field'
 import { InputField } from '@/shared/ui/InputField'
 
@@ -72,7 +71,6 @@ export function CreateMarkForm() {
             />
           )}
         </FieldSet>
-        <ErrorText>{!state.isSuccess && state.message}</ErrorText>
         <Button type='submit'>Create WebMark</Button>
       </FieldSet>
     </form>

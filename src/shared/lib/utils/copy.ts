@@ -9,7 +9,7 @@ export async function copy(value: string) {
     console.error(error)
     return {
       isSuccess: false,
-      message: "Your browser doesn't support this API",
+      message: "Your browser doesn't support copy API",
     }
   }
 }

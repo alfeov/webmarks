@@ -41,7 +41,7 @@ export async function signinAction(
   return createResult({
     isSuccess: true,
     message:
-      'You have successfully enter to your account: ' +
+      'You have successfully logged in to your account: ' +
       (user.username ?? user.email),
   })
 }

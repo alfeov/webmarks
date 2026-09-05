@@ -19,7 +19,7 @@ export async function deleteUserMark({ id, userId }: DeleteUserMarkParams) {
     if (error instanceof Prisma.PrismaClientKnownRequestError) {
       if (error.code === 'P2025') {
         return {
-          error: `Seems like this user doesn't have WebMark with id ${id}`,
+          error: `Seems like current user doesn't have this WebMark`,
         }
       }
     }

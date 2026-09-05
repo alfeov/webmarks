@@ -13,7 +13,7 @@ export async function getUserMark({ id, userId }: GetUserMarkParams) {
 
   if (!mark)
     return {
-      error: `Seems like WebMark with id (${id}) doesn't exist`,
+      error: `Seems like current user doesn't have provided WebMark`,
       mark: null,
     }
 

@@ -9,7 +9,7 @@ export async function paste() {
     console.error(error)
     return {
       clipText: null,
-      error: "Your browser doesn't support this API",
+      error: "Your browser doesn't support paste API",
     }
   }
 }

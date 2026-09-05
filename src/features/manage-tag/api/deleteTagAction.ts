@@ -14,7 +14,7 @@ export async function deleteTagAction(id: Tag['id'], isOnTagPage: boolean) {
   if (!session)
     return {
       isSuccess: false,
-      message: 'To delete you must be auth',
+      message: 'To delete Tag you must be auth',
     }
 
   // delete tag in db

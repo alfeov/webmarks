@@ -7,7 +7,7 @@ export function validateChangeMarkTagsForm(formData: FormData) {
   if (!validatedValues.success)
     return {
       tagIds: null,
-      validationError: 'Provided incorrect Ids data',
+      validationError: 'Provided invalid identifier data',
     }
 
   return {

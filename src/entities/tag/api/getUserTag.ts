@@ -13,7 +13,7 @@ export async function getUserTag({ id, userId }: GetUserTagParams) {
 
   if (!tag)
     return {
-      error: `Seems like Tag with id (${id}) doesn't exist`,
+      error: `Seems like current user doesn't have provided Tag`,
       tag: null,
     }
 

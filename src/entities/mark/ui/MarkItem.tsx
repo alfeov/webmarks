@@ -33,7 +33,7 @@ export function MarkItem({
       <div className='flex items-center gap-[10px] px-(--card-spacing)'>
         <Link href={url} target='_blank' className='rounded-[50%]'>
           <Avatar size='lg'>
-            <AvatarImage src={logoUrl ?? 'errorSrc'} />
+            <AvatarImage src={logoUrl || 'errorSrc'} />
             <AvatarFallback>L</AvatarFallback>
           </Avatar>
         </Link>

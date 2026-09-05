@@ -20,7 +20,7 @@ export async function editMarkAction(
   const session = await verifySession()
   if (!session)
     return createResult({
-      message: 'To edit WebMarks you must login to account',
+      message: 'To edit WebMarks you must be auth',
     })
 
   // zod validation

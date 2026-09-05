@@ -25,7 +25,7 @@ export async function Profile() {
             <Avatar size='lg'>
               <AvatarImage
                 src={session?.avatarUrl || 'errorSrc'} // to handle AvatarFallback
-                alt={session?.username || 'empty avatar'}
+                alt={session?.username || 'system user avatar'}
               />
               <AvatarFallback>
                 {session ? <FaceSlightlySmiling /> : <FaceSlightlyFrowning />}

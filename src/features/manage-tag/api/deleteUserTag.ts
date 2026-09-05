@@ -19,7 +19,7 @@ export async function deleteUserTag({ id, userId }: DeleteTagParams) {
     if (error instanceof Prisma.PrismaClientKnownRequestError) {
       if (error.code === 'P2025') {
         return {
-          error: `Seems like this user doesn't have Tag with id ${id}`,
+          error: `Seems like current user doesn't have this Tag`,
         }
       }
     }

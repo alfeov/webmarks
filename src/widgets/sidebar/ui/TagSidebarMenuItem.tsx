@@ -14,7 +14,7 @@ export function TagSidebarMenuItem({ ...tag }: TagSidebarMenuItemProps) {
 
   return (
     <SidebarMenuItem>
-      <Link href={tag.id} prefetch className='rounded-xl w-full'>
+      <Link href={tag.id} prefetch className='w-full rounded-xl'>
         <SidebarMenuButton
           className='pr-8'
           data-active={params.tagId === tag.id}
@@ -22,7 +22,7 @@ export function TagSidebarMenuItem({ ...tag }: TagSidebarMenuItemProps) {
           <span className='truncate'>{tag.title}</span>
         </SidebarMenuButton>
       </Link>
-      <div className='absolute top-1/2 -translate-y-1/2 right-1 flex aspect-square w-6 items-center justify-center rounded-xl'>
+      <div className='absolute top-1/2 right-1 flex aspect-square w-6 -translate-y-1/2 items-center justify-center rounded-xl'>
         <TagDropdownMenu {...tag} />
       </div>
     </SidebarMenuItem>

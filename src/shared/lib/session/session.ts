@@ -1,5 +1,6 @@
 import 'server-only'
 
+import { cacheLife } from 'next/cache'
 import { cookies } from 'next/headers'
 
 import { SESSION_COOKIE_KEY } from './constants'
@@ -46,6 +47,10 @@ export async function deleteSession() {
 }
 
 export async function verifySession() {
+  'use cache: private'
+
+  cacheLife('hours')
+
   const cookie = (await cookies()).get(SESSION_COOKIE_KEY)?.value
   const session = await decrypt(cookie)
   return session

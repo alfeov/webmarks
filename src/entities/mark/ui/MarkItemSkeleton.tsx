@@ -8,7 +8,7 @@ export function MarkItemSkeleton() {
       <CardHeader>
         <div className='flex items-center gap-[10px]'>
           <AvatarSkeleton size='lg' />
-          <div className='grow grid gap-[10px]'>
+          <div className='grid grow gap-[10px]'>
             <Skeleton className='h-4 w-3/4' />
             <Skeleton className='h-4 w-2/3' />
           </div>
@@ -20,7 +20,7 @@ export function MarkItemSkeleton() {
       <CardFooter>
         <div className='flex flex-wrap gap-[10px]'>
           {Array.from({ length: 5 }).map((_, i) => (
-            <Skeleton key={i} className='rounded-3xl h-5 w-20' />
+            <Skeleton key={i} className='h-5 w-20 rounded-3xl' />
           ))}
         </div>
       </CardFooter>

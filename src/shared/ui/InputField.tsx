@@ -18,7 +18,7 @@ export function InputField({
   return (
     <Field data-invalid={Boolean(errors?.length)} className={className}>
       <FieldLabel
-        className={req ? "after:content-['*'] after:text-red-500" : ''}
+        className={req ? "after:text-red-500 after:content-['*']" : ''}
       >
         {label}
       </FieldLabel>

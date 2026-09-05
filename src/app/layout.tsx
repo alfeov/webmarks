@@ -30,11 +30,11 @@ export default function RootLayout({ children }: LayoutProps<'/'>) {
       className={cn('h-full', 'antialiased', fontExcalidraw.className)}
       data-scroll-behavior='smooth'
     >
-      <body className='min-h-full max-h- flex flex-col'>
+      <body className='max-h- flex min-h-full flex-col'>
         <Suspense fallback={<SpinnerEmpty>App Initialization</SpinnerEmpty>}>
           <Providers>
             <header className='border-b'>
-              <div className='flex items-center justify-between px-[30px] md:px-[40px] h-(--header-height)'>
+              <div className='flex h-(--header-height) items-center justify-between px-[30px] md:px-[40px]'>
                 <Link href='/'>
                   <h1 className='text-[30px] font-bold'>WebMarks</h1>
                 </Link>

@@ -4,7 +4,7 @@ import { Skeleton } from '@/shared/ui/skeleton'
 export function SidebarMenuItemSkeleton() {
   return (
     <SidebarMenuItem>
-      <Skeleton className='w-full h-9 rounded-xl' />
+      <Skeleton className='h-9 w-full rounded-xl' />
     </SidebarMenuItem>
   )
 }

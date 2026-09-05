@@ -1,5 +1,5 @@
 import { Skeleton } from './skeleton'
 
 export function FullSkeleton() {
-  return <Skeleton className='w-full h-full' />
+  return <Skeleton className='h-full w-full' />
 }

@@ -52,7 +52,7 @@ export function MarkItem({
           </div>
         )}
         {pinned && (
-          <Image src={PinIcon} alt='pin' className='w-[20px] mr-[7px]' />
+          <Image src={PinIcon} alt='pin' className='mr-[7px] w-[20px]' />
         )}
       </CardFooter>
     </Card>

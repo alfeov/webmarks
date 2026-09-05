@@ -9,7 +9,7 @@ export function CloseDialogButton({ ...props }: CloseDialogButtonProps) {
     <Button
       size='icon-sm'
       variant='outline'
-      className='absolute top-4 right-4 bg-secondary border-transparent'
+      className='bg-secondary absolute top-4 right-4 border-transparent'
       {...props}
     >
       <X />

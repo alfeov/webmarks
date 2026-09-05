@@ -10,8 +10,8 @@ import { TagsSidebarGroup } from './TagsSidebarGroup'
 
 export function AppSidebar() {
   return (
-    <SidebarProvider className='items-start border-r min-h-full'>
-      <Sidebar collapsible='none' className='hidden md:flex bg-(--background)'>
+    <SidebarProvider className='min-h-full items-start border-r'>
+      <Sidebar collapsible='none' className='hidden bg-(--background) md:flex'>
         <SidebarHeader>
           <AllMarksSidebarGroup />
         </SidebarHeader>

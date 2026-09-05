@@ -27,7 +27,7 @@ export function AbsoluteWrapper({
   ...props
 }: AbsoluteWrapperProps) {
   return (
-    <div className={cn('absolute h-full top-0', className)} {...props}>
+    <div className={cn('absolute top-0 h-full', className)} {...props}>
       {children}
     </div>
   )

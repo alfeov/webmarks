@@ -30,6 +30,21 @@ export default function RootLayout({ children }: LayoutProps<'/'>) {
       className={cn('h-full', 'antialiased', fontExcalidraw.className)}
       data-scroll-behavior='smooth'
     >
+      <head>
+        <link rel='icon' href='/favicon.ico' sizes='any' />
+        <link
+          rel='icon'
+          href='/icon?<generated>'
+          type='image/<generated>'
+          sizes='<generated>'
+        />
+        <link
+          rel='apple-touch-icon'
+          href='/apple-icon?<generated>'
+          type='image/<generated>'
+          sizes='<generated>'
+        />
+      </head>
       <body className='max-h- flex min-h-full flex-col'>
         <Suspense fallback={<SpinnerEmpty>App Initialization</SpinnerEmpty>}>
           <Providers>

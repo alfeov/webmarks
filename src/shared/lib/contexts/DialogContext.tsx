@@ -14,9 +14,20 @@ type DialogContextValue = {
 
 const DialogContext = createContext<null | DialogContextValue>(null)
 
-export function DialogProvider({ children }: { children: React.ReactNode }) {
-  const [isDialogOpen, setIsDialogOpen] = useState(false)
-  const [dialogContent, setDialogContent] = useState<React.ReactNode>(null)
+type DialogProviderProps = {
+  initialOpen?: boolean
+  initialDialogContent?: React.ReactNode
+  children: React.ReactNode
+}
+
+export function DialogProvider({
+  initialOpen = false,
+  initialDialogContent = null,
+  children,
+}: DialogProviderProps) {
+  const [isDialogOpen, setIsDialogOpen] = useState(initialOpen)
+  const [dialogContent, setDialogContent] =
+    useState<React.ReactNode>(initialDialogContent)
 
   const openDialog = (dialogContent: React.ReactNode) => {
     setDialogContent(dialogContent)

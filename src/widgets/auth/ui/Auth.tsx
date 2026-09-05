@@ -1,3 +1,5 @@
+'use client'
+
 import { useState } from 'react'
 
 import { SigninForm } from '@/features/signin/ui/SigninForm'

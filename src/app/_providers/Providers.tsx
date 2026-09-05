@@ -5,6 +5,7 @@ import { FetchingIndicatorProvider } from '@/shared/lib/contexts/FetchingIndicat
 import { verifySession } from '@/shared/lib/session'
 import { Toaster } from '@/shared/ui/toast'
 import { TooltipProvider } from '@/shared/ui/tooltip'
+import { Auth } from '@/widgets/auth/ui/Auth'
 
 export async function Providers({ children }: { children: React.ReactNode }) {
   const session = await verifySession()
@@ -14,7 +15,12 @@ export async function Providers({ children }: { children: React.ReactNode }) {
     <TooltipProvider>
       <FetchingIndicatorProvider>
         <TagsProvider tags={tags}>
-          <DialogProvider>
+          <DialogProvider
+            initialOpen={!session}
+            initialDialogContent={
+              !session ? <Auth initialMode='signin' /> : null
+            }
+          >
             {children}
             <Toaster />
           </DialogProvider>

@@ -1,8 +1,10 @@
 import { prisma } from '@/shared/lib/prisma'
-import { Prisma } from '@/shared/lib/prisma/generated/client'
-import { WebMarkUncheckedCreateInput } from '@/shared/lib/prisma/generated/models'
+import { Prisma, WebMark } from '@/shared/lib/prisma/generated/client'
 
-type CreateMarkParams = WebMarkUncheckedCreateInput
+type CreateMarkParams = Pick<
+  WebMark,
+  'title' | 'description' | 'url' | 'logoUrl' | 'userId'
+>
 
 export async function createMark({
   title,

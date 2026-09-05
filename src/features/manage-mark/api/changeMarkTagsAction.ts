@@ -7,7 +7,7 @@ import { verifySession } from '@/shared/lib/session'
 
 import { validateChangeMarkTagsForm } from '../lib/validateChangeMarkTagsForm'
 import { ChangeMarkTagsFormState } from '../model/types'
-import { setMarkTags } from './setMarkTags'
+import { setUserMarkTags } from './setUserMarkTags'
 
 export async function changeMarkTagsAction(
   markId: WebMark['id'] | undefined,
@@ -37,8 +37,9 @@ export async function changeMarkTagsAction(
     }
 
   // set tags to webmark
-  const { error } = await setMarkTags({
-    markId,
+  const { error } = await setUserMarkTags({
+    id: markId,
+    userId: session.userId,
     tagIds: tagIds.map((tagId) => ({ id: tagId })),
   })
   if (error)

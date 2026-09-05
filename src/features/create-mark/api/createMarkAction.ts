@@ -6,7 +6,7 @@ import { verifySession } from '@/shared/lib/session'
 import { createResult } from '@/shared/lib/utils/createResult'
 import { validateFormData } from '@/shared/lib/utils/validateFormData'
 
-import { MarkFormSchema } from '../lib/MarkFormSchema'
+import { CreateMarkFormSchema } from '../lib/CreateMarkFormSchema'
 import { CreateMark, CreateMarkFormState } from '../model/types'
 import { createMark } from './createMark'
 import { createMarkAndConnectTag } from './createMarkAndConnectTag'
@@ -25,7 +25,7 @@ export async function createMarkAction(
   // zod validation
   const { validatedData, validationErrors } = validateFormData(
     data,
-    MarkFormSchema,
+    CreateMarkFormSchema,
   )
   if (!validatedData)
     return createResult({
@@ -41,8 +41,9 @@ export async function createMarkAction(
         userId: session.userId,
       })
     : await createMark({
-        ...validatedData,
         userId: session.userId,
+        ...validatedData,
+        logoUrl: validatedData.logoUrl ?? null,
       })
   if (!mark)
     return createResult({

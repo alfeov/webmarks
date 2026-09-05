@@ -1,12 +1,15 @@
 import { prisma } from '@/shared/lib/prisma'
 import { Prisma, Tag, WebMark } from '@/shared/lib/prisma/generated/client'
 
-type SetMarkTagsParams = {
-  markId: WebMark['id']
+type SetUserMarkTagsParams = Pick<WebMark, 'id' | 'userId'> & {
   tagIds: Pick<Tag, 'id'>[]
 }
 
-export async function setMarkTags({ markId, tagIds }: SetMarkTagsParams) {
+export async function setUserMarkTags({
+  id,
+  userId,
+  tagIds,
+}: SetUserMarkTagsParams) {
   try {
     const mark = await prisma.webMark.update({
       data: {
@@ -15,7 +18,8 @@ export async function setMarkTags({ markId, tagIds }: SetMarkTagsParams) {
         },
       },
       where: {
-        id: markId,
+        id,
+        userId,
       },
     })
 

@@ -36,7 +36,6 @@ export function EditTagForm({ ...tag }: EditTagFormProps) {
         <FieldDescription>
           Please fill in the fields below to edit Tag
         </FieldDescription>
-        <input hidden name={EDIT_TAG_FORMDATA.ID} value={tag.id} readOnly />
         <InputField
           label='Title'
           req

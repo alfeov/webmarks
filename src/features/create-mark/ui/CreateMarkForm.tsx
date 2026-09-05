@@ -32,17 +32,17 @@ export function CreateMarkForm() {
         <FieldSet>
           <FieldLegend>Required Fields</FieldLegend>
           <InputField
-            label='Title'
-            placeholder='WebMark'
-            errors={state.errors?.title}
-            {...register(CREATE_MARK_FORMDATA.TITLE)}
-            req
-          />
-          <InputField
             label='URL'
             placeholder='https://webmarks.com'
             errors={state.errors?.url}
             {...register(CREATE_MARK_FORMDATA.URL)}
+            req
+          />
+          <InputField
+            label='Title'
+            placeholder='WebMark'
+            errors={state.errors?.title}
+            {...register(CREATE_MARK_FORMDATA.TITLE)}
             req
           />
           <InputField

@@ -2,56 +2,56 @@
 
 import { updateTag } from 'next/cache'
 
-import { Tag } from '@/shared/lib/prisma/generated/client'
+import { WebMark } from '@/shared/lib/prisma/generated/client'
 import { verifySession } from '@/shared/lib/session'
 import { createResult } from '@/shared/lib/utils/createResult'
 import { validateFormData } from '@/shared/lib/utils/validateFormData'
 
-import { EditTagFormSchema } from '../lib/EditTagFormSchema'
-import type { EditTagFormState } from '../model/types'
-import { updateUserTag } from './updateUserTag'
+import { EditMarkFormSchema } from '../lib/EditMarkFormSchema'
+import { EditMarkFormState } from '../model/types'
+import { updateUserMark } from './updateUserMark'
 
-export async function editTagAction(
-  id: Tag['id'],
-  prevState: EditTagFormState,
+export async function editMarkAction(
+  markId: WebMark['id'],
+  prevState: EditMarkFormState,
   formData: FormData,
 ) {
   // check auth
   const session = await verifySession()
   if (!session)
     return createResult({
-      message: 'To edit tags you must be auth',
+      message: 'To edit WebMarks you must login to account',
     })
 
   // zod validation
   const { validatedData, validationErrors } = validateFormData(
     formData,
-    EditTagFormSchema,
+    EditMarkFormSchema,
   )
   if (!validatedData)
     return createResult({
-      message: 'Please fix highlighted fields',
       errors: validationErrors,
+      message: 'Please fix the highlighted fields',
     })
 
-  // update tag in DB
-  const { error } = await updateUserTag({
-    id,
-    newTitle: validatedData.title,
+  // updating webmark in db
+  const { error, mark } = await updateUserMark({
+    id: markId,
     userId: session.userId,
+    ...validatedData,
+    logoUrl: validatedData.logoUrl ?? null,
   })
-  if (error)
+  if (!mark)
     return createResult({
       message: error,
     })
 
   // revalidation
-  updateTag(`tags-${session.userId}`)
   updateTag(`marks-${session.userId}`)
 
   // return success response
   return createResult({
     isSuccess: true,
-    message: 'Tag has been successfully edited',
+    message: 'Webmark has been successfully edited',
   })
 }

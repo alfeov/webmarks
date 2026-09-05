@@ -7,5 +7,4 @@ export const CREATE_MARK_FORMDATA = {
   URL: 'url',
   DESCRIPTION: 'description',
   LOGO_URL: 'logoUrl',
-  DEFAULT_TAG_ID: 'defaultTagId',
 } as const

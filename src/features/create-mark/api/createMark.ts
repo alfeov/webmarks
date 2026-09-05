@@ -1,12 +1,13 @@
 import { prisma } from '@/shared/lib/prisma'
-import { Prisma, WebMark } from '@/shared/lib/prisma/generated/client'
+import { Prisma, Tag, WebMark } from '@/shared/lib/prisma/generated/client'
 
 type CreateMarkParams = Pick<
   WebMark,
   'title' | 'description' | 'url' | 'logoUrl' | 'userId'
->
+> & { tagId: Tag['id'] | null }
 
 export async function createMark({
+  tagId,
   title,
   description,
   url,
@@ -21,6 +22,13 @@ export async function createMark({
         url,
         description,
         logoUrl: logoUrl ?? null,
+        tags: tagId
+          ? {
+              connect: {
+                id: tagId,
+              },
+            }
+          : undefined,
       },
     })
 

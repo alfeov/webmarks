@@ -5,7 +5,7 @@ import { useParams } from 'next/navigation'
 import { useTagsContext } from '@/entities/tag/model/TagsContext'
 import { useCloseDialogOn } from '@/shared/lib/hooks/useCloseDialogOn'
 import { useNotificationManager } from '@/shared/lib/hooks/useNotificationManager'
-import { BadgeField } from '@/shared/ui/BadgeField'
+import { Badge } from '@/shared/ui/badge'
 import { Button } from '@/shared/ui/button'
 import { FieldLegend, FieldSet } from '@/shared/ui/field'
 import { InputField } from '@/shared/ui/InputField'
@@ -61,15 +61,7 @@ export function CreateMarkForm() {
             {...register(CREATE_MARK_FORMDATA.LOGO_URL)}
           />
           {/* default tag according to page params */}
-          {params.tagId && activeTagTitle && (
-            <BadgeField
-              hidden
-              label='Default Tag:'
-              badgeLabel={activeTagTitle}
-              errors={state.errors?.defaultTagId}
-              {...register(CREATE_MARK_FORMDATA.DEFAULT_TAG_ID)}
-            />
-          )}
+          {params.tagId && activeTagTitle && <Badge>{activeTagTitle}</Badge>}
         </FieldSet>
         <Button type='submit'>Create WebMark</Button>
       </FieldSet>

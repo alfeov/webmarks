@@ -24,14 +24,13 @@ export function useCreateMarkForm({
   const { register, handleSubmit } = useForm({
     values: {
       ...meta.state.data,
-      defaultTagId,
     },
   })
 
   const [state, formAction, isPending] = useActionState<
     CreateMarkFormState,
     CreateMark
-  >(createMarkAction, initialState)
+  >(createMarkAction.bind(null, defaultTagId ?? null), initialState)
 
   const onSubmit = handleSubmit((data) => {
     startTransition(() => formAction(data))

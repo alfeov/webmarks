@@ -9,8 +9,8 @@ export function useClickOutside<T extends HTMLElement = HTMLDivElement>(
     const onClick = (event: MouseEvent) => {
       if (ref.current && !ref.current.contains(event.target as Node)) callback()
     }
-    document.addEventListener('click', onClick)
-    return () => document.removeEventListener('click', onClick)
+    document.addEventListener('mousedown', onClick)
+    return () => document.removeEventListener('mousedown', onClick)
   }, [callback])
 
   return ref

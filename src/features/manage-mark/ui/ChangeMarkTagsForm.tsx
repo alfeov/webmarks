@@ -37,8 +37,8 @@ export function ChangeMarkTagsForm({
   return (
     <form action={formAction}>
       <FieldSet className='gap-3' disabled={isPending}>
-        <FieldLegend>WebMark Tags</FieldLegend>
-        <FieldDescription>Select Tags to WebMark</FieldDescription>
+        <FieldLegend>Change WebMark Tags</FieldLegend>
+        <FieldDescription>Select Tags to apply to WebMark</FieldDescription>
         {tags.map((tag) => {
           const hasTag = markTags.some((markTag) => markTag.id === tag.id)
 

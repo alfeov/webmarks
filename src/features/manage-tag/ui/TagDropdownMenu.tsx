@@ -33,9 +33,8 @@ export function TagDropdownMenu({ ...tag }: TagDropdownMenuProps) {
       />
       <DropdownMenuContent>
         <DropdownMenuGroup>
-          <DeleteTagDropdownItem tagId={tag.id} />
           <EditTagDropdownItem {...tag} />
-          <DropdownMenuItem>Share</DropdownMenuItem>
+          <DeleteTagDropdownItem tagId={tag.id} />
         </DropdownMenuGroup>
       </DropdownMenuContent>
     </DropdownMenu>

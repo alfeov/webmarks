@@ -22,7 +22,7 @@ export function ChangeMarkTagsDropdownItem({
           )
         }
       >
-        Tags
+        Change Tags
       </DropdownMenuItem>
     </>
   )

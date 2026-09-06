@@ -4,4 +4,4 @@ export const MarkDescriptionSchema = z
   .string()
   .trim()
   .min(10, 'At least 10 characters')
-  .max(100, 'Maximum 100 characters')
+  .max(200, 'Maximum 200 characters')

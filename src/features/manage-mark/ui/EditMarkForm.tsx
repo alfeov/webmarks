@@ -67,7 +67,7 @@ export function EditMarkForm({ ...mark }: EditMarkFormProps) {
           label='Logo URL'
           placeholder='https://logo.com'
         />
-        <Button type='submit'>Edit Tag</Button>
+        <Button type='submit'>Edit WebMark</Button>
       </FieldSet>
     </form>
   )

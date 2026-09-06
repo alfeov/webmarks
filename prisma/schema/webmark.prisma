@@ -10,7 +10,7 @@ model WebMark {
   createdAt DateTime @default(now()) @map("created_at")
 
   userId String @map("user_id")
-  user   User   @relation(fields: [userId], references: [id])
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   tags Tag[]
 

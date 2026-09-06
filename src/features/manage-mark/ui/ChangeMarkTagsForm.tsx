@@ -39,17 +39,23 @@ export function ChangeMarkTagsForm({
       <FieldSet className='gap-3' disabled={isPending}>
         <FieldLegend>Change WebMark Tags</FieldLegend>
         <FieldDescription>Select Tags to apply to WebMark</FieldDescription>
-        {tags.map((tag) => {
-          const hasTag = markTags.some((markTag) => markTag.id === tag.id)
+        {Boolean(tags.length) ? (
+          tags.map((tag) => {
+            const hasTag = markTags.some((markTag) => markTag.id === tag.id)
 
-          return (
-            <MarkTagItem
-              key={`${tag.id}-${tag.updatedAt}`}
-              {...tag}
-              defaultChecked={hasTag}
-            />
-          )
-        })}
+            return (
+              <MarkTagItem
+                key={`${tag.id}-${tag.updatedAt}`}
+                {...tag}
+                defaultChecked={hasTag}
+              />
+            )
+          })
+        ) : (
+          <FieldDescription className='py-[20px] text-center italic'>
+            You have no tags yet
+          </FieldDescription>
+        )}
         <Button type='submit'>Apply Tags</Button>
       </FieldSet>
     </form>

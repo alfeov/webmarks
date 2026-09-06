@@ -10,6 +10,7 @@
     "lint": "eslint --fix",
     "type": "tsc --noEmit",
     "shad": "pnx shadcn@latest add",
+    "prisma:seed": "tsx prisma/seeds.ts",
     "prisma:view": "prisma studio",
     "prisma:apply-migrations": "prisma migrate deploy",
     "prepare": "husky"

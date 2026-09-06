@@ -47,12 +47,14 @@ export function MarkItem({
       </div>
       <CardContent className='grow'>{description}</CardContent>
       <CardFooter className='justify-between gap-[20px] empty:hidden'>
-        {Boolean(tags.length) && (
+        {Boolean(tags.length) ? (
           <div className='flex flex-wrap gap-[10px]'>
             {tags.map((tag) => (
               <Badge key={`${tag.id}-${tag.updatedAt}`}>{tag.title}</Badge>
             ))}
           </div>
+        ) : (
+          <span></span>
         )}
         {pinned && (
           <Image src={PinIcon} alt='pin' className='mr-[7px] w-[20px]' />

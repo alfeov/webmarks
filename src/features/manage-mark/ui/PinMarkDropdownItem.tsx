@@ -17,7 +17,7 @@ const initialState = {
 }
 
 export function PinMarkDropdownItem({ id, pinned }: PinMarkDropdownItemProps) {
-  const [state, formAction, isPending] = useActionState<PinMarkFormState>(
+  const [_, formAction, isPending] = useActionState<PinMarkFormState>(
     toggleMarkPinAction.bind(null, { id, pinned }),
     initialState,
   )

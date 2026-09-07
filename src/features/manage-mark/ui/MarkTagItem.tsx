@@ -1,4 +1,6 @@
-import { useState } from 'react'
+'use client'
+
+import { memo, useState } from 'react'
 
 import { Tag } from '@/shared/lib/prisma/generated/client'
 import { Checkbox } from '@/shared/ui/checkbox'
@@ -8,7 +10,11 @@ type MarkTagItemProps = Pick<Tag, 'id' | 'title'> & {
   defaultChecked?: boolean
 }
 
-export function MarkTagItem({ defaultChecked, id, title }: MarkTagItemProps) {
+export const MarkTagItem = memo(function Memoized({
+  id,
+  title,
+  defaultChecked = false,
+}: MarkTagItemProps) {
   const [checked, setChecked] = useState(defaultChecked)
 
   return (
@@ -23,4 +29,4 @@ export function MarkTagItem({ defaultChecked, id, title }: MarkTagItemProps) {
       </Field>
     </FieldLabel>
   )
-}
+})

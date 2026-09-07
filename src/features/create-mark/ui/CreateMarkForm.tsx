@@ -1,10 +1,8 @@
 'use client'
 
-import { useParams } from 'next/navigation'
-
-import { useTagsContext } from '@/entities/tag/model/TagsContext'
 import { useCloseDialogOn } from '@/shared/lib/hooks/useCloseDialogOn'
 import { useNotificationManager } from '@/shared/lib/hooks/useNotificationManager'
+import { Tag } from '@/shared/lib/prisma/generated/client'
 import { Badge } from '@/shared/ui/badge'
 import { Button } from '@/shared/ui/button'
 import { FieldLegend, FieldSet } from '@/shared/ui/field'
@@ -13,17 +11,20 @@ import { InputField } from '@/shared/ui/InputField'
 import { CREATE_MARK_FORMDATA } from '../lib/constants'
 import { useCreateMarkForm } from '../lib/useCreateMarkForm'
 
-export function CreateMarkForm() {
-  const params = useParams<{ tagId?: string }>()
+interface CreateMarkFormProps {
+  currentTagId?: Tag['id']
+  currentTagTitle?: Tag['title']
+}
 
+export function CreateMarkForm({
+  currentTagId,
+  currentTagTitle,
+}: CreateMarkFormProps) {
   const { state, isPending, onSubmit, register } = useCreateMarkForm({
-    defaultTagId: params.tagId,
+    defaultTagId: currentTagId,
   })
   useNotificationManager(state.message, state.isSuccess, !isPending)
   useCloseDialogOn(state.isSuccess)
-
-  const { tags } = useTagsContext()
-  const activeTagTitle = tags.find((tag) => tag.id === params.tagId)?.title
 
   return (
     <form onSubmit={onSubmit}>
@@ -61,7 +62,7 @@ export function CreateMarkForm() {
             {...register(CREATE_MARK_FORMDATA.LOGO_URL)}
           />
           {/* default tag according to page params */}
-          {params.tagId && activeTagTitle && <Badge>{activeTagTitle}</Badge>}
+          {currentTagTitle && <Badge>{currentTagTitle}</Badge>}
         </FieldSet>
         <Button type='submit'>Create WebMark</Button>
       </FieldSet>

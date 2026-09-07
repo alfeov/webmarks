@@ -3,10 +3,9 @@
 import { useActionState } from 'react'
 
 import { WebMarkWithTags } from '@/entities/mark/model/types'
-import { useTagsContext } from '@/entities/tag/model/TagsContext'
 import { useCloseDialogOn } from '@/shared/lib/hooks/useCloseDialogOn'
 import { useNotificationManager } from '@/shared/lib/hooks/useNotificationManager'
-import { WebMark } from '@/shared/lib/prisma/generated/client'
+import { Tag, WebMark } from '@/shared/lib/prisma/generated/client'
 import { Button } from '@/shared/ui/button'
 import { FieldDescription, FieldLegend, FieldSet } from '@/shared/ui/field'
 
@@ -22,11 +21,12 @@ const initialState: ChangeMarkTagsFormState = {
 export function ChangeMarkTagsForm({
   markId,
   markTags,
+  tags,
 }: {
   markId: WebMark['id']
   markTags: WebMarkWithTags['tags']
+  tags: Tag[]
 }) {
-  const { tags } = useTagsContext()
   const [state, formAction, isPending] = useActionState(
     changeMarkTagsAction.bind(null, markId),
     initialState,

@@ -5,7 +5,7 @@ import { useActionState } from 'react'
 import { WebMarkWithTags } from '@/entities/mark/model/types'
 import { useCloseDialogOn } from '@/shared/lib/hooks/useCloseDialogOn'
 import { useNotificationManager } from '@/shared/lib/hooks/useNotificationManager'
-import { Tag, WebMark } from '@/shared/lib/prisma/generated/client'
+import { Tag } from '@/shared/lib/prisma/generated/client'
 import { Button } from '@/shared/ui/button'
 import { FieldDescription, FieldLegend, FieldSet } from '@/shared/ui/field'
 
@@ -23,7 +23,7 @@ export function ChangeMarkTagsForm({
   markTags,
   tags,
 }: {
-  markId: WebMark['id']
+  markId: WebMarkWithTags['id']
   markTags: WebMarkWithTags['tags']
   tags: Tag[]
 }) {

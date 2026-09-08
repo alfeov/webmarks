@@ -37,7 +37,7 @@ export function MarkDropdownMenu({ ...mark }: MarkDropDownMenuProps) {
         <DropdownMenuGroup>
           <OpenMarkDropdownItem url={mark.url} />
           <CopyLinkDropdownItem url={mark.url} />
-          <ChangeMarkTagsDropdownItem {...mark} />
+          <ChangeMarkTagsDropdownItem markId={mark.id} markTags={mark.tags} />
           <PinMarkDropdownItem id={mark.id} pinned={mark.pinned} />
           <EditMarkDropdownItem {...mark} />
           <DeleteMarkDropdownItem id={mark.id} />

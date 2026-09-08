@@ -6,10 +6,14 @@ import { ChangeMarkTagsForm } from '@/features/manage-mark/ui/ChangeMarkTagsForm
 import { useDialogContext } from '@/shared/lib/contexts/DialogContext'
 import { DropdownMenuItem } from '@/shared/ui/dropdown-menu'
 
-type ChangeMarkTagsDropdownItemProps = WebMarkWithTags
+type ChangeMarkTagsDropdownItemProps = {
+  markId: WebMarkWithTags['id']
+  markTags: WebMarkWithTags['tags']
+}
 
 export function ChangeMarkTagsDropdownItem({
-  ...mark
+  markId,
+  markTags,
 }: ChangeMarkTagsDropdownItemProps) {
   const { openDialog } = useDialogContext()
   const tags = useTagsContext()
@@ -21,8 +25,8 @@ export function ChangeMarkTagsDropdownItem({
         onClick={() =>
           openDialog(
             <ChangeMarkTagsForm
-              markId={mark.id}
-              markTags={mark.tags}
+              markId={markId}
+              markTags={markTags}
               tags={tags}
             />,
           )

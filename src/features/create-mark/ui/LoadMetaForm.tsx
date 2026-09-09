@@ -57,6 +57,7 @@ export function LoadMetaForm() {
             </InputGroupAddon>
 
             <InputGroupInput
+              autoFocus
               placeholder='Search Meta by URL...'
               name={LOAD_META_FORMDATA.URL}
               aria-invalid={Boolean(error)}

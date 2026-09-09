@@ -34,6 +34,7 @@ export function CreateTagForm() {
           Please fill in the fields below to create new Tag
         </FieldDescription>
         <InputField
+          autoFocus
           label='Title'
           req
           placeholder='Some Tag Name...'

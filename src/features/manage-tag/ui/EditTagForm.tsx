@@ -37,6 +37,7 @@ export function EditTagForm({ ...tag }: EditTagFormProps) {
           Please fill in the fields below to edit Tag
         </FieldDescription>
         <InputField
+          autoFocus
           label='Title'
           req
           placeholder={tag.title}

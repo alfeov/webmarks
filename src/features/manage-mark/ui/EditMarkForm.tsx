@@ -37,6 +37,7 @@ export function EditMarkForm({ ...mark }: EditMarkFormProps) {
           Please fill in the fields below to edit WebMark
         </FieldDescription>
         <InputField
+          autoFocus
           name={EDIT_MARK_FORMDATA.URL}
           errors={state.errors?.url}
           defaultValue={mark.url}

@@ -30,6 +30,7 @@ export function SigninForm() {
     <form className='flex flex-col gap-[20px]' action={formAction}>
       <FieldSet disabled={isPending}>
         <InputField
+          autoFocus
           label='Email'
           placeholder='Enter your email address'
           type='text'

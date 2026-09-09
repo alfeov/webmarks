@@ -135,7 +135,7 @@ function SidebarProvider({
           } as React.CSSProperties
         }
         className={cn(
-          'group/sidebar-wrapper has-data-[variant=inset]:bg-sidebar flex min-h-svh w-full',
+          'group/sidebar-wrapper has-data-[variant=inset]:bg-sidebar relative flex min-h-svh w-full',
           className,
         )}
         {...props}
@@ -161,21 +161,6 @@ function Sidebar({
 }) {
   const { isMobile, state, openMobile, setOpenMobile } = useSidebar()
 
-  if (collapsible === 'none') {
-    return (
-      <div
-        data-slot='sidebar'
-        className={cn(
-          'bg-sidebar text-sidebar-foreground flex h-full w-(--sidebar-width) flex-col',
-          className,
-        )}
-        {...props}
-      >
-        {children}
-      </div>
-    )
-  }
-
   if (isMobile) {
     return (
       <Sheet open={openMobile} onOpenChange={setOpenMobile} {...props}>
@@ -199,6 +184,21 @@ function Sidebar({
           <div className='flex h-full w-full flex-col'>{children}</div>
         </SheetContent>
       </Sheet>
+    )
+  }
+
+  if (collapsible === 'none') {
+    return (
+      <div
+        data-slot='sidebar'
+        className={cn(
+          'bg-sidebar text-sidebar-foreground flex hidden h-full w-(--sidebar-width) flex-col md:flex',
+          className,
+        )}
+        {...props}
+      >
+        {children}
+      </div>
     )
   }
 
@@ -262,6 +262,35 @@ function SidebarTrigger({
       variant='ghost'
       size='icon-sm'
       className={cn(className)}
+      onClick={(event) => {
+        onClick?.(event)
+        toggleSidebar()
+      }}
+      {...props}
+    >
+      <PanelLeftIcon />
+      <span className='sr-only'>Toggle Sidebar</span>
+    </Button>
+  )
+}
+
+function SidebarTriggerInset({
+  className,
+  onClick,
+  ...props
+}: React.ComponentProps<typeof Button>) {
+  const { toggleSidebar } = useSidebar()
+
+  return (
+    <Button
+      data-sidebar='trigger'
+      data-slot='sidebar-trigger'
+      variant='ghost'
+      size='icon-sm'
+      className={cn(
+        className,
+        'absolute right-0 z-10 translate-x-full md:hidden',
+      )}
       onClick={(event) => {
         onClick?.(event)
         toggleSidebar()
@@ -719,5 +748,6 @@ export {
   SidebarRail,
   SidebarSeparator,
   SidebarTrigger,
+  SidebarTriggerInset,
   useSidebar,
 }

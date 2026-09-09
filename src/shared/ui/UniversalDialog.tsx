@@ -19,10 +19,12 @@ export function UniversalDialog({
     <Dialog open={isDialogOpen}>
       <DialogContent showCloseButton={false} className='gap-3' ref={ref}>
         <CloseDialogButton onClick={closeDialog} />
-        {dialogContent}
-        <Button variant='outline' onClick={closeDialog}>
-          Close
-        </Button>
+        <div className='no-scrollbar grid max-h-[70vh] gap-[10px] overflow-y-auto px-1'>
+          {dialogContent}
+          <Button variant='outline' onClick={closeDialog}>
+            Close
+          </Button>
+        </div>
       </DialogContent>
     </Dialog>
   )

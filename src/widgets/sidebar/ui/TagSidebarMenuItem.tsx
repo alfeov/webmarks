@@ -2,6 +2,7 @@
 
 import Link from 'next/link'
 import { useParams } from 'next/navigation'
+import { memo } from 'react'
 
 import { TagDropdownMenu } from '@/features/manage-tag/ui/TagDropdownMenu'
 import { Tag } from '@/shared/lib/prisma/generated/client'
@@ -9,7 +10,9 @@ import { SidebarMenuButton, SidebarMenuItem } from '@/shared/ui/sidebar'
 
 type TagSidebarMenuItemProps = Tag
 
-export function TagSidebarMenuItem({ ...tag }: TagSidebarMenuItemProps) {
+export const TagSidebarMenuItem = memo(function Memoized({
+  ...tag
+}: TagSidebarMenuItemProps) {
   const params = useParams<{ tagId?: string }>()
 
   return (
@@ -27,4 +30,4 @@ export function TagSidebarMenuItem({ ...tag }: TagSidebarMenuItemProps) {
       </div>
     </SidebarMenuItem>
   )
-}
+})

@@ -1,7 +1,9 @@
 import 'server-only'
 
 import { cacheLife, cacheTag } from 'next/cache'
+import { notFound } from 'next/navigation'
 
+import { getUserTag } from '@/entities/tag/api/getUserTag'
 import { prisma } from '@/shared/lib/prisma'
 import { Tag, WebMark } from '@/shared/lib/prisma/generated/client'
 
@@ -22,6 +24,11 @@ export async function getUserMarks({
   cacheLife('days')
 
   if (!userId) return { marks: [], message: 'To view marks you must be auth' }
+
+  if (tagId) {
+    const { tag } = await getUserTag({ id: tagId, userId })
+    if (!tag) return notFound()
+  }
 
   const marks = await prisma.webMark.findMany({
     where: {

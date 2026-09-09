@@ -43,7 +43,7 @@ export function EditTagForm({ ...tag }: EditTagFormProps) {
           name={EDIT_TAG_FORMDATA.TITLE}
           errors={state.errors?.title}
         />
-        <Button type='submit'>Create Tag</Button>
+        <Button type='submit'>Edit Tag</Button>
       </FieldSet>
     </form>
   )

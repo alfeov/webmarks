@@ -45,7 +45,7 @@ export default function RootLayout({ children }: LayoutProps<'/'>) {
           sizes='<generated>'
         />
       </head>
-      <body className='max-h- flex min-h-full flex-col'>
+      <body className='flex min-h-full flex-col'>
         <Suspense fallback={<SpinnerEmpty>App Initialization</SpinnerEmpty>}>
           <Providers>
             <header className='border-b'>
@@ -59,13 +59,11 @@ export default function RootLayout({ children }: LayoutProps<'/'>) {
               </div>
             </header>
 
-            <main>
-              <div className='flex h-(--content-height)'>
-                <aside>
-                  <AppSidebar />
-                </aside>
-                <ScrollArea className='h-full w-full'>{children}</ScrollArea>
-              </div>
+            <main className='flex h-(--content-height)'>
+              <nav className='h-full'>
+                <AppSidebar />
+              </nav>
+              <ScrollArea className='h-full w-full'>{children}</ScrollArea>
             </main>
           </Providers>
         </Suspense>

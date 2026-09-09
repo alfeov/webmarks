@@ -19,7 +19,7 @@ interface MarksProps {
 export async function Marks({ params, searchParams }: MarksProps) {
   return (
     <div className='flex h-full flex-col gap-[30px] p-[30px]'>
-      <div className='flex justify-between'>
+      <div className='flex flex-col-reverse justify-between gap-[15px] sm:flex-row'>
         <SearchMark />
         <CreateMarkButton />
       </div>

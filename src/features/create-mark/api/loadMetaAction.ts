@@ -1,30 +1,46 @@
 'use server'
 
-import { LOAD_META_FORMDATA } from '../lib/constants'
+import { verifySession } from '@/shared/lib/session'
+import { validateFormData } from '@/shared/lib/utils/validateFormData'
+
+import { LoadMetaFormSchema } from '../lib/LoadMetaFormSchema'
 import { LoadMetaFormState } from '../model/types'
-import { getMQLMeta } from './getMQLMeta'
+import { getMetadata } from './getMetadata'
 
 export async function loadMetaAction(
   prevState: LoadMetaFormState,
   formData: FormData,
 ) {
-  const url = formData.get(LOAD_META_FORMDATA.URL)
+  // check auth
+  const session = await verifySession()
+  if (!session)
+    return {
+      data: null,
+      error: 'To get Metadata by url you must login to account',
+    }
 
-  const cleanUrl = url?.toString().trim()
-  if (!cleanUrl) {
-    return { data: null, error: 'Do not provide empty URL' }
-  }
+  // zod validation
+  const { validatedData, validationErrors } = validateFormData(
+    formData,
+    LoadMetaFormSchema,
+  )
+  if (!validatedData)
+    return {
+      data: null,
+      error: validationErrors.url?.[0] ?? 'Unknown error',
+    }
 
-  const { data, error } = await getMQLMeta(cleanUrl)
+  // get metadata with api
+  const { metadata, error } = await getMetadata(validatedData.url)
+  if (!metadata) return { data: null, error }
 
-  if (!data) return { data: null, error }
-
+  // return success
   return {
     data: {
-      title: data.title ?? '',
-      url: data.url ?? '',
-      description: data.description ?? '',
-      logoUrl: data.logo?.url ?? '',
+      title: metadata.title ?? '',
+      url: metadata.url ?? '',
+      description: metadata.description ?? '',
+      logoUrl: metadata.favicon ?? '',
     },
     error: null,
   }

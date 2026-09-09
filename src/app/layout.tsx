@@ -16,6 +16,8 @@ import './styles/index.css'
 
 const fontExcalidraw = localFont({
   src: '../shared/assets/fonts/Excalifont-Regular.woff2',
+  display: 'swap',
+  variable: '--font-excalifont',
 })
 
 export const metadata: Metadata = {
@@ -27,7 +29,7 @@ export default function RootLayout({ children }: LayoutProps<'/'>) {
   return (
     <html
       lang='en'
-      className={cn('h-full', 'antialiased', fontExcalidraw.className)}
+      className={cn('h-full', 'antialiased', fontExcalidraw.variable)}
       data-scroll-behavior='smooth'
     >
       <head>

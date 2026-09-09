@@ -33,8 +33,8 @@ export function MarkItem({
       <div className='flex items-center gap-[10px] px-(--card-spacing)'>
         <Link href={url} target='_blank' className='rounded-[50%]'>
           <Avatar size='lg'>
-            <AvatarImage src={logoUrl || 'errorSrc'} />
-            <AvatarFallback>L</AvatarFallback>
+            <AvatarImage src={logoUrl || 'errorSrc'} alt={title} />
+            <AvatarFallback>{title.charAt(0)}</AvatarFallback>
           </Avatar>
         </Link>
         <div className='grow overflow-hidden'>
@@ -56,9 +56,7 @@ export function MarkItem({
         ) : (
           <span></span>
         )}
-        {pinned && (
-          <Image src={PinIcon} alt='pin' className='mr-[7px] w-[20px]' />
-        )}
+        {pinned && <PinIcon className='mr-[7px] size-[20px]' />}
       </CardFooter>
     </Card>
   )

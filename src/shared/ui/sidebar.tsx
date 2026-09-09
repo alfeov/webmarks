@@ -29,6 +29,13 @@ const SIDEBAR_WIDTH_MOBILE = '18rem'
 const SIDEBAR_WIDTH_ICON = '3rem'
 const SIDEBAR_KEYBOARD_SHORTCUT = 'b'
 
+const SIDEBAR_INSET_HEIGHT = 'var(--content-height)'
+// to use inset sidebar variant
+// 1. set up SIDEBAR_INSET_HEIGHT variable
+// 		- for example: calc(100dvh - 1px - var(--header-height))
+// 2. set up collapsible='none' variant='inset' on Sidebar
+// ! note that on mobile design is different from desktop
+
 type SidebarContextProps = {
   state: 'expanded' | 'collapsed'
   open: boolean
@@ -131,11 +138,12 @@ function SidebarProvider({
           {
             '--sidebar-width': SIDEBAR_WIDTH,
             '--sidebar-width-icon': SIDEBAR_WIDTH_ICON,
+            '--sidebar-inset-height': SIDEBAR_INSET_HEIGHT,
             ...style,
           } as React.CSSProperties
         }
         className={cn(
-          'group/sidebar-wrapper has-data-[variant=inset]:bg-sidebar relative flex min-h-svh w-full',
+          'group/sidebar-wrapper has-data-[variant=inset]:bg-sidebar relative flex min-h-svh w-full has-data-[variant=inset]:h-(--sidebar-inset-height) has-data-[variant=inset]:min-h-full',
           className,
         )}
         {...props}
@@ -191,6 +199,7 @@ function Sidebar({
     return (
       <div
         data-slot='sidebar'
+        data-variant={variant}
         className={cn(
           'bg-sidebar text-sidebar-foreground flex hidden h-full w-(--sidebar-width) flex-col md:flex',
           className,
@@ -287,10 +296,7 @@ function SidebarTriggerInset({
       data-slot='sidebar-trigger'
       variant='ghost'
       size='icon-sm'
-      className={cn(
-        className,
-        'absolute right-0 z-10 translate-x-full md:hidden',
-      )}
+      className={cn(className, 'absolute left-full z-10 md:hidden')}
       onClick={(event) => {
         onClick?.(event)
         toggleSidebar()

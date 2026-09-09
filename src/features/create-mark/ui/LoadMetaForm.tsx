@@ -75,6 +75,7 @@ export function LoadMetaForm() {
               </InputGroupButton>
             </InputGroupAddon>
           </InputGroup>
+          {error && <FieldError>{error}</FieldError>}
         </Field>
       </fieldset>
     </form>

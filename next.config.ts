@@ -11,6 +11,18 @@ const nextConfig: NextConfig = {
       },
     },
   },
+  poweredByHeader: false,
+  reactStrictMode: true,
+  productionBrowserSourceMaps: false,
+  compress: false,
+  typescript: {
+    ignoreBuildErrors: true,
+  },
+  logging: {
+    fetches: {
+      fullUrl: true,
+    },
+  },
 }
 
 export default nextConfig

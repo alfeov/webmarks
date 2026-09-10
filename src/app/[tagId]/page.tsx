@@ -1,1 +1,1 @@
-export { MarksByTagPage as default } from '@/_pages/MarksByTagPage'
+export { MarksByTagPage as default, metadata } from '@/_pages/MarksByTagPage'

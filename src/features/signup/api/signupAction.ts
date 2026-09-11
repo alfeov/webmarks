@@ -24,7 +24,8 @@ export async function signupAction(
     })
 
   // hash password and create user in DB
-  const { user, error } = await createUser(validatedData)
+  const { confirmPassword, ...restData } = validatedData
+  const { user, error } = await createUser(restData)
   if (!user)
     return createResult({
       message: error,

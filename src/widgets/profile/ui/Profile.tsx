@@ -21,7 +21,7 @@ export async function Profile() {
     <DropdownMenu>
       <DropdownMenuTrigger
         render={
-          <Button variant='ghost' size='icon' className='rounded-full'>
+          <Button variant='ghost' size='icon' className='rounded-[50%]'>
             <Avatar size='lg'>
               <AvatarImage
                 src={session?.avatarUrl || 'errorSrc'} // to handle AvatarFallback

@@ -25,6 +25,7 @@ export function TagDropdownMenu({ ...tag }: TagDropdownMenuProps) {
             variant='ghost'
             size='icon-xs'
             data-slot='dropdown-menu-trigger'
+            aria-label='tag menu'
           >
             <LucideEllipsis />
           </Button>

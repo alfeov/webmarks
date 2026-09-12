@@ -1,3 +1,5 @@
+import 'server-only'
+
 import { scrape, ScraperError } from 'web-meta-scraper'
 
 export async function getMetadata(url: string) {

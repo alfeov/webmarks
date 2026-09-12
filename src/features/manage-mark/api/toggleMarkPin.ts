@@ -1,3 +1,5 @@
+import 'server-only'
+
 import { getUserMark } from '@/entities/mark/api/getUserMark'
 import { prisma } from '@/shared/lib/prisma'
 import { WebMark } from '@/shared/lib/prisma/generated/client'

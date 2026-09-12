@@ -19,7 +19,7 @@ const seeds = async () => {
 
   for (const { password, ...userData } of users) {
     const hashedPassword = await bcrypt.hash(password, saltOrRounds)
-    const user = await prisma.user.create({
+    await prisma.user.create({
       data: {
         password: hashedPassword,
         ...userData,

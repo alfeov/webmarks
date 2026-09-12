@@ -1,3 +1,5 @@
+import 'server-only'
+
 import { prisma } from '@/shared/lib/prisma'
 import { Tag } from '@/shared/lib/prisma/generated/client'
 

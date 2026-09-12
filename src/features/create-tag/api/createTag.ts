@@ -1,3 +1,5 @@
+import 'server-only'
+
 import { prisma } from '@/shared/lib/prisma'
 import { Prisma } from '@/shared/lib/prisma/generated/client'
 import { TagUncheckedCreateInput } from '@/shared/lib/prisma/generated/models'

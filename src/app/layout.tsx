@@ -21,6 +21,9 @@ const fontExcalidraw = localFont({
 })
 
 export const metadata: Metadata = {
+  metadataBase: new URL(
+    process.env.NEXT_PUBLIC_SITE_URL || 'https://webmarks.vercel.app/',
+  ),
   title: {
     template: '%s | WebMarks',
     default: 'WebMarks',
@@ -66,6 +69,7 @@ export const metadata: Metadata = {
     canonical: '/',
   },
   openGraph: {
+    url: '/',
     title: 'WebMarks',
     description:
       'Create and manege your web bookmarks on different devices with safe and instant experience',
@@ -102,6 +106,10 @@ export default function RootLayout({ children }: LayoutProps<'/'>) {
           type='image/<generated>'
           sizes='<generated>'
         />
+        <meta property='og:image' content='<generated>' />
+        <meta property='og:image:type' content='<generated>' />
+        <meta property='og:image:width' content='<generated>' />
+        <meta property='og:image:height' content='<generated>' />
       </head>
       <body className='flex min-h-full flex-col'>
         <Suspense fallback={<SpinnerEmpty>App Initialization</SpinnerEmpty>}>

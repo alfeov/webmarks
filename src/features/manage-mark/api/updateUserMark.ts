@@ -1,3 +1,5 @@
+import 'server-only'
+
 import { prisma } from '@/shared/lib/prisma'
 import { Prisma, WebMark } from '@/shared/lib/prisma/generated/client'
 

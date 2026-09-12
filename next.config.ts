@@ -1,7 +1,7 @@
 import type { NextConfig } from 'next'
 
 const nextConfig: NextConfig = {
-  output: 'standalone',
+  // output: 'standalone', // turn on to deploy with Docker
   cacheComponents: true,
   partialPrefetching: true,
   turbopack: {

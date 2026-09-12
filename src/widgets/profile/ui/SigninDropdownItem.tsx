@@ -4,7 +4,7 @@ import { useDialogContext } from '@/shared/lib/contexts/DialogContext'
 import { DropdownMenuItem } from '@/shared/ui/dropdown-menu'
 import { Auth } from '@/widgets/auth/ui/Auth'
 
-export function LoginMenuItem() {
+export function LoginDropdownItem() {
   const { openDialog } = useDialogContext()
 
   return (

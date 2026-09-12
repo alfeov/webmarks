@@ -13,6 +13,7 @@
     "prisma:seed": "tsx prisma/seeds.ts",
     "prisma:view": "prisma studio",
     "prisma:apply-migrations": "prisma migrate deploy",
+    "docker:up-db": "docker compose up db -d",
     "prepare": "husky"
   },
   "dependencies": {

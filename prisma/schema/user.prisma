@@ -2,7 +2,7 @@ model User {
   id        String  @id @default(cuid())
   email     String  @unique
   password  String
-  username  String?
+  username  String? @unique
   avatarUrl String? @map("avatar_url")
 
   updatedAt DateTime @default(now()) @updatedAt @map("update_at")

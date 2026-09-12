@@ -16,16 +16,20 @@ export function UniversalDialog({
   const ref = useClickOutside(closeDialog)
 
   return (
-    <Dialog open={isDialogOpen}>
-      <DialogContent showCloseButton={false} className='gap-3' ref={ref}>
-        <CloseDialogButton onClick={closeDialog} />
-        <div className='no-scrollbar grid max-h-[70vh] gap-[10px] overflow-y-auto px-1 md:max-h-[90vh]'>
-          {dialogContent}
-          <Button variant='outline' onClick={closeDialog}>
-            Close
-          </Button>
-        </div>
-      </DialogContent>
-    </Dialog>
+    <>
+      {isDialogOpen && (
+        <Dialog open>
+          <DialogContent showCloseButton={false} className='gap-3' ref={ref}>
+            <CloseDialogButton onClick={closeDialog} />
+            <div className='no-scrollbar grid max-h-[70vh] gap-[10px] overflow-y-auto px-1 md:max-h-[90vh]'>
+              {dialogContent}
+              <Button variant='outline' onClick={closeDialog}>
+                Close
+              </Button>
+            </div>
+          </DialogContent>
+        </Dialog>
+      )}
+    </>
   )
 }

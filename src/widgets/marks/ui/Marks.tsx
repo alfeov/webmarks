@@ -1,4 +1,4 @@
-import { Suspense } from 'react'
+import { Suspense, ViewTransition } from 'react'
 
 import { CreateMarkButton } from '@/features/create-mark/ui/CreateMarkButton'
 import { SearchMark } from '@/features/search-mark/ui/SearchMark'
@@ -23,8 +23,16 @@ export async function Marks({ params, searchParams }: MarksProps) {
         <SearchMark />
         <CreateMarkButton />
       </div>
-      <Suspense fallback={<MarksListSkeleton />}>
-        <MarkList params={params} searchParams={searchParams} />
+      <Suspense
+        fallback={
+          <ViewTransition default='none' exit='exit'>
+            <MarksListSkeleton />
+          </ViewTransition>
+        }
+      >
+        <ViewTransition default='none' enter='enter'>
+          <MarkList params={params} searchParams={searchParams} />
+        </ViewTransition>
       </Suspense>
     </div>
   )

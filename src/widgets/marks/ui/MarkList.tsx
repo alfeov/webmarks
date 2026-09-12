@@ -1,3 +1,5 @@
+import { ViewTransition } from 'react'
+
 import { getUserMarks } from '@/entities/mark/api/getUserMarks'
 import { MarkItem } from '@/entities/mark/ui/MarkItem'
 import { MarkDropdownMenu } from '@/features/manage-mark/ui/MarkDropdownMenu'
@@ -32,9 +34,17 @@ export async function MarkList({ params, searchParams }: MarkListProps) {
       {Boolean(marks.length) ? (
         <MarkGrid>
           {marks.map((mark) => (
-            <MarkItem key={`${mark.id}-${mark.updatedAt}`} {...mark}>
-              <MarkDropdownMenu {...mark} />
-            </MarkItem>
+            <ViewTransition
+              name={mark.id}
+              key={`${mark.id}-${mark.updatedAt}`}
+              update='auto'
+              share='auto'
+              default='none'
+            >
+              <MarkItem {...mark}>
+                <MarkDropdownMenu {...mark} />
+              </MarkItem>
+            </ViewTransition>
           ))}
         </MarkGrid>
       ) : (

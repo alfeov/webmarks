@@ -1,0 +1,29 @@
+::view-transition-old(.exit) {
+  animation:
+    var(--duration-s) ease-out both fade reverse,
+    var(--duration-s) ease-out both slide-y reverse;
+}
+
+::view-transition-new(.enter) {
+  animation:
+    var(--duration-s) ease-in var(--duration-s) both fade,
+    var(--duration-s) ease-in var(--duration-s) both slide-y;
+}
+
+@keyframes fade {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slide-y {
+  from {
+    transform: translateY(20px);
+  }
+  to {
+    transform: translateY(0);
+  }
+}

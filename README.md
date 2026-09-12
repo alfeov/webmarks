@@ -19,7 +19,7 @@
 
 ```terminal
 pn i
-pn prisma db push
+pn prisma:push
 pn prisma:seed
 pn prisma generate
 pn dev

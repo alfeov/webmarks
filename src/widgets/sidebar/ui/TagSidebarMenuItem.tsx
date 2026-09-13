@@ -8,16 +8,24 @@ import { TagDropdownMenu } from '@/features/manage-tag/ui/TagDropdownMenu'
 import { Tag } from '@/shared/lib/prisma/generated/client'
 import { SidebarMenuButton, SidebarMenuItem } from '@/shared/ui/sidebar'
 
+import { useCloseMobileSidebarOnClick } from '../lib/useCloseMobileSidebarOnClick'
+
 type TagSidebarMenuItemProps = Tag
 
 export const TagSidebarMenuItem = memo(function Memoized({
   ...tag
 }: TagSidebarMenuItemProps) {
   const params = useParams<{ tagId?: string }>()
+  const handleClick = useCloseMobileSidebarOnClick()
 
   return (
     <SidebarMenuItem>
-      <Link href={tag.id} prefetch className='w-full rounded-xl'>
+      <Link
+        href={tag.id}
+        prefetch
+        className='w-full rounded-xl'
+        onClick={handleClick}
+      >
         <SidebarMenuButton
           className='pr-8'
           data-active={params.tagId === tag.id}

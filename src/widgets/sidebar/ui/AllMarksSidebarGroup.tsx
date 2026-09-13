@@ -11,15 +11,18 @@ import {
   SidebarMenuItem,
 } from '@/shared/ui/sidebar'
 
+import { useCloseMobileSidebarOnClick } from '../lib/useCloseMobileSidebarOnClick'
+
 export function AllMarksSidebarGroup() {
   const pathname = usePathname()
+  const handleClick = useCloseMobileSidebarOnClick()
 
   return (
     <SidebarGroup>
       <SidebarGroupLabel className='text-[16px]'>Main</SidebarGroupLabel>
       <SidebarMenu>
         <SidebarMenuItem>
-          <Link href='/' prefetch>
+          <Link href='/' prefetch onClick={handleClick}>
             <SidebarMenuButton data-active={pathname === '/'}>
               Show All WebMarks
             </SidebarMenuButton>

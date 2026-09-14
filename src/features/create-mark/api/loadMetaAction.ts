@@ -34,13 +34,21 @@ export async function loadMetaAction(
   const { metadata, error } = await getMetadata(validatedData.url)
   if (!metadata) return { data: null, error }
 
+  // check at least one field existence
+  const { url, title, description, favicon } = metadata
+  if (!url && !title && !description && !favicon)
+    return {
+      data: null,
+      error: `Failed to fetch URL: ${validatedData.url}`,
+    }
+
   // return success
   return {
     data: {
-      title: metadata.title ?? '',
-      url: metadata.url ?? '',
-      description: metadata.description ?? '',
-      logoUrl: metadata.favicon ?? '',
+      title,
+      url,
+      description,
+      logoUrl: favicon,
     },
     error: null,
   }

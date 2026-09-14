@@ -7,9 +7,9 @@ import { Tag } from '@/shared/lib/prisma/generated/client'
 
 import { createMarkAction } from '../api/createMarkAction'
 import { useMetaContext } from '../model/MetaContext'
-import { CreateMark, CreateMarkFormState } from '../model/types'
+import { CreateMarkFormState } from '../model/types'
 
-export const initialState = {
+export const initialState: CreateMarkFormState = {
   isSuccess: false,
   errors: null,
   message: null,
@@ -27,10 +27,10 @@ export function useCreateMarkForm({
     },
   })
 
-  const [state, formAction, isPending] = useActionState<
-    CreateMarkFormState,
-    CreateMark
-  >(createMarkAction.bind(null, defaultTagId ?? null), initialState)
+  const [state, formAction, isPending] = useActionState(
+    createMarkAction.bind(null, defaultTagId ?? null),
+    initialState,
+  )
 
   const onSubmit = handleSubmit((data) => {
     startTransition(() => formAction(data))

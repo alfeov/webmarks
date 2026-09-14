@@ -15,21 +15,16 @@ type MetaContextValue = {
 
 const MetaContext = createContext<null | MetaContextValue>(null)
 
-export const initialState = {
+export const initialState: LoadMetaFormState = {
   error: null,
-  data: {
-    title: '',
-    url: '',
-    description: '',
-    logoUrl: '',
-  },
+  data: null,
 }
 
 export function MetaProvider({ children }: { children: React.ReactNode }) {
-  const [state, formAction, isPending] = useActionState<
-    LoadMetaFormState,
-    FormData
-  >(loadMetaAction, initialState)
+  const [state, formAction, isPending] = useActionState(
+    loadMetaAction,
+    initialState,
+  )
 
   return (
     <MetaContext value={{ state, formAction, isPending }}>

@@ -21,5 +21,5 @@ export interface CreateMarkFormState {
 
 export interface LoadMetaFormState {
   error: string | null
-  data: Exclude<CreateMark, 'defaultTagId'> | null
+  data: Omit<CreateMark, 'defaultTagId'> | null
 }

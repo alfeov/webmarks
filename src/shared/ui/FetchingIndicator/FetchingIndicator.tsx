@@ -25,7 +25,7 @@ export function FetchingIndicator({
       {condition && (
         <StickyPortalWrapper>
           <AbsoluteWrapper
-            className={`left-[50%] translate-x-[-50%] ${className}`}
+            className={`left-[50%] z-50 translate-x-[-50%] ${className}`}
           >
             <StickyWrapper className='top-[80px]'>
               <div

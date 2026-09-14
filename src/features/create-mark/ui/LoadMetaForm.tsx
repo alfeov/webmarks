@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from 'react'
 
+import { useFetchingIndicatorManager } from '@/shared/lib/hooks/useFetchingIndicatorManager'
 import { paste } from '@/shared/lib/utils/paste'
 import { showToast } from '@/shared/lib/utils/showToast'
 import { Field, FieldError, FieldLabel } from '@/shared/ui/field'
@@ -25,6 +26,8 @@ export function LoadMetaForm() {
     formAction,
     isPending,
   } = useMetaContext()
+
+  useFetchingIndicatorManager(isPending)
 
   useEffect(() => {
     if (error) {

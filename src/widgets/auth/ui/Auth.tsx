@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { Activity, useState } from 'react'
 
 import { SigninForm } from '@/features/signin/ui/SigninForm'
 import { SignupForm } from '@/features/signup/ui/SignupForm'
@@ -18,8 +18,9 @@ export function Auth({ initialMode }: { initialMode: Mode }) {
         {mode === 'signin' ? 'Login to your account' : 'Create new account'}
       </FieldLegend>
       <FieldDescription>
-        Please fill in the fields below to
-        {mode === 'signin' ? ' login to your account' : ' create new account'}
+        {mode === 'signin'
+          ? 'Please fill in the fields below to login to your account'
+          : 'Please fill in the fields below to create new account'}
         <br />
         <span className='flex justify-between'>
           <span>
@@ -40,7 +41,12 @@ export function Auth({ initialMode }: { initialMode: Mode }) {
           </Button>
         </span>
       </FieldDescription>
-      {mode === 'signin' ? <SigninForm /> : <SignupForm />}
+      <Activity mode={mode === 'signin' ? 'visible' : 'hidden'}>
+        <SigninForm />
+      </Activity>
+      <Activity mode={mode === 'signup' ? 'visible' : 'hidden'}>
+        <SignupForm />
+      </Activity>
     </FieldSet>
   )
 }

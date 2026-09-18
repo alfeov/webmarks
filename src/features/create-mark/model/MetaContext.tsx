@@ -1,36 +1,27 @@
 'use client'
 
-import { createContext, useActionState } from 'react'
+import {
+  createContext,
+  type Dispatch,
+  type SetStateAction,
+  useState,
+} from 'react'
 
-import { loadMetaAction } from '@/features/create-mark/api/loadMetaAction'
 import { createUseContextHook } from '@/shared/lib/utils/createUseContextHook'
 
-import { LoadMetaFormState } from './types'
+import type { MetaData } from './types'
 
 type MetaContextValue = {
-  state: LoadMetaFormState
-  formAction: (payload: FormData) => void
-  isPending: boolean
+  metadata: MetaData
+  setMetadata: Dispatch<SetStateAction<MetaData>>
 }
 
 const MetaContext = createContext<null | MetaContextValue>(null)
 
-export const initialState: LoadMetaFormState = {
-  error: null,
-  data: null,
-}
-
 export function MetaProvider({ children }: { children: React.ReactNode }) {
-  const [state, formAction, isPending] = useActionState(
-    loadMetaAction,
-    initialState,
-  )
+  const [metadata, setMetadata] = useState<MetaData>(null)
 
-  return (
-    <MetaContext value={{ state, formAction, isPending }}>
-      {children}
-    </MetaContext>
-  )
+  return <MetaContext value={{ metadata, setMetadata }}>{children}</MetaContext>
 }
 
 export const useMetaContext = createUseContextHook(MetaContext)

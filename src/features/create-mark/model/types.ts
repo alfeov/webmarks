@@ -1,10 +1,7 @@
-import { Tag } from '@/shared/lib/prisma/generated/client'
-import { WebMarkCreateInput } from '@/shared/lib/prisma/generated/models'
+import { WebMark } from '@/shared/lib/prisma/generated/client'
 
 export type CreateMark = Partial<
-  Pick<WebMarkCreateInput, 'title' | 'description' | 'url' | 'logoUrl'> & {
-    defaultTagId: Tag['id']
-  }
+  Pick<WebMark, 'title' | 'description' | 'url' | 'logoUrl'>
 >
 
 export interface CreateMarkFormState {
@@ -14,12 +11,13 @@ export interface CreateMarkFormState {
     url?: string[]
     description?: string[]
     logoUrl?: string[]
-    defaultTagId?: string[]
   } | null
   message: string | null
 }
 
+export type MetaData = CreateMark | null
+
 export interface LoadMetaFormState {
   error: string | null
-  data: Omit<CreateMark, 'defaultTagId'> | null
+  metadata: MetaData
 }

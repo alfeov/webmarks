@@ -15,7 +15,7 @@ export async function loadMetaAction(
   const session = await verifySession()
   if (!session)
     return {
-      data: null,
+      metadata: null,
       error: 'To get Metadata by url you must login to account',
     }
 
@@ -26,25 +26,25 @@ export async function loadMetaAction(
   )
   if (!validatedData)
     return {
-      data: null,
+      metadata: null,
       error: validationErrors.url?.[0] ?? 'Unknown error',
     }
 
   // get metadata with api
   const { metadata, error } = await getMetadata(validatedData.url)
-  if (!metadata) return { data: null, error }
+  if (!metadata) return { metadata: null, error }
 
   // check at least one field existence
   const { url, title, description, favicon } = metadata
   if (!url && !title && !description && !favicon)
     return {
-      data: null,
+      metadata: null,
       error: `Failed to fetch URL: ${validatedData.url}`,
     }
 
   // return success
   return {
-    data: {
+    metadata: {
       title,
       url,
       description,

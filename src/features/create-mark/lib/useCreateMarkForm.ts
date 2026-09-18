@@ -20,10 +20,13 @@ export function useCreateMarkForm({
 }: {
   defaultTagId?: Tag['id']
 }) {
-  const meta = useMetaContext()
+  const { metadata } = useMetaContext()
   const { register, handleSubmit } = useForm({
     values: {
-      ...meta.state.data,
+      ...metadata,
+    },
+    resetOptions: {
+      keepDirtyValues: true,
     },
   })
 

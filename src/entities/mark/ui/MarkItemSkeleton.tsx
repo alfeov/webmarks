@@ -15,11 +15,11 @@ export function MarkItemSkeleton() {
         </div>
       </CardHeader>
       <CardContent>
-        <Skeleton className='aspect-video w-full' />
+        <Skeleton className='h-[40px] w-full' />
       </CardContent>
       <CardFooter>
         <div className='flex flex-wrap gap-[10px]'>
-          {Array.from({ length: 5 }).map((_, i) => (
+          {Array.from({ length: 3 }).map((_, i) => (
             <Skeleton key={i} className='h-5 w-20 rounded-3xl' />
           ))}
         </div>

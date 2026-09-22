@@ -3,6 +3,8 @@ import localFont from 'next/font/local'
 import Link from 'next/link'
 import { Suspense } from 'react'
 
+import { themeKey } from '@/features/toggle-theme/lib/useToggleTheme'
+import { ThemeToggleButton } from '@/features/toggle-theme/ui/ThemeToggleButton'
 import { cn } from '@/shared/lib/utils'
 import { ScrollArea } from '@/shared/ui/scroll-area'
 import { SpinnerEmpty } from '@/shared/ui/SpinerEmpty'
@@ -85,6 +87,7 @@ export default function RootLayout({ children }: LayoutProps<'/'>) {
       lang='en'
       className={cn('h-full', 'antialiased', fontExcalidraw.variable)}
       data-scroll-behavior='smooth'
+      suppressHydrationWarning
     >
       <head>
         <link rel='icon' href='/favicon.ico' sizes='32x32' />
@@ -110,6 +113,26 @@ export default function RootLayout({ children }: LayoutProps<'/'>) {
         <meta property='og:image:type' content='<generated>' />
         <meta property='og:image:width' content='<generated>' />
         <meta property='og:image:height' content='<generated>' />
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+							(function () {
+								try {
+									const storedTheme = JSON.parse(localStorage.getItem('webmarks/theme')) ?? 'system'
+									const isPreferredDarkTheme = window.matchMedia(
+										'(prefers-color-scheme: dark)',
+									).matches
+
+									const isCurrentThemeDark =
+										storedTheme === 'system' ? isPreferredDarkTheme : storedTheme === 'dark'
+
+									const root = window.document.documentElement
+									root.classList.toggle('dark', isCurrentThemeDark)
+								} catch (e) {}
+							})()
+						`,
+          }}
+        />
       </head>
       <body className='flex min-h-full flex-col'>
         <Suspense fallback={<SpinnerEmpty>App Initialization</SpinnerEmpty>}>
@@ -119,9 +142,12 @@ export default function RootLayout({ children }: LayoutProps<'/'>) {
                 <Link href='/'>
                   <h1 className='text-[30px] font-bold'>WebMarks</h1>
                 </Link>
-                <Suspense fallback={<ProfileSkeleton />}>
-                  <Profile />
-                </Suspense>
+                <div className='flex items-center gap-[20px]'>
+                  <ThemeToggleButton />
+                  <Suspense fallback={<ProfileSkeleton />}>
+                    <Profile />
+                  </Suspense>
+                </div>
               </div>
             </header>
 

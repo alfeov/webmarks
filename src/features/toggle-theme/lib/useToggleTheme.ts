@@ -1,4 +1,6 @@
-import { useEffect, useState } from 'react'
+'use client'
+
+import { useState } from 'react'
 
 import {
   getLocalStorageData,
@@ -7,11 +9,8 @@ import {
 
 import { isPreferredDarkTheme } from './isPreferredDarkTheme'
 
-const themeKey = 'webmarks/theme'
-
-function initialState(): Theme {
-  return getLocalStorageData<Theme>(themeKey) ?? 'system'
-}
+// ! if changing it, then change in script also
+export const themeKey = 'webmarks/theme'
 
 type Theme = 'system' | 'dark' | 'light'
 
@@ -22,21 +21,22 @@ const NEXT_THEME: Record<Theme, Theme> = {
 } as const
 
 export function useToggleTheme() {
-  const [theme, setTheme] = useState<Theme>(initialState)
-
-  useEffect(() => {
-    const isCurrentThemeDark =
-      theme === 'system' ? isPreferredDarkTheme() : theme === 'dark'
-
-    const root = window.document.documentElement
-    root.classList.toggle('dark', isCurrentThemeDark)
-  }, [theme])
+  const [theme, setTheme] = useState<Theme>(() => {
+    if (typeof window === 'undefined') return 'system'
+    return getLocalStorageData<Theme>(themeKey) ?? 'system'
+  })
 
   function toggleTheme() {
     const nextTheme = NEXT_THEME[theme]
     setTheme(nextTheme)
     setLocalStorageData(themeKey, nextTheme)
+
+    const isNextThemeDark =
+      nextTheme === 'system' ? isPreferredDarkTheme() : nextTheme === 'dark'
+
+    const root = window.document.documentElement
+    root.classList.toggle('dark', isNextThemeDark)
   }
 
-  return toggleTheme
+  return { theme, toggleTheme }
 }

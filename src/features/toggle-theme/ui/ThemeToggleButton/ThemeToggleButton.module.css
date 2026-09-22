@@ -1,0 +1,30 @@
+.sun {
+  transform: scale(1) rotate(0);
+
+  width: 12px;
+  height: 12px;
+
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 300ms;
+  transition-property: all;
+}
+
+:global(.dark) .sun {
+  transform: scale(0) rotate(-90deg);
+}
+
+.moon {
+  position: absolute;
+  transform: scale(0) rotate(90deg);
+
+  width: 12px;
+  height: 12px;
+
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 300ms;
+  transition-property: all;
+}
+
+:global(.dark) .moon {
+  transform: scale(1) rotate(0);
+}

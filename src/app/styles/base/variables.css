@@ -3,6 +3,9 @@
   --content-height: calc(100dvh - 1px - var(--header-height));
   --duration-s: 100ms;
   --duration-m: 200ms;
+  --duration-l: 400ms;
+  --duration-xl: 600ms;
   --delay-s: 100ms;
   --delay-m: 200ms;
+  --delay-l: 400ms;
 }

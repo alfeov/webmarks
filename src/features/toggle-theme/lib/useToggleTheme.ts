@@ -1,13 +1,13 @@
 'use client'
 
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 
 import {
   getLocalStorageData,
   setLocalStorageData,
 } from '@/shared/lib/utils/localStorage'
 
-import { isPreferredDarkTheme } from './isPreferredDarkTheme'
+import { isThemeDark } from './isThemeDark'
 
 // ! if changing it, then change in script also
 export const themeKey = 'webmarks/theme'
@@ -26,16 +26,37 @@ export function useToggleTheme() {
     return getLocalStorageData<Theme>(themeKey) ?? 'system'
   })
 
+  useEffect(() => {
+    if (theme !== 'system') return
+    const mql = window.matchMedia('(prefers-color-scheme: dark)')
+
+    const onChange = () => {
+      document.documentElement.classList.toggle('dark', mql.matches)
+    }
+
+    mql.addEventListener('change', onChange)
+  }, [theme])
+
   function toggleTheme() {
     const nextTheme = NEXT_THEME[theme]
-    setTheme(nextTheme)
     setLocalStorageData(themeKey, nextTheme)
+    setTheme(nextTheme)
 
-    const isNextThemeDark =
-      nextTheme === 'system' ? isPreferredDarkTheme() : nextTheme === 'dark'
+    const isCurrentThemeDark = isThemeDark(theme)
+    const isNextThemeDark = isThemeDark(nextTheme)
 
-    const root = window.document.documentElement
-    root.classList.toggle('dark', isNextThemeDark)
+    const shouldUpdateTheme = isCurrentThemeDark !== isNextThemeDark
+    if (shouldUpdateTheme) {
+      // Fallback
+      if (!document.startViewTransition) {
+        document.documentElement.classList.toggle('dark', isNextThemeDark)
+        return
+      }
+
+      document.startViewTransition(() => {
+        document.documentElement.classList.toggle('dark', isNextThemeDark)
+      })
+    }
   }
 
   return { theme, toggleTheme }

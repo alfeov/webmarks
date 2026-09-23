@@ -3,7 +3,6 @@ import localFont from 'next/font/local'
 import Link from 'next/link'
 import { Suspense } from 'react'
 
-import { themeKey } from '@/features/toggle-theme/lib/useToggleTheme'
 import { ThemeToggleButton } from '@/features/toggle-theme/ui/ThemeToggleButton'
 import { cn } from '@/shared/lib/utils'
 import { ScrollArea } from '@/shared/ui/scroll-area'

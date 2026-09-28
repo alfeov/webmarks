@@ -1,4 +1,4 @@
-import { Context, use } from 'react'
+import { type Context, use } from 'react'
 
 export function createUseContextHook<T>(Context: Context<T | null>) {
   return function useCustomContext() {

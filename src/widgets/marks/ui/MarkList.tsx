@@ -29,27 +29,23 @@ export async function MarkList({ params, searchParams }: MarkListProps) {
     userId: session?.userId,
   })
 
-  return (
-    <div className='h-full'>
-      {Boolean(marks.length) ? (
-        <MarkGrid>
-          {marks.map((mark) => (
-            <ViewTransition
-              name={mark.id}
-              key={`${mark.id}-${mark.updatedAt}`}
-              update='auto'
-              share='auto'
-              default='none'
-            >
-              <MarkItem {...mark}>
-                <MarkDropdownMenu {...mark} />
-              </MarkItem>
-            </ViewTransition>
-          ))}
-        </MarkGrid>
-      ) : (
-        <ErrorEmpty>{message}</ErrorEmpty>
-      )}
-    </div>
+  return Boolean(marks.length) ? (
+    <MarkGrid>
+      {marks.map((mark) => (
+        <ViewTransition
+          name={mark.id}
+          key={`${mark.id}-${mark.updatedAt}`}
+          update='auto'
+          share='auto'
+          default='none'
+        >
+          <MarkItem {...mark}>
+            <MarkDropdownMenu {...mark} />
+          </MarkItem>
+        </ViewTransition>
+      ))}
+    </MarkGrid>
+  ) : (
+    <ErrorEmpty>{message}</ErrorEmpty>
   )
 }

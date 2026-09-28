@@ -8,6 +8,7 @@ import { WebMark } from '@/shared/lib/prisma/generated/client'
 import { Button } from '@/shared/ui/button'
 import { FieldDescription, FieldLegend, FieldSet } from '@/shared/ui/field'
 import { InputField } from '@/shared/ui/InputField'
+import { TextareaField } from '@/shared/ui/TextareaField'
 
 import { editMarkAction } from '../api/editMarkAction'
 import { EDIT_MARK_FORMDATA } from '../lib/constants'
@@ -53,7 +54,7 @@ export function EditMarkForm({ ...mark }: EditMarkFormProps) {
           placeholder='WebMark'
           req
         />
-        <InputField
+        <TextareaField
           name={EDIT_MARK_FORMDATA.DESCRIPTION}
           errors={state.errors?.description}
           defaultValue={mark.description}

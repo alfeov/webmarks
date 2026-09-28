@@ -7,6 +7,7 @@ import { Badge } from '@/shared/ui/badge'
 import { Button } from '@/shared/ui/button'
 import { FieldLegend, FieldSet } from '@/shared/ui/field'
 import { InputField } from '@/shared/ui/InputField'
+import { TextareaField } from '@/shared/ui/TextareaField'
 
 import { CREATE_MARK_FORMDATA } from '../lib/constants'
 import { useCreateMarkForm } from '../lib/useCreateMarkForm'
@@ -45,7 +46,7 @@ export function CreateMarkForm({
             {...register(CREATE_MARK_FORMDATA.TITLE)}
             req
           />
-          <InputField
+          <TextareaField
             label='Description'
             placeholder='Some cool description to your link'
             errors={state.errors?.description}

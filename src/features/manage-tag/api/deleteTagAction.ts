@@ -1,14 +1,19 @@
 'use server'
 
 import { updateTag } from 'next/cache'
-import { redirect } from 'next/navigation'
+import type { Locale } from 'next-intl'
 
+import { redirect } from '@/shared/i18n/navigation'
 import { Tag } from '@/shared/lib/prisma/generated/client'
 import { verifySession } from '@/shared/lib/session'
 
 import { deleteUserTag } from './deleteUserTag'
 
-export async function deleteTagAction(id: Tag['id'], isOnTagPage: boolean) {
+export async function deleteTagAction(
+  id: Tag['id'],
+  isOnTagPage: boolean,
+  locale: Locale,
+) {
   // check auth
   const session = await verifySession()
   if (!session)
@@ -33,7 +38,7 @@ export async function deleteTagAction(id: Tag['id'], isOnTagPage: boolean) {
   updateTag(`marks-${session.userId}`)
 
   // redirection
-  if (isOnTagPage) redirect('/')
+  if (isOnTagPage) redirect({ href: '/', locale })
 
   // return success response
   return {

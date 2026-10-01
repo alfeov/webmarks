@@ -9,6 +9,6 @@ export const metadata: Metadata = {
 export async function MarksByTagPage({
   params,
   searchParams,
-}: PageProps<'/[tagId]'>) {
+}: PageProps<'/[locale]/[tagId]'>) {
   return <Marks params={params} searchParams={searchParams} />
 }

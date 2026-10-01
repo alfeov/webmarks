@@ -1,3 +1,5 @@
+import { NextIntlClientProvider } from 'next-intl'
+
 import { getAllUserTags } from '@/entities/tag/api/getAllUserTags'
 import { TagsProvider } from '@/entities/tag/model/TagsContext'
 import { DialogProvider } from '@/shared/lib/contexts/DialogContext'
@@ -12,20 +14,22 @@ export async function Providers({ children }: { children: React.ReactNode }) {
   const { tags } = await getAllUserTags({ userId: session?.userId })
 
   return (
-    <TooltipProvider>
-      <FetchingIndicatorProvider>
-        <TagsProvider tags={tags}>
-          <DialogProvider
-            initialOpen={!session}
-            initialDialogContent={
-              !session ? <Auth initialMode='signin' /> : null
-            }
-          >
-            {children}
-            <Toaster />
-          </DialogProvider>
-        </TagsProvider>
-      </FetchingIndicatorProvider>
-    </TooltipProvider>
+    <NextIntlClientProvider>
+      <TooltipProvider>
+        <FetchingIndicatorProvider>
+          <TagsProvider tags={tags}>
+            <DialogProvider
+              initialOpen={!session}
+              initialDialogContent={
+                !session ? <Auth initialMode='signin' /> : null
+              }
+            >
+              {children}
+              <Toaster />
+            </DialogProvider>
+          </TagsProvider>
+        </FetchingIndicatorProvider>
+      </TooltipProvider>
+    </NextIntlClientProvider>
   )
 }

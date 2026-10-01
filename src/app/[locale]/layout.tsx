@@ -1,25 +1,31 @@
 import type { Metadata } from 'next'
 import localFont from 'next/font/local'
 import Link from 'next/link'
+import { getLocale, getTranslations } from 'next-intl/server'
 import { Suspense } from 'react'
 
 import { ThemeToggleButton } from '@/features/toggle-theme/ui/ThemeToggleButton'
+import { routing } from '@/shared/i18n/routing'
 import { cn } from '@/shared/lib/utils'
 import { ScrollArea } from '@/shared/ui/scroll-area'
-import { SpinnerEmpty } from '@/shared/ui/SpinerEmpty'
+import { SpinnerEmpty } from '@/shared/ui/SpinnerEmpty'
 import { Profile } from '@/widgets/profile/ui/Profile'
 import { ProfileSkeleton } from '@/widgets/profile/ui/ProfileSkeleton'
 import { AppSidebar } from '@/widgets/sidebar/ui/AppSidebar'
 
 import { Providers } from './_providers/Providers'
 
-import './styles/index.css'
+import '../styles/index.css'
 
 const fontExcalidraw = localFont({
-  src: '../shared/assets/fonts/Excalifont-Regular.woff2',
+  src: '../Excalifont-Regular.woff2',
   display: 'swap',
   variable: '--font-excalifont',
 })
+
+export function generateStaticParams() {
+  return routing.locales.map((locale) => ({ locale }))
+}
 
 export const metadata: Metadata = {
   metadataBase: new URL(
@@ -80,10 +86,15 @@ export const metadata: Metadata = {
   },
 }
 
-export default function RootLayout({ children }: LayoutProps<'/'>) {
+export default async function RootLayout({
+  children,
+}: LayoutProps<'/[locale]'>) {
+  const locale = await getLocale()
+  const t = await getTranslations('layout')
+
   return (
     <html
-      lang='en'
+      lang={locale}
       className={cn('h-full', 'antialiased', fontExcalidraw.variable)}
       data-scroll-behavior='smooth'
       suppressHydrationWarning
@@ -134,7 +145,7 @@ export default function RootLayout({ children }: LayoutProps<'/'>) {
         />
       </head>
       <body className='flex min-h-full flex-col'>
-        <Suspense fallback={<SpinnerEmpty>App Initialization</SpinnerEmpty>}>
+        <Suspense fallback={<SpinnerEmpty>{t('loading')}</SpinnerEmpty>}>
           <Providers>
             <header className='border-b'>
               <div className='flex h-(--header-height) items-center justify-between px-[30px] md:px-[40px]'>

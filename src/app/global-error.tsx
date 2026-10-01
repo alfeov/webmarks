@@ -10,7 +10,7 @@ import { ErrorEmpty } from '@/shared/ui/ErrorEmpty'
 import './styles/index.css'
 
 const fontExcalidraw = localFont({
-  src: '../shared/assets/fonts/Excalifont-Regular.woff2',
+  src: './Excalifont-Regular.woff2',
   display: 'swap',
   variable: '--font-excalifont',
 })

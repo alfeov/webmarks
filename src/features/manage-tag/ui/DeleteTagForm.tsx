@@ -1,6 +1,7 @@
 'use client'
 
 import { useParams } from 'next/navigation'
+import { useLocale } from 'next-intl'
 import { useActionState } from 'react'
 
 import { useCloseDialogOn } from '@/shared/lib/hooks/useCloseDialogOn'
@@ -19,9 +20,10 @@ const initialState: DeleteTagFormState = {
 
 export function DeleteTagForm({ tagId }: { tagId: Tag['id'] }) {
   const params = useParams<{ tagId?: string }>()
+  const locale = useLocale()
 
   const [state, formAction, isPending] = useActionState(
-    deleteTagAction.bind(null, tagId, params.tagId === tagId),
+    deleteTagAction.bind(null, tagId, params.tagId === tagId, locale),
     initialState,
   )
   useNotificationManager(state.message, state.isSuccess, !isPending)

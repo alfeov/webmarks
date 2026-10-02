@@ -2,10 +2,9 @@ import 'server-only'
 
 import { cacheLife, cacheTag } from 'next/cache'
 
+import { MESSAGE_CODES } from '@/shared/api/types'
 import { prisma } from '@/shared/lib/prisma'
 import { Tag, WebMark } from '@/shared/lib/prisma/generated/client'
-
-import { WebMarkWithTags } from '../model/types'
 
 interface GetUserMarksParams {
   query?: string
@@ -13,22 +12,17 @@ interface GetUserMarksParams {
   tagId?: Tag['id']
 }
 
-type ErrorType = 'UNAUTHORIZED' | 'NOT_FOUND' | null
-
 export async function getUserMarks({
   query,
   tagId,
   userId,
-}: GetUserMarksParams): Promise<{
-  marks: WebMarkWithTags[]
-  error: ErrorType
-}> {
+}: GetUserMarksParams) {
   'use cache'
 
   cacheTag(`marks-${userId}`)
   cacheLife('days')
 
-  if (!userId) return { marks: [], error: 'UNAUTHORIZED' }
+  if (!userId) return { marks: [], error: MESSAGE_CODES.UNAUTHORIZED }
 
   const marks = await prisma.webMark.findMany({
     where: {
@@ -61,7 +55,11 @@ export async function getUserMarks({
     },
   })
 
-  if (marks.length === 0) return { marks: [], error: 'NOT_FOUND' }
+  if (marks.length === 0)
+    return {
+      marks: [],
+      error: MESSAGE_CODES.MARKS_NOT_FOUND,
+    }
 
-  return { marks, error: null }
+  return { marks }
 }

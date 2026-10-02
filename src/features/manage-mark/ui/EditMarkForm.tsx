@@ -1,5 +1,6 @@
 'use client'
 
+import { useTranslations } from 'next-intl'
 import { useActionState } from 'react'
 
 import { useCloseDialogOn } from '@/shared/lib/hooks/useCloseDialogOn'
@@ -18,8 +19,6 @@ type EditMarkFormProps = WebMark
 
 const initialState: EditMarkFormState = {
   isSuccess: false,
-  errors: null,
-  message: null,
 }
 
 export function EditMarkForm({ ...mark }: EditMarkFormProps) {
@@ -30,19 +29,20 @@ export function EditMarkForm({ ...mark }: EditMarkFormProps) {
   useNotificationManager(state.message, state.isSuccess, !isPending)
   useCloseDialogOn(state.isSuccess)
 
+  const tMarkForm = useTranslations('markForm')
+  const tEditMarkForm = useTranslations('editMarkForm')
+
   return (
     <form action={formAction}>
       <FieldSet disabled={isPending}>
-        <FieldLegend>Edit WebMark</FieldLegend>
-        <FieldDescription>
-          Please fill in the fields below to edit WebMark
-        </FieldDescription>
+        <FieldLegend>{tEditMarkForm('formTitle')}</FieldLegend>
+        <FieldDescription>{tEditMarkForm('formDescription')}</FieldDescription>
         <InputField
           autoFocus
           name={EDIT_MARK_FORMDATA.URL}
           errors={state.errors?.url}
           defaultValue={mark.url}
-          label='URL'
+          label={tMarkForm('fields.url.label')}
           placeholder='https://webmarks.com'
           req
         />
@@ -50,7 +50,7 @@ export function EditMarkForm({ ...mark }: EditMarkFormProps) {
           name={EDIT_MARK_FORMDATA.TITLE}
           errors={state.errors?.title}
           defaultValue={mark.title}
-          label='Title'
+          label={tMarkForm('fields.title.label')}
           placeholder='WebMark'
           req
         />
@@ -58,18 +58,18 @@ export function EditMarkForm({ ...mark }: EditMarkFormProps) {
           name={EDIT_MARK_FORMDATA.DESCRIPTION}
           errors={state.errors?.description}
           defaultValue={mark.description}
-          label='Description'
-          placeholder='Some cool description to your link'
+          label={tMarkForm('fields.description.label')}
+          placeholder={tMarkForm('fields.description.placeholder')}
           req
         />
         <InputField
           name={EDIT_MARK_FORMDATA.LOGO_URL}
           errors={state.errors?.logoUrl}
           defaultValue={mark.logoUrl ?? ''}
-          label='Logo URL'
+          label={tMarkForm('fields.logoUrl.label')}
           placeholder='https://logo.com'
         />
-        <Button type='submit'>Edit WebMark</Button>
+        <Button type='submit'>{tEditMarkForm('submit')}</Button>
       </FieldSet>
     </form>
   )

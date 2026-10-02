@@ -2,8 +2,8 @@
 
 import { updateTag } from 'next/cache'
 
+import { MESSAGE_CODES } from '@/shared/api/types'
 import { verifySession } from '@/shared/lib/session'
-import { createResult } from '@/shared/lib/utils/createResult'
 import { validateFormData } from '@/shared/lib/utils/validateFormData'
 
 import { CreateTagFormSchema } from '../lib/CreateTagFormSchema'
@@ -17,9 +17,10 @@ export async function createTagAction(
   // check auth
   const session = await verifySession()
   if (!session)
-    return createResult({
-      message: 'To create tags you must be auth',
-    })
+    return {
+      isSuccess: false,
+      message: MESSAGE_CODES.UNAUTHORIZED,
+    }
 
   // zod validation
   const { validatedData, validationErrors } = validateFormData(
@@ -27,27 +28,29 @@ export async function createTagAction(
     CreateTagFormSchema,
   )
   if (!validatedData)
-    return createResult({
-      message: 'Please fix highlighted fields',
+    return {
+      isSuccess: false,
+      message: MESSAGE_CODES.VALIDATION_ERROR,
       errors: validationErrors,
-    })
+    }
 
   // creating tag in DB
-  const { tag, error } = await createTag({
+  const { data, error } = await createTag({
     ...validatedData,
     userId: session.userId,
   })
-  if (!tag)
-    return createResult({
+  if (!data)
+    return {
+      isSuccess: false,
       message: error,
-    })
+    }
 
   // revalidation
   updateTag(`tags-${session.userId}`)
 
   // return success response
-  return createResult({
+  return {
     isSuccess: true,
-    message: 'Tag has been successfully created',
-  })
+    message: MESSAGE_CODES.TAG_CREATE_SUCCESS,
+  }
 }

@@ -21,8 +21,8 @@ export function CreateMark() {
 
   return (
     <FieldSet>
-      <FieldLegend>{t('title')}</FieldLegend>
-      <FieldDescription>{t('description')}</FieldDescription>
+      <FieldLegend>{t('formTitle')}</FieldLegend>
+      <FieldDescription>{t('formDescription')}</FieldDescription>
       <MetaProvider>
         <LoadMetaForm />
         <CreateMarkForm

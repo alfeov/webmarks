@@ -1,25 +1,14 @@
-export type ChangeMarkTagsFormState = {
-  isSuccess: boolean
-  message: string | null
-}
+import { ActionFormState, ActionFormStateWithErrors } from '@/shared/api/types'
 
-export type PinMarkFormState = {
-  isSuccess: boolean
-  message: string | null
-}
+export type ChangeMarkTagsFormState = ActionFormState
 
-export type DeleteMarkFormState = {
-  isSuccess: boolean
-  message: string | null
-}
+export type PinMarkFormState = ActionFormState
 
-export interface EditMarkFormState {
-  isSuccess: boolean
-  errors: {
-    title?: string[]
-    url?: string[]
-    description?: string[]
-    logoUrl?: string[]
-  } | null
-  message: string | null
-}
+export type DeleteMarkFormState = ActionFormState
+
+export type EditMarkFormState = ActionFormStateWithErrors<{
+  title?: string[]
+  url?: string[]
+  description?: string[]
+  logoUrl?: string[]
+}>

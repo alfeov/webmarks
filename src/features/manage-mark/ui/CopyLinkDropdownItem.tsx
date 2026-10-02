@@ -1,5 +1,7 @@
 'use client'
 
+import { useTranslations } from 'next-intl'
+
 import { copy } from '@/shared/lib/utils/copy'
 import { showToast } from '@/shared/lib/utils/showToast'
 import { DropdownMenuItem } from '@/shared/ui/dropdown-menu'
@@ -10,5 +12,9 @@ export function CopyLinkDropdownItem({ url }: { url: string }) {
     showToast(message, isSuccess)
   }
 
-  return <DropdownMenuItem onClick={handleClick}>Copy Link</DropdownMenuItem>
+  const t = useTranslations('markDropdown')
+
+  return (
+    <DropdownMenuItem onClick={handleClick}>{t('items.copy')}</DropdownMenuItem>
+  )
 }

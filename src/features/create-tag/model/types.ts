@@ -1,7 +1,5 @@
-export interface CreateTagFormState {
-  isSuccess: boolean
-  errors: {
-    title?: string[]
-  } | null
-  message: string | null
-}
+import { ActionFormStateWithErrors } from '@/shared/api/types'
+
+export type CreateTagFormState = ActionFormStateWithErrors<{
+  title?: string[]
+}>

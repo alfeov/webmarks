@@ -2,6 +2,7 @@
 
 import { updateTag } from 'next/cache'
 
+import { MESSAGE_CODES } from '@/shared/api/types'
 import { Tag } from '@/shared/lib/prisma/generated/client'
 import { verifySession } from '@/shared/lib/session'
 import { validateFormData } from '@/shared/lib/utils/validateFormData'
@@ -14,13 +15,13 @@ export async function createMarkAction(
   defaultTagId: Tag['id'] | null,
   prevState: CreateMarkFormState,
   data: CreateMark,
-): Promise<CreateMarkFormState> {
+) {
   // check auth
   const session = await verifySession()
   if (!session)
     return {
       isSuccess: false,
-      message: 'UNAUTHORIZED',
+      message: MESSAGE_CODES.UNAUTHORIZED,
     }
 
   // zod validation
@@ -32,7 +33,7 @@ export async function createMarkAction(
     return {
       isSuccess: false,
       errors: validationErrors,
-      message: 'VALIDATION_ERROR',
+      message: MESSAGE_CODES.VALIDATION_ERROR,
     }
 
   // webmark creation
@@ -46,7 +47,7 @@ export async function createMarkAction(
   if (!result.data)
     return {
       isSuccess: false,
-      message: result.errorCode,
+      message: result.error,
     }
 
   // invalidation
@@ -55,6 +56,6 @@ export async function createMarkAction(
   // return success response
   return {
     isSuccess: true,
-    message: 'MARK_CREATE_SUCCESS',
+    message: MESSAGE_CODES.MARK_CREATE_SUCCESS,
   }
 }

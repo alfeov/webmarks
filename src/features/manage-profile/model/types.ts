@@ -1,5 +1,5 @@
-import { ActionFormState } from '@/shared/api/types'
+import { ActionFormStateWithErrors } from '@/shared/api/types'
 
-export type EditAvatarFormState = ActionFormState<{
+export type EditAvatarFormState = ActionFormStateWithErrors<{
   avatarUrl?: string[]
 } | null>

@@ -6,6 +6,7 @@ import { getUserMarks } from '@/entities/mark/api/getUserMarks'
 import { MarkItem } from '@/entities/mark/ui/MarkItem'
 import { getUserTag } from '@/entities/tag/api/getUserTag'
 import { MarkDropdownMenu } from '@/features/manage-mark/ui/MarkDropdownMenu'
+import { MESSAGE_CODES } from '@/shared/api/types'
 import { Tag } from '@/shared/lib/prisma/generated/client'
 import { verifySession } from '@/shared/lib/session'
 import { ErrorEmpty } from '@/shared/ui/ErrorEmpty'
@@ -24,6 +25,7 @@ interface MarkListProps {
 export async function MarkList({ params, searchParams }: MarkListProps) {
   const tagId = (await params)?.tagId
   const query = (await searchParams)?.query
+  const resultQuery = Array.isArray(query) ? query[0] : query
 
   const session = await verifySession()
   if (tagId) {
@@ -32,7 +34,7 @@ export async function MarkList({ params, searchParams }: MarkListProps) {
   }
   const { marks, error } = await getUserMarks({
     tagId,
-    query: Array.isArray(query) ? query[0] : query,
+    query: resultQuery,
     userId: session?.userId,
   })
 
@@ -57,16 +59,20 @@ export async function MarkList({ params, searchParams }: MarkListProps) {
           ))}
         </MarkGrid>
       )}
-      {error === 'UNAUTHORIZED' && (
+      {error === MESSAGE_CODES.UNAUTHORIZED && (
         <ErrorEmpty
-          title={t('errorTitle')}
+          title={t('unauthorizedTitle')}
           description={t('unauthorizedDescription')}
         />
       )}
-      {error === 'NOT_FOUND' && (
+      {error === MESSAGE_CODES.MARKS_NOT_FOUND && (
         <ErrorEmpty
-          title={t('errorTitle')}
-          description={t('notFoundDescription')}
+          title={t('notFoundTitle')}
+          description={
+            resultQuery
+              ? t('notFoundByQueryDescription')
+              : t('notFoundDescription')
+          }
         />
       )}
     </>

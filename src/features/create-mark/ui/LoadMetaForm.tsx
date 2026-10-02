@@ -45,7 +45,7 @@ export function LoadMetaForm() {
   const handlePasteClick = async () => {
     const data = await paste()
     if (!data.clipText) {
-      showToast(data.error ?? 'Unknown error')
+      showToast(data.error ?? 'Unknown error during paste text')
       return
     }
     setUrl(data.clipText)
@@ -58,7 +58,7 @@ export function LoadMetaForm() {
     <form className='grid gap-[30px]' action={formAction}>
       <fieldset disabled={isPending}>
         <Field data-invalid={Boolean(state.errors)}>
-          <FieldLabel>{t('urlFieldLabel')}</FieldLabel>
+          <FieldLabel>{t('fields.url.label')}</FieldLabel>
           <InputGroup>
             <InputGroupAddon>
               <InputGroupButton
@@ -71,7 +71,7 @@ export function LoadMetaForm() {
 
             <InputGroupInput
               autoFocus
-              placeholder={t('inputPlaceholder')}
+              placeholder={t('fields.url.placeholder')}
               name={LOAD_META_FORMDATA.URL}
               aria-invalid={Boolean(state.errors)}
               value={url}

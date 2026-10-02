@@ -2,6 +2,7 @@ import 'server-only'
 
 import { cacheLife, cacheTag } from 'next/cache'
 
+import { MESSAGE_CODES } from '@/shared/api/types'
 import { prisma } from '@/shared/lib/prisma'
 import { Tag } from '@/shared/lib/prisma/generated/client'
 
@@ -15,7 +16,7 @@ export async function getAllUserTags({ userId }: GetAllUserTagsParams) {
   cacheTag(`tags-${userId}`)
   cacheLife('days')
 
-  if (!userId) return { tags: [], message: 'To view tags you must be auth' }
+  if (!userId) return { tags: [], message: MESSAGE_CODES.UNAUTHORIZED }
 
   const tags = await prisma.tag.findMany({
     where: {
@@ -26,7 +27,8 @@ export async function getAllUserTags({ userId }: GetAllUserTagsParams) {
     },
   })
 
-  if (tags.length === 0) return { tags: [], message: 'There are no Tags yet' }
+  if (tags.length === 0)
+    return { tags: [], message: MESSAGE_CODES.TAGS_NOT_FOUND }
 
   return { tags, message: null }
 }

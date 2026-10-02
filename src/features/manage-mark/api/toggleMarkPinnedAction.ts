@@ -2,29 +2,30 @@
 
 import { updateTag } from 'next/cache'
 
+import { MESSAGE_CODES } from '@/shared/api/types'
 import { WebMark } from '@/shared/lib/prisma/generated/client'
 import { verifySession } from '@/shared/lib/session'
 
-import { toggleMarkPin } from './toggleMarkPin'
+import { toggleUserMarkPinned } from './toggleUserMarkPinned'
 
-type ToggleMarkPinActionParams = Pick<WebMark, 'id' | 'pinned'>
+type ToggleMarkPinnedActionParams = Pick<WebMark, 'id' | 'pinned'>
 
-export async function toggleMarkPinAction({
+export async function toggleMarkPinnedAction({
   id,
   pinned,
-}: ToggleMarkPinActionParams) {
+}: ToggleMarkPinnedActionParams) {
   // check user
   const session = await verifySession()
   if (!session) {
     return {
       isSuccess: false,
-      message: 'To pin WebMark you must be auth',
+      message: MESSAGE_CODES.UNAUTHORIZED,
     }
   }
 
   // toggling webmark pinned state
-  // ! pass current pinned state
-  const { error } = await toggleMarkPin({
+  // ! provide the current pinned state
+  const { error } = await toggleUserMarkPinned({
     id,
     pinned,
     userId: session.userId,
@@ -42,6 +43,6 @@ export async function toggleMarkPinAction({
   // return success result
   return {
     isSuccess: true,
-    message: 'Mark has been successfully pinned',
+    message: MESSAGE_CODES.TOGGLE_MARK_PIN_SUCCESS,
   }
 }

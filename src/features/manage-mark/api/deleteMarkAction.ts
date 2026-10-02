@@ -2,6 +2,7 @@
 
 import { updateTag } from 'next/cache'
 
+import { MESSAGE_CODES } from '@/shared/api/types'
 import { WebMark } from '@/shared/lib/prisma/generated/client'
 import { verifySession } from '@/shared/lib/session'
 
@@ -13,7 +14,7 @@ export async function deleteMarkAction(id: WebMark['id']) {
   if (!session)
     return {
       isSuccess: false,
-      message: 'To delete you must be auth',
+      message: MESSAGE_CODES.UNAUTHORIZED,
     }
 
   // delete mark in db
@@ -33,6 +34,6 @@ export async function deleteMarkAction(id: WebMark['id']) {
   // return success response
   return {
     isSuccess: true,
-    message: 'WebMark has been successfully deleted!',
+    message: MESSAGE_CODES.MARK_DELETE_SUCCESS,
   }
 }

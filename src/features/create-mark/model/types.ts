@@ -1,11 +1,11 @@
-import type { ActionFormState } from '@/shared/api/types'
+import type { ActionFormStateWithErrors } from '@/shared/api/types'
 import type { WebMark } from '@/shared/lib/prisma/generated/client'
 
 export type CreateMark = Partial<
   Pick<WebMark, 'title' | 'description' | 'url' | 'logoUrl'>
 >
 
-export type CreateMarkFormState = ActionFormState<{
+export type CreateMarkFormState = ActionFormStateWithErrors<{
   title?: string[]
   url?: string[]
   description?: string[]
@@ -14,6 +14,8 @@ export type CreateMarkFormState = ActionFormState<{
 
 export type MetaData = CreateMark | null
 
-export type LoadMetaFormState = ActionFormState<{ url?: string[] }> & {
+export type LoadMetaFormState = ActionFormStateWithErrors<{
+  url?: string[]
+}> & {
   data?: MetaData
 }

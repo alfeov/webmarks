@@ -4,25 +4,21 @@ import { MESSAGE_CODES } from '@/shared/api/types'
 import { prisma } from '@/shared/lib/prisma'
 import { Prisma, WebMark } from '@/shared/lib/prisma/generated/client'
 
-export async function updateUserMark({
+type ToggleUserMarkPinnedParams = Pick<WebMark, 'id' | 'pinned' | 'userId'>
+
+// toggling webmark pinned state
+// ! pass current pinned state
+
+export async function toggleUserMarkPinned({
   id,
+  pinned,
   userId,
-  title,
-  description,
-  url,
-  logoUrl,
-}: Pick<
-  WebMark,
-  'title' | 'description' | 'url' | 'logoUrl' | 'id' | 'userId'
->) {
+}: ToggleUserMarkPinnedParams) {
   try {
-    // update mark in db
+    // update pinned state
     const mark = await prisma.webMark.update({
       data: {
-        title,
-        description,
-        url,
-        logoUrl,
+        pinned: !pinned,
       },
       where: {
         id,
@@ -30,22 +26,19 @@ export async function updateUserMark({
       },
     })
 
-    // return success
     return { data: mark }
   } catch (error) {
     // error handling
     console.error(error)
     if (error instanceof Prisma.PrismaClientKnownRequestError) {
-      if (error.code === 'P2002') {
-        return {
-          error: MESSAGE_CODES.MARK_EXISTS,
-        }
-      }
       if (error.code === 'P2025') {
         return {
           error: MESSAGE_CODES.MARK_NOT_FOUND,
         }
       }
+    }
+
+    if (error instanceof Prisma.PrismaClientKnownRequestError) {
     }
     return {
       error: MESSAGE_CODES.INTERNAL_ERROR,

@@ -18,7 +18,7 @@ export function CreateMarkButton({ ...props }: CreateMarkButtonProps) {
 
   return (
     <Button {...props} onClick={() => openDialog(<CreateMark />)}>
-      {t('create')}
+      {t('title')}
       <Plus data-icon='inline-end' />
     </Button>
   )

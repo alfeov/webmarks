@@ -39,7 +39,7 @@ export function MarkItem({
         <div className='grow overflow-hidden'>
           <CardTitle className='truncate'>{title}</CardTitle>
           <CardDescription className='truncate'>
-            {url.split('://')[1] || 'Incorrect Link'}
+            {url.split('://')[1]}
           </CardDescription>
         </div>
         {children}

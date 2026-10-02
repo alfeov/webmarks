@@ -1,5 +1,6 @@
 'use client'
 
+import { useTranslations } from 'next-intl'
 import { memo, useState } from 'react'
 
 import { Tag } from '@/shared/lib/prisma/generated/client'
@@ -17,11 +18,13 @@ export const MarkTagItem = memo(function Memoized({
 }: MarkTagItemProps) {
   const [checked, setChecked] = useState(defaultChecked)
 
+  const t = useTranslations('markTagItem')
+
   return (
     <FieldLabel>
       <Field
         orientation='horizontal'
-        aria-label='Toggle tag'
+        aria-label={t('ariaLabel')}
         onClick={() => setChecked(!checked)}
       >
         <Checkbox name={`tagId-${id}`} value={id} checked={checked} />

@@ -1,16 +1,34 @@
 type ZodFieldErrors = Record<string, string[] | undefined> | null
 
-export type MessageCode =
-  | 'UNAUTHORIZED'
-  | 'VALIDATION_ERROR'
-  | 'INTERNAL_ERROR'
-  | 'LOAD_META_ERROR'
-  | 'LOAD_META_SUCCESS'
-  | 'MARK_CREATE_SUCCESS'
-  | 'MARK_EXISTS'
+export const MESSAGE_CODES = {
+  UNAUTHORIZED: 'UNAUTHORIZED',
+  VALIDATION_ERROR: 'VALIDATION_ERROR',
+  INVALID_ID: 'INVALID_ID',
+  INTERNAL_ERROR: 'INTERNAL_ERROR',
+  LOAD_META_ERROR: 'LOAD_META_ERROR',
+  LOAD_META_SUCCESS: 'LOAD_META_SUCCESS',
+  MARK_NOT_FOUND: 'MARK_NOT_FOUND',
+  MARKS_NOT_FOUND: 'MARKS_NOT_FOUND',
+  MARK_CREATE_SUCCESS: 'MARK_CREATE_SUCCESS',
+  MARK_DELETE_SUCCESS: 'MARK_DELETE_SUCCESS',
+  MARK_EDIT_SUCCESS: 'MARK_UPDATE_SUCCESS',
+  MARK_EXISTS: 'MARK_EXISTS',
+  TAG_EXISTS: 'TAG_EXISTS',
+  TAG_NOT_FOUND: 'TAG_NOT_FOUND',
+  TAGS_NOT_FOUND: 'TAGS_NOT_FOUND',
+  TAG_CREATE_SUCCESS: 'TAG_CREATE_SUCCESS',
+  CHANGE_MARK_TAGS_SUCCESS: 'CHANGE_MARK_TAGS_SUCCESS',
+  TOGGLE_MARK_PIN_SUCCESS: 'TOGGLE_MARK_PIN_SUCCESS',
+} as const
 
-export interface ActionFormState<T extends ZodFieldErrors = null> {
+export type MessageCode = (typeof MESSAGE_CODES)[keyof typeof MESSAGE_CODES]
+
+export interface ActionFormState {
   isSuccess: boolean
-  errors?: T
   message?: MessageCode
 }
+
+export type ActionFormStateWithErrors<T extends ZodFieldErrors = null> =
+  ActionFormState & {
+    errors?: T
+  }

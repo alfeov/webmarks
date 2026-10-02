@@ -1,6 +1,6 @@
 import 'server-only'
 
-import type { MessageCode } from '@/shared/api/types'
+import { MESSAGE_CODES } from '@/shared/api/types'
 import { prisma } from '@/shared/lib/prisma'
 import { Prisma, Tag, WebMark } from '@/shared/lib/prisma/generated/client'
 
@@ -16,13 +16,7 @@ export async function createMark({
   url,
   logoUrl,
   userId,
-}: CreateMarkParams): Promise<
-  | { data: WebMark; errorCode?: undefined }
-  | {
-      data?: undefined
-      errorCode: Extract<MessageCode, 'INTERNAL_ERROR' | 'MARK_EXISTS'>
-    }
-> {
+}: CreateMarkParams) {
   try {
     const mark = await prisma.webMark.create({
       data: {
@@ -49,12 +43,12 @@ export async function createMark({
     if (error instanceof Prisma.PrismaClientKnownRequestError) {
       if (error.code === 'P2002') {
         return {
-          errorCode: 'MARK_EXISTS',
+          error: MESSAGE_CODES.MARK_EXISTS,
         }
       }
     }
     return {
-      errorCode: 'INTERNAL_ERROR',
+      error: MESSAGE_CODES.INTERNAL_ERROR,
     }
   }
 }

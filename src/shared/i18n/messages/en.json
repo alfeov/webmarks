@@ -1,5 +1,6 @@
 {
   "errors": {
+    "id": "Provided ID is not correct",
     "url": {
       "invalid": "Invalid URL",
       "max": "Maximum 2048 characters"
@@ -11,34 +12,53 @@
     "markDescription": {
       "min": "At least 10 characters",
       "max": "Maximum 200 characters"
+    },
+    "tagTitle": {
+      "min": "At least 1 characters",
+      "max": "Maximum 15 characters"
     }
   },
   "codes": {
     "UNAUTHORIZED": "You are not authorized to perform this action",
     "VALIDATION_ERROR": "Validation failed. Please check your input",
     "INTERNAL_ERROR": "An internal error occurred. Please try again later",
+    "INVALID_ID": "Provided invalid identifier data",
     "UNKNOWN_ERROR": "An unknown error occurred",
     "LOAD_META_SUCCESS": "Metadata successfully loaded",
     "LOAD_META_ERROR": "Failed to fetch Metadata by provided URL",
     "MARK_CREATE_SUCCESS": "Webmark has been successfully created",
-    "MARK_EXISTS": "WebMark with this URL already exist!"
+    "MARK_DELETE_SUCCESS": "WebMark has been successfully deleted",
+    "MARK_EDIT_SUCCESS": "Webmark has been successfully edited",
+    "MARK_EXISTS": "WebMark with this URL already exist!",
+    "MARK_NOT_FOUND": "Seems like current user doesn't have provided WebMark",
+    "TOGGLE_MARK_PIN_SUCCESS": "Mark has been successfully pinned",
+    "CHANGE_MARK_TAGS_SUCCESS": "Tags has been successfully changed",
+    "TAG_EXISTS": "Tag with this Title already exist!",
+    "TAG_NOT_FOUND": "Seems like current user doesn't have provided Tag(-s)",
+    "TAG_CREATE_SUCCESS": "Tag has been successfully created"
+  },
+  "notFoundPage": {
+    "title": "404 - Not Found",
+    "description": "Page with you're looking for doesn't exist."
   },
   "layout": {
     "loaderTitle": "Loading",
     "loaderDescription": "App Initialization"
   },
   "markList": {
-    "errorTitle": "Something went wrong",
+    "unauthorizedTitle": "Something went wrong",
     "unauthorizedDescription": "To view marks you must be authenticated",
-    "notFoundDescription": "There are no WebMarks yet"
-  },
-  "createMark": {
-    "title": "Create new WebMark",
-    "description": "Please fill in the fields below to create new WebMark"
+    "notFoundTitle": "No WebMarks",
+    "notFoundDescription": "There are no WebMarks yet",
+    "notFoundByQueryDescription": "There are no WebMarks matching your query"
   },
   "loadMetaForm": {
-    "urlFieldLabel": "Insert url and autoload data",
-    "inputPlaceholder": "Search Meta by URL...",
+    "fields": {
+      "url": {
+        "label": "Insert url and autoload data",
+        "placeholder": "Search Meta by URL..."
+      }
+    },
     "buttons": {
       "paste": {
         "title": "Paste",
@@ -51,10 +71,11 @@
     },
     "unauthorizedMessage": "To get Metadata by url you must login to account"
   },
-  "createMarkForm": {
-    "requiredFields": "Required Fields",
-    "optionalFields": "Optional Fields",
-    "submit": "Create WebMark",
+  "createMark": {
+    "formTitle": "Create new WebMark",
+    "formDescription": "Please fill in the fields below to create new WebMark"
+  },
+  "markForm": {
     "fields": {
       "url": {
         "label": "URL"
@@ -69,15 +90,60 @@
       "logoUrl": {
         "label": "Logo URL"
       }
-    },
-    "descriptionPlaceholder": "Some cool description to your link"
+    }
+  },
+  "editMarkForm": {
+    "formTitle": "Edit WebMark",
+    "formDescription": "Please fill in the fields below to edit WebMark",
+    "submit": "Edit WebMark"
+  },
+  "createMarkForm": {
+    "requiredFields": "Required Fields",
+    "optionalFields": "Optional Fields",
+    "submit": "Create WebMark"
   },
   "createMarkButton": {
-    "create": "New WebMark"
+    "title": "New WebMark"
+  },
+  "createTagForm": {
+    "formTitle": "Create new Tag",
+    "formDescription": "Please fill in the fields below to create new Tag",
+    "submit": "Create Tag",
+    "fields": {
+      "title": {
+        "label": "Title",
+        "placeholder": "'Some cool Tag name...'"
+      }
+    }
+  },
+  "deleteMarkForm": {
+    "formTitle": "Delete WebMark?",
+    "formDescription": "Are you sure you want to delete this WebMark?",
+    "submit": "Delete"
+  },
+  "changeMarkTagsForm": {
+    "formTitle": "Change WebMark Tags",
+    "formDescription": "Select Tags to apply to WebMark",
+    "submit": "Apply Tags",
+    "emptyTags": "You don't have any tags yet. Try to create and then come back."
+  },
+  "markTagItem": {
+    "ariaLabel": "Toggle tag"
+  },
+  "tagsSidebarMenu": {
+    "unauthorizedMessage": "To view marks you must be authenticated",
+    "notFoundMessage": "There are no Tags yet"
   },
   "markDropdown": {
+    "ariaLabel": "mark menu",
     "items": {
-      "open": "Open WebMark"
+      "open": "Open WebMark",
+      "pin": "Pin",
+      "unpin": "Unpin",
+      "delete": "Delete",
+      "copy": "Copy Link",
+      "edit": "Edit WebMark",
+      "changeTags": "Change Tags"
     }
   }
 }

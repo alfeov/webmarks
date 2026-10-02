@@ -1,5 +1,6 @@
 import 'server-only'
 
+import { MESSAGE_CODES } from '@/shared/api/types'
 import { prisma } from '@/shared/lib/prisma'
 import { Prisma } from '@/shared/lib/prisma/generated/client'
 import { TagUncheckedCreateInput } from '@/shared/lib/prisma/generated/models'
@@ -13,22 +14,19 @@ export async function createTag({ title, userId }: TagUncheckedCreateInput) {
       },
     })
     return {
-      tag,
-      error: null,
+      data: tag,
     }
   } catch (error) {
     console.error(error)
     if (error instanceof Prisma.PrismaClientKnownRequestError) {
       if (error.code === 'P2002') {
         return {
-          tag: null,
-          error: 'Tag with this Title already exist!',
+          error: MESSAGE_CODES.TAG_EXISTS,
         }
       }
     }
     return {
-      tag: null,
-      error: 'An internal error occurred while creating Tag',
+      error: MESSAGE_CODES.INTERNAL_ERROR,
     }
   }
 }

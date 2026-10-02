@@ -1,10 +1,11 @@
 import 'server-only'
 
+import { MESSAGE_CODES } from '@/shared/api/types'
 import { prisma } from '@/shared/lib/prisma'
 import { Prisma, Tag, WebMark } from '@/shared/lib/prisma/generated/client'
 
 type SetUserMarkTagsParams = Pick<WebMark, 'id' | 'userId'> & {
-  tagIds: Pick<Tag, 'id'>[]
+  tagIds: Tag['id'][]
 }
 
 export async function setUserMarkTags({
@@ -13,10 +14,22 @@ export async function setUserMarkTags({
   tagIds,
 }: SetUserMarkTagsParams) {
   try {
+    const userTags = await prisma.tag.findMany({
+      where: {
+        id: {
+          in: tagIds,
+        },
+        userId,
+      },
+    })
+
+    if (userTags.length !== tagIds.length)
+      return { error: MESSAGE_CODES.TAG_NOT_FOUND }
+
     const mark = await prisma.webMark.update({
       data: {
         tags: {
-          set: tagIds,
+          set: tagIds.map((tagId) => ({ id: tagId })),
         },
       },
       where: {
@@ -25,24 +38,14 @@ export async function setUserMarkTags({
       },
     })
 
-    return {
-      mark,
-      error: null,
-    }
+    return { data: mark }
   } catch (error) {
     console.error(error)
     if (error instanceof Prisma.PrismaClientKnownRequestError) {
       if (error.code === 'P2025') {
-        return {
-          mark: null,
-          error:
-            "Seems like current user doesn't have this WebMark/Provided Tag(-s) doesn't exist",
-        }
+        return { error: MESSAGE_CODES.MARK_NOT_FOUND }
       }
     }
-    return {
-      mark: null,
-      error: 'An internal error occurred while applying Tag(-s) to WebMark',
-    }
+    return { error: MESSAGE_CODES.INTERNAL_ERROR }
   }
 }

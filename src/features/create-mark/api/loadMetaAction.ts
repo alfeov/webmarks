@@ -1,5 +1,6 @@
 'use server'
 
+import { MESSAGE_CODES } from '@/shared/api/types'
 import { verifySession } from '@/shared/lib/session'
 import { validateFormData } from '@/shared/lib/utils/validateFormData'
 
@@ -16,7 +17,7 @@ export async function loadMetaAction(
   if (!session)
     return {
       isSuccess: false,
-      message: 'UNAUTHORIZED',
+      message: MESSAGE_CODES.UNAUTHORIZED,
     }
 
   // zod validation
@@ -28,7 +29,7 @@ export async function loadMetaAction(
     return {
       isSuccess: false,
       errors: validationErrors,
-      message: 'VALIDATION_ERROR',
+      message: MESSAGE_CODES.VALIDATION_ERROR,
     }
 
   // get metadata with api
@@ -36,7 +37,7 @@ export async function loadMetaAction(
   if (!metadata)
     return {
       isSuccess: false,
-      message: 'LOAD_META_ERROR',
+      message: MESSAGE_CODES.LOAD_META_ERROR,
     }
 
   // check at least one field existence
@@ -44,13 +45,13 @@ export async function loadMetaAction(
   if (!url && !title && !description && !favicon)
     return {
       isSuccess: false,
-      message: 'LOAD_META_ERROR',
+      message: MESSAGE_CODES.LOAD_META_ERROR,
     }
 
   // return success
   return {
     isSuccess: true,
-    message: 'LOAD_META_SUCCESS',
+    message: MESSAGE_CODES.LOAD_META_SUCCESS,
     data: {
       title,
       url,

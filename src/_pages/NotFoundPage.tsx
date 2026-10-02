@@ -1,3 +1,5 @@
+import { useTranslations } from 'next-intl'
+
 import {
   Empty,
   EmptyDescription,
@@ -9,16 +11,16 @@ import {
 import { CircleX } from 'lucide-react'
 
 export function NotFoundPage() {
+  const t = useTranslations('notFoundPage')
+
   return (
     <Empty className='h-full'>
       <EmptyHeader>
         <EmptyMedia variant='icon'>
           <CircleX className='size-6' />
         </EmptyMedia>
-        <EmptyTitle>404 - Not Found</EmptyTitle>
-        <EmptyDescription>
-          Page with you&apos;re looking for doesn&apos;t exist.
-        </EmptyDescription>
+        <EmptyTitle>{t('title')}</EmptyTitle>
+        <EmptyDescription>{t('description')}</EmptyDescription>
       </EmptyHeader>
     </Empty>
   )

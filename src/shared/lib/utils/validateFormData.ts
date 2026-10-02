@@ -10,12 +10,10 @@ export function validateFormData<T extends z.ZodObject>(
 
   if (!validatedFields.success)
     return {
-      validatedData: null,
       validationErrors: flattenError(validatedFields.error).fieldErrors,
     }
 
   return {
     validatedData: validatedFields.data,
-    validationErrors: null,
   }
 }

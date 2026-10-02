@@ -1,3 +1,5 @@
+import { useTranslations } from 'next-intl'
+
 import { WebMarkWithTags } from '@/entities/mark/model/types'
 import { ChangeMarkTagsDropdownItem } from '@/features/manage-mark/ui/ChangeMarkTagsDropdownItem'
 import { Button } from '@/shared/ui/button'
@@ -19,6 +21,8 @@ import { LucideEllipsis } from 'lucide-react'
 type MarkDropDownMenuProps = WebMarkWithTags
 
 export function MarkDropdownMenu({ ...mark }: MarkDropDownMenuProps) {
+  const t = useTranslations('markDropdown')
+
   return (
     <DropdownMenu>
       <DropdownMenuTrigger
@@ -27,7 +31,7 @@ export function MarkDropdownMenu({ ...mark }: MarkDropDownMenuProps) {
             size='icon-sm'
             variant='ghost'
             data-slot='dropdown-menu-trigger'
-            aria-label='mark menu'
+            aria-label={t('ariaLabel')}
           >
             <LucideEllipsis />
           </Button>
@@ -38,8 +42,8 @@ export function MarkDropdownMenu({ ...mark }: MarkDropDownMenuProps) {
           <OpenMarkDropdownItem url={mark.url} />
           <CopyLinkDropdownItem url={mark.url} />
           <ChangeMarkTagsDropdownItem markId={mark.id} markTags={mark.tags} />
-          <PinMarkDropdownItem id={mark.id} pinned={mark.pinned} />
           <EditMarkDropdownItem {...mark} />
+          <PinMarkDropdownItem id={mark.id} pinned={mark.pinned} />
           <DeleteMarkDropdownItem id={mark.id} />
         </DropdownMenuGroup>
       </DropdownMenuContent>

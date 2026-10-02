@@ -1,5 +1,6 @@
 'use client'
 
+import { useTranslations } from 'next-intl'
 import { useActionState } from 'react'
 
 import { WebMarkWithTags } from '@/entities/mark/model/types'
@@ -15,7 +16,6 @@ import { MarkTagItem } from './MarkTagItem'
 
 const initialState: ChangeMarkTagsFormState = {
   isSuccess: false,
-  message: null,
 }
 
 export function ChangeMarkTagsForm({
@@ -34,11 +34,13 @@ export function ChangeMarkTagsForm({
   useCloseDialogOn(state.isSuccess)
   useNotificationManager(state.message, state.isSuccess, !isPending)
 
+  const t = useTranslations('changeMarkTagsForm')
+
   return (
     <form action={formAction}>
       <FieldSet className='gap-3' disabled={isPending}>
-        <FieldLegend>Change WebMark Tags</FieldLegend>
-        <FieldDescription>Select Tags to apply to WebMark</FieldDescription>
+        <FieldLegend>{t('formTitle')}</FieldLegend>
+        <FieldDescription>{t('formDescription')}</FieldDescription>
         {Boolean(tags.length) ? (
           tags.map((tag) => {
             const hasTag = markTags.some((markTag) => markTag.id === tag.id)
@@ -53,10 +55,10 @@ export function ChangeMarkTagsForm({
           })
         ) : (
           <FieldDescription className='py-[20px] text-center italic'>
-            You have no tags yet
+            {t('emptyTags')}
           </FieldDescription>
         )}
-        <Button type='submit'>Apply Tags</Button>
+        <Button type='submit'>{t('submit')}</Button>
       </FieldSet>
     </form>
   )

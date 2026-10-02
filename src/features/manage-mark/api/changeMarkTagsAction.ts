@@ -2,10 +2,11 @@
 
 import { updateTag } from 'next/cache'
 
+import { MESSAGE_CODES } from '@/shared/api/types'
 import { WebMark } from '@/shared/lib/prisma/generated/client'
 import { verifySession } from '@/shared/lib/session'
 
-import { validateChangeMarkTagsForm } from '../lib/validateChangeMarkTagsForm'
+import { IdsSchema } from '../lib/IdsSchema'
 import { ChangeMarkTagsFormState } from '../model/types'
 import { setUserMarkTags } from './setUserMarkTags'
 
@@ -17,7 +18,7 @@ export async function changeMarkTagsAction(
   if (!markId)
     return {
       isSuccess: false,
-      message: 'Mark ID has not been provided',
+      message: MESSAGE_CODES.INVALID_ID,
     }
 
   // check auth
@@ -25,24 +26,25 @@ export async function changeMarkTagsAction(
   if (!session)
     return {
       isSuccess: false,
-      message: 'To change WebMark Tags you must me auth',
+      message: MESSAGE_CODES.UNAUTHORIZED,
     }
 
   // zod validation
-  const { tagIds, validationError } = validateChangeMarkTagsForm(formData)
-  if (!tagIds)
+  const rawData = Array.from(formData.values())
+  const validatedValues = IdsSchema.safeParse(rawData)
+  if (!validatedValues.success)
     return {
       isSuccess: false,
-      message: validationError,
+      message: MESSAGE_CODES.INVALID_ID,
     }
 
   // set tags to webmark
-  const { error } = await setUserMarkTags({
+  const { data, error } = await setUserMarkTags({
     id: markId,
     userId: session.userId,
-    tagIds: tagIds.map((tagId) => ({ id: tagId })),
+    tagIds: validatedValues.data,
   })
-  if (error)
+  if (!data)
     return {
       isSuccess: false,
       message: error,
@@ -54,6 +56,6 @@ export async function changeMarkTagsAction(
   // return success response
   return {
     isSuccess: true,
-    message: 'Tags has been successfully changed',
+    message: MESSAGE_CODES.CHANGE_MARK_TAGS_SUCCESS,
   }
 }

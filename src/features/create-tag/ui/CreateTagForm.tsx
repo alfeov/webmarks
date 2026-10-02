@@ -1,5 +1,6 @@
 'use client'
 
+import { useTranslations } from 'next-intl'
 import { useActionState } from 'react'
 
 import { useCloseDialogOn } from '@/shared/lib/hooks/useCloseDialogOn'
@@ -12,36 +13,34 @@ import { createTagAction } from '../api/createTagAction'
 import { CREATE_TAG_FORMDATA } from '../lib/constants'
 import { CreateTagFormState } from '../model/types'
 
-const initialState = {
+const initialState: CreateTagFormState = {
   isSuccess: false,
-  errors: null,
-  message: null,
 }
 
 export function CreateTagForm() {
-  const [state, formAction, isPending] = useActionState<
-    CreateTagFormState,
-    FormData
-  >(createTagAction, initialState)
+  const [state, formAction, isPending] = useActionState(
+    createTagAction,
+    initialState,
+  )
   useNotificationManager(state.message, state.isSuccess, !isPending)
   useCloseDialogOn(state.isSuccess)
+
+  const t = useTranslations('createTagForm')
 
   return (
     <form action={formAction}>
       <FieldSet disabled={isPending}>
-        <FieldLegend>Create new Tag</FieldLegend>
-        <FieldDescription>
-          Please fill in the fields below to create new Tag
-        </FieldDescription>
+        <FieldLegend>{t('formTitle')}</FieldLegend>
+        <FieldDescription>{t('formDescription')}</FieldDescription>
         <InputField
           autoFocus
-          label='Title'
+          label={t('fields.title.label')}
           req
-          placeholder='Some Tag Name...'
+          placeholder={t('fields.title.placeholder')}
           name={CREATE_TAG_FORMDATA.TITLE}
           errors={state.errors?.title}
         />
-        <Button type='submit'>Create Tag</Button>
+        <Button type='submit'>{t('submit')}</Button>
       </FieldSet>
     </form>
   )

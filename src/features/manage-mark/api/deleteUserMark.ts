@@ -1,5 +1,6 @@
 import 'server-only'
 
+import { MESSAGE_CODES } from '@/shared/api/types'
 import { prisma } from '@/shared/lib/prisma'
 import { Prisma, WebMark } from '@/shared/lib/prisma/generated/client'
 
@@ -14,19 +15,19 @@ export async function deleteUserMark({ id, userId }: DeleteUserMarkParams) {
       },
     })
     return {
-      error: null,
+      error: undefined,
     }
   } catch (error) {
     console.error(error)
     if (error instanceof Prisma.PrismaClientKnownRequestError) {
       if (error.code === 'P2025') {
         return {
-          error: `Seems like current user doesn't have this WebMark`,
+          error: MESSAGE_CODES.MARK_NOT_FOUND,
         }
       }
     }
     return {
-      error: 'An internal error occurred while deleting WebMark',
+      error: MESSAGE_CODES.INTERNAL_ERROR,
     }
   }
 }

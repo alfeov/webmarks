@@ -1,5 +1,6 @@
 'use client'
 
+import { useTranslations } from 'next-intl'
 import { useActionState } from 'react'
 
 import { useCloseDialogOn } from '@/shared/lib/hooks/useCloseDialogOn'
@@ -13,7 +14,6 @@ import { DeleteMarkFormState } from '../model/types'
 
 const initialState: DeleteMarkFormState = {
   isSuccess: false,
-  message: null,
 }
 
 export function DeleteMarkForm({ markId }: { markId: WebMark['id'] }) {
@@ -24,14 +24,14 @@ export function DeleteMarkForm({ markId }: { markId: WebMark['id'] }) {
   useNotificationManager(state.message, state.isSuccess, !isPending)
   useCloseDialogOn(state.isSuccess)
 
+  const t = useTranslations('deleteMarkForm')
+
   return (
     <form action={formAction}>
       <FieldSet disabled={isPending}>
-        <FieldLegend>Delete WebMark?</FieldLegend>
-        <FieldDescription>
-          Are you sure you want to delete this WebMark?
-        </FieldDescription>
-        <Button type='submit'>Delete</Button>
+        <FieldLegend>{t('formTitle')}</FieldLegend>
+        <FieldDescription>{t('formDescription')}</FieldDescription>
+        <Button type='submit'>{t('submit')}</Button>
       </FieldSet>
     </form>
   )

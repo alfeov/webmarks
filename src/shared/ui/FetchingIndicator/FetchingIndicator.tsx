@@ -3,7 +3,7 @@
 import { Spinner } from '@/shared/ui/spinner'
 import {
   AbsoluteWrapper,
-  StickyPortalWrapper,
+  PortalWrapper,
   StickyWrapper,
 } from '@/shared/ui/Sticky'
 
@@ -23,7 +23,7 @@ export function FetchingIndicator({
   return (
     <>
       {condition && (
-        <StickyPortalWrapper>
+        <PortalWrapper>
           <AbsoluteWrapper
             className={`left-[50%] z-50 translate-x-[-50%] ${className}`}
           >
@@ -35,7 +35,7 @@ export function FetchingIndicator({
               </div>
             </StickyWrapper>
           </AbsoluteWrapper>
-        </StickyPortalWrapper>
+        </PortalWrapper>
       )}
     </>
   )

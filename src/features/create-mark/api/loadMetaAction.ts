@@ -10,13 +10,13 @@ import { getMetadata } from './getMetadata'
 export async function loadMetaAction(
   prevState: LoadMetaFormState,
   formData: FormData,
-) {
+): Promise<LoadMetaFormState> {
   // check auth
   const session = await verifySession()
   if (!session)
     return {
-      metadata: null,
-      error: 'To get Metadata by url you must login to account',
+      isSuccess: false,
+      message: 'UNAUTHORIZED',
     }
 
   // zod validation
@@ -26,30 +26,36 @@ export async function loadMetaAction(
   )
   if (!validatedData)
     return {
-      metadata: null,
-      error: validationErrors.url?.[0] ?? 'Unknown error',
+      isSuccess: false,
+      errors: validationErrors,
+      message: 'VALIDATION_ERROR',
     }
 
   // get metadata with api
-  const { metadata, error } = await getMetadata(validatedData.url)
-  if (!metadata) return { metadata: null, error }
+  const metadata = await getMetadata(validatedData.url)
+  if (!metadata)
+    return {
+      isSuccess: false,
+      message: 'LOAD_META_ERROR',
+    }
 
   // check at least one field existence
   const { url, title, description, favicon } = metadata
   if (!url && !title && !description && !favicon)
     return {
-      metadata: null,
-      error: `Failed to fetch URL: ${validatedData.url}`,
+      isSuccess: false,
+      message: 'LOAD_META_ERROR',
     }
 
   // return success
   return {
-    metadata: {
+    isSuccess: true,
+    message: 'LOAD_META_SUCCESS',
+    data: {
       title,
       url,
       description,
       logoUrl: favicon,
     },
-    error: null,
   }
 }

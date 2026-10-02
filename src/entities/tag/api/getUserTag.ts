@@ -3,9 +3,20 @@ import 'server-only'
 import { prisma } from '@/shared/lib/prisma'
 import { Tag } from '@/shared/lib/prisma/generated/client'
 
-type GetUserTagParams = Pick<Tag, 'id' | 'userId'>
+type GetUserTagParams = {
+  id: Tag['id']
+  userId?: Tag['userId']
+}
 
 export async function getUserTag({ id, userId }: GetUserTagParams) {
+  'use cache'
+
+  if (!userId)
+    return {
+      error: 'UNAUTHORIZED',
+      tag: null,
+    }
+
   const tag = await prisma.tag.findUnique({
     where: {
       id,
@@ -15,7 +26,7 @@ export async function getUserTag({ id, userId }: GetUserTagParams) {
 
   if (!tag)
     return {
-      error: `Seems like current user doesn't have provided Tag`,
+      error: 'NOT_FOUND',
       tag: null,
     }
 

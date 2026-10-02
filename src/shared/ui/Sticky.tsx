@@ -4,19 +4,11 @@ import { createPortal } from 'react-dom'
 
 import { cn } from '../lib/utils'
 
-// Portal
-//  Absolute
-//   Sticky
-//     .... < your components
-//   Sticky
-//  Absolute
-// Portal
-
-interface StickyPortalWrapper {
+interface PortalWrapper {
   children: React.ReactNode
 }
 
-export function StickyPortalWrapper({ children }: StickyPortalWrapper) {
+export function PortalWrapper({ children }: PortalWrapper) {
   return createPortal(children, document.body)
 }
 

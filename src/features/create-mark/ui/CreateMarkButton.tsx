@@ -1,5 +1,7 @@
 'use client'
 
+import { useTranslations } from 'next-intl'
+
 import { useDialogContext } from '@/shared/lib/contexts/DialogContext'
 import { Button } from '@/shared/ui/button'
 
@@ -12,9 +14,11 @@ type CreateMarkButtonProps = React.ComponentProps<'button'>
 export function CreateMarkButton({ ...props }: CreateMarkButtonProps) {
   const { openDialog } = useDialogContext()
 
+  const t = useTranslations('createMarkButton')
+
   return (
     <Button {...props} onClick={() => openDialog(<CreateMark />)}>
-      New WebMark
+      {t('create')}
       <Plus data-icon='inline-end' />
     </Button>
   )

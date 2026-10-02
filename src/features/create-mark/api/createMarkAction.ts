@@ -4,7 +4,6 @@ import { updateTag } from 'next/cache'
 
 import { Tag } from '@/shared/lib/prisma/generated/client'
 import { verifySession } from '@/shared/lib/session'
-import { createResult } from '@/shared/lib/utils/createResult'
 import { validateFormData } from '@/shared/lib/utils/validateFormData'
 
 import { CreateMarkFormSchema } from '../lib/CreateMarkFormSchema'
@@ -15,13 +14,14 @@ export async function createMarkAction(
   defaultTagId: Tag['id'] | null,
   prevState: CreateMarkFormState,
   data: CreateMark,
-) {
+): Promise<CreateMarkFormState> {
   // check auth
   const session = await verifySession()
   if (!session)
-    return createResult({
-      message: 'To create WebMarks you must login to account',
-    })
+    return {
+      isSuccess: false,
+      message: 'UNAUTHORIZED',
+    }
 
   // zod validation
   const { validatedData, validationErrors } = validateFormData(
@@ -29,30 +29,32 @@ export async function createMarkAction(
     CreateMarkFormSchema,
   )
   if (!validatedData)
-    return createResult({
+    return {
+      isSuccess: false,
       errors: validationErrors,
-      message: 'Please fix the highlighted fields',
-    })
+      message: 'VALIDATION_ERROR',
+    }
 
   // webmark creation
-  const { mark, error } = await createMark({
+  const result = await createMark({
     userId: session.userId,
     ...validatedData,
     logoUrl: validatedData.logoUrl ?? null,
     // if on the tag page then connect to tag
     tagId: defaultTagId,
   })
-  if (!mark)
-    return createResult({
-      message: error,
-    })
+  if (!result.data)
+    return {
+      isSuccess: false,
+      message: result.errorCode,
+    }
 
-  // revalidation
+  // invalidation
   updateTag(`marks-${session.userId}`)
 
   // return success response
-  return createResult({
+  return {
     isSuccess: true,
-    message: 'Webmark has been successfully created',
-  })
+    message: 'MARK_CREATE_SUCCESS',
+  }
 }

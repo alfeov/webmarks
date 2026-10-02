@@ -1,5 +1,6 @@
 import {
   Empty,
+  EmptyContent,
   EmptyDescription,
   EmptyHeader,
   EmptyMedia,
@@ -8,15 +9,22 @@ import {
 
 import { FaceSlightlyFrowning } from 'lucide-react'
 
-export function ErrorEmpty({ children }: { children: React.ReactNode }) {
+interface ErrorEmptyProps {
+  title: string
+  description: string
+  children?: React.ReactNode
+}
+
+export function ErrorEmpty({ title, description, children }: ErrorEmptyProps) {
   return (
     <Empty className='h-full'>
       <EmptyHeader>
         <EmptyMedia variant='icon'>
           <FaceSlightlyFrowning />
         </EmptyMedia>
-        <EmptyTitle>Something went wrong</EmptyTitle>
-        <EmptyDescription>{children}</EmptyDescription>
+        <EmptyTitle>{title}</EmptyTitle>
+        <EmptyDescription>{description}</EmptyDescription>
+        <EmptyContent>{children}</EmptyContent>
       </EmptyHeader>
     </Empty>
   )

@@ -7,15 +7,20 @@ import {
 } from '@/shared/ui/empty'
 import { Spinner } from '@/shared/ui/spinner'
 
-export function SpinnerEmpty({ children }: { children: React.ReactNode }) {
+interface SpinnerEmptyProps {
+  title: string
+  description: string
+}
+
+export function SpinnerEmpty({ title, description }: SpinnerEmptyProps) {
   return (
     <Empty className='h-full w-full'>
       <EmptyHeader>
         <EmptyMedia variant='icon'>
           <Spinner className='size-6' />
         </EmptyMedia>
-        <EmptyTitle>Loading</EmptyTitle>
-        <EmptyDescription>{children}</EmptyDescription>
+        <EmptyTitle>{title}</EmptyTitle>
+        <EmptyDescription>{description}</EmptyDescription>
       </EmptyHeader>
     </Empty>
   )

@@ -5,5 +5,5 @@ export const MAX_MARK_DESC = 200
 export const MarkDescriptionSchema = z
   .string()
   .trim()
-  .min(10, 'At least 10 characters')
-  .max(MAX_MARK_DESC, `Maximum ${MAX_MARK_DESC} characters`)
+  .min(10, 'markDescription.min')
+  .max(MAX_MARK_DESC, `markDescription.max`)

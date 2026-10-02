@@ -1,6 +1,6 @@
 import 'server-only'
 
-import { scrape, ScraperError } from 'web-meta-scraper'
+import { scrape } from 'web-meta-scraper'
 
 import { MAX_MARK_DESC } from '@/entities/mark/lib/MarkDescriptionSchema'
 
@@ -12,21 +12,9 @@ export async function getMetadata(url: string) {
       },
     })
 
-    return {
-      metadata,
-      error: null,
-    }
+    return metadata
   } catch (error) {
     console.error(error)
-    if (error instanceof ScraperError) {
-      return {
-        metadata: null,
-        error: error.message,
-      }
-    }
-    return {
-      metadata: null,
-      error: 'Unknown internal error',
-    }
+    return null
   }
 }

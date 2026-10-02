@@ -1,5 +1,6 @@
 'use client'
 
+import { useTranslations } from 'next-intl'
 import { useActionState, useEffect, useState } from 'react'
 
 import { loadMetaAction } from '@/features/create-mark/api/loadMetaAction'
@@ -22,8 +23,7 @@ import type { LoadMetaFormState } from '../model/types'
 import { ClipboardPaste, CloudDownload } from 'lucide-react'
 
 const initialState: LoadMetaFormState = {
-  error: null,
-  metadata: null,
+  isSuccess: false,
 }
 
 export function LoadMetaForm() {
@@ -36,10 +36,10 @@ export function LoadMetaForm() {
 
   const { setMetadata } = useMetaContext()
   useEffect(() => {
-    setMetadata(state.metadata)
-  }, [state.metadata, setMetadata])
+    if (state.data) setMetadata(state.data)
+  }, [state.data, setMetadata])
 
-  useNotificationManager(state.error, false, !isPending)
+  useNotificationManager(state.message, state.isSuccess, !isPending)
   useFetchingIndicatorManager(isPending)
 
   const handlePasteClick = async () => {
@@ -51,42 +51,49 @@ export function LoadMetaForm() {
     setUrl(data.clipText)
   }
 
+  const t = useTranslations('loadMetaForm')
+  const tErrors = useTranslations('errors')
+
   return (
     <form className='grid gap-[30px]' action={formAction}>
       <fieldset disabled={isPending}>
-        <Field data-invalid={Boolean(state.error)}>
-          <FieldLabel>Insert url and autoload data</FieldLabel>
+        <Field data-invalid={Boolean(state.errors)}>
+          <FieldLabel>{t('urlFieldLabel')}</FieldLabel>
           <InputGroup>
             <InputGroupAddon>
               <InputGroupButton
-                aria-label='search mark'
+                aria-label={t('buttons.paste.ariaLabel')}
                 onClick={handlePasteClick}
               >
-                <ClipboardPaste /> Paste
+                <ClipboardPaste /> {t('buttons.paste.title')}
               </InputGroupButton>
             </InputGroupAddon>
 
             <InputGroupInput
               autoFocus
-              placeholder='Search Meta by URL...'
+              placeholder={t('inputPlaceholder')}
               name={LOAD_META_FORMDATA.URL}
-              aria-invalid={Boolean(state.error)}
+              aria-invalid={Boolean(state.errors)}
               value={url}
               onChange={(e) => setUrl(e.target.value)}
             />
 
             <InputGroupAddon align='inline-end'>
               <InputGroupButton
-                aria-label='load metadata from url'
+                aria-label={t('buttons.load.ariaLabel')}
                 type='submit'
                 disabled={isPending}
               >
-                Load
+                {t('buttons.load.title')}
                 <CloudDownload data-icon='inline-end' />
               </InputGroupButton>
             </InputGroupAddon>
           </InputGroup>
-          {state.error && <FieldError>{state.error}</FieldError>}
+          <FieldError
+            errors={state.errors?.url?.map((code) => ({
+              message: tErrors(code),
+            }))}
+          />
         </Field>
       </fieldset>
     </form>

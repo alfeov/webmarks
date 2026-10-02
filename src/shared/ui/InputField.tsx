@@ -1,3 +1,5 @@
+import { useTranslations } from 'next-intl'
+
 import { Field, FieldError, FieldLabel } from '@/shared/ui/field'
 import { Input } from '@/shared/ui/input'
 
@@ -15,6 +17,8 @@ export function InputField({
   className,
   ...props
 }: InputFieldProps) {
+  const t = useTranslations('errors')
+
   return (
     <Field data-invalid={Boolean(errors?.length)} className={className}>
       <FieldLabel
@@ -23,7 +27,7 @@ export function InputField({
         {label}
       </FieldLabel>
       <Input aria-invalid={Boolean(errors?.length)} {...props} />
-      <FieldError errors={errors?.map((error) => ({ message: error }))} />
+      <FieldError errors={errors?.map((error) => ({ message: t(error) }))} />
     </Field>
   )
 }

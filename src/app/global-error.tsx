@@ -33,11 +33,13 @@ export default function GlobalError({
       data-scroll-behavior='smooth'
     >
       <body className='flex min-h-full flex-col'>
-        <ErrorEmpty>
-          <div className='grid gap-[10px]'>
-            App has been down...
-            <Button onClick={retry}>Retry</Button>
-          </div>
+        <ErrorEmpty
+          title='Something went wrong'
+          description='App has been down...'
+        >
+          <Button onClick={retry} className='w-full'>
+            Retry
+          </Button>
         </ErrorEmpty>
       </body>
     </html>

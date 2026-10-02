@@ -145,7 +145,14 @@ export default async function RootLayout({
         />
       </head>
       <body className='flex min-h-full flex-col'>
-        <Suspense fallback={<SpinnerEmpty>{t('loading')}</SpinnerEmpty>}>
+        <Suspense
+          fallback={
+            <SpinnerEmpty
+              title={t('loaderTitle')}
+              description={t('loaderDescription')}
+            />
+          }
+        >
           <Providers>
             <header className='border-b'>
               <div className='flex h-(--header-height) items-center justify-between px-[30px] md:px-[40px]'>

@@ -1,6 +1,7 @@
 'use client'
 
 import { useParams } from 'next/navigation'
+import { useTranslations } from 'next-intl'
 
 import { useTagsContext } from '@/entities/tag/model/TagsContext'
 import { Tag } from '@/shared/lib/prisma/generated/client'
@@ -16,12 +17,12 @@ export function CreateMark() {
   const currentTagId = params.tagId
   const currentTagTitle = tags.find((tag) => tag.id === params.tagId)?.title
 
+  const t = useTranslations('createMark')
+
   return (
     <FieldSet>
-      <FieldLegend>Create new WebMark</FieldLegend>
-      <FieldDescription>
-        Please fill in the fields below to create new WebMark
-      </FieldDescription>
+      <FieldLegend>{t('title')}</FieldLegend>
+      <FieldDescription>{t('description')}</FieldDescription>
       <MetaProvider>
         <LoadMetaForm />
         <CreateMarkForm

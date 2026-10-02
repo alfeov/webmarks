@@ -1,11 +1,11 @@
 import 'server-only'
 
 import { cacheLife, cacheTag } from 'next/cache'
-import { notFound } from 'next/navigation'
 
-import { getUserTag } from '@/entities/tag/api/getUserTag'
 import { prisma } from '@/shared/lib/prisma'
 import { Tag, WebMark } from '@/shared/lib/prisma/generated/client'
+
+import { WebMarkWithTags } from '../model/types'
 
 interface GetUserMarksParams {
   query?: string
@@ -13,22 +13,22 @@ interface GetUserMarksParams {
   tagId?: Tag['id']
 }
 
+type ErrorType = 'UNAUTHORIZED' | 'NOT_FOUND' | null
+
 export async function getUserMarks({
   query,
   tagId,
   userId,
-}: GetUserMarksParams) {
+}: GetUserMarksParams): Promise<{
+  marks: WebMarkWithTags[]
+  error: ErrorType
+}> {
   'use cache'
 
   cacheTag(`marks-${userId}`)
   cacheLife('days')
 
-  if (!userId) return { marks: [], message: 'To view marks you must be auth' }
-
-  if (tagId) {
-    const { tag } = await getUserTag({ id: tagId, userId })
-    if (!tag) return notFound()
-  }
+  if (!userId) return { marks: [], error: 'UNAUTHORIZED' }
 
   const marks = await prisma.webMark.findMany({
     where: {
@@ -61,15 +61,7 @@ export async function getUserMarks({
     },
   })
 
-  if (marks.length === 0) {
-    const message = query
-      ? 'There are no WebMarks for your query'
-      : 'There are no WebMarks yet'
-    return {
-      marks: [],
-      message,
-    }
-  }
+  if (marks.length === 0) return { marks: [], error: 'NOT_FOUND' }
 
-  return { marks, message: null }
+  return { marks, error: null }
 }

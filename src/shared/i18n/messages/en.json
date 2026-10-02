@@ -1,5 +1,83 @@
 {
+  "errors": {
+    "url": {
+      "invalid": "Invalid URL",
+      "max": "Maximum 2048 characters"
+    },
+    "markTitle": {
+      "min": "At least 3 characters",
+      "max": "Maximum 50 characters"
+    },
+    "markDescription": {
+      "min": "At least 10 characters",
+      "max": "Maximum 200 characters"
+    }
+  },
+  "codes": {
+    "UNAUTHORIZED": "You are not authorized to perform this action",
+    "VALIDATION_ERROR": "Validation failed. Please check your input",
+    "INTERNAL_ERROR": "An internal error occurred. Please try again later",
+    "UNKNOWN_ERROR": "An unknown error occurred",
+    "LOAD_META_SUCCESS": "Metadata successfully loaded",
+    "LOAD_META_ERROR": "Failed to fetch Metadata by provided URL",
+    "MARK_CREATE_SUCCESS": "Webmark has been successfully created",
+    "MARK_EXISTS": "WebMark with this URL already exist!"
+  },
   "layout": {
-    "loading": "App Initialization"
+    "loaderTitle": "Loading",
+    "loaderDescription": "App Initialization"
+  },
+  "markList": {
+    "errorTitle": "Something went wrong",
+    "unauthorizedDescription": "To view marks you must be authenticated",
+    "notFoundDescription": "There are no WebMarks yet"
+  },
+  "createMark": {
+    "title": "Create new WebMark",
+    "description": "Please fill in the fields below to create new WebMark"
+  },
+  "loadMetaForm": {
+    "urlFieldLabel": "Insert url and autoload data",
+    "inputPlaceholder": "Search Meta by URL...",
+    "buttons": {
+      "paste": {
+        "title": "Paste",
+        "ariaLabel": "Paste from clipboard"
+      },
+      "load": {
+        "title": "Load",
+        "ariaLabel": "Load metadata from url"
+      }
+    },
+    "unauthorizedMessage": "To get Metadata by url you must login to account"
+  },
+  "createMarkForm": {
+    "requiredFields": "Required Fields",
+    "optionalFields": "Optional Fields",
+    "submit": "Create WebMark",
+    "fields": {
+      "url": {
+        "label": "URL"
+      },
+      "title": {
+        "label": "Title"
+      },
+      "description": {
+        "label": "Description",
+        "placeholder": "Some cool description to your link"
+      },
+      "logoUrl": {
+        "label": "Logo URL"
+      }
+    },
+    "descriptionPlaceholder": "Some cool description to your link"
+  },
+  "createMarkButton": {
+    "create": "New WebMark"
+  },
+  "markDropdown": {
+    "items": {
+      "open": "Open WebMark"
+    }
   }
 }

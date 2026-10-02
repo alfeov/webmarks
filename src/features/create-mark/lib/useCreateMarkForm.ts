@@ -11,8 +11,6 @@ import { CreateMarkFormState } from '../model/types'
 
 export const initialState: CreateMarkFormState = {
   isSuccess: false,
-  errors: null,
-  message: null,
 }
 
 export function useCreateMarkForm({

@@ -1,5 +1,7 @@
 'use client'
 
+import { useTranslations } from 'next-intl'
+
 import { useCloseDialogOn } from '@/shared/lib/hooks/useCloseDialogOn'
 import { useNotificationManager } from '@/shared/lib/hooks/useNotificationManager'
 import { Tag } from '@/shared/lib/prisma/generated/client'
@@ -24,40 +26,43 @@ export function CreateMarkForm({
   const { state, isPending, onSubmit, register } = useCreateMarkForm({
     defaultTagId: currentTagId,
   })
+
   useNotificationManager(state.message, state.isSuccess, !isPending)
   useCloseDialogOn(state.isSuccess)
+
+  const t = useTranslations('createMarkForm')
 
   return (
     <form onSubmit={onSubmit}>
       <FieldSet disabled={isPending}>
         <FieldSet>
-          <FieldLegend>Required Fields</FieldLegend>
+          <FieldLegend>{t('requiredFields')}</FieldLegend>
           <InputField
-            label='URL'
+            label={t('fields.url.label')}
             placeholder='https://webmarks.com'
             errors={state.errors?.url}
             {...register(CREATE_MARK_FORMDATA.URL)}
             req
           />
           <InputField
-            label='Title'
+            label={t('fields.title.label')}
             placeholder='WebMark'
             errors={state.errors?.title}
             {...register(CREATE_MARK_FORMDATA.TITLE)}
             req
           />
           <TextareaField
-            label='Description'
-            placeholder='Some cool description to your link'
+            label={t('fields.description.label')}
+            placeholder={t('fields.description.placeholder')}
             errors={state.errors?.description}
             {...register(CREATE_MARK_FORMDATA.DESCRIPTION)}
             req
           />
         </FieldSet>
         <FieldSet>
-          <FieldLegend>Optional Fields</FieldLegend>
+          <FieldLegend>{t('optionalFields')}</FieldLegend>
           <InputField
-            label='Logo URL'
+            label={t('fields.logoUrl.label')}
             placeholder='https://logo.com'
             errors={state.errors?.logoUrl}
             {...register(CREATE_MARK_FORMDATA.LOGO_URL)}
@@ -65,7 +70,7 @@ export function CreateMarkForm({
           {/* default tag according to page params */}
           {currentTagTitle && <Badge>{currentTagTitle}</Badge>}
         </FieldSet>
-        <Button type='submit'>Create WebMark</Button>
+        <Button type='submit'>{t('submit')}</Button>
       </FieldSet>
     </form>
   )

@@ -1,5 +1,6 @@
 'use client'
 
+import { useTranslations } from 'next-intl'
 import { Activity, useState } from 'react'
 
 import { SigninForm } from '@/features/signin/ui/SigninForm'
@@ -12,21 +13,21 @@ type Mode = 'signin' | 'signup'
 export function Auth({ initialMode }: { initialMode: Mode }) {
   const [mode, setMode] = useState<Mode>(initialMode)
 
+  const t = useTranslations('Auth')
+
   return (
     <FieldSet>
       <FieldLegend>
-        {mode === 'signin' ? 'Login to your account' : 'Create new account'}
+        {mode === 'signin' ? t('signinFormTitle') : t('signupFormTitle')}
       </FieldLegend>
       <FieldDescription>
         {mode === 'signin'
-          ? 'Please fill in the fields below to login to your account'
-          : 'Please fill in the fields below to create new account'}
+          ? t('signinFormDescription')
+          : t('signupFormDescription')}
         <br />
         <span className='flex justify-between'>
           <span>
-            {mode === 'signin'
-              ? "Hasn't account yet?"
-              : 'Already has an account?'}
+            {mode === 'signin' ? t('signinQuestion') : t('signupQuestion')}
           </span>
           <Button
             variant='link'
@@ -37,7 +38,7 @@ export function Auth({ initialMode }: { initialMode: Mode }) {
             }
             className='h-auto'
           >
-            {mode === 'signin' ? 'Sign Up' : 'Login'}
+            {mode === 'signin' ? t('signinButton') : t('signupButton')}
           </Button>
         </span>
       </FieldDescription>

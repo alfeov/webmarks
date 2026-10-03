@@ -25,7 +25,7 @@ export function SignupForm() {
   useNotificationManager(state.message, state.isSuccess, !isPending)
   useCloseDialogOn(state.isSuccess)
 
-  const tAuthFrom = useTranslations('AuthFrom')
+  const tAuthFrom = useTranslations('AuthForm')
   const tSignupForm = useTranslations('SignupForm')
 
   return (

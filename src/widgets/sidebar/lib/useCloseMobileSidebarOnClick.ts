@@ -3,9 +3,9 @@ import { useSidebar } from '@/shared/ui/sidebar'
 export function useCloseMobileSidebarOnClick() {
   const { openMobile, setOpenMobile } = useSidebar()
 
-  const handleClick = () => {
+  const closeMobileSidebar = () => {
     if (openMobile) setOpenMobile(false)
   }
 
-  return handleClick
+  return closeMobileSidebar
 }

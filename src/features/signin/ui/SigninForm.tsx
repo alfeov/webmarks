@@ -25,7 +25,7 @@ export function SigninForm() {
   useNotificationManager(state.message, state.isSuccess, !isPending)
   useCloseDialogOn(state.isSuccess)
 
-  const tAuthFrom = useTranslations('AuthFrom')
+  const tAuthFrom = useTranslations('AuthForm')
   const tSigninForm = useTranslations('SigninForm')
 
   return (

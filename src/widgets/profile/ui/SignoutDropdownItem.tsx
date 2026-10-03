@@ -1,4 +1,4 @@
-import { useLocale } from 'next-intl'
+import { useLocale, useTranslations } from 'next-intl'
 
 import { signoutAction } from '@/features/signout/api/signoutAction'
 import { DropdownMenuItem } from '@/shared/ui/dropdown-menu'
@@ -6,12 +6,14 @@ import { DropdownMenuItem } from '@/shared/ui/dropdown-menu'
 export function SignoutDropdownItem() {
   const locale = useLocale()
 
+  const t = useTranslations('ProfileDropdownMenu')
+
   return (
     <DropdownMenuItem
       variant='destructive'
       onClick={signoutAction.bind(null, locale)}
     >
-      Log out
+      {t('items.signout')}
     </DropdownMenuItem>
   )
 }

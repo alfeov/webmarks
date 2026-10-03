@@ -1,17 +1,19 @@
 import 'server-only'
 
 import { cacheLife, cacheTag } from 'next/cache'
-import { notFound } from 'next/navigation'
 
-import { MESSAGE_CODES } from '@/shared/api/types'
 import { prisma } from '@/shared/lib/prisma'
 import { Tag, WebMark } from '@/shared/lib/prisma/generated/client'
 
 interface GetUserMarksParams {
   query?: string
-  userId?: WebMark['userId']
+  userId: WebMark['userId']
   tagId?: Tag['id']
 }
+
+// ! if you update tag data you possible need to revalidate marks
+// ! this request return tags included in marks
+// ! without revalidation might lead to ui incoherence
 
 export async function getUserMarks({
   query,
@@ -22,18 +24,6 @@ export async function getUserMarks({
 
   cacheTag(`marks-${userId}`)
   cacheLife('days')
-
-  if (!userId) return { marks: [], error: MESSAGE_CODES.UNAUTHORIZED }
-
-  if (tagId) {
-    const tag = await prisma.tag.findUnique({
-      where: {
-        id: tagId,
-        userId,
-      },
-    })
-    if (!tag) return notFound()
-  }
 
   const marks = await prisma.webMark.findMany({
     where: {
@@ -66,11 +56,5 @@ export async function getUserMarks({
     },
   })
 
-  if (marks.length === 0)
-    return {
-      marks: [],
-      error: MESSAGE_CODES.MARKS_NOT_FOUND,
-    }
-
-  return { marks }
+  return marks
 }

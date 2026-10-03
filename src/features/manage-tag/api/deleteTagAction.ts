@@ -36,7 +36,7 @@ export async function deleteTagAction(
 
   // revalidation
   updateTag(`tags-${session.userId}`)
-  updateTag(`marks-${session.userId}`)
+  updateTag(`marks-${session.userId}`) // to prevent UI incoherence (see getUserMarks)
 
   // redirection
   if (isOnTagPage) redirect({ href: '/', locale })

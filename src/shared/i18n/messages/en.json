@@ -115,6 +115,37 @@
   "ThemeToggleButton": {
     "ariaLabel": "Toggle theme"
   },
+  "AllMarksSidebarGroup": {
+    "label": "Main",
+    "showAll": "Show All WebMarks"
+  },
+  "TagsSidebarGroup": {
+    "label": "Tags"
+  },
+  "TagsSidebarGroupAction": {
+    "ariaLabel": "Open create Tag dialog"
+  },
+  "Profile": {
+    "ariaLabel": "Profile menu"
+  },
+  "ProfileDropdownMenu": {
+    "items": {
+      "editAvatar": "Edit Avatar",
+      "signin": "Login",
+      "signup": "Signup",
+      "signout": "Log out"
+    }
+  },
+  "Auth": {
+    "signinFormTitle": "Login to your account",
+    "signupFormTitle": "Create new account",
+    "signinFormDescription": "Please fill in the fields below to login to your account",
+    "signupFormDescription": "Please fill in the fields below to create new account",
+    "signinQuestion": "Hasn't account yet?",
+    "signupQuestion": "Already has an account?",
+    "signinButton": "Sign Up",
+    "signupButton": "Login"
+  },
   "AuthForm": {
     "fields": {
       "email": {

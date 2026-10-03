@@ -50,7 +50,7 @@ export async function editTagAction(
 
   // revalidation
   updateTag(`tags-${session.userId}`)
-  updateTag(`marks-${session.userId}`)
+  updateTag(`marks-${session.userId}`) // to prevent UI incoherence (see getUserMarks)
 
   // return success response
   return {

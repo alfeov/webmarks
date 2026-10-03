@@ -2,6 +2,7 @@
 
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
+import { useTranslations } from 'next-intl'
 
 import {
   SidebarGroup,
@@ -15,16 +16,21 @@ import { useCloseMobileSidebarOnClick } from '../lib/useCloseMobileSidebarOnClic
 
 export function AllMarksSidebarGroup() {
   const pathname = usePathname()
-  const handleClick = useCloseMobileSidebarOnClick()
+
+  const closeMobileSidebar = useCloseMobileSidebarOnClick()
+
+  const t = useTranslations('AllMarksSidebarGroup')
 
   return (
     <SidebarGroup>
-      <SidebarGroupLabel className='text-[16px]'>Main</SidebarGroupLabel>
+      <SidebarGroupLabel className='text-[16px]'>
+        {t('label')}
+      </SidebarGroupLabel>
       <SidebarMenu>
         <SidebarMenuItem>
-          <Link href='/' prefetch onClick={handleClick}>
+          <Link href='/' prefetch onClick={closeMobileSidebar}>
             <SidebarMenuButton data-active={pathname === '/'}>
-              Show All WebMarks
+              {t('showAll')}
             </SidebarMenuButton>
           </Link>
         </SidebarMenuItem>

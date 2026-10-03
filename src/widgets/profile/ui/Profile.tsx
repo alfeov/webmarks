@@ -1,3 +1,5 @@
+import { getTranslations } from 'next-intl/server'
+
 import { getUserData } from '@/entities/user/api/getUserData'
 import { verifySession } from '@/shared/lib/session'
 import { Avatar, AvatarFallback, AvatarImage } from '@/shared/ui/avatar'
@@ -11,7 +13,7 @@ import {
 } from '@/shared/ui/dropdown-menu'
 
 import { EditAvatarDropdownItem } from './EditAvatarDropdownItem'
-import { LoginDropdownItem } from './SigninDropdownItem'
+import { SigninDropdownItem } from './SigninDropdownItem'
 import { SignoutDropdownItem } from './SignoutDropdownItem'
 import { SignupDropdownItem } from './SignupDropdownItem'
 
@@ -21,11 +23,18 @@ export async function Profile() {
   const session = await verifySession()
   const user = await getUserData({ id: session?.userId })
 
+  const t = await getTranslations('Profile')
+
   return (
     <DropdownMenu>
       <DropdownMenuTrigger
         render={
-          <Button variant='ghost' size='icon' className='rounded-[50%]'>
+          <Button
+            variant='ghost'
+            size='icon'
+            className='rounded-[50%]'
+            aria-label={t('ariaLabel')}
+          >
             <Avatar size='lg'>
               <AvatarImage
                 src={user?.avatarUrl || 'errorSrc'} // to handle AvatarFallback if url is ''
@@ -52,7 +61,7 @@ export async function Profile() {
         ) : (
           <DropdownMenuGroup>
             <SignupDropdownItem />
-            <LoginDropdownItem />
+            <SigninDropdownItem />
           </DropdownMenuGroup>
         )}
       </DropdownMenuContent>

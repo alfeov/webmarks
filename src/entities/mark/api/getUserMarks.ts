@@ -1,6 +1,7 @@
 import 'server-only'
 
 import { cacheLife, cacheTag } from 'next/cache'
+import { notFound } from 'next/navigation'
 
 import { MESSAGE_CODES } from '@/shared/api/types'
 import { prisma } from '@/shared/lib/prisma'
@@ -23,6 +24,16 @@ export async function getUserMarks({
   cacheLife('days')
 
   if (!userId) return { marks: [], error: MESSAGE_CODES.UNAUTHORIZED }
+
+  if (tagId) {
+    const tag = await prisma.tag.findUnique({
+      where: {
+        id: tagId,
+        userId,
+      },
+    })
+    if (!tag) return notFound()
+  }
 
   const marks = await prisma.webMark.findMany({
     where: {

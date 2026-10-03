@@ -1,15 +1,17 @@
+import { MESSAGE_CODES } from '@/shared/api/types'
+
 export async function copy(value: string) {
   try {
     await navigator.clipboard.writeText(value)
     return {
       isSuccess: true,
-      message: 'Data has been successfully copy to clipboard',
+      message: MESSAGE_CODES.COPY_SUCCESS,
     }
   } catch (error) {
     console.error(error)
     return {
       isSuccess: false,
-      message: "Your browser doesn't support copy API",
+      message: MESSAGE_CODES.COPY_ERROR,
     }
   }
 }

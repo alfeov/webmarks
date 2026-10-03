@@ -1,18 +1,11 @@
 import { toast } from '@/shared/ui/toast'
 
 // error by default
-export function showToast(message: string, isSuccess = false) {
-  if (isSuccess) {
-    return toast.add({
-      type: 'success',
-      title: 'Success!',
-      description: message,
-    })
-  }
+export function showToast(title: string, message: string, isSuccess = false) {
   return toast.add({
-    type: 'error',
-    title: 'Something went wrong',
+    type: isSuccess ? 'success' : 'error',
+    title: title,
     description: message,
-    priority: 'high',
+    ...(isSuccess ? {} : { priority: 'high' }),
   })
 }

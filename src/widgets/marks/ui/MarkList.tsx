@@ -1,10 +1,8 @@
-import { notFound } from 'next/navigation'
 import { getTranslations } from 'next-intl/server'
 import { ViewTransition } from 'react'
 
 import { getUserMarks } from '@/entities/mark/api/getUserMarks'
 import { MarkItem } from '@/entities/mark/ui/MarkItem'
-import { getUserTag } from '@/entities/tag/api/getUserTag'
 import { MarkDropdownMenu } from '@/features/manage-mark/ui/MarkDropdownMenu'
 import { MESSAGE_CODES } from '@/shared/api/types'
 import { Tag } from '@/shared/lib/prisma/generated/client'
@@ -28,10 +26,6 @@ export async function MarkList({ params, searchParams }: MarkListProps) {
   const resultQuery = Array.isArray(query) ? query[0] : query
 
   const session = await verifySession()
-  if (tagId) {
-    const { tag } = await getUserTag({ id: tagId, userId: session?.userId })
-    if (!tag) return notFound()
-  }
   const { marks, error } = await getUserMarks({
     tagId,
     query: resultQuery,

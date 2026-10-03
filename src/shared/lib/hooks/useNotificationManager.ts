@@ -10,13 +10,15 @@ export function useNotificationManager(
   isSuccess: boolean,
   notificationTrigger: boolean,
 ) {
-  const t = useTranslations('codes')
+  const tToast = useTranslations('toast')
+  const tCodes = useTranslations('codes')
 
   useEffect(() => {
     if (notificationTrigger) {
       if (messageCode) {
-        const message = t(messageCode) || t('UNKNOWN_ERROR')
-        showToast(message, isSuccess)
+        const title = isSuccess ? tToast('successTitle') : tToast('errorTitle')
+        const message = tCodes(messageCode) || tCodes('UNKNOWN_ERROR')
+        showToast(title, message, isSuccess)
       }
     }
   }, [notificationTrigger])

@@ -1,4 +1,7 @@
-import { ActionFormState, ActionFormStateWithErrors } from '@/shared/api/types'
+import type {
+  ActionFormState,
+  ActionFormStateWithErrors,
+} from '@/shared/api/types'
 
 export type ChangeMarkTagsFormState = ActionFormState
 

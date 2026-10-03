@@ -1,5 +1,6 @@
 import 'server-only'
 
+import { MESSAGE_CODES } from '@/shared/api/types'
 import { prisma } from '@/shared/lib/prisma'
 import { Prisma, Tag } from '@/shared/lib/prisma/generated/client'
 
@@ -26,8 +27,7 @@ export async function updateUserTag({
 
     // return success
     return {
-      tag,
-      error: null,
+      data: tag,
     }
   } catch (error) {
     // error handling
@@ -35,20 +35,17 @@ export async function updateUserTag({
     if (error instanceof Prisma.PrismaClientKnownRequestError) {
       if (error.code === 'P2002') {
         return {
-          tag: null,
-          error: 'Tag with this Title already exist!',
+          error: MESSAGE_CODES.TAG_EXISTS,
         }
       }
       if (error.code === 'P2025') {
         return {
-          tag: null,
-          error: `Seems like current user doesn't have this Tag`,
+          error: MESSAGE_CODES.TAG_NOT_FOUND,
         }
       }
     }
     return {
-      tag: null,
-      error: 'An internal error occurred while updating Tag',
+      error: MESSAGE_CODES.INTERNAL_ERROR,
     }
   }
 }

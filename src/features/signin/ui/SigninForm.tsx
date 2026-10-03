@@ -1,5 +1,6 @@
 'use client'
 
+import { useTranslations } from 'next-intl'
 import { useActionState } from 'react'
 
 import { useCloseDialogOn } from '@/shared/lib/hooks/useCloseDialogOn'
@@ -12,10 +13,8 @@ import { signinAction } from '../api/signinAction'
 import { SIGNIN_FORMDATA } from '../lib/constants'
 import type { SigninFormState } from '../model/types'
 
-export const initialState = {
+export const initialState: SigninFormState = {
   isSuccess: false,
-  errors: null,
-  message: null,
 }
 
 export function SigninForm() {
@@ -26,25 +25,28 @@ export function SigninForm() {
   useNotificationManager(state.message, state.isSuccess, !isPending)
   useCloseDialogOn(state.isSuccess)
 
+  const tAuthFrom = useTranslations('AuthFrom')
+  const tSigninForm = useTranslations('SigninForm')
+
   return (
     <form className='flex flex-col gap-[20px]' action={formAction}>
       <FieldSet disabled={isPending}>
         <InputField
           autoFocus
-          label='Email'
-          placeholder='Enter your email address'
+          label={tAuthFrom('fields.email.label')}
+          placeholder={tAuthFrom('fields.email.placeholder')}
           type='text'
           name={SIGNIN_FORMDATA.EMAIL}
           errors={state?.errors?.email}
         />
         <InputField
-          label='Password'
-          placeholder='Enter your password'
+          label={tAuthFrom('fields.password.label')}
+          placeholder={tAuthFrom('fields.password.label')}
           type='password'
           name={SIGNIN_FORMDATA.PASSWORD}
           errors={state?.errors?.password}
         />
-        <Button type='submit'>Login</Button>
+        <Button type='submit'>{tSigninForm('submit')}</Button>
       </FieldSet>
     </form>
   )

@@ -2,8 +2,8 @@
 
 import { updateTag } from 'next/cache'
 
+import { MESSAGE_CODES } from '@/shared/api/types'
 import { verifySession } from '@/shared/lib/session'
-import { createResult } from '@/shared/lib/utils/createResult'
 import { validateFormData } from '@/shared/lib/utils/validateFormData'
 
 import { EditAvatarFormSchema } from '../lib/EditAvatarFormSchema'
@@ -17,9 +17,10 @@ export async function editAvatarAction(
   // check auth
   const session = await verifySession()
   if (!session)
-    return createResult({
-      message: 'To edit avatar you must be auth',
-    })
+    return {
+      isSuccess: false,
+      message: MESSAGE_CODES.UNAUTHORIZED,
+    }
 
   // zod validation
   const { validatedData, validationErrors } = validateFormData(
@@ -27,10 +28,11 @@ export async function editAvatarAction(
     EditAvatarFormSchema,
   )
   if (!validatedData)
-    return createResult({
-      message: 'Please fix highlighted fields',
+    return {
+      isSuccess: false,
+      message: MESSAGE_CODES.VALIDATION_ERROR,
       errors: validationErrors,
-    })
+    }
 
   // update avatarUrl in DB
   const { error } = await updateUserAvatar({
@@ -38,16 +40,17 @@ export async function editAvatarAction(
     avatarUrl: validatedData.avatarUrl,
   })
   if (error)
-    return createResult({
+    return {
+      isSuccess: false,
       message: error,
-    })
+    }
 
   // revalidation
   updateTag(`user-${session.userId}`)
 
   // return success response
-  return createResult({
+  return {
     isSuccess: true,
-    message: 'Avatar has been successfully edited',
-  })
+    message: MESSAGE_CODES.AVATAR_EDIT_SUCCESS,
+  }
 }

@@ -90,7 +90,7 @@ export default async function RootLayout({
   children,
 }: LayoutProps<'/[locale]'>) {
   const locale = await getLocale()
-  const t = await getTranslations('layout')
+  const t = await getTranslations('Layout')
 
   return (
     <html

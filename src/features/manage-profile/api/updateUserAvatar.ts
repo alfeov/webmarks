@@ -1,8 +1,9 @@
 import 'server-only'
 
 import { SafeUserData } from '@/entities/user/lib/SafeUserData'
+import { MESSAGE_CODES } from '@/shared/api/types'
 import { prisma } from '@/shared/lib/prisma'
-import { User } from '@/shared/lib/prisma/generated/client'
+import { Prisma, User } from '@/shared/lib/prisma/generated/client'
 import { UserUpdateInput } from '@/shared/lib/prisma/generated/models'
 
 type UpdateUserAvatarParams = {
@@ -27,15 +28,18 @@ export async function updateUserAvatar({
 
     // return success
     return {
-      user: { ...new SafeUserData(user) },
-      error: null,
+      data: { ...new SafeUserData(user) },
     }
   } catch (error) {
     // error handling
     console.error(error)
+    if (error instanceof Prisma.PrismaClientKnownRequestError) {
+      if (error.code === 'P2025') {
+        return { error: MESSAGE_CODES.USER_NOT_FOUND }
+      }
+    }
     return {
-      user: null,
-      error: 'An internal error occurred while updating your account',
+      error: MESSAGE_CODES.INTERNAL_ERROR,
     }
   }
 }

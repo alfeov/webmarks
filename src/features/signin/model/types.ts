@@ -1,8 +1,6 @@
-export interface SigninFormState {
-  isSuccess: boolean
-  errors: {
-    email?: string[]
-    password?: string[]
-  } | null
-  message: string | null
-}
+import type { ActionFormStateWithErrors } from '@/shared/api/types'
+
+export type SigninFormState = ActionFormStateWithErrors<{
+  email?: string[]
+  password?: string[]
+}>

@@ -38,7 +38,7 @@ export async function MarkList({ params, searchParams }: MarkListProps) {
     userId: session?.userId,
   })
 
-  const t = await getTranslations('markList')
+  const t = await getTranslations('MarkList')
 
   return (
     <>

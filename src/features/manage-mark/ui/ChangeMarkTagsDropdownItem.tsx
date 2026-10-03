@@ -20,7 +20,7 @@ export function ChangeMarkTagsDropdownItem({
   const { openDialog } = useDialogContext()
   const tags = useTagsContext()
 
-  const t = useTranslations('markDropdown')
+  const t = useTranslations('MarkDropdownMenu')
 
   return (
     <>

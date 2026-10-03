@@ -23,7 +23,7 @@ export function PinMarkDropdownItem({ id, pinned }: PinMarkDropdownItemProps) {
   )
   useFetchingIndicatorManager(isPending)
 
-  const t = useTranslations('markDropdown')
+  const t = useTranslations('MarkDropdownMenu')
 
   return (
     <form action={formAction}>

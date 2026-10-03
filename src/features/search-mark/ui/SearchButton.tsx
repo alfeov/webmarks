@@ -1,5 +1,6 @@
 'use client'
 
+import { useTranslations } from 'next-intl'
 import { useFormStatus } from 'react-dom'
 
 import { useFetchingIndicatorManager } from '@/shared/lib/hooks/useFetchingIndicatorManager'
@@ -11,10 +12,12 @@ export function SearchButton() {
   const formStatus = useFormStatus()
   useFetchingIndicatorManager(formStatus.pending)
 
+  const t = useTranslations('SearchButton')
+
   return (
     <InputGroupButton
       type='submit'
-      aria-label='search mark'
+      aria-label={t('ariaLabel')}
       size='icon-xs'
       disabled={formStatus.pending}
     >

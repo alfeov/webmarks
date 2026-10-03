@@ -2,8 +2,8 @@ import z from 'zod'
 
 export const PasswordSchema = z
   .string()
-  .regex(/^[A-Za-z0-9]+$/, 'Only english letters and numbers allowed')
-  .regex(/[A-Z]/, 'At least one uppercase letter')
-  .regex(/[0-9]/, 'At least one digit')
-  .min(8, 'At least 8 characters')
-  .max(72, 'Maximum 72 characters')
+  .regex(/^[A-Za-z0-9]+$/, 'password.allowed')
+  .regex(/[A-Z]/, 'password.capital')
+  .regex(/[0-9]/, 'password.digit')
+  .min(8, 'password.min')
+  .max(72, 'password.max')

@@ -7,24 +7,17 @@ import { User } from '@/shared/lib/prisma/generated/client'
 
 import { SafeUserData } from '../lib/SafeUserData'
 
-export async function getUserData({
-  id,
-}: {
+interface GetUserDataProps {
   id?: User['id']
-}): Promise<
-  | { error: null; user: Pick<User, 'username' | 'avatarUrl'> }
-  | { error: string; user: null }
-> {
+}
+
+export async function getUserData({ id }: GetUserDataProps) {
   'use cache'
 
   cacheTag(`user-${id}`)
   cacheLife('days')
 
-  if (!id)
-    return {
-      error: 'Provided nullish id',
-      user: null,
-    }
+  if (!id) return null
 
   const user = await prisma.user.findUnique({
     where: {
@@ -32,14 +25,7 @@ export async function getUserData({
     },
   })
 
-  if (!user)
-    return {
-      error: 'There are no user in db',
-      user: null,
-    }
+  if (!user) return null
 
-  return {
-    error: null,
-    user: { ...new SafeUserData(user) },
-  }
+  return { ...new SafeUserData(user) }
 }

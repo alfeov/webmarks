@@ -1,7 +1,7 @@
 'use client'
 
 import { useParams } from 'next/navigation'
-import { useLocale } from 'next-intl'
+import { useLocale, useTranslations } from 'next-intl'
 import { useActionState } from 'react'
 
 import { useCloseDialogOn } from '@/shared/lib/hooks/useCloseDialogOn'
@@ -15,12 +15,13 @@ import type { DeleteTagFormState } from '../model/types'
 
 const initialState: DeleteTagFormState = {
   isSuccess: false,
-  message: null,
 }
 
 export function DeleteTagForm({ tagId }: { tagId: Tag['id'] }) {
   const params = useParams<{ tagId?: string }>()
+
   const locale = useLocale()
+  const t = useTranslations('DeleteTagForm')
 
   const [state, formAction, isPending] = useActionState(
     deleteTagAction.bind(null, tagId, params.tagId === tagId, locale),
@@ -32,11 +33,9 @@ export function DeleteTagForm({ tagId }: { tagId: Tag['id'] }) {
   return (
     <form action={formAction}>
       <FieldSet disabled={isPending}>
-        <FieldLegend>Delete Tag?</FieldLegend>
-        <FieldDescription>
-          Are you sure you want to delete this Tag?
-        </FieldDescription>
-        <Button type='submit'>Delete</Button>
+        <FieldLegend>{t('formTitle')}</FieldLegend>
+        <FieldDescription>{t('formDescription')}</FieldDescription>
+        <Button type='submit'>{t('submit')}</Button>
       </FieldSet>
     </form>
   )

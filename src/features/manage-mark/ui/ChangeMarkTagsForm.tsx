@@ -34,7 +34,7 @@ export function ChangeMarkTagsForm({
   useCloseDialogOn(state.isSuccess)
   useNotificationManager(state.message, state.isSuccess, !isPending)
 
-  const t = useTranslations('changeMarkTagsForm')
+  const t = useTranslations('ChangeMarkTagsForm')
 
   return (
     <form action={formAction}>

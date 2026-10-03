@@ -11,7 +11,7 @@ import { DeleteMarkForm } from './DeleteMarkForm'
 export function DeleteMarkDropdownItem({ id }: { id: WebMark['id'] }) {
   const { openDialog } = useDialogContext()
 
-  const t = useTranslations('markDropdown')
+  const t = useTranslations('MarkDropdownMenu')
 
   return (
     <DropdownMenuItem

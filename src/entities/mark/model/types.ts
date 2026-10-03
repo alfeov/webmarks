@@ -1,4 +1,4 @@
-import { Prisma } from '@/shared/lib/prisma/generated/client'
+import type { Prisma } from '@/shared/lib/prisma/generated/client'
 
 export type WebMarkWithTags = Prisma.WebMarkGetPayload<{
   include: {

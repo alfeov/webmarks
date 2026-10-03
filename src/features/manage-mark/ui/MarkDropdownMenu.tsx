@@ -21,7 +21,7 @@ import { LucideEllipsis } from 'lucide-react'
 type MarkDropDownMenuProps = WebMarkWithTags
 
 export function MarkDropdownMenu({ ...mark }: MarkDropDownMenuProps) {
-  const t = useTranslations('markDropdown')
+  const t = useTranslations('MarkDropdownMenu')
 
   return (
     <DropdownMenu>

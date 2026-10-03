@@ -29,8 +29,8 @@ export function CreateMarkForm({
   useNotificationManager(state.message, state.isSuccess, !isPending)
   useCloseDialogOn(state.isSuccess)
 
-  const tMarkForm = useTranslations('markForm')
-  const tCreateMarkForm = useTranslations('createMarkForm')
+  const tMarkForm = useTranslations('MarkForm')
+  const tCreateMarkForm = useTranslations('CreateMarkForm')
 
   return (
     <form onSubmit={onSubmit}>

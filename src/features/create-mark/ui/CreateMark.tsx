@@ -17,7 +17,7 @@ export function CreateMark() {
   const currentTagId = params.tagId
   const currentTagTitle = tags.find((tag) => tag.id === params.tagId)?.title
 
-  const t = useTranslations('createMark')
+  const t = useTranslations('CreateMark')
 
   return (
     <FieldSet>

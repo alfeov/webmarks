@@ -25,7 +25,7 @@ export function CreateTagForm() {
   useNotificationManager(state.message, state.isSuccess, !isPending)
   useCloseDialogOn(state.isSuccess)
 
-  const t = useTranslations('createTagForm')
+  const t = useTranslations('CreateTagForm')
 
   return (
     <form action={formAction}>

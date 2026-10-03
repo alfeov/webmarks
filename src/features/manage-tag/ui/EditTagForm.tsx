@@ -1,5 +1,6 @@
 'use client'
 
+import { useTranslations } from 'next-intl'
 import { useActionState } from 'react'
 
 import { useCloseDialogOn } from '@/shared/lib/hooks/useCloseDialogOn'
@@ -17,8 +18,6 @@ type EditTagFormProps = Tag
 
 const initialState: EditTagFormState = {
   isSuccess: false,
-  errors: null,
-  message: null,
 }
 
 export function EditTagForm({ ...tag }: EditTagFormProps) {
@@ -29,22 +28,22 @@ export function EditTagForm({ ...tag }: EditTagFormProps) {
   useNotificationManager(state.message, state.isSuccess, !isPending)
   useCloseDialogOn(state.isSuccess)
 
+  const t = useTranslations('EditTagForm')
+
   return (
     <form action={formAction}>
       <FieldSet disabled={isPending}>
-        <FieldLegend>Edit Tag</FieldLegend>
-        <FieldDescription>
-          Please fill in the fields below to edit Tag
-        </FieldDescription>
+        <FieldLegend>{t('formTitle')}</FieldLegend>
+        <FieldDescription>{t('formDescription')}</FieldDescription>
         <InputField
           autoFocus
-          label='Title'
+          label={t('label')}
           req
           placeholder={tag.title}
           name={EDIT_TAG_FORMDATA.TITLE}
           errors={state.errors?.title}
         />
-        <Button type='submit'>Edit Tag</Button>
+        <Button type='submit'>{t('submit')}</Button>
       </FieldSet>
     </form>
   )

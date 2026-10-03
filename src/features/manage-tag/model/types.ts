@@ -1,13 +1,10 @@
-export interface DeleteTagFormState {
-  isSuccess: boolean
-  message: string | null
-}
+import type {
+  ActionFormState,
+  ActionFormStateWithErrors,
+} from '@/shared/api/types'
 
-export interface EditTagFormState {
-  isSuccess: boolean
-  errors: {
-    id?: string[]
-    title?: string[]
-  } | null
-  message: string | null
-}
+export type DeleteTagFormState = ActionFormState
+
+export type EditTagFormState = ActionFormStateWithErrors<{
+  title?: string[]
+}>

@@ -18,7 +18,7 @@ export const MarkTagItem = memo(function Memoized({
 }: MarkTagItemProps) {
   const [checked, setChecked] = useState(defaultChecked)
 
-  const t = useTranslations('markTagItem')
+  const t = useTranslations('MarkTagItem')
 
   return (
     <FieldLabel>

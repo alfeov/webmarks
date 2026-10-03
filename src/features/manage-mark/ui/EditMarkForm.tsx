@@ -29,8 +29,8 @@ export function EditMarkForm({ ...mark }: EditMarkFormProps) {
   useNotificationManager(state.message, state.isSuccess, !isPending)
   useCloseDialogOn(state.isSuccess)
 
-  const tMarkForm = useTranslations('markForm')
-  const tEditMarkForm = useTranslations('editMarkForm')
+  const tMarkForm = useTranslations('MarkForm')
+  const tEditMarkForm = useTranslations('EditMarkForm')
 
   return (
     <form action={formAction}>

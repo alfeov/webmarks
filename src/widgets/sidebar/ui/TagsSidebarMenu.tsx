@@ -11,7 +11,7 @@ export async function TagsSidebarMenu() {
   const session = await verifySession()
   const { tags, message } = await getAllUserTags({ userId: session?.userId })
 
-  const t = await getTranslations('tagsSidebarMenu')
+  const t = await getTranslations('TagsSidebarMenu')
 
   return (
     <SidebarMenu>

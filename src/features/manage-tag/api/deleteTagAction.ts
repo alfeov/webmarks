@@ -3,6 +3,7 @@
 import { updateTag } from 'next/cache'
 import type { Locale } from 'next-intl'
 
+import { MESSAGE_CODES } from '@/shared/api/types'
 import { redirect } from '@/shared/i18n/navigation'
 import { Tag } from '@/shared/lib/prisma/generated/client'
 import { verifySession } from '@/shared/lib/session'
@@ -19,7 +20,7 @@ export async function deleteTagAction(
   if (!session)
     return {
       isSuccess: false,
-      message: 'To delete Tag you must be auth',
+      message: MESSAGE_CODES.UNAUTHORIZED,
     }
 
   // delete tag in db
@@ -43,6 +44,6 @@ export async function deleteTagAction(
   // return success response
   return {
     isSuccess: true,
-    message: 'Tag has been successfully deleted!',
+    message: MESSAGE_CODES.TAG_DELETE_SUCCESS,
   }
 }

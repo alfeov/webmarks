@@ -11,7 +11,7 @@ import {
 import { CircleX } from 'lucide-react'
 
 export function NotFoundPage() {
-  const t = useTranslations('notFoundPage')
+  const t = useTranslations('NotFoundPage')
 
   return (
     <Empty className='h-full'>

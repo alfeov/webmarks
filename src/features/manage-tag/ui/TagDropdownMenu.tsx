@@ -1,5 +1,7 @@
 'use client'
 
+import { useTranslations } from 'next-intl'
+
 import { Tag } from '@/shared/lib/prisma/generated/client'
 import { Button } from '@/shared/ui/button'
 import {
@@ -17,6 +19,8 @@ import { LucideEllipsis } from 'lucide-react'
 type TagDropdownMenuProps = Tag
 
 export function TagDropdownMenu({ ...tag }: TagDropdownMenuProps) {
+  const t = useTranslations('TagDropdownMenu')
+
   return (
     <DropdownMenu>
       <DropdownMenuTrigger
@@ -25,7 +29,7 @@ export function TagDropdownMenu({ ...tag }: TagDropdownMenuProps) {
             variant='ghost'
             size='icon-xs'
             data-slot='dropdown-menu-trigger'
-            aria-label='tag menu'
+            aria-label={t('ariaLabel')}
           >
             <LucideEllipsis />
           </Button>

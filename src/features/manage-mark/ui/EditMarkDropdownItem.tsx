@@ -11,7 +11,7 @@ import { EditMarkForm } from './EditMarkForm'
 export function EditMarkDropdownItem({ ...mark }: WebMarkWithTags) {
   const { openDialog } = useDialogContext()
 
-  const t = useTranslations('markDropdown')
+  const t = useTranslations('MarkDropdownMenu')
 
   return (
     <DropdownMenuItem onClick={() => openDialog(<EditMarkForm {...mark} />)}>

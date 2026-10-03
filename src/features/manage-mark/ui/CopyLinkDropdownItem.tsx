@@ -12,7 +12,7 @@ export function CopyLinkDropdownItem({ url }: { url: string }) {
     showToast(message, isSuccess)
   }
 
-  const t = useTranslations('markDropdown')
+  const t = useTranslations('MarkDropdownMenu')
 
   return (
     <DropdownMenuItem onClick={handleClick}>{t('items.copy')}</DropdownMenuItem>

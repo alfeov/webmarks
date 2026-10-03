@@ -2,6 +2,8 @@ import 'server-only'
 
 import bcrypt from 'bcrypt'
 
+import { SafeUserData } from '@/entities/user/lib/SafeUserData'
+import { MESSAGE_CODES } from '@/shared/api/types'
 import { prisma } from '@/shared/lib/prisma'
 import { Prisma } from '@/shared/lib/prisma/generated/client'
 import { UserCreateInput } from '@/shared/lib/prisma/generated/models'
@@ -16,20 +18,18 @@ export async function createUser({ password, ...userData }: UserCreateInput) {
         ...userData,
       },
     })
-    return { user, error: null }
+    return { data: { ...new SafeUserData(user) } }
   } catch (error) {
     // handle errors
     console.error(error)
     if (error instanceof Prisma.PrismaClientKnownRequestError) {
       if (error.code === 'P2002')
         return {
-          user: null,
-          error: 'User with this email/username already exist',
+          error: MESSAGE_CODES.USER_EXISTS,
         }
     }
     return {
-      user: null,
-      error: 'An internal error occurred while creating your account',
+      error: MESSAGE_CODES.INTERNAL_ERROR,
     }
   }
 }

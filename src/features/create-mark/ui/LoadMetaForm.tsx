@@ -51,7 +51,7 @@ export function LoadMetaForm() {
     setUrl(data.clipText)
   }
 
-  const t = useTranslations('loadMetaForm')
+  const t = useTranslations('LoadMetaForm')
   const tErrors = useTranslations('errors')
 
   return (

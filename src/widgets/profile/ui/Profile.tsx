@@ -19,7 +19,7 @@ import { FaceSlightlyFrowning, FaceSlightlySmiling } from 'lucide-react'
 
 export async function Profile() {
   const session = await verifySession()
-  const { user } = await getUserData({ id: session?.userId })
+  const user = await getUserData({ id: session?.userId })
 
   return (
     <DropdownMenu>
@@ -28,7 +28,7 @@ export async function Profile() {
           <Button variant='ghost' size='icon' className='rounded-[50%]'>
             <Avatar size='lg'>
               <AvatarImage
-                src={user?.avatarUrl || 'errorSrc'} // to handle AvatarFallback
+                src={user?.avatarUrl || 'errorSrc'} // to handle AvatarFallback if url is ''
                 alt={user?.username || 'system user avatar'}
               />
               <AvatarFallback>
@@ -42,7 +42,7 @@ export async function Profile() {
         {session && user ? (
           <>
             <DropdownMenuGroup>
-              <EditAvatarDropdownItem avatarUrl={user?.avatarUrl} />
+              <EditAvatarDropdownItem avatarUrl={user.avatarUrl} />
             </DropdownMenuGroup>
             <DropdownMenuSeparator />
             <DropdownMenuGroup>

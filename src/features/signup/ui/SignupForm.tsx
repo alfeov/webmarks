@@ -1,5 +1,6 @@
 'use client'
 
+import { useTranslations } from 'next-intl'
 import { useActionState } from 'react'
 
 import { useCloseDialogOn } from '@/shared/lib/hooks/useCloseDialogOn'
@@ -12,10 +13,8 @@ import { signupAction } from '../api/signupAction'
 import { SIGNUP_FORMDATA } from '../lib/constants'
 import type { SignupFormState } from '../model/types'
 
-export const initialState = {
+export const initialState: SignupFormState = {
   isSuccess: false,
-  errors: null,
-  message: null,
 }
 
 export function SignupForm() {
@@ -26,39 +25,42 @@ export function SignupForm() {
   useNotificationManager(state.message, state.isSuccess, !isPending)
   useCloseDialogOn(state.isSuccess)
 
+  const tAuthFrom = useTranslations('AuthFrom')
+  const tSignupForm = useTranslations('SignupForm')
+
   return (
     <form className='flex flex-col gap-[20px]' action={formAction}>
       <FieldSet disabled={isPending}>
         <InputField
           autoFocus
-          label='Username'
-          placeholder='Enter username'
+          label={tSignupForm('fields.username.label')}
+          placeholder={tSignupForm('fields.username.placeholder')}
           type='text'
           name={SIGNUP_FORMDATA.USERNAME}
           errors={state?.errors?.username}
         />
         <InputField
-          label='Email'
-          placeholder='Enter your email address'
+          label={tAuthFrom('fields.email.label')}
+          placeholder={tAuthFrom('fields.email.placeholder')}
           type='text'
           name={SIGNUP_FORMDATA.EMAIL}
           errors={state?.errors?.email}
         />
         <InputField
-          label='Password'
-          placeholder='Enter your password'
+          label={tAuthFrom('fields.password.label')}
+          placeholder={tAuthFrom('fields.password.label')}
           type='password'
           name={SIGNUP_FORMDATA.PASSWORD}
           errors={state?.errors?.password}
         />
         <InputField
-          label='Confirm password'
-          placeholder='Confirm your password'
+          label={tSignupForm('fields.confirmPassword.label')}
+          placeholder={tSignupForm('fields.confirmPassword.placeholder')}
           type='password'
           name={SIGNUP_FORMDATA.CONFIRM_PASSWORD}
           errors={state?.errors?.confirmPassword}
         />
-        <Button type='submit'>Sign Up</Button>
+        <Button type='submit'>{tSignupForm('submit')}</Button>
       </FieldSet>
     </form>
   )

@@ -2,6 +2,8 @@ import 'server-only'
 
 import bcrypt from 'bcrypt'
 
+import { SafeUserData } from '@/entities/user/lib/SafeUserData'
+import { MESSAGE_CODES } from '@/shared/api/types'
 import { prisma } from '@/shared/lib/prisma'
 import { User } from '@/shared/lib/prisma/generated/client'
 
@@ -15,11 +17,11 @@ export async function verifyUser({
       email,
     },
   })
-  if (!user) return { user: null, error: "User with this email doesn't exist" }
+  if (!user) return { error: MESSAGE_CODES.USER_NOT_FOUND }
 
   // compare passwords
   const isPasswordMatch = await bcrypt.compare(password, user.password)
-  if (!isPasswordMatch) return { user: null, error: 'Incorrect password!' }
+  if (!isPasswordMatch) return { error: MESSAGE_CODES.USER_INCORRECT_PASSWORD }
 
-  return { user, error: null }
+  return { data: { ...new SafeUserData(user) } }
 }

@@ -1,7 +1,7 @@
 'use server'
 
+import { MESSAGE_CODES } from '@/shared/api/types'
 import { createSession } from '@/shared/lib/session'
-import { createResult } from '@/shared/lib/utils/createResult'
 import { validateFormData } from '@/shared/lib/utils/validateFormData'
 
 import { SigninFormSchema } from '../lib/SigninFormSchema'
@@ -18,30 +18,30 @@ export async function signinAction(
     SigninFormSchema,
   )
   if (!validatedData)
-    return createResult({
+    return {
+      isSuccess: false,
       errors: validationErrors,
-      message: 'Please fix the highlighted fields',
-    })
+      message: MESSAGE_CODES.VALIDATION_ERROR,
+    }
 
   // finding user in db and compare password
-  const { user, error } = await verifyUser(validatedData)
-  if (!user)
-    return createResult({
+  const { data, error } = await verifyUser(validatedData)
+  if (!data)
+    return {
+      isSuccess: false,
       message: error,
-    })
+    }
 
   // create session
   await createSession({
-    avatarUrl: user.avatarUrl,
-    userId: user.id,
-    username: user.username,
+    avatarUrl: data.avatarUrl,
+    userId: data.id,
+    username: data.username,
   })
 
   // return success response
-  return createResult({
+  return {
     isSuccess: true,
-    message:
-      'You have successfully logged in to your account: ' +
-      (user.username ?? user.email),
-  })
+    message: MESSAGE_CODES.SIGNIN_SUCCESS,
+  }
 }

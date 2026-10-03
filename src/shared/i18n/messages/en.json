@@ -5,6 +5,22 @@
       "invalid": "Invalid URL",
       "max": "Maximum 2048 characters"
     },
+    "email": {
+      "invalid": "Email is not correct"
+    },
+    "username": {
+      "allowed": "Only latin letters, numbers, _ and - allowed",
+      "min": "At least 5 characters",
+      "max": "Maximum 30 characters"
+    },
+    "password": {
+      "allowed": "Only english letters and numbers allowed",
+      "capital": "At least one capital letter",
+      "digit": "At least one digit",
+      "min": "At least 8 characters",
+      "max": "Maximum 72 characters",
+      "notMatch": "Passwords don't match"
+    },
     "markTitle": {
       "min": "At least 3 characters",
       "max": "Maximum 50 characters"
@@ -24,6 +40,12 @@
     "INTERNAL_ERROR": "An internal error occurred. Please try again later",
     "INVALID_ID": "Provided invalid identifier data",
     "UNKNOWN_ERROR": "An unknown error occurred",
+    "USER_NOT_FOUND": "Seems like User with this data doesn't exist",
+    "USER_EXISTS": "User with this data already exist",
+    "USER_INCORRECT_PASSWORD": "Seems like User has different password",
+    "SIGNIN_SUCCESS": "You have successfully logged into your account",
+    "SIGNUP_SUCCESS": "You have successfully created your account",
+    "AVATAR_EDIT_SUCCESS": "Avatar has been successfully edited",
     "LOAD_META_SUCCESS": "Metadata successfully loaded",
     "LOAD_META_ERROR": "Failed to fetch Metadata by provided URL",
     "MARK_CREATE_SUCCESS": "Webmark has been successfully created",
@@ -35,24 +57,86 @@
     "CHANGE_MARK_TAGS_SUCCESS": "Tags has been successfully changed",
     "TAG_EXISTS": "Tag with this Title already exist!",
     "TAG_NOT_FOUND": "Seems like current user doesn't have provided Tag(-s)",
+    "TAG_DELETE_SUCCESS": "Tag has been successfully deleted",
+    "TAG_EDIT_SUCCESS": "Tag has been successfully edited",
     "TAG_CREATE_SUCCESS": "Tag has been successfully created"
   },
-  "notFoundPage": {
+  "NotFoundPage": {
     "title": "404 - Not Found",
     "description": "Page with you're looking for doesn't exist."
   },
-  "layout": {
+  "Layout": {
     "loaderTitle": "Loading",
     "loaderDescription": "App Initialization"
   },
-  "markList": {
+  "MarkList": {
     "unauthorizedTitle": "Something went wrong",
     "unauthorizedDescription": "To view marks you must be authenticated",
     "notFoundTitle": "No WebMarks",
     "notFoundDescription": "There are no WebMarks yet",
     "notFoundByQueryDescription": "There are no WebMarks matching your query"
   },
-  "loadMetaForm": {
+  "MarkDropdownMenu": {
+    "ariaLabel": "mark menu",
+    "items": {
+      "open": "Open WebMark",
+      "pin": "Pin",
+      "unpin": "Unpin",
+      "delete": "Delete",
+      "copy": "Copy Link",
+      "edit": "Edit WebMark",
+      "changeTags": "Change Tags"
+    }
+  },
+  "TagDropdownMenu": {
+    "ariaLabel": "tag menu",
+    "items": {
+      "delete": "Delete",
+      "edit": "Edit"
+    }
+  },
+  "TagsSidebarMenu": {
+    "unauthorizedMessage": "To view marks you must be authenticated",
+    "notFoundMessage": "There are no Tags yet"
+  },
+  "SearchButton": {
+    "ariaLabel": "search mark"
+  },
+  "SearchMark": {
+    "placeholder": "Search WebMark..."
+  },
+  "ThemeToggleButton": {
+    "ariaLabel": "Toggle theme"
+  },
+  "AuthForm": {
+    "fields": {
+      "email": {
+        "label": "Email",
+        "placeholder": "Enter your email address"
+      },
+      "password": {
+        "label": "Password",
+        "placeholder": "Enter your password"
+      }
+    }
+  },
+  "SigninForm": {
+    "submit": "Login"
+  },
+  "SignupForm": {
+    "submit": "Sign Up",
+    "fields": {
+      "username": {
+        "label": "Username",
+        "placeholder": "Enter username"
+      },
+      "confirmPassword": {
+        "label": "Confirm password",
+        "placeholder": "Confirm your password"
+      }
+    }
+  },
+  "LoadMetaForm": {
     "fields": {
       "url": {
         "label": "Insert url and autoload data",
@@ -71,11 +155,11 @@
     },
     "unauthorizedMessage": "To get Metadata by url you must login to account"
   },
-  "createMark": {
+  "CreateMark": {
     "formTitle": "Create new WebMark",
     "formDescription": "Please fill in the fields below to create new WebMark"
   },
-  "markForm": {
+  "MarkForm": {
     "fields": {
       "url": {
         "label": "URL"
@@ -92,58 +176,59 @@
       }
     }
   },
-  "editMarkForm": {
+  "EditMarkForm": {
     "formTitle": "Edit WebMark",
     "formDescription": "Please fill in the fields below to edit WebMark",
     "submit": "Edit WebMark"
   },
-  "createMarkForm": {
+  "CreateMarkForm": {
     "requiredFields": "Required Fields",
     "optionalFields": "Optional Fields",
     "submit": "Create WebMark"
   },
-  "createMarkButton": {
+  "CreateMarkButton": {
     "title": "New WebMark"
   },
-  "createTagForm": {
+  "DeleteMarkForm": {
+    "formTitle": "Delete WebMark?",
+    "formDescription": "Are you sure you want to delete this WebMark?",
+    "submit": "Delete"
+  },
+  "ChangeMarkTagsForm": {
+    "formTitle": "Change WebMark Tags",
+    "formDescription": "Select Tags to apply to WebMark",
+    "submit": "Apply Tags",
+    "emptyTags": "You don't have any tags yet. Try to create and then come back."
+  },
+  "MarkTagItem": {
+    "ariaLabel": "Toggle tag"
+  },
+  "CreateTagForm": {
     "formTitle": "Create new Tag",
     "formDescription": "Please fill in the fields below to create new Tag",
     "submit": "Create Tag",
     "fields": {
       "title": {
         "label": "Title",
-        "placeholder": "'Some cool Tag name...'"
+        "placeholder": "Some cool Tag name..."
       }
     }
   },
-  "deleteMarkForm": {
-    "formTitle": "Delete WebMark?",
-    "formDescription": "Are you sure you want to delete this WebMark?",
+  "DeleteTagForm": {
+    "formTitle": "Delete Tag?",
+    "formDescription": "Are you sure you want to delete this Tag?",
     "submit": "Delete"
   },
-  "changeMarkTagsForm": {
-    "formTitle": "Change WebMark Tags",
-    "formDescription": "Select Tags to apply to WebMark",
-    "submit": "Apply Tags",
-    "emptyTags": "You don't have any tags yet. Try to create and then come back."
+  "EditTagForm": {
+    "formTitle": "Edit Tag",
+    "formDescription": "Please fill in the fields below to edit Tag",
+    "submit": "Edit Tag",
+    "label": "Title"
   },
-  "markTagItem": {
-    "ariaLabel": "Toggle tag"
-  },
-  "tagsSidebarMenu": {
-    "unauthorizedMessage": "To view marks you must be authenticated",
-    "notFoundMessage": "There are no Tags yet"
-  },
-  "markDropdown": {
-    "ariaLabel": "mark menu",
-    "items": {
-      "open": "Open WebMark",
-      "pin": "Pin",
-      "unpin": "Unpin",
-      "delete": "Delete",
-      "copy": "Copy Link",
-      "edit": "Edit WebMark",
-      "changeTags": "Change Tags"
-    }
+  "EditAvatarForm": {
+    "formTitle": "Edit Avatar",
+    "formDescription": "Please fill in the field below to edit Avatar",
+    "submit": "Edit Avatar",
+    "label": "Avatar URL"
   }
 }

@@ -2,9 +2,9 @@
 
 import { updateTag } from 'next/cache'
 
+import { MESSAGE_CODES } from '@/shared/api/types'
 import { Tag } from '@/shared/lib/prisma/generated/client'
 import { verifySession } from '@/shared/lib/session'
-import { createResult } from '@/shared/lib/utils/createResult'
 import { validateFormData } from '@/shared/lib/utils/validateFormData'
 
 import { EditTagFormSchema } from '../lib/EditTagFormSchema'
@@ -19,9 +19,10 @@ export async function editTagAction(
   // check auth
   const session = await verifySession()
   if (!session)
-    return createResult({
-      message: 'To edit tags you must be auth',
-    })
+    return {
+      isSuccess: false,
+      message: MESSAGE_CODES.UNAUTHORIZED,
+    }
 
   // zod validation
   const { validatedData, validationErrors } = validateFormData(
@@ -29,10 +30,11 @@ export async function editTagAction(
     EditTagFormSchema,
   )
   if (!validatedData)
-    return createResult({
-      message: 'Please fix highlighted fields',
+    return {
+      isSuccess: false,
+      message: MESSAGE_CODES.VALIDATION_ERROR,
       errors: validationErrors,
-    })
+    }
 
   // update tag in DB
   const { error } = await updateUserTag({
@@ -41,17 +43,18 @@ export async function editTagAction(
     userId: session.userId,
   })
   if (error)
-    return createResult({
+    return {
+      isSuccess: false,
       message: error,
-    })
+    }
 
   // revalidation
   updateTag(`tags-${session.userId}`)
   updateTag(`marks-${session.userId}`)
 
   // return success response
-  return createResult({
+  return {
     isSuccess: true,
-    message: 'Tag has been successfully edited',
-  })
+    message: MESSAGE_CODES.TAG_EDIT_SUCCESS,
+  }
 }

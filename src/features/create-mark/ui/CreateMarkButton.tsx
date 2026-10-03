@@ -14,7 +14,7 @@ type CreateMarkButtonProps = React.ComponentProps<'button'>
 export function CreateMarkButton({ ...props }: CreateMarkButtonProps) {
   const { openDialog } = useDialogContext()
 
-  const t = useTranslations('createMarkButton')
+  const t = useTranslations('CreateMarkButton')
 
   return (
     <Button {...props} onClick={() => openDialog(<CreateMark />)}>

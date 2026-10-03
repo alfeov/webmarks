@@ -24,7 +24,7 @@ export function DeleteMarkForm({ markId }: { markId: WebMark['id'] }) {
   useNotificationManager(state.message, state.isSuccess, !isPending)
   useCloseDialogOn(state.isSuccess)
 
-  const t = useTranslations('deleteMarkForm')
+  const t = useTranslations('DeleteMarkForm')
 
   return (
     <form action={formAction}>

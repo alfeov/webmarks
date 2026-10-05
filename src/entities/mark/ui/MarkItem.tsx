@@ -1,5 +1,3 @@
-import Link from 'next/link'
-
 import { Avatar, AvatarFallback, AvatarImage } from '@/shared/ui/avatar'
 import { Badge } from '@/shared/ui/badge'
 import {
@@ -30,12 +28,12 @@ export function MarkItem({
   return (
     <Card>
       <div className='flex items-center gap-[10px] px-(--card-spacing)'>
-        <Link href={url} target='_blank' className='rounded-[50%]'>
+        <a href={url} target='_blank' className='rounded-[50%]'>
           <Avatar size='lg'>
             <AvatarImage src={logoUrl || 'errorSrc'} alt={title} />
             <AvatarFallback>{title.charAt(0)}</AvatarFallback>
           </Avatar>
-        </Link>
+        </a>
         <div className='grow overflow-hidden'>
           <CardTitle className='truncate'>{title}</CardTitle>
           <CardDescription className='truncate'>

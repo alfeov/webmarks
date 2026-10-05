@@ -1,10 +1,10 @@
 'use client'
 
-import Link from 'next/link'
 import { useParams } from 'next/navigation'
 import { memo } from 'react'
 
 import { TagDropdownMenu } from '@/features/manage-tag/ui/TagDropdownMenu'
+import { Link } from '@/shared/i18n/navigation'
 import { Tag } from '@/shared/lib/prisma/generated/client'
 import { SidebarMenuButton, SidebarMenuItem } from '@/shared/ui/sidebar'
 

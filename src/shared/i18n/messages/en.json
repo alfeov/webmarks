@@ -1,4 +1,7 @@
 {
+  "Metadata": {
+    "description": "Create and manage your web bookmarks on different devices with safe and instant experience"
+  },
   "errors": {
     "id": "Provided ID is not correct",
     "url": {
@@ -67,6 +70,11 @@
     "COPY_SUCCESS": "Data has been successfully copy to clipboard",
     "COPY_ERROR": "Your browser doesn't support copy API",
     "PASTE_ERROR": "Your browser doesn't support paste API"
+  },
+  "SwitchLocale": {
+    "button": "Language",
+    "en": "English",
+    "ru": "Russian"
   },
   "NotFoundPage": {
     "title": "404 - Not Found",

@@ -1,9 +1,8 @@
 'use client'
 
-import Link from 'next/link'
-import { usePathname } from 'next/navigation'
 import { useTranslations } from 'next-intl'
 
+import { Link, usePathname } from '@/shared/i18n/navigation'
 import {
   SidebarGroup,
   SidebarGroupLabel,
@@ -28,7 +27,12 @@ export function AllMarksSidebarGroup() {
       </SidebarGroupLabel>
       <SidebarMenu>
         <SidebarMenuItem>
-          <Link href='/' prefetch onClick={closeMobileSidebar}>
+          <Link
+            href='/'
+            prefetch
+            onClick={closeMobileSidebar}
+            className='w-full rounded-xl'
+          >
             <SidebarMenuButton data-active={pathname === '/'}>
               {t('showAll')}
             </SidebarMenuButton>

@@ -1,10 +1,11 @@
 import type { Metadata } from 'next'
 import localFont from 'next/font/local'
-import Link from 'next/link'
 import { getLocale, getTranslations } from 'next-intl/server'
 import { Suspense } from 'react'
 
+import { SwitchLocale } from '@/features/switch-locale/SwitchLocale'
 import { ThemeToggleButton } from '@/features/toggle-theme/ui/ThemeToggleButton'
+import { Link } from '@/shared/i18n/navigation'
 import { routing } from '@/shared/i18n/routing'
 import { cn } from '@/shared/lib/utils'
 import { ScrollArea } from '@/shared/ui/scroll-area'
@@ -23,67 +24,73 @@ const fontExcalidraw = localFont({
   variable: '--font-excalifont',
 })
 
+const BASE_URL = String(process.env.NEXT_PUBLIC_SITE_URL)
+
 export function generateStaticParams() {
   return routing.locales.map((locale) => ({ locale }))
 }
 
-export const metadata: Metadata = {
-  metadataBase: new URL(
-    process.env.NEXT_PUBLIC_SITE_URL || 'https://webmarks.vercel.app/',
-  ),
-  title: {
-    template: '%s | WebMarks',
-    default: 'WebMarks',
-  },
-  description:
-    'Create and manege your web bookmarks on different devices with safe and instant experience',
-  keywords: [
-    'bookmarks',
-    'web bookmarks',
-    'bookmark manager',
-    'web bookmark manager',
-    'online bookmark manager',
-    'cloud web bookmark manager',
-    'web bookmark organizer',
-    'link manager',
-    'link organizer',
-    'tag web bookmarks',
-    'organize web bookmarks with tags',
-    'web bookmark folders',
-    'web bookmark search',
-    'fast web bookmark manager',
-    'sync web bookmarks across devices',
-    'cross‑device web bookmarks',
-    'search meta by web bookmarks',
-    'edit web bookmarks',
-  ],
-  authors: {
-    name: 'alfeov',
-    url: 'https://github.com/alfeov',
-  },
-  creator: 'alfeov',
-  robots: {
-    index: true,
-    follow: true,
-    nocache: false,
-    googleBot: {
+export async function generateMetadata(): Promise<Metadata> {
+  const locale = await getLocale()
+  const t = await getTranslations('Metadata')
+
+  return {
+    metadataBase: new URL(BASE_URL),
+    title: {
+      template: '%s | WebMarks',
+      default: 'WebMarks',
+    },
+    description: t('description'),
+    keywords: [
+      'bookmarks',
+      'web bookmarks',
+      'bookmark manager',
+      'web bookmark manager',
+      'online bookmark manager',
+      'cloud web bookmark manager',
+      'web bookmark organizer',
+      'link manager',
+      'link organizer',
+      'tag web bookmarks',
+      'organize web bookmarks with tags',
+      'web bookmark folders',
+      'web bookmark search',
+      'fast web bookmark manager',
+      'sync web bookmarks across devices',
+      'cross‑device web bookmarks',
+      'search meta by web bookmarks',
+      'edit web bookmarks',
+    ],
+    authors: {
+      name: 'alfeov',
+      url: 'https://github.com/alfeov',
+    },
+    creator: 'alfeov',
+    robots: {
       index: true,
       follow: true,
-      noimageindex: false,
+      nocache: false,
+      googleBot: {
+        index: true,
+        follow: true,
+        noimageindex: false,
+      },
     },
-  },
-  alternates: {
-    canonical: '/',
-  },
-  openGraph: {
-    url: '/',
-    title: 'WebMarks',
-    description:
-      'Create and manege your web bookmarks on different devices with safe and instant experience',
-    locale: 'en_US',
-    type: 'website',
-    siteName: 'WebMarks',
-  },
+    alternates: {
+      canonical: '/',
+      languages: Object.fromEntries(
+        routing.locales.map((locale) => [locale, '/' + locale]),
+      ),
+    },
+    openGraph: {
+      url: '/',
+      title: 'WebMarks',
+      description: t('description'),
+      locale: locale === 'en' ? 'en_US' : 'ru_RU',
+      type: 'website',
+      siteName: 'WebMarks',
+    },
+  }
 }
 
 export default async function RootLayout({
@@ -160,6 +167,7 @@ export default async function RootLayout({
                   <h1 className='text-[30px] font-bold'>WebMarks</h1>
                 </Link>
                 <div className='flex items-center gap-[20px]'>
+                  <SwitchLocale />
                   <ThemeToggleButton />
                   <Suspense fallback={<ProfileSkeleton />}>
                     <Profile />

@@ -55,12 +55,12 @@
     "AVATAR_EDIT_SUCCESS": "Avatar has been successfully edited",
     "LOAD_META_SUCCESS": "Metadata successfully loaded",
     "LOAD_META_ERROR": "Failed to fetch Metadata by provided URL",
-    "MARK_CREATE_SUCCESS": "Webmark has been successfully created",
+    "MARK_CREATE_SUCCESS": "WebMark has been successfully created",
     "MARK_DELETE_SUCCESS": "WebMark has been successfully deleted",
-    "MARK_EDIT_SUCCESS": "Webmark has been successfully edited",
+    "MARK_EDIT_SUCCESS": "WebMark has been successfully edited",
     "MARK_EXISTS": "WebMark with this URL already exist!",
     "MARK_NOT_FOUND": "Seems like current user doesn't have provided WebMark",
-    "TOGGLE_MARK_PIN_SUCCESS": "Mark has been successfully pinned",
+    "TOGGLE_MARK_PIN_SUCCESS": "WebMark has been successfully pinned",
     "CHANGE_MARK_TAGS_SUCCESS": "Tags has been successfully changed",
     "TAG_EXISTS": "Tag with this Title already exist!",
     "TAG_NOT_FOUND": "Seems like current user doesn't have provided Tag(-s)",
@@ -74,11 +74,11 @@
   "SwitchLocale": {
     "button": "Language",
     "en": "English",
-    "ru": "Russian"
+    "ru": "Русский"
   },
   "NotFoundPage": {
     "title": "404 - Not Found",
-    "description": "Page with you're looking for doesn't exist."
+    "description": "Seems like page you're looking for doesn't exist."
   },
   "Layout": {
     "loaderTitle": "Loading",
@@ -92,14 +92,14 @@
     "notFoundByQueryDescription": "There are no WebMarks matching your query"
   },
   "MarkDropdownMenu": {
-    "ariaLabel": "mark menu",
+    "ariaLabel": "Mark menu",
     "items": {
       "open": "Open WebMark",
+      "copy": "Copy Link",
       "pin": "Pin",
       "unpin": "Unpin",
       "delete": "Delete",
-      "copy": "Copy Link",
-      "edit": "Edit WebMark",
+      "edit": "Edit",
       "changeTags": "Change Tags"
     }
   },
@@ -115,10 +115,10 @@
     "notFoundMessage": "There are no Tags yet"
   },
   "SearchButton": {
-    "ariaLabel": "search mark"
+    "ariaLabel": "Find mark"
   },
   "SearchMark": {
-    "placeholder": "Search WebMark..."
+    "placeholder": "Search by WebMark..."
   },
   "ThemeToggleButton": {
     "ariaLabel": "Toggle theme"
@@ -145,7 +145,7 @@
     }
   },
   "Auth": {
-    "signinFormTitle": "Login to your account",
+    "signinFormTitle": "Login to account",
     "signupFormTitle": "Create new account",
     "signinFormDescription": "Please fill in the fields below to login to your account",
     "signupFormDescription": "Please fill in the fields below to create new account",
@@ -158,11 +158,11 @@
     "fields": {
       "email": {
         "label": "Email",
-        "placeholder": "Enter your email address"
+        "placeholder": "Enter email address"
       },
       "password": {
         "label": "Password",
-        "placeholder": "Enter your password"
+        "placeholder": "Enter password"
       }
     }
   },
@@ -178,14 +178,14 @@
       },
       "confirmPassword": {
         "label": "Confirm password",
-        "placeholder": "Confirm your password"
+        "placeholder": "Confirm password"
       }
     }
   },
   "LoadMetaForm": {
     "fields": {
       "url": {
-        "label": "Insert url and autoload data",
+        "label": "Paste URL and autoload data",
         "placeholder": "Search Meta by URL..."
       }
     },
@@ -215,7 +215,7 @@
       },
       "description": {
         "label": "Description",
-        "placeholder": "Some cool description to your link"
+        "placeholder": "Some cool description to your WebMarks..."
       },
       "logoUrl": {
         "label": "Logo URL"

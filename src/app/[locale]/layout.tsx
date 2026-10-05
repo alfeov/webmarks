@@ -24,7 +24,9 @@ const fontExcalidraw = localFont({
   variable: '--font-excalifont',
 })
 
-const BASE_URL = String(process.env.NEXT_PUBLIC_SITE_URL)
+const BASE_URL = new URL(
+  String(process.env.NEXT_PUBLIC_SITE_URL) || 'http://localhost:3000',
+)
 
 export function generateStaticParams() {
   return routing.locales.map((locale) => ({ locale }))
@@ -35,7 +37,7 @@ export async function generateMetadata(): Promise<Metadata> {
   const t = await getTranslations('Metadata')
 
   return {
-    metadataBase: new URL(BASE_URL),
+    metadataBase: BASE_URL,
     title: {
       template: '%s | WebMarks',
       default: 'WebMarks',
@@ -77,7 +79,7 @@ export async function generateMetadata(): Promise<Metadata> {
       },
     },
     alternates: {
-      canonical: '/',
+      canonical: '/' + locale,
       languages: Object.fromEntries(
         routing.locales.map((locale) => [locale, '/' + locale]),
       ),
@@ -107,29 +109,6 @@ export default async function RootLayout({
       suppressHydrationWarning
     >
       <head>
-        <link rel='icon' href='/favicon.ico' sizes='32x32' />
-        <link
-          rel='icon'
-          href='/icon-192.png'
-          type='image/png'
-          sizes='192x192'
-        />
-        <link
-          rel='icon'
-          href='/icon-512.png'
-          type='image/png'
-          sizes='512x512'
-        />
-        <link
-          rel='apple-touch-icon'
-          href='/apple-icon?<generated>'
-          type='image/<generated>'
-          sizes='<generated>'
-        />
-        <meta property='og:image' content='<generated>' />
-        <meta property='og:image:type' content='<generated>' />
-        <meta property='og:image:width' content='<generated>' />
-        <meta property='og:image:height' content='<generated>' />
         <script
           dangerouslySetInnerHTML={{
             __html: `

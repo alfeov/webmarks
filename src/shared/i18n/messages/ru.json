@@ -1,5 +1,280 @@
 {
+  "Metadata": {
+    "description": "Создавайте и управляйте своими веб-закладками на разных устройствах — безопасно и быстро"
+  },
+  "errors": {
+    "id": "Указанный ID некорректен",
+    "url": {
+      "invalid": "Неверный URL",
+      "max": "Максимум 2048 символов"
+    },
+    "email": {
+      "invalid": "Некорректный email"
+    },
+    "username": {
+      "allowed": "Разрешены только латинские буквы, цифры, _ и -",
+      "min": "Минимум 5 символов",
+      "max": "Максимум 30 символов"
+    },
+    "password": {
+      "allowed": "Разрешены только английские буквы и цифры",
+      "capital": "Хотя бы одна заглавная буква",
+      "digit": "Хотя бы одна цифра",
+      "min": "Минимум 8 символов",
+      "max": "Максимум 72 символа",
+      "notMatch": "Пароли не совпадают"
+    },
+    "markTitle": {
+      "min": "Минимум 3 символа",
+      "max": "Максимум 50 символов"
+    },
+    "markDescription": {
+      "min": "Минимум 10 символов",
+      "max": "Максимум 200 символов"
+    },
+    "tagTitle": {
+      "min": "Минимум 1 символ",
+      "max": "Максимум 15 символов"
+    }
+  },
+  "toast": {
+    "successTitle": "Успех!",
+    "errorTitle": "Что-то пошло не так!"
+  },
+  "codes": {
+    "UNAUTHORIZED": "У вас нет прав для выполнения этого действия",
+    "VALIDATION_ERROR": "Ошибка валидации. Пожалуйста, проверьте введенные данные",
+    "INTERNAL_ERROR": "Произошла внутренняя ошибка. Пожалуйста, попробуйте позже",
+    "INVALID_ID": "Предоставлены неверные идентификационные данные",
+    "UNKNOWN_ERROR": "Произошла неизвестная ошибка",
+    "USER_NOT_FOUND": "Похоже, пользователя с такими данными не существует",
+    "USER_EXISTS": "Пользователь с такими данными уже существует",
+    "USER_INCORRECT_PASSWORD": "Похоже, у пользователя другой пароль",
+    "SIGNIN_SUCCESS": "Вы успешно вошли в свой аккаунт",
+    "SIGNUP_SUCCESS": "Вы успешно создали свой аккаунт",
+    "AVATAR_EDIT_SUCCESS": "Аватар успешно изменен",
+    "LOAD_META_SUCCESS": "Метаданные успешно загружены",
+    "LOAD_META_ERROR": "Не удалось получить метаданные по указанному URL",
+    "MARK_CREATE_SUCCESS": "Закладка успешно создана",
+    "MARK_DELETE_SUCCESS": "Закладка успешно удалена",
+    "MARK_EDIT_SUCCESS": "Закладка успешно отредактирована",
+    "MARK_EXISTS": "Закладка с таким URL уже существует!",
+    "MARK_NOT_FOUND": "Похоже, у текущего пользователя нет указанной закладки",
+    "TOGGLE_MARK_PIN_SUCCESS": "Закладка успешно закреплена",
+    "CHANGE_MARK_TAGS_SUCCESS": "Теги успешно изменены",
+    "TAG_EXISTS": "Тег с таким названием уже существует!",
+    "TAG_NOT_FOUND": "Похоже, у текущего пользователя нет указанных тегов",
+    "TAG_DELETE_SUCCESS": "Тег успешно удален",
+    "TAG_EDIT_SUCCESS": "Тег успешно отредактирован",
+    "TAG_CREATE_SUCCESS": "Тег успешно создан",
+    "COPY_SUCCESS": "Данные успешно скопированы в буфер обмена",
+    "COPY_ERROR": "Ваш браузер не поддерживает API копирования",
+    "PASTE_ERROR": "Ваш браузер не поддерживает API вставки"
+  },
+  "SwitchLocale": {
+    "button": "Язык",
+    "en": "English",
+    "ru": "Русский"
+  },
+  "NotFoundPage": {
+    "title": "404 — Страница не найдена",
+    "description": "Похоже страница, которую вы ищите, не существует."
+  },
   "Layout": {
-    "loading": "Загрузка приложения"
+    "loaderTitle": "Загрузка",
+    "loaderDescription": "Инициализация приложения"
+  },
+  "MarkList": {
+    "unauthorizedTitle": "Что-то пошло не так",
+    "unauthorizedDescription": "Чтобы просматривать закладки, необходимо авторизоваться",
+    "notFoundTitle": "Закладки не найдены",
+    "notFoundDescription": "Здесь пока нет закладок",
+    "notFoundByQueryDescription": "Нет закладок, соответствующих вашему запросу"
+  },
+  "MarkDropdownMenu": {
+    "ariaLabel": "Меню закладки",
+    "items": {
+      "open": "Открыть закладку",
+      "pin": "Закрепить",
+      "unpin": "Открепить",
+      "delete": "Удалить",
+      "copy": "Копировать ссылку",
+      "edit": "Редактировать",
+      "changeTags": "Изменить теги"
+    }
+  },
+  "TagDropdownMenu": {
+    "ariaLabel": "меню тега",
+    "items": {
+      "delete": "Удалить",
+      "edit": "Редактировать"
+    }
+  },
+  "TagsSidebarMenu": {
+    "unauthorizedMessage": "Чтобы просматривать закладки, необходимо авторизоваться",
+    "notFoundMessage": "Здесь пока нет тегов"
+  },
+  "SearchButton": {
+    "ariaLabel": "Найти закладки"
+  },
+  "SearchMark": {
+    "placeholder": "Поиск по WebMark..."
+  },
+  "ThemeToggleButton": {
+    "ariaLabel": "Переключить тему"
+  },
+  "AllMarksSidebarGroup": {
+    "label": "Главная",
+    "showAll": "Показать все WebMarks"
+  },
+  "TagsSidebarGroup": {
+    "label": "Теги"
+  },
+  "TagsSidebarGroupAction": {
+    "ariaLabel": "Открыть диалог создания тега"
+  },
+  "Profile": {
+    "ariaLabel": "Меню профиля"
+  },
+  "ProfileDropdownMenu": {
+    "items": {
+      "editAvatar": "Изменить аватар",
+      "signin": "Войти",
+      "signup": "Регистрация",
+      "signout": "Выйти"
+    }
+  },
+  "Auth": {
+    "signinFormTitle": "Войдите в аккаунт",
+    "signupFormTitle": "Создать новый аккаунт",
+    "signinFormDescription": "Пожалуйста, заполните поля ниже, чтобы войти в свой аккаунт",
+    "signupFormDescription": "Пожалуйста, заполните поля ниже, чтобы создать новый аккаунт",
+    "signinQuestion": "Еще нет аккаунта?",
+    "signupQuestion": "Уже есть аккаунт?",
+    "signinButton": "Зарегистрироваться",
+    "signupButton": "Войти"
+  },
+  "AuthForm": {
+    "fields": {
+      "email": {
+        "label": "Email",
+        "placeholder": "Введите адрес электронной почты"
+      },
+      "password": {
+        "label": "Пароль",
+        "placeholder": "Введите пароль"
+      }
+    }
+  },
+  "SigninForm": {
+    "submit": "Войти"
+  },
+  "SignupForm": {
+    "submit": "Зарегистрироваться",
+    "fields": {
+      "username": {
+        "label": "Имя пользователя",
+        "placeholder": "Введите имя пользователя"
+      },
+      "confirmPassword": {
+        "label": "Подтверди пароль",
+        "placeholder": "Подтвердите пароль"
+      }
+    }
+  },
+  "LoadMetaForm": {
+    "fields": {
+      "url": {
+        "label": "Введите URL и загрузите данные автоматически",
+        "placeholder": "Поиск метаданных по URL..."
+      }
+    },
+    "buttons": {
+      "paste": {
+        "title": "Вставить",
+        "ariaLabel": "Вставить из буфера обмена"
+      },
+      "load": {
+        "title": "Загрузить",
+        "ariaLabel": "Загрузить метаданные из URL"
+      }
+    },
+    "unauthorizedMessage": "Чтобы получить метаданные по URL, вам нужно войти в аккаунт"
+  },
+  "CreateMark": {
+    "formTitle": "Создать новую закладку",
+    "formDescription": "Пожалуйста, заполните поля ниже, чтобы создать новый WebMark"
+  },
+  "MarkForm": {
+    "fields": {
+      "url": {
+        "label": "URL"
+      },
+      "title": {
+        "label": "Название"
+      },
+      "description": {
+        "label": "Описание",
+        "placeholder": "Описание вашей закладки..."
+      },
+      "logoUrl": {
+        "label": "URL логотипа"
+      }
+    }
+  },
+  "EditMarkForm": {
+    "formTitle": "Редактировать закладку",
+    "formDescription": "Пожалуйста, заполните поля ниже, чтобы отредактировать закладку",
+    "submit": "Редактировать закладку"
+  },
+  "CreateMarkForm": {
+    "requiredFields": "Обязательные поля",
+    "optionalFields": "Необязательные поля",
+    "submit": "Создать закладку"
+  },
+  "CreateMarkButton": {
+    "title": "Новая закладка"
+  },
+  "DeleteMarkForm": {
+    "formTitle": "Удалить закладку?",
+    "formDescription": "Вы точно хотите удалить эту закладку?",
+    "submit": "Удалить"
+  },
+  "ChangeMarkTagsForm": {
+    "formTitle": "Изменить теги закладки",
+    "formDescription": "Выберите теги для закладки",
+    "submit": "Применить теги",
+    "emptyTags": "У вас пока нет тегов. Попробуйте создать их и возвращайтесь."
+  },
+  "MarkTagItem": {
+    "ariaLabel": "Переключить тег"
+  },
+  "CreateTagForm": {
+    "formTitle": "Создать новый тег",
+    "formDescription": "Пожалуйста, заполните поля ниже, чтобы создать новый тег",
+    "submit": "Создать тег",
+    "fields": {
+      "title": {
+        "label": "Название",
+        "placeholder": "Имя тега..."
+      }
+    }
+  },
+  "DeleteTagForm": {
+    "formTitle": "Удалить тег?",
+    "formDescription": "Вы точно хотите удалить этот тег?",
+    "submit": "Удалить"
+  },
+  "EditTagForm": {
+    "formTitle": "Редактировать тег",
+    "formDescription": "Пожалуйста, заполните поля ниже, чтобы отредактировать тег",
+    "submit": "Редактировать тег",
+    "label": "Название"
+  },
+  "EditAvatarForm": {
+    "formTitle": "Изменить аватар",
+    "formDescription": "Пожалуйста, заполните поле ниже, чтобы изменить аватар",
+    "submit": "Изменить аватар",
+    "label": "URL аватара"
   }
 }

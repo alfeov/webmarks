@@ -5,7 +5,7 @@ import type { Locale } from 'next-intl'
 
 import { MESSAGE_CODES } from '@/shared/api/types'
 import { redirect } from '@/shared/i18n/navigation'
-import { Tag } from '@/shared/lib/prisma/generated/client'
+import type { Tag } from '@/shared/lib/prisma/generated/client'
 import { verifySession } from '@/shared/lib/session'
 
 import { deleteUserTag } from './deleteUserTag'

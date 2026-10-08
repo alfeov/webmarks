@@ -7,7 +7,7 @@ import { verifySession } from '@/shared/lib/session'
 import { validateFormData } from '@/shared/lib/utils/validateFormData'
 
 import { EditAvatarFormSchema } from '../lib/EditAvatarFormSchema'
-import { EditAvatarFormState } from '../model/types'
+import type { EditAvatarFormState } from '../model/types'
 import { updateUserAvatar } from './updateUserAvatar'
 
 export async function editAvatarAction(

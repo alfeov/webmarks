@@ -3,7 +3,7 @@
 import { updateTag } from 'next/cache'
 
 import { MESSAGE_CODES } from '@/shared/api/types'
-import { Tag } from '@/shared/lib/prisma/generated/client'
+import type { Tag } from '@/shared/lib/prisma/generated/client'
 import { verifySession } from '@/shared/lib/session'
 import { validateFormData } from '@/shared/lib/utils/validateFormData'
 

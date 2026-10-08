@@ -28,13 +28,18 @@ pn dev
 
 ## Stack
 
-- Next.js (Instant Navigation)
-- Prisma (PostgreSQL)
-- jose (session)
-- React (ViewTransition, Context without State Managements)
-- React Hook Form
-- Zod
-- Typescript
-- ShadCN UI (Tailwind)
-- Husky + nano-staged
-- FSD
+- Base:
+  - Next.js (Instant Navigation)
+  - Prisma (PostgreSQL)
+  - React (ViewTransition, Contexts without State Managements)
+  - Typescript
+- Forms:
+  - React Hook Form
+  - Zod
+- UI:
+  - ShadCN UI
+  - Tailwind
+- Other:
+  - FSD
+  - next-intl (i18n)
+  - jose (session)

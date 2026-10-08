@@ -2,7 +2,7 @@ import 'server-only'
 
 import { MESSAGE_CODES } from '@/shared/api/types'
 import { prisma } from '@/shared/lib/prisma'
-import { Prisma, Tag } from '@/shared/lib/prisma/generated/client'
+import { Prisma, type Tag } from '@/shared/lib/prisma/generated/client'
 
 type UpdateUserTagParams = Pick<Tag, 'id' | 'userId'> & {
   newTitle: Tag['title']

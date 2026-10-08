@@ -2,7 +2,7 @@
 
 import { useTranslations } from 'next-intl'
 
-import { Tag } from '@/shared/lib/prisma/generated/client'
+import type { Tag } from '@/shared/lib/prisma/generated/client'
 import { Button } from '@/shared/ui/button'
 import {
   DropdownMenu,

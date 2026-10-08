@@ -3,7 +3,7 @@
 import { useTranslations } from 'next-intl'
 import { memo, useState } from 'react'
 
-import { Tag } from '@/shared/lib/prisma/generated/client'
+import type { Tag } from '@/shared/lib/prisma/generated/client'
 import { Checkbox } from '@/shared/ui/checkbox'
 import { Field, FieldLabel } from '@/shared/ui/field'
 

@@ -4,7 +4,7 @@ import { useTranslations } from 'next-intl'
 import { useActionState } from 'react'
 
 import { useFetchingIndicatorManager } from '@/shared/lib/hooks/useFetchingIndicatorManager'
-import { WebMark } from '@/shared/lib/prisma/generated/client'
+import type { WebMark } from '@/shared/lib/prisma/generated/client'
 import { DropdownMenuItem } from '@/shared/ui/dropdown-menu'
 
 import { toggleMarkPinnedAction } from '../api/toggleMarkPinnedAction'

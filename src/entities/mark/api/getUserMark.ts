@@ -1,7 +1,7 @@
 import 'server-only'
 
 import { prisma } from '@/shared/lib/prisma'
-import { WebMark } from '@/shared/lib/prisma/generated/client'
+import type { WebMark } from '@/shared/lib/prisma/generated/client'
 
 type GetUserMarkParams = Pick<WebMark, 'id' | 'userId'>
 

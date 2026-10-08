@@ -4,7 +4,7 @@ import { useTranslations } from 'next-intl'
 
 import { useCloseDialogOn } from '@/shared/lib/hooks/useCloseDialogOn'
 import { useNotificationManager } from '@/shared/lib/hooks/useNotificationManager'
-import { Tag } from '@/shared/lib/prisma/generated/client'
+import type { Tag } from '@/shared/lib/prisma/generated/client'
 import { Badge } from '@/shared/ui/badge'
 import { Button } from '@/shared/ui/button'
 import { FieldLegend, FieldSet } from '@/shared/ui/field'

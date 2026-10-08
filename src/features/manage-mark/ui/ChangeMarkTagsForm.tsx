@@ -3,15 +3,15 @@
 import { useTranslations } from 'next-intl'
 import { useActionState } from 'react'
 
-import { WebMarkWithTags } from '@/entities/mark/model/types'
+import type { WebMarkWithTags } from '@/entities/mark/model/types'
 import { useCloseDialogOn } from '@/shared/lib/hooks/useCloseDialogOn'
 import { useNotificationManager } from '@/shared/lib/hooks/useNotificationManager'
-import { Tag } from '@/shared/lib/prisma/generated/client'
+import type { Tag } from '@/shared/lib/prisma/generated/client'
 import { Button } from '@/shared/ui/button'
 import { FieldDescription, FieldLegend, FieldSet } from '@/shared/ui/field'
 
 import { changeMarkTagsAction } from '../api/changeMarkTagsAction'
-import { ChangeMarkTagsFormState } from '../model/types'
+import type { ChangeMarkTagsFormState } from '../model/types'
 import { MarkTagItem } from './MarkTagItem'
 
 const initialState: ChangeMarkTagsFormState = {

@@ -1,9 +1,8 @@
 import { useTranslations } from 'next-intl'
 import { useEffect } from 'react'
 
-import { MessageCode } from '@/shared/api/types'
-
-import { showToast } from '../utils/showToast'
+import type { MessageCode } from '@/shared/api/types'
+import { showToast } from '@/shared/lib/utils/showToast'
 
 export function useNotificationManager(
   messageCode: MessageCode | null = null,
@@ -17,9 +16,10 @@ export function useNotificationManager(
     if (notificationTrigger) {
       if (messageCode) {
         const title = isSuccess ? tToast('successTitle') : tToast('errorTitle')
-        const message = tCodes(messageCode) || tCodes('UNKNOWN_ERROR')
+        const message = tCodes(messageCode)
         showToast(title, message, isSuccess)
       }
     }
-  }, [notificationTrigger])
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [notificationTrigger, messageCode])
 }

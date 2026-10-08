@@ -3,8 +3,8 @@ import 'server-only'
 import { SafeUserData } from '@/entities/user/lib/SafeUserData'
 import { MESSAGE_CODES } from '@/shared/api/types'
 import { prisma } from '@/shared/lib/prisma'
-import { Prisma, User } from '@/shared/lib/prisma/generated/client'
-import { UserUpdateInput } from '@/shared/lib/prisma/generated/models'
+import { Prisma, type User } from '@/shared/lib/prisma/generated/client'
+import type { UserUpdateInput } from '@/shared/lib/prisma/generated/models'
 
 type UpdateUserAvatarParams = {
   id: User['id']

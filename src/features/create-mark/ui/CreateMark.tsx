@@ -4,7 +4,7 @@ import { useParams } from 'next/navigation'
 import { useTranslations } from 'next-intl'
 
 import { useTagsContext } from '@/entities/tag/model/TagsContext'
-import { Tag } from '@/shared/lib/prisma/generated/client'
+import type { Tag } from '@/shared/lib/prisma/generated/client'
 import { FieldDescription, FieldLegend, FieldSet } from '@/shared/ui/field'
 
 import { MetaProvider } from '../model/MetaContext'

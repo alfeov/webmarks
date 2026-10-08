@@ -2,7 +2,7 @@
 
 import { useTranslations } from 'next-intl'
 
-import { WebMarkWithTags } from '@/entities/mark/model/types'
+import type { WebMarkWithTags } from '@/entities/mark/model/types'
 import { useTagsContext } from '@/entities/tag/model/TagsContext'
 import { ChangeMarkTagsForm } from '@/features/manage-mark/ui/ChangeMarkTagsForm'
 import { useDialogContext } from '@/shared/lib/contexts/DialogContext'

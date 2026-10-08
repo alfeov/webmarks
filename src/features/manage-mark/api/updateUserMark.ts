@@ -2,7 +2,7 @@ import 'server-only'
 
 import { MESSAGE_CODES } from '@/shared/api/types'
 import { prisma } from '@/shared/lib/prisma'
-import { Prisma, WebMark } from '@/shared/lib/prisma/generated/client'
+import { Prisma, type WebMark } from '@/shared/lib/prisma/generated/client'
 
 export async function updateUserMark({
   id,

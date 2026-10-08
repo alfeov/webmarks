@@ -6,7 +6,7 @@ import { useActionState } from 'react'
 
 import { useCloseDialogOn } from '@/shared/lib/hooks/useCloseDialogOn'
 import { useNotificationManager } from '@/shared/lib/hooks/useNotificationManager'
-import { Tag } from '@/shared/lib/prisma/generated/client'
+import type { Tag } from '@/shared/lib/prisma/generated/client'
 import { Button } from '@/shared/ui/button'
 import { FieldDescription, FieldLegend, FieldSet } from '@/shared/ui/field'
 

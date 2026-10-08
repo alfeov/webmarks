@@ -3,11 +3,11 @@
 import { updateTag } from 'next/cache'
 
 import { MESSAGE_CODES } from '@/shared/api/types'
-import { WebMark } from '@/shared/lib/prisma/generated/client'
+import type { WebMark } from '@/shared/lib/prisma/generated/client'
 import { verifySession } from '@/shared/lib/session'
 
 import { IdsSchema } from '../lib/IdsSchema'
-import { ChangeMarkTagsFormState } from '../model/types'
+import type { ChangeMarkTagsFormState } from '../model/types'
 import { setUserMarkTags } from './setUserMarkTags'
 
 export async function changeMarkTagsAction(

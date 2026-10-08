@@ -1,6 +1,6 @@
 import { useTranslations } from 'next-intl'
 
-import { WebMarkWithTags } from '@/entities/mark/model/types'
+import type { WebMarkWithTags } from '@/entities/mark/model/types'
 import { ChangeMarkTagsDropdownItem } from '@/features/manage-mark/ui/ChangeMarkTagsDropdownItem'
 import { Button } from '@/shared/ui/button'
 import {

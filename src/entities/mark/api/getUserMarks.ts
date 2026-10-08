@@ -3,7 +3,7 @@ import 'server-only'
 import { cacheLife, cacheTag } from 'next/cache'
 
 import { prisma } from '@/shared/lib/prisma'
-import { Tag, WebMark } from '@/shared/lib/prisma/generated/client'
+import type { Tag, WebMark } from '@/shared/lib/prisma/generated/client'
 
 interface GetUserMarksParams {
   query?: string

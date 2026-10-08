@@ -5,7 +5,7 @@ import bcrypt from 'bcrypt'
 import { SafeUserData } from '@/entities/user/lib/SafeUserData'
 import { MESSAGE_CODES } from '@/shared/api/types'
 import { prisma } from '@/shared/lib/prisma'
-import { User } from '@/shared/lib/prisma/generated/client'
+import type { User } from '@/shared/lib/prisma/generated/client'
 
 export async function verifyUser({
   email,

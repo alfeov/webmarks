@@ -5,7 +5,7 @@ import { verifySession } from '@/shared/lib/session'
 import { validateFormData } from '@/shared/lib/utils/validateFormData'
 
 import { LoadMetaFormSchema } from '../lib/LoadMetaFormSchema'
-import { LoadMetaFormState } from '../model/types'
+import type { LoadMetaFormState } from '../model/types'
 import { getMetadata } from './getMetadata'
 
 export async function loadMetaAction(

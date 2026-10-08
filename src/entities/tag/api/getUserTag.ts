@@ -3,7 +3,7 @@ import 'server-only'
 import { cacheLife, cacheTag } from 'next/cache'
 
 import { prisma } from '@/shared/lib/prisma'
-import { Tag } from '@/shared/lib/prisma/generated/client'
+import type { Tag } from '@/shared/lib/prisma/generated/client'
 
 type GetUserTagParams = {
   id: Tag['id']

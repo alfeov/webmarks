@@ -3,12 +3,12 @@
 import { updateTag } from 'next/cache'
 
 import { MESSAGE_CODES } from '@/shared/api/types'
-import { WebMark } from '@/shared/lib/prisma/generated/client'
+import type { WebMark } from '@/shared/lib/prisma/generated/client'
 import { verifySession } from '@/shared/lib/session'
 import { validateFormData } from '@/shared/lib/utils/validateFormData'
 
 import { EditMarkFormSchema } from '../lib/EditMarkFormSchema'
-import { EditMarkFormState } from '../model/types'
+import type { EditMarkFormState } from '../model/types'
 import { updateUserMark } from './updateUserMark'
 
 export async function editMarkAction(

@@ -6,7 +6,7 @@ import { getUserMarks } from '@/entities/mark/api/getUserMarks'
 import { MarkItem } from '@/entities/mark/ui/MarkItem'
 import { getUserTag } from '@/entities/tag/api/getUserTag'
 import { MarkDropdownMenu } from '@/features/manage-mark/ui/MarkDropdownMenu'
-import { Tag } from '@/shared/lib/prisma/generated/client'
+import type { Tag } from '@/shared/lib/prisma/generated/client'
 import { verifySession } from '@/shared/lib/session'
 import { ErrorEmpty } from '@/shared/ui/ErrorEmpty'
 

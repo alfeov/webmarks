@@ -5,7 +5,7 @@ import { useActionState } from 'react'
 
 import { useCloseDialogOn } from '@/shared/lib/hooks/useCloseDialogOn'
 import { useNotificationManager } from '@/shared/lib/hooks/useNotificationManager'
-import { WebMark } from '@/shared/lib/prisma/generated/client'
+import type { WebMark } from '@/shared/lib/prisma/generated/client'
 import { Button } from '@/shared/ui/button'
 import { FieldDescription, FieldLegend, FieldSet } from '@/shared/ui/field'
 import { InputField } from '@/shared/ui/InputField'
@@ -13,7 +13,7 @@ import { TextareaField } from '@/shared/ui/TextareaField'
 
 import { editMarkAction } from '../api/editMarkAction'
 import { EDIT_MARK_FORMDATA } from '../lib/constants'
-import { EditMarkFormState } from '../model/types'
+import type { EditMarkFormState } from '../model/types'
 
 type EditMarkFormProps = WebMark
 

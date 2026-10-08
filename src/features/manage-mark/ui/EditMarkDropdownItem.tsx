@@ -2,7 +2,7 @@
 
 import { useTranslations } from 'next-intl'
 
-import { WebMarkWithTags } from '@/entities/mark/model/types'
+import type { WebMarkWithTags } from '@/entities/mark/model/types'
 import { useDialogContext } from '@/shared/lib/contexts/DialogContext'
 import { DropdownMenuItem } from '@/shared/ui/dropdown-menu'
 

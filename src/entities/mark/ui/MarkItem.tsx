@@ -8,7 +8,7 @@ import {
   CardTitle,
 } from '@/shared/ui/card'
 
-import { WebMarkWithTags } from '../model/types'
+import type { WebMarkWithTags } from '../model/types'
 
 import PinIcon from '@/shared/assets/icons/pin.svg'
 

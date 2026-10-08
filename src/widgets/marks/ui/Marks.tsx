@@ -2,7 +2,7 @@ import { Suspense, ViewTransition } from 'react'
 
 import { CreateMarkButton } from '@/features/create-mark/ui/CreateMarkButton'
 import { SearchMark } from '@/features/search-mark/ui/SearchMark'
-import { Tag } from '@/shared/lib/prisma/generated/client'
+import type { Tag } from '@/shared/lib/prisma/generated/client'
 
 import { MarkList } from './MarkList'
 import { MarksListSkeleton } from './MarkListSkeleton'

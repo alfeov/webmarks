@@ -3,7 +3,7 @@ import 'server-only'
 import { cacheLife, cacheTag } from 'next/cache'
 
 import { prisma } from '@/shared/lib/prisma'
-import { User } from '@/shared/lib/prisma/generated/client'
+import type { User } from '@/shared/lib/prisma/generated/client'
 
 import { SafeUserData } from '../lib/SafeUserData'
 

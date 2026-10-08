@@ -7,7 +7,7 @@ import { verifySession } from '@/shared/lib/session'
 import { validateFormData } from '@/shared/lib/utils/validateFormData'
 
 import { CreateTagFormSchema } from '../lib/CreateTagFormSchema'
-import { CreateTagFormState } from '../model/types'
+import type { CreateTagFormState } from '../model/types'
 import { createTag } from './createTag'
 
 export async function createTagAction(

@@ -5,7 +5,7 @@ import { memo } from 'react'
 
 import { TagDropdownMenu } from '@/features/manage-tag/ui/TagDropdownMenu'
 import { Link } from '@/shared/i18n/navigation'
-import { Tag } from '@/shared/lib/prisma/generated/client'
+import type { Tag } from '@/shared/lib/prisma/generated/client'
 import { SidebarMenuButton, SidebarMenuItem } from '@/shared/ui/sidebar'
 
 import { useCloseMobileSidebarOnClick } from '../lib/useCloseMobileSidebarOnClick'

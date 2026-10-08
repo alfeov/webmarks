@@ -2,7 +2,7 @@
 
 import { createContext, useMemo } from 'react'
 
-import { Tag } from '@/shared/lib/prisma/generated/client'
+import type { Tag } from '@/shared/lib/prisma/generated/client'
 import { createUseContextHook } from '@/shared/lib/utils/createUseContextHook'
 
 type TagsContextValue = Tag[]

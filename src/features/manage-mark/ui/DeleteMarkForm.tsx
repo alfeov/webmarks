@@ -5,12 +5,12 @@ import { useActionState } from 'react'
 
 import { useCloseDialogOn } from '@/shared/lib/hooks/useCloseDialogOn'
 import { useNotificationManager } from '@/shared/lib/hooks/useNotificationManager'
-import { WebMark } from '@/shared/lib/prisma/generated/client'
+import type { WebMark } from '@/shared/lib/prisma/generated/client'
 import { Button } from '@/shared/ui/button'
 import { FieldDescription, FieldLegend, FieldSet } from '@/shared/ui/field'
 
 import { deleteMarkAction } from '../api/deleteMarkAction'
-import { DeleteMarkFormState } from '../model/types'
+import type { DeleteMarkFormState } from '../model/types'
 
 const initialState: DeleteMarkFormState = {
   isSuccess: false,

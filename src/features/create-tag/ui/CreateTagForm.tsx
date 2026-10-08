@@ -11,7 +11,7 @@ import { InputField } from '@/shared/ui/InputField'
 
 import { createTagAction } from '../api/createTagAction'
 import { CREATE_TAG_FORMDATA } from '../lib/constants'
-import { CreateTagFormState } from '../model/types'
+import type { CreateTagFormState } from '../model/types'
 
 const initialState: CreateTagFormState = {
   isSuccess: false,

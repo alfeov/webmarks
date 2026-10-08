@@ -4,7 +4,7 @@ import { cacheLife, cacheTag } from 'next/cache'
 
 import { MESSAGE_CODES } from '@/shared/api/types'
 import { prisma } from '@/shared/lib/prisma'
-import { Tag } from '@/shared/lib/prisma/generated/client'
+import type { Tag } from '@/shared/lib/prisma/generated/client'
 
 interface GetAllUserTagsParams {
   userId?: Tag['userId']

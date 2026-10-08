@@ -3,7 +3,7 @@
 import { useTranslations } from 'next-intl'
 
 import { useDialogContext } from '@/shared/lib/contexts/DialogContext'
-import { Tag } from '@/shared/lib/prisma/generated/client'
+import type { Tag } from '@/shared/lib/prisma/generated/client'
 import { DropdownMenuItem } from '@/shared/ui/dropdown-menu'
 
 import { DeleteTagForm } from './DeleteTagForm'

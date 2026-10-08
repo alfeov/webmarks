@@ -2,7 +2,7 @@ import { useEffect } from 'react'
 
 import { useFetchingIndicatorContext } from '../contexts/FetchingIndicatorContext'
 
-const hidingDelay = 1000
+export const hidingDelay = 1000
 
 export function useFetchingIndicatorManager(condition: boolean) {
   const { showFetchingIndicator, hideFetchingIndicator } =

@@ -3,11 +3,11 @@
 import { startTransition, useActionState } from 'react'
 import { useForm } from 'react-hook-form'
 
-import { Tag } from '@/shared/lib/prisma/generated/client'
+import type { Tag } from '@/shared/lib/prisma/generated/client'
 
 import { createMarkAction } from '../api/createMarkAction'
 import { useMetaContext } from '../model/MetaContext'
-import { CreateMarkFormState } from '../model/types'
+import type { CreateMarkFormState } from '../model/types'
 
 export const initialState: CreateMarkFormState = {
   isSuccess: false,

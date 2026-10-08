@@ -6,7 +6,7 @@ import { SafeUserData } from '@/entities/user/lib/SafeUserData'
 import { MESSAGE_CODES } from '@/shared/api/types'
 import { prisma } from '@/shared/lib/prisma'
 import { Prisma } from '@/shared/lib/prisma/generated/client'
-import { UserCreateInput } from '@/shared/lib/prisma/generated/models'
+import type { UserCreateInput } from '@/shared/lib/prisma/generated/models'
 import { saltOrRounds } from '@/shared/lib/session/constants'
 
 export async function createUser({ password, ...userData }: UserCreateInput) {

@@ -3,7 +3,7 @@ import 'server-only'
 import { MESSAGE_CODES } from '@/shared/api/types'
 import { prisma } from '@/shared/lib/prisma'
 import { Prisma } from '@/shared/lib/prisma/generated/client'
-import { TagUncheckedCreateInput } from '@/shared/lib/prisma/generated/models'
+import type { TagUncheckedCreateInput } from '@/shared/lib/prisma/generated/models'
 
 export async function createTag({ title, userId }: TagUncheckedCreateInput) {
   try {

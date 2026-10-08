@@ -3,7 +3,7 @@
 import { updateTag } from 'next/cache'
 
 import { MESSAGE_CODES } from '@/shared/api/types'
-import { WebMark } from '@/shared/lib/prisma/generated/client'
+import type { WebMark } from '@/shared/lib/prisma/generated/client'
 import { verifySession } from '@/shared/lib/session'
 
 import { deleteUserMark } from './deleteUserMark'

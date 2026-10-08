@@ -36,6 +36,9 @@ pn dev
 - Forms:
   - React Hook Form
   - Zod
+- Tests:
+  - Vitest
+  - React Testing Library
 - UI:
   - ShadCN UI
   - Tailwind

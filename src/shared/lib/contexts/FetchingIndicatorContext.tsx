@@ -1,6 +1,6 @@
 'use client'
 
-import { createContext, useState } from 'react'
+import { createContext, useCallback, useMemo, useState } from 'react'
 
 import { FetchingIndicator } from '@/shared/ui/FetchingIndicator'
 
@@ -21,13 +21,16 @@ export function FetchingIndicatorProvider({
 }) {
   const [isShown, setIsShown] = useState(false)
 
-  const showFetchingIndicator = () => setIsShown(true)
-  const hideFetchingIndicator = () => setIsShown(false)
+  const showFetchingIndicator = useCallback(() => setIsShown(true), [])
+  const hideFetchingIndicator = useCallback(() => setIsShown(false), [])
+
+  const value = useMemo(
+    () => ({ showFetchingIndicator, hideFetchingIndicator }),
+    [showFetchingIndicator, hideFetchingIndicator],
+  )
 
   return (
-    <FetchingIndicatorContext
-      value={{ showFetchingIndicator, hideFetchingIndicator }}
-    >
+    <FetchingIndicatorContext value={value}>
       {children}
       <FetchingIndicator condition={isShown} />
     </FetchingIndicatorContext>

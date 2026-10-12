@@ -4,11 +4,10 @@ import userEvent from '@testing-library/user-event'
 import { DialogProvider, useDialogContext } from './DialogContext'
 
 const Consumer = () => {
-  const { isDialogOpen, closeDialog, openDialog } = useDialogContext()
+  const { closeDialog, openDialog } = useDialogContext()
 
   return (
     <div>
-      <div data-testid='isOpen'>{isDialogOpen ? 'Opened' : 'Closed'}</div>
       <button onClick={() => openDialog(<div>Content</div>)}>
         Open dialog
       </button>
@@ -29,19 +28,15 @@ describe('DialogContext', () => {
         </DialogProvider>,
       )
 
-      const isOpen = screen.getByTestId('isOpen')
-      expect(isOpen.textContent).toBe('Closed')
       expect(screen.queryByText('Content')).not.toBeInTheDocument()
     })
-    it('should show dialog when provided corresponding props', () => {
+    it('should show dialog when passed corresponding props', () => {
       render(
         <DialogProvider initialOpen initialDialogContent={<div>Content</div>}>
           <Consumer />
         </DialogProvider>,
       )
 
-      const isOpen = screen.getByTestId('isOpen')
-      expect(isOpen.textContent).toBe('Opened')
       expect(screen.getByText('Content')).toBeInTheDocument()
     })
     it('should open dialog when openDialog function is called', async () => {
@@ -56,7 +51,6 @@ describe('DialogContext', () => {
       const openDialogButton = screen.getByText(/open dialog/i)
       await userEvent.click(openDialogButton)
 
-      expect(screen.getByTestId('isOpen').textContent).toBe('Opened')
       expect(screen.getByText('Content')).toBeInTheDocument()
     })
     it('should close dialog when closeDialog function is called', async () => {

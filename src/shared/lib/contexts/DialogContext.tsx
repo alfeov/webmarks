@@ -1,13 +1,12 @@
 'use client'
 
-import { createContext, useState } from 'react'
+import { createContext, useCallback, useMemo, useState } from 'react'
 
 import { UniversalDialog } from '@/shared/ui/UniversalDialog'
 
 import { createUseContextHook } from '../utils/createUseContextHook'
 
 type DialogContextValue = {
-  isDialogOpen: boolean
   openDialog: (dialogContent: React.ReactNode) => void
   closeDialog: () => void
 }
@@ -29,18 +28,23 @@ export function DialogProvider({
   const [dialogContent, setDialogContent] =
     useState<React.ReactNode>(initialDialogContent)
 
-  const openDialog = (dialogContent: React.ReactNode) => {
+  const openDialog = useCallback((dialogContent: React.ReactNode) => {
     setDialogContent(dialogContent)
     setIsDialogOpen(true)
-  }
-  const closeDialog = () => {
+  }, [])
+  const closeDialog = useCallback(() => {
     setIsDialogOpen(false)
-  }
+  }, [])
+
+  const value = useMemo(
+    () => ({ openDialog, closeDialog }),
+    [openDialog, closeDialog],
+  )
 
   return (
-    <DialogContext value={{ isDialogOpen, openDialog, closeDialog }}>
+    <DialogContext value={value}>
       {children}
-      <UniversalDialog dialogContent={dialogContent} />
+      <UniversalDialog dialogContent={dialogContent} isOpen={isDialogOpen} />
     </DialogContext>
   )
 }

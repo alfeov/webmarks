@@ -12,7 +12,7 @@ import type { WebMarkWithTags } from '../model/types'
 
 import PinIcon from '@/shared/assets/icons/pin.svg'
 
-type MarkItemProps = WebMarkWithTags & {
+export type MarkItemProps = WebMarkWithTags & {
   children: React.ReactNode
 }
 
@@ -51,7 +51,7 @@ export function MarkItem({
             ))}
           </div>
         ) : (
-          <span></span>
+          <span data-testid='span'></span>
         )}
         {pinned && <PinIcon className='mr-[7px] size-[20px]' />}
       </CardFooter>

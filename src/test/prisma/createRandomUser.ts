@@ -9,7 +9,7 @@ export const createRandomUser = async () => {
     data: {
       password: randomId,
       email: `${randomId}@gmail.com`,
-      username: `user-${randomId}`,
+      username: `username-${randomId}`,
     },
   })
 }

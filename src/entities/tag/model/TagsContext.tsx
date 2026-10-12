@@ -1,6 +1,6 @@
 'use client'
 
-import { createContext, useMemo } from 'react'
+import { createContext } from 'react'
 
 import type { Tag } from '@/shared/lib/prisma/generated/client'
 import { createUseContextHook } from '@/shared/lib/utils/createUseContextHook'
@@ -16,8 +16,7 @@ export function TagsProvider({
   tags: Tag[]
   children: React.ReactNode
 }) {
-  const value = useMemo(() => tags, [tags])
-  return <TagsContext value={value}>{children}</TagsContext>
+  return <TagsContext value={tags}>{children}</TagsContext>
 }
 
 export const useTagsContext = createUseContextHook(TagsContext)

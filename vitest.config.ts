@@ -5,7 +5,25 @@ import { defineConfig } from 'vitest/config'
 export default defineConfig({
   plugins: [react()],
   test: {
-    environment: 'happy-dom',
+    projects: [
+      {
+        test: {
+          name: { label: 'dom', color: 'white' },
+          environment: 'happy-dom',
+          include: ['./src/**/*.test.{ts,tsx}'],
+          exclude: ['./src/**/*.node.test.{ts,tsx}'],
+        },
+      },
+      {
+        test: {
+          name: { label: 'node', color: 'green' },
+          environment: 'node',
+          include: ['./src/**/*.node.test.{ts,tsx}'],
+          fileParallelism: false,
+          setupFiles: './src/test/vitest.node.setup.ts',
+        },
+      },
+    ],
     globals: true,
     setupFiles: './src/test/vitest.setup.ts',
     env: {

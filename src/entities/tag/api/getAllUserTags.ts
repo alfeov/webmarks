@@ -30,5 +30,5 @@ export async function getAllUserTags({ userId }: GetAllUserTagsParams) {
   if (tags.length === 0)
     return { tags: [], message: MESSAGE_CODES.TAGS_NOT_FOUND }
 
-  return { tags, message: null }
+  return { tags }
 }

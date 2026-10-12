@@ -8,6 +8,8 @@
     "build": "next build",
     "start": "next start",
     "test": "pn docker:up-test-db && dotenv -e .env.test -- prisma migrate deploy && dotenv -e .env.test -- vitest",
+    "test:dom": "vitest --project dom",
+    "test:node": "pn docker:up-test-db && dotenv -e .env.test -- prisma migrate deploy && dotenv -e .env.test -- vitest --project node",
     "lint": "eslint --fix",
     "type": "tsc --noEmit",
     "shad": "pnx shadcn@latest add",

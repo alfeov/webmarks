@@ -20,7 +20,10 @@ export default defineConfig({
           environment: 'node',
           include: ['./src/**/*.node.test.{ts,tsx}'],
           fileParallelism: false,
-          setupFiles: './src/test/vitest.node.setup.ts',
+          setupFiles: [
+            './src/test/vitest.node.setup.ts',
+            './src/test/vitest.setup.ts',
+          ],
         },
       },
     ],

@@ -1,7 +1,10 @@
 import z from 'zod'
 
+export const MIN_TAG_TITLE_LENGTH = 1
+export const MAX_TAG_TITLE_LENGTH = 15
+
 export const TagTitleSchema = z
   .string()
   .trim()
-  .min(1, 'tagTitle.min')
-  .max(15, 'tagTitle.max')
+  .min(MIN_TAG_TITLE_LENGTH, 'tagTitle.min')
+  .max(MAX_TAG_TITLE_LENGTH, 'tagTitle.max')

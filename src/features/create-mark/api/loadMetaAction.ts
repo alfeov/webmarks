@@ -34,29 +34,16 @@ export async function loadMetaAction(
 
   // get metadata with api
   const metadata = await getMetadata(validatedData.url)
-  if (!metadata)
+  if (!metadata.data)
     return {
       isSuccess: false,
-      message: MESSAGE_CODES.LOAD_META_ERROR,
-    }
-
-  // check at least one field existence
-  const { url, title, description, favicon } = metadata
-  if (!url && !title && !description && !favicon)
-    return {
-      isSuccess: false,
-      message: MESSAGE_CODES.LOAD_META_ERROR,
+      message: metadata.error,
     }
 
   // return success
   return {
     isSuccess: true,
     message: MESSAGE_CODES.LOAD_META_SUCCESS,
-    data: {
-      title,
-      url,
-      description,
-      logoUrl: favicon,
-    },
+    data: metadata.data,
   }
 }

@@ -37,6 +37,9 @@ export async function createMark({
             }
           : undefined,
       },
+      include: {
+        tags: true,
+      },
     })
 
     return {

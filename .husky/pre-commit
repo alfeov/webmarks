@@ -1,2 +1,4 @@
+#!/usr/bin/env sh
+
 pn type
 pn nano-staged

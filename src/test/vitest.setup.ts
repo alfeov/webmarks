@@ -2,6 +2,8 @@ import { cleanup } from '@testing-library/react'
 
 import '@testing-library/jest-dom/vitest'
 
+vi.mock('next/cache')
+
 export const spyOnConsoleError = vi
   .spyOn(console, 'error')
   .mockImplementation(vi.fn())

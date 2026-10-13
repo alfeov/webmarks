@@ -3,8 +3,6 @@ import { createRandomUser } from '@/test/prisma/createRandomUser'
 import type { SafeUserData } from '../lib/SafeUserData'
 import { getUserData } from './getUserData'
 
-vi.mock('next/cache')
-
 describe('getUserData', () => {
   it('should return null when id not passed', async () => {
     const result = await getUserData({})

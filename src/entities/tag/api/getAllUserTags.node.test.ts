@@ -4,8 +4,6 @@ import { createRandomUser } from '@/test/prisma/createRandomUser'
 
 import { getAllUserTags } from './getAllUserTags'
 
-vi.mock('next/cache')
-
 describe('getAllUserTags', () => {
   let userId: string
 

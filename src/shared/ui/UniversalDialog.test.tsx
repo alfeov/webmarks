@@ -1,12 +1,17 @@
-import { render, screen } from '@testing-library/react'
+import { screen } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
+
+import { renderWithProviders } from '@/test/renderWithProviders'
 
 import { DialogProvider } from '../lib/contexts/DialogContext'
 
 describe('UniversalDialog', () => {
   it('should render inside provider and show dialog content when isDialogOpen true', () => {
-    render(
-      <DialogProvider initialOpen initialDialogContent={<div>Content</div>}>
+    renderWithProviders(
+      <DialogProvider
+        initialDialogOpen
+        initialDialogContent={<div>Content</div>}
+      >
         {null}
       </DialogProvider>,
     )
@@ -14,9 +19,9 @@ describe('UniversalDialog', () => {
     expect(screen.getByText('Content')).toBeInTheDocument()
   })
   it('should not render when isDialogOpen false', () => {
-    render(
+    renderWithProviders(
       <DialogProvider
-        initialOpen={false}
+        initialDialogOpen={false}
         initialDialogContent={<div>Content</div>}
       >
         {null}
@@ -26,8 +31,11 @@ describe('UniversalDialog', () => {
     expect(screen.queryByText('Content')).not.toBeInTheDocument()
   })
   it('should close dialog when close button is clicked', async () => {
-    render(
-      <DialogProvider initialOpen initialDialogContent={<div>Content</div>}>
+    renderWithProviders(
+      <DialogProvider
+        initialDialogOpen
+        initialDialogContent={<div>Content</div>}
+      >
         {null}
       </DialogProvider>,
     )
@@ -40,8 +48,11 @@ describe('UniversalDialog', () => {
     expect(screen.queryByText('Content')).not.toBeInTheDocument()
   })
   it('should close dialog when close (icon) button is clicked', async () => {
-    render(
-      <DialogProvider initialOpen initialDialogContent={<div>Content</div>}>
+    renderWithProviders(
+      <DialogProvider
+        initialDialogOpen
+        initialDialogContent={<div>Content</div>}
+      >
         {null}
       </DialogProvider>,
     )
@@ -54,8 +65,11 @@ describe('UniversalDialog', () => {
     expect(screen.queryByText('Content')).not.toBeInTheDocument()
   })
   it('should close dialog when click outside dialog', async () => {
-    render(
-      <DialogProvider initialOpen initialDialogContent={<div>Content</div>}>
+    renderWithProviders(
+      <DialogProvider
+        initialDialogOpen
+        initialDialogContent={<div>Content</div>}
+      >
         <div>Component outside dialog</div>
       </DialogProvider>,
     )
@@ -68,8 +82,11 @@ describe('UniversalDialog', () => {
     expect(screen.queryByText('Content')).not.toBeInTheDocument()
   })
   it('should not close dialog when click on dialog', async () => {
-    render(
-      <DialogProvider initialOpen initialDialogContent={<div>Content</div>}>
+    renderWithProviders(
+      <DialogProvider
+        initialDialogOpen
+        initialDialogContent={<div>Content</div>}
+      >
         {null}
       </DialogProvider>,
     )

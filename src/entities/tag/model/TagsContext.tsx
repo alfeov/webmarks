@@ -9,13 +9,12 @@ type TagsContextValue = Tag[]
 
 const TagsContext = createContext<null | TagsContextValue>(null)
 
-export function TagsProvider({
-  tags = [],
-  children,
-}: {
-  tags: Tag[]
+export interface TagsProviderProps {
+  tags?: Tag[]
   children: React.ReactNode
-}) {
+}
+
+export function TagsProvider({ tags = [], children }: TagsProviderProps) {
   return <TagsContext value={tags}>{children}</TagsContext>
 }
 

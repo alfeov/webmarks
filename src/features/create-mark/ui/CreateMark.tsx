@@ -15,7 +15,7 @@ export function CreateMark() {
   const params = useParams<{ tagId?: Tag['id'] }>()
   const tags = useTagsContext()
   const currentTagId = params.tagId
-  const currentTagTitle = tags.find((tag) => tag.id === params.tagId)?.title
+  const currentTagTitle = tags.find((tag) => tag.id === currentTagId)?.title
 
   const t = useTranslations('CreateMark')
 

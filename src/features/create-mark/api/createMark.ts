@@ -11,7 +11,7 @@ import {
 type CreateMarkParams = Pick<
   WebMark,
   'title' | 'description' | 'url' | 'logoUrl' | 'userId'
-> & { tagId: Tag['id'] | null }
+> & { tagId?: Tag['id'] }
 
 export async function createMark({
   tagId,

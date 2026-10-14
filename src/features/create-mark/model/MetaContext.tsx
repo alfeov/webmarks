@@ -11,17 +11,22 @@ import { createUseContextHook } from '@/shared/lib/utils/createUseContextHook'
 
 import type { MetaData } from './types'
 
-type MetaContextValue = {
-  metadata: MetaData
-  setMetadata: Dispatch<SetStateAction<MetaData>>
-}
+type MetaStateContextValue = MetaData
 
-const MetaContext = createContext<null | MetaContextValue>(null)
+type MetaActionContextValue = Dispatch<SetStateAction<MetaData>>
+
+const MetaStateContext = createContext<null | MetaStateContextValue>(null)
+const MetaActionContext = createContext<null | MetaActionContextValue>(null)
 
 export function MetaProvider({ children }: { children: React.ReactNode }) {
   const [metadata, setMetadata] = useState<MetaData>(null)
 
-  return <MetaContext value={{ metadata, setMetadata }}>{children}</MetaContext>
+  return (
+    <MetaStateContext value={metadata}>
+      <MetaActionContext value={setMetadata}>{children}</MetaActionContext>
+    </MetaStateContext>
+  )
 }
 
-export const useMetaContext = createUseContextHook(MetaContext)
+export const useMetaStateContext = createUseContextHook(MetaStateContext)
+export const useMetaActionContext = createUseContextHook(MetaActionContext)

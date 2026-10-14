@@ -19,7 +19,7 @@ export async function Providers({ children }: { children: React.ReactNode }) {
         <FetchingIndicatorProvider>
           <TagsProvider tags={tags}>
             <DialogProvider
-              initialOpen={!session}
+              initialDialogOpen={!session}
               initialDialogContent={
                 !session ? <Auth initialMode='signin' /> : null
               }

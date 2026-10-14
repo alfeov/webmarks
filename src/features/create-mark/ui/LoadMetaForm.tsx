@@ -17,7 +17,7 @@ import {
 } from '@/shared/ui/input-group'
 
 import { LOAD_META_FORMDATA } from '../lib/constants'
-import { useMetaContext } from '../model/MetaContext'
+import { useMetaActionContext } from '../model/MetaContext'
 import type { LoadMetaFormState } from '../model/types'
 
 import { ClipboardPaste, CloudDownload } from 'lucide-react'
@@ -34,7 +34,7 @@ export function LoadMetaForm() {
     initialState,
   )
 
-  const { setMetadata } = useMetaContext()
+  const setMetadata = useMetaActionContext()
   useEffect(() => {
     if (state.data) setMetadata(state.data)
   }, [state.data, setMetadata])

@@ -34,7 +34,7 @@ describe('createMarkAction', () => {
     vi.mocked(verifySession).mockResolvedValueOnce(null)
 
     const result = await createMarkAction(
-      null,
+      undefined,
       { isSuccess: false },
       defaultData,
     )
@@ -46,7 +46,7 @@ describe('createMarkAction', () => {
   })
   it('should return error when data is not valid', async () => {
     const result = await createMarkAction(
-      null,
+      undefined,
       { isSuccess: false },
       {
         title: '',
@@ -68,7 +68,7 @@ describe('createMarkAction', () => {
     })
 
     const result = await createMarkAction(
-      null,
+      undefined,
       { isSuccess: false },
       defaultData,
     )
@@ -79,7 +79,7 @@ describe('createMarkAction', () => {
   })
   it('should return success when all operations completed successfully', async () => {
     const result = await createMarkAction(
-      null,
+      undefined,
       { isSuccess: false },
       defaultData,
     )

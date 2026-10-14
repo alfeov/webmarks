@@ -1,5 +1,7 @@
 'use client'
 
+import { useTranslations } from 'next-intl'
+
 import { CloseDialogButton } from '@/shared/ui/CloseDialogButton'
 import { Dialog, DialogContent } from '@/shared/ui/dialog'
 
@@ -17,6 +19,8 @@ export function UniversalDialog({
   const { closeDialog } = useDialogContext()
   const ref = useClickOutside(closeDialog)
 
+  const t = useTranslations('UniversalDialog')
+
   return (
     isOpen && (
       <Dialog open>
@@ -25,7 +29,7 @@ export function UniversalDialog({
           <div className='no-scrollbar grid max-h-[70vh] gap-[10px] overflow-y-auto px-1 md:max-h-[90vh]'>
             {dialogContent}
             <Button variant='outline' onClick={closeDialog}>
-              Close
+              {t('button')}
             </Button>
           </div>
         </DialogContent>

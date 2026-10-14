@@ -36,6 +36,8 @@ describe('useClickOutside', () => {
   it('should call remove EventListener from document when effect rerun', () => {
     const { rerender } = render(<TestComponent callback={mockFn} />)
 
+    expect(spyOnRemoveEventListener).not.toHaveBeenCalled()
+
     rerender(<TestComponent callback={vi.fn} />)
 
     expect(spyOnRemoveEventListener).toHaveBeenCalled()

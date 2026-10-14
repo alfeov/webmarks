@@ -12,7 +12,7 @@ import type { CreateMark, CreateMarkFormState } from '../model/types'
 import { createMark } from './createMark'
 
 export async function createMarkAction(
-  defaultTagId: Tag['id'] | null,
+  defaultTagId: Tag['id'] | undefined,
   prevState: CreateMarkFormState,
   data: CreateMark,
 ) {

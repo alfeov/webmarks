@@ -276,5 +276,8 @@
     "formDescription": "Please fill in the field below to edit Avatar",
     "submit": "Edit Avatar",
     "label": "Avatar URL"
+  },
+  "UniversalDialog": {
+    "button": "Close"
   }
 }

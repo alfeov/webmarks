@@ -6,7 +6,7 @@ import { useForm } from 'react-hook-form'
 import type { Tag } from '@/shared/lib/prisma/generated/client'
 
 import { createMarkAction } from '../api/createMarkAction'
-import { useMetaContext } from '../model/MetaContext'
+import { useMetaStateContext } from '../model/MetaContext'
 import type { CreateMarkFormState } from '../model/types'
 
 export const initialState: CreateMarkFormState = {
@@ -18,7 +18,7 @@ export function useCreateMarkForm({
 }: {
   defaultTagId?: Tag['id']
 }) {
-  const { metadata } = useMetaContext()
+  const metadata = useMetaStateContext()
   const { register, handleSubmit } = useForm({
     values: {
       ...metadata,
@@ -29,7 +29,7 @@ export function useCreateMarkForm({
   })
 
   const [state, formAction, isPending] = useActionState(
-    createMarkAction.bind(null, defaultTagId ?? null),
+    createMarkAction.bind(null, defaultTagId),
     initialState,
   )
 

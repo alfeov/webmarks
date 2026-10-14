@@ -49,10 +49,10 @@ describe('createMark', () => {
 
     expect(result.data?.tags[0].id).toBe(tagId)
   })
-  it('should not connect to tag when passed null as tag id', async () => {
+  it('should not connect to tag when tagId not passed', async () => {
     const result = await createMark({
       ...defaultMarkData,
-      tagId: null,
+      tagId: undefined,
       userId,
     })
 

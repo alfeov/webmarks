@@ -23,9 +23,7 @@ describe('useNotificationManager', () => {
   it('should show toast when trigger is fire and message is provided', () => {
     const message = MESSAGE_CODES.INVALID_ID
     const isSuccess = false
-    renderHookWithProviders(() =>
-      useNotificationManager(message, isSuccess, true),
-    )
+    renderHookWithProviders(useNotificationManager, [message, isSuccess, true])
 
     expect(showToast).toHaveBeenCalledWith('errorTitle', message, isSuccess)
   })
@@ -33,39 +31,35 @@ describe('useNotificationManager', () => {
   it('should call showToast with success title when provided isSuccess', () => {
     const message = MESSAGE_CODES.COPY_SUCCESS
     const isSuccess = true
-    renderHookWithProviders(() =>
-      useNotificationManager(message, isSuccess, true),
-    )
+    renderHookWithProviders(useNotificationManager, [message, isSuccess, true])
 
     expect(showToast).toHaveBeenCalledWith('successTitle', message, isSuccess)
   })
   it('should not call showToast when trigger is false', () => {
-    renderHookWithProviders(() =>
-      useNotificationManager(MESSAGE_CODES.COPY_SUCCESS, true, false),
-    )
+    renderHookWithProviders(useNotificationManager, [
+      MESSAGE_CODES.COPY_SUCCESS,
+      true,
+      false,
+    ])
 
     expect(showToast).not.toHaveBeenCalled()
   })
   it('should not call showToast when message is null and trigger is true', () => {
-    renderHookWithProviders(() => useNotificationManager(null, true, true))
+    renderHookWithProviders(useNotificationManager, [null, true, true])
 
     expect(showToast).not.toHaveBeenCalled()
   })
   it('should re-fire showToast when message is changed and trigger is not', () => {
-    const initialProps: { messageCode: MessageCode } = {
-      messageCode: MESSAGE_CODES.USER_EXISTS,
-    }
-    const { rerender } = renderHook(
-      ({ messageCode }) => useNotificationManager(messageCode, true, true),
-      {
-        initialProps,
-        wrapper: AllProviders,
-      },
-    )
+    const message: MessageCode = MESSAGE_CODES.USER_EXISTS
+    const { rerender } = renderHookWithProviders(useNotificationManager, [
+      message,
+      true,
+      true,
+    ])
 
     expect(showToast).toHaveBeenCalledTimes(1)
 
-    rerender({ messageCode: MESSAGE_CODES.COPY_ERROR })
+    rerender([MESSAGE_CODES.COPY_ERROR, true, true])
 
     expect(showToast).toHaveBeenCalledTimes(2)
   })

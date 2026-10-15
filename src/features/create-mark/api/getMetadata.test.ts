@@ -47,7 +47,7 @@ describe('getMetadata', async () => {
     { description: '' },
     { favicon: undefined },
   ])(
-    'should return error and console it when one of fields is absent: field-data: %s',
+    'should return error and log it when one of fields is absent: field-data: %s',
     async (field) => {
       vi.mocked(scrape, { partial: true }).mockResolvedValue({
         metadata: {
@@ -62,7 +62,7 @@ describe('getMetadata', async () => {
       expect(result.error).toBe(MESSAGE_CODES.LOAD_META_ERROR)
     },
   )
-  it('should return error and console it on error', async () => {
+  it('should return error and log it on error', async () => {
     const error = new Error('some error message')
     vi.mocked(scrape).mockRejectedValue(error)
 

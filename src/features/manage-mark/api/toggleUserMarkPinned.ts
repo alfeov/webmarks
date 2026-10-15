@@ -37,9 +37,6 @@ export async function toggleUserMarkPinned({
         }
       }
     }
-
-    if (error instanceof Prisma.PrismaClientKnownRequestError) {
-    }
     return {
       error: MESSAGE_CODES.INTERNAL_ERROR,
     }

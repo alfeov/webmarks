@@ -4,6 +4,7 @@ import { useTranslations } from 'next-intl'
 import { useActionState } from 'react'
 
 import { useFetchingIndicatorManager } from '@/shared/lib/hooks/useFetchingIndicatorManager'
+import { useNotificationManager } from '@/shared/lib/hooks/useNotificationManager'
 import type { WebMark } from '@/shared/lib/prisma/generated/client'
 import { DropdownMenuItem } from '@/shared/ui/dropdown-menu'
 
@@ -17,10 +18,11 @@ const initialState = {
 }
 
 export function PinMarkDropdownItem({ id, pinned }: PinMarkDropdownItemProps) {
-  const [_, formAction, isPending] = useActionState<PinMarkFormState>(
+  const [state, formAction, isPending] = useActionState<PinMarkFormState>(
     toggleMarkPinnedAction.bind(null, { id, pinned }),
     initialState,
   )
+  useNotificationManager(state.message, state.isSuccess, !isPending)
   useFetchingIndicatorManager(isPending)
 
   const t = useTranslations('MarkDropdownMenu')

@@ -4,6 +4,7 @@ import { useTranslations } from 'next-intl'
 import { useActionState } from 'react'
 
 import { useCloseDialogOn } from '@/shared/lib/hooks/useCloseDialogOn'
+import { useFetchingIndicatorManager } from '@/shared/lib/hooks/useFetchingIndicatorManager'
 import { useNotificationManager } from '@/shared/lib/hooks/useNotificationManager'
 import type { WebMark } from '@/shared/lib/prisma/generated/client'
 import { Button } from '@/shared/ui/button'
@@ -22,6 +23,7 @@ export function DeleteMarkForm({ markId }: { markId: WebMark['id'] }) {
     initialState,
   )
   useNotificationManager(state.message, state.isSuccess, !isPending)
+  useFetchingIndicatorManager(isPending)
   useCloseDialogOn(state.isSuccess)
 
   const t = useTranslations('DeleteMarkForm')

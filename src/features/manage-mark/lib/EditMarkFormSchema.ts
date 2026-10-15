@@ -8,8 +8,8 @@ import { UrlSchema } from '@/shared/lib/schemas/UrlSchema'
 import { EDIT_MARK_FORMDATA } from './constants'
 
 export const EditMarkFormSchema = z.object({
-  [EDIT_MARK_FORMDATA.TITLE]: MarkTitleSchema,
   [EDIT_MARK_FORMDATA.URL]: UrlSchema,
+  [EDIT_MARK_FORMDATA.TITLE]: MarkTitleSchema,
   [EDIT_MARK_FORMDATA.DESCRIPTION]: MarkDescriptionSchema,
   [EDIT_MARK_FORMDATA.LOGO_URL]: UrlOrEmptySchema,
 })

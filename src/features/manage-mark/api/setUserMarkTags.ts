@@ -40,6 +40,9 @@ export async function setUserMarkTags({
         id,
         userId,
       },
+      include: {
+        tags: true,
+      },
     })
 
     return { data: mark }

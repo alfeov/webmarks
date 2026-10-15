@@ -23,21 +23,19 @@ export function ChangeMarkTagsDropdownItem({
   const t = useTranslations('MarkDropdownMenu')
 
   return (
-    <>
-      <DropdownMenuItem
-        data-slot='dialog-trigger'
-        onClick={() =>
-          openDialog(
-            <ChangeMarkTagsForm
-              markId={markId}
-              markTags={markTags}
-              tags={tags}
-            />,
-          )
-        }
-      >
-        {t('items.changeTags')}
-      </DropdownMenuItem>
-    </>
+    <DropdownMenuItem
+      data-slot='dialog-trigger'
+      onClick={() =>
+        openDialog(
+          <ChangeMarkTagsForm
+            markId={markId}
+            markTags={markTags}
+            tags={tags}
+          />,
+        )
+      }
+    >
+      {t('items.changeTags')}
+    </DropdownMenuItem>
   )
 }

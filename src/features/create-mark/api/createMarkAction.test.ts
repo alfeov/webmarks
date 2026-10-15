@@ -10,6 +10,8 @@ import { createMarkAction } from './createMarkAction'
 vi.mock('@/shared/lib/session')
 vi.mock('./createMark')
 
+const prevState = { isSuccess: false }
+
 const defaultData: CreateMark = {
   url: 'https://some-url.com',
   title: 'title',
@@ -33,11 +35,7 @@ describe('createMarkAction', () => {
   it('should return error when user is not authorized', async () => {
     vi.mocked(verifySession).mockResolvedValueOnce(null)
 
-    const result = await createMarkAction(
-      undefined,
-      { isSuccess: false },
-      defaultData,
-    )
+    const result = await createMarkAction(undefined, prevState, defaultData)
 
     expect(createMark).not.toHaveBeenCalled()
     expect(result.isSuccess).toBe(false)
@@ -45,44 +43,33 @@ describe('createMarkAction', () => {
     expect(result.message).toBe(MESSAGE_CODES.UNAUTHORIZED)
   })
   it('should return error when data is not valid', async () => {
-    const result = await createMarkAction(
-      undefined,
-      { isSuccess: false },
-      {
-        title: '',
-        description: '',
-        logoUrl: '',
-        url: '',
-      },
-    )
+    const result = await createMarkAction(undefined, prevState, {
+      title: '',
+      description: '',
+      logoUrl: '',
+      url: '',
+    })
 
     expect(createMark).not.toHaveBeenCalled()
     expect(result.isSuccess).toBe(false)
     expect(result.errors).not.toBeUndefined()
     expect(result.message).toBe(MESSAGE_CODES.VALIDATION_ERROR)
   })
-  it('should return error when occurred creation error', async () => {
+  it('should return error when occurred db error', async () => {
+    const error = MESSAGE_CODES.INTERNAL_ERROR
     vi.mocked(createMark).mockResolvedValueOnce({
       data: undefined,
-      error: 'INTERNAL_ERROR',
+      error,
     })
 
-    const result = await createMarkAction(
-      undefined,
-      { isSuccess: false },
-      defaultData,
-    )
+    const result = await createMarkAction(undefined, prevState, defaultData)
 
     expect(result.isSuccess).toBe(false)
     expect(result.errors).toBeUndefined()
-    expect(result.message).toBe(MESSAGE_CODES.INTERNAL_ERROR)
+    expect(result.message).toBe(error)
   })
   it('should return success when all operations completed successfully', async () => {
-    const result = await createMarkAction(
-      undefined,
-      { isSuccess: false },
-      defaultData,
-    )
+    const result = await createMarkAction(undefined, prevState, defaultData)
 
     expect(updateTag).toHaveBeenCalledWith(`marks-${userId}`)
     expect(result.isSuccess).toBe(true)

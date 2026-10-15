@@ -68,7 +68,7 @@ describe('createMark', () => {
 
     expect(result.data?.logoUrl).toBeNull()
   })
-  it('should return "existence" error and console it when user already have mark with this url', async () => {
+  it('should return "existence" error and log it when user already have mark with this url', async () => {
     await createMark({
       ...defaultMarkData,
       url: 'https://same-url.com',
@@ -104,13 +104,12 @@ describe('createMark', () => {
     expect(result.data).toMatchObject(defaultMarkData)
     expect(result.error).toBeUndefined()
   })
-  it('should return internal error and console it when other prisma error have been occurred', async () => {
-    spy.mockRejectedValueOnce(
-      new PrismaClientKnownRequestError('...', {
-        code: 'P2003',
-        clientVersion: '...',
-      }),
-    )
+  it('should return internal error and log it when other prisma error has been occurred', async () => {
+    const error = new PrismaClientKnownRequestError('...', {
+      code: 'P2003',
+      clientVersion: '...',
+    })
+    spy.mockRejectedValueOnce(error)
 
     const result = await createMark({
       ...defaultMarkData,
@@ -121,10 +120,11 @@ describe('createMark', () => {
 
     expect(result.data).toBeUndefined()
     expect(result.error).toBe(MESSAGE_CODES.INTERNAL_ERROR)
-    expect(spyOnConsoleError).toHaveBeenCalledOnce()
+    expect(spyOnConsoleError).toHaveBeenCalledWith(error)
   })
-  it('should return internal error and console it when occurred', async () => {
-    spy.mockRejectedValueOnce(new Error('unknown error'))
+  it('should return internal error and log it when unknown error occurred', async () => {
+    const error = new Error('unknown error')
+    spy.mockRejectedValueOnce(error)
 
     const result = await createMark({
       ...defaultMarkData,
@@ -135,6 +135,6 @@ describe('createMark', () => {
 
     expect(result.data).toBeUndefined()
     expect(result.error).toBe(MESSAGE_CODES.INTERNAL_ERROR)
-    expect(spyOnConsoleError).toHaveBeenCalledOnce()
+    expect(spyOnConsoleError).toHaveBeenCalledWith(error)
   })
 })

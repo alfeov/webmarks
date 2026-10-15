@@ -1,23 +1,10 @@
-import { renderHook } from '@testing-library/react'
-
 import { MESSAGE_CODES, type MessageCode } from '@/shared/api/types'
-import {
-  AllProviders,
-  renderHookWithProviders,
-} from '@/test/renderWithProviders'
+import { renderHookWithProviders } from '@/test/renderWithProviders'
 
 import { showToast } from '../utils/showToast'
 import { useNotificationManager } from './useNotificationManager'
 
 vi.mock('@/shared/lib/utils/showToast')
-
-vi.mock('next-intl', async () => {
-  const actual = await vi.importActual('next-intl')
-  return {
-    ...actual,
-    useTranslations: () => (key: string) => key,
-  }
-})
 
 describe('useNotificationManager', () => {
   it('should show toast when trigger is fire and message is provided', () => {

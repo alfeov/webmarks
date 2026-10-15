@@ -1,4 +1,3 @@
-import { screen } from '@testing-library/react'
 import { useParams } from 'next/navigation'
 
 import type { Tag } from '@/shared/lib/prisma/generated/client'

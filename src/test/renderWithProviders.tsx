@@ -1,12 +1,10 @@
 import { render, renderHook } from '@testing-library/react'
-import { NextIntlClientProvider } from 'next-intl'
 
 import {
   TagsProvider,
   type TagsProviderProps,
 } from '@/entities/tag/model/TagsContext'
 import { MetaProvider } from '@/features/create-mark/model/MetaContext'
-import messages from '@/shared/i18n/messages/en.json'
 import {
   DialogProvider,
   type DialogProviderProps,
@@ -27,23 +25,21 @@ export function AllProviders({
   initialDialogContent,
 }: AllProviders) {
   return (
-    <NextIntlClientProvider locale='en' messages={messages}>
-      <TooltipProvider>
-        <FetchingIndicatorProvider>
-          <MetaProvider>
-            <TagsProvider tags={tags}>
-              <DialogProvider
-                initialDialogOpen={initialDialogOpen}
-                initialDialogContent={initialDialogContent}
-              >
-                {children}
-                <Toaster />
-              </DialogProvider>
-            </TagsProvider>
-          </MetaProvider>
-        </FetchingIndicatorProvider>
-      </TooltipProvider>
-    </NextIntlClientProvider>
+    <TooltipProvider>
+      <FetchingIndicatorProvider>
+        <MetaProvider>
+          <TagsProvider tags={tags}>
+            <DialogProvider
+              initialDialogOpen={initialDialogOpen}
+              initialDialogContent={initialDialogContent}
+            >
+              {children}
+              <Toaster />
+            </DialogProvider>
+          </TagsProvider>
+        </MetaProvider>
+      </FetchingIndicatorProvider>
+    </TooltipProvider>
   )
 }
 

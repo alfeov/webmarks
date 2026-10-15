@@ -1,6 +1,7 @@
 import { screen } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 
+import { MESSAGE_CODES } from '@/shared/api/types'
 import { paste } from '@/shared/lib/utils/paste'
 import { showToast } from '@/shared/lib/utils/showToast'
 import { renderWithProviders } from '@/test/renderWithProviders'
@@ -12,10 +13,6 @@ const setMetadata = vi.fn()
 
 vi.mock('@/shared/lib/utils/paste')
 vi.mock('@/shared/lib/utils/showToast')
-vi.mock('next-intl', async (importOriginal) => ({
-  ...(await importOriginal()),
-  useTranslations: () => (key: string) => key,
-}))
 vi.mock('@/features/create-mark/api/loadMetaAction')
 vi.mock('../model/MetaContext', async (importOriginal) => ({
   ...(await importOriginal()),
@@ -65,11 +62,10 @@ describe('LoadMetaForm', () => {
       description: 'Some cool description',
       logoUrl: 'https:/logo-url.png',
     }
-    const message = 'LOAD_META_SUCCESS'
     vi.mocked(loadMetaAction).mockResolvedValueOnce({
       isSuccess: true,
       data: metadata,
-      message,
+      message: MESSAGE_CODES.LOAD_META_SUCCESS,
     })
 
     const loadBtn = screen.getByRole('button', { name: /load/i })
@@ -81,14 +77,13 @@ describe('LoadMetaForm', () => {
   it('should not call setMetadata and show validation error when received error', async () => {
     renderWithProviders(<LoadMetaForm />)
 
-    const message = 'VALIDATION_ERROR'
     const validationMessage = 'SOME_ERROR_CODE'
     vi.mocked(loadMetaAction).mockResolvedValueOnce({
       isSuccess: false,
       errors: {
         url: [validationMessage],
       },
-      message,
+      message: MESSAGE_CODES.VALIDATION_ERROR,
     })
 
     const loadBtn = screen.getByRole('button', { name: /load/i })

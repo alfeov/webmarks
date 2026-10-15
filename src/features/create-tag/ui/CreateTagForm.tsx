@@ -4,6 +4,7 @@ import { useTranslations } from 'next-intl'
 import { useActionState } from 'react'
 
 import { useCloseDialogOn } from '@/shared/lib/hooks/useCloseDialogOn'
+import { useFetchingIndicatorManager } from '@/shared/lib/hooks/useFetchingIndicatorManager'
 import { useNotificationManager } from '@/shared/lib/hooks/useNotificationManager'
 import { Button } from '@/shared/ui/button'
 import { FieldDescription, FieldLegend, FieldSet } from '@/shared/ui/field'
@@ -23,6 +24,7 @@ export function CreateTagForm() {
     initialState,
   )
   useNotificationManager(state.message, state.isSuccess, !isPending)
+  useFetchingIndicatorManager(isPending)
   useCloseDialogOn(state.isSuccess)
 
   const t = useTranslations('CreateTagForm')

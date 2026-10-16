@@ -38,8 +38,8 @@ export async function editTagAction(
 
   // update tag in DB
   const { error } = await updateUserTag({
+    ...validatedData,
     id,
-    newTitle: validatedData.title,
     userId: session.userId,
   })
   if (error)

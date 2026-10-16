@@ -1,4 +1,4 @@
-import { extractNumber, locales } from '@/test/locales'
+import { extractNumber, messages } from '@/test/utils/messages'
 
 import {
   MAX_PASSWORD_LENGTH,
@@ -7,7 +7,7 @@ import {
 } from './PasswordSchema'
 
 describe('PasswordSchema', () => {
-  it.each(locales)(
+  it.each(messages)(
     'should have length according to locale message',
     (locale) => {
       expect(extractNumber(locale.errors.password.min)).toBe(
@@ -18,7 +18,7 @@ describe('PasswordSchema', () => {
       )
     },
   )
-  it.each(locales)('should have message path in locale', (locale) => {
+  it.each(messages)('should have path in locale message', (locale) => {
     expect(locale.errors.password.allowed).toBeTruthy()
     expect(locale.errors.password.capital).toBeTruthy()
     expect(locale.errors.password.digit).toBeTruthy()

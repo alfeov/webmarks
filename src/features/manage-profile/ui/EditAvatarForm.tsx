@@ -4,6 +4,7 @@ import { useTranslations } from 'next-intl'
 import { useActionState } from 'react'
 
 import { useCloseDialogOn } from '@/shared/lib/hooks/useCloseDialogOn'
+import { useFetchingIndicatorManager } from '@/shared/lib/hooks/useFetchingIndicatorManager'
 import { useNotificationManager } from '@/shared/lib/hooks/useNotificationManager'
 import type { User } from '@/shared/lib/prisma/generated/client'
 import { Button } from '@/shared/ui/button'
@@ -23,6 +24,7 @@ export function EditAvatarForm({ avatarUrl }: Pick<User, 'avatarUrl'>) {
     editAvatarAction,
     initialState,
   )
+  useFetchingIndicatorManager(isPending)
   useNotificationManager(state.message, state.isSuccess, !isPending)
   useCloseDialogOn(state.isSuccess)
 

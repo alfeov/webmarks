@@ -1,4 +1,4 @@
-import { extractNumber, locales } from '@/test/locales'
+import { extractNumber, messages } from '@/test/utils/messages'
 
 import {
   MAX_MARK_DESC_LENGTH,
@@ -6,7 +6,7 @@ import {
 } from './MarkDescriptionSchema'
 
 describe('MarkDescriptionSchema', () => {
-  it.each(locales)(
+  it.each(messages)(
     'should have length according to locale message',
     (locale) => {
       expect(extractNumber(locale.errors.markDescription.min)).toBe(
@@ -17,7 +17,7 @@ describe('MarkDescriptionSchema', () => {
       )
     },
   )
-  it.each(locales)('should have message path in locale', (locale) => {
+  it.each(messages)('should have path in locale message', (locale) => {
     expect(locale.errors.markDescription.min).toBeTruthy()
     expect(locale.errors.markDescription.max).toBeTruthy()
   })

@@ -34,6 +34,7 @@ describe('createTagAction', () => {
     const result = await createTagAction(prevState, defaultFormData)
 
     expect(createTag).not.toHaveBeenCalled()
+    expect(updateTag).not.toHaveBeenCalled()
     expect(result.isSuccess).toBe(false)
     expect(result.errors).toBeUndefined()
     expect(result.message).toBe(MESSAGE_CODES.UNAUTHORIZED)
@@ -42,6 +43,7 @@ describe('createTagAction', () => {
     const result = await createTagAction(prevState, new FormData())
 
     expect(createTag).not.toHaveBeenCalled()
+    expect(updateTag).not.toHaveBeenCalled()
     expect(result.isSuccess).toBe(false)
     expect(result.errors).not.toBeUndefined()
     expect(result.message).toBe(MESSAGE_CODES.VALIDATION_ERROR)
@@ -55,6 +57,7 @@ describe('createTagAction', () => {
 
     const result = await createTagAction(prevState, defaultFormData)
 
+    expect(updateTag).not.toHaveBeenCalled()
     expect(result.isSuccess).toBe(false)
     expect(result.errors).toBeUndefined()
     expect(result.message).toBe(error)

@@ -1,4 +1,4 @@
-import { extractNumber, locales } from '@/test/locales'
+import { extractNumber, messages } from '@/test/utils/messages'
 
 import {
   MAX_USERNAME_LENGTH,
@@ -7,7 +7,7 @@ import {
 } from './UsernameSchema'
 
 describe('UsernameSchema', () => {
-  it.each(locales)(
+  it.each(messages)(
     'should have length according to locale message',
     (locale) => {
       expect(extractNumber(locale.errors.username.min)).toBe(
@@ -18,7 +18,7 @@ describe('UsernameSchema', () => {
       )
     },
   )
-  it.each(locales)('should have message path in locale', (locale) => {
+  it.each(messages)('should have path in locale message', (locale) => {
     expect(locale.errors.username.min).toBeTruthy()
     expect(locale.errors.username.max).toBeTruthy()
     expect(locale.errors.username.allowed).toBeTruthy()

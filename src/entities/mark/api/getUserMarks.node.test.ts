@@ -1,6 +1,6 @@
 import { prisma } from '@/shared/lib/prisma'
-import { createRandomTag } from '@/test/prisma/createRandomTag'
-import { createRandomUser } from '@/test/prisma/createRandomUser'
+import { createRandomTag } from '@/test/factories/createRandomTag'
+import { createRandomUser } from '@/test/factories/createRandomUser'
 
 import { getUserMarks } from './getUserMarks'
 

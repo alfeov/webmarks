@@ -28,6 +28,7 @@ describe('deleteMarkAction', () => {
     const result = await deleteMarkAction(markId)
 
     expect(deleteUserMark).not.toHaveBeenCalled()
+    expect(updateTag).not.toHaveBeenCalled()
     expect(result.isSuccess).toBe(false)
     expect(result.message).toBe(MESSAGE_CODES.UNAUTHORIZED)
   })
@@ -39,6 +40,7 @@ describe('deleteMarkAction', () => {
 
     const result = await deleteMarkAction(markId)
 
+    expect(updateTag).not.toHaveBeenCalled()
     expect(result.isSuccess).toBe(false)
     expect(result.message).toBe(error)
   })

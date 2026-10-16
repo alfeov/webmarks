@@ -2,18 +2,15 @@ import { PrismaClientKnownRequestError } from '@prisma/client/runtime/client'
 
 import { MESSAGE_CODES } from '@/shared/api/types'
 import { prisma } from '@/shared/lib/prisma'
-import { createRandomTag } from '@/test/prisma/createRandomTag'
-import { createRandomUser } from '@/test/prisma/createRandomUser'
+import { createRandomTag } from '@/test/factories/createRandomTag'
+import { createRandomUser } from '@/test/factories/createRandomUser'
 import { spyOnConsoleError } from '@/test/vitest.setup'
 
 import { createMark } from './createMark'
 
 const spy = vi.spyOn(prisma.webMark, 'create')
 
-const defaultMarkData: Omit<
-  Parameters<typeof createMark>[0],
-  'userId' | 'tagId'
-> = {
+const defaultMarkData = {
   url: 'https://some-url.com',
   title: 'mark-title',
   description: 'mark-desc',

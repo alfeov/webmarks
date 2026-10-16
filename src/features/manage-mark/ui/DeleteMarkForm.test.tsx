@@ -12,7 +12,7 @@ vi.mock('../api/deleteMarkAction')
 const defaultMarkId = '1'
 
 describe('DeleteMarkForm', () => {
-  it('should render enabled elements by default with default values', () => {
+  it('should render enabled elements by default', () => {
     renderWithProviders(<DeleteMarkForm markId={defaultMarkId} />)
 
     expect(screen.getByRole('button')).toBeEnabled()

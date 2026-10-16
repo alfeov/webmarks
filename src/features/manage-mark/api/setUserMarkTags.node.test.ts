@@ -2,9 +2,9 @@ import { PrismaClientKnownRequestError } from '@prisma/client/runtime/client'
 
 import { MESSAGE_CODES } from '@/shared/api/types'
 import { prisma } from '@/shared/lib/prisma'
-import { createRandomMark } from '@/test/prisma/createRandomMark'
-import { createRandomTag } from '@/test/prisma/createRandomTag'
-import { createRandomUser } from '@/test/prisma/createRandomUser'
+import { createRandomMark } from '@/test/factories/createRandomMark'
+import { createRandomTag } from '@/test/factories/createRandomTag'
+import { createRandomUser } from '@/test/factories/createRandomUser'
 import { spyOnConsoleError } from '@/test/vitest.setup'
 
 import { setUserMarkTags } from './setUserMarkTags'

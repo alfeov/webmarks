@@ -38,6 +38,7 @@ describe('createMarkAction', () => {
     const result = await createMarkAction(undefined, prevState, defaultData)
 
     expect(createMark).not.toHaveBeenCalled()
+    expect(updateTag).not.toHaveBeenCalled()
     expect(result.isSuccess).toBe(false)
     expect(result.errors).toBeUndefined()
     expect(result.message).toBe(MESSAGE_CODES.UNAUTHORIZED)
@@ -51,6 +52,7 @@ describe('createMarkAction', () => {
     })
 
     expect(createMark).not.toHaveBeenCalled()
+    expect(updateTag).not.toHaveBeenCalled()
     expect(result.isSuccess).toBe(false)
     expect(result.errors).not.toBeUndefined()
     expect(result.message).toBe(MESSAGE_CODES.VALIDATION_ERROR)
@@ -64,6 +66,7 @@ describe('createMarkAction', () => {
 
     const result = await createMarkAction(undefined, prevState, defaultData)
 
+    expect(updateTag).not.toHaveBeenCalled()
     expect(result.isSuccess).toBe(false)
     expect(result.errors).toBeUndefined()
     expect(result.message).toBe(error)

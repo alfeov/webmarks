@@ -5,19 +5,19 @@ import { prisma } from '@/shared/lib/prisma'
 import { Prisma, type Tag } from '@/shared/lib/prisma/generated/client'
 
 type UpdateUserTagParams = Pick<Tag, 'id' | 'userId'> & {
-  newTitle: Tag['title']
+  title: Tag['title']
 }
 
 export async function updateUserTag({
   id,
   userId,
-  newTitle,
+  title,
 }: UpdateUserTagParams) {
   try {
     // update tag in db
     const tag = await prisma.tag.update({
       data: {
-        title: newTitle,
+        title,
       },
       where: {
         id,

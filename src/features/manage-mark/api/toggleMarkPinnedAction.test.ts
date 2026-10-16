@@ -34,6 +34,7 @@ describe('toggleMarkPinnedAction', () => {
 
     const result = await toggleMarkPinnedAction(defaultData)
 
+    expect(updateTag).not.toHaveBeenCalled()
     expect(toggleUserMarkPinned).not.toHaveBeenCalled()
     expect(result.isSuccess).toBe(false)
     expect(result.message).toBe(MESSAGE_CODES.UNAUTHORIZED)
@@ -46,6 +47,7 @@ describe('toggleMarkPinnedAction', () => {
 
     const result = await toggleMarkPinnedAction(defaultData)
 
+    expect(updateTag).not.toHaveBeenCalled()
     expect(result.isSuccess).toBe(false)
     expect(result.message).toBe(error)
   })

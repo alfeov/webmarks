@@ -17,9 +17,9 @@ const nextConfig: NextConfig = {
   reactStrictMode: true,
   productionBrowserSourceMaps: false,
   compress: false,
-  typescript: {
-    ignoreBuildErrors: true,
-  },
+  // typescript: { // uncomment to increase build speed
+  //   ignoreBuildErrors: true,
+  // },
   logging: {
     fetches: {
       fullUrl: true,

@@ -2,18 +2,15 @@ import { PrismaClientKnownRequestError } from '@prisma/client/runtime/client'
 
 import { MESSAGE_CODES } from '@/shared/api/types'
 import { prisma } from '@/shared/lib/prisma'
-import { createRandomMark } from '@/test/prisma/createRandomMark'
-import { createRandomUser } from '@/test/prisma/createRandomUser'
+import { createRandomMark } from '@/test/factories/createRandomMark'
+import { createRandomUser } from '@/test/factories/createRandomUser'
 import { spyOnConsoleError } from '@/test/vitest.setup'
 
 import { updateUserMark } from './updateUserMark'
 
 const spy = vi.spyOn(prisma.webMark, 'update')
 
-const defaultUpdateData: Omit<
-  Parameters<typeof updateUserMark>[0],
-  'id' | 'userId'
-> = {
+const defaultUpdateData = {
   title: 'updated-title',
   description: 'updated-description',
   url: 'https://updated-url.com',

@@ -5,6 +5,7 @@ import { useLocale, useTranslations } from 'next-intl'
 import { useActionState } from 'react'
 
 import { useCloseDialogOn } from '@/shared/lib/hooks/useCloseDialogOn'
+import { useFetchingIndicatorManager } from '@/shared/lib/hooks/useFetchingIndicatorManager'
 import { useNotificationManager } from '@/shared/lib/hooks/useNotificationManager'
 import type { Tag } from '@/shared/lib/prisma/generated/client'
 import { Button } from '@/shared/ui/button'
@@ -27,6 +28,7 @@ export function DeleteTagForm({ tagId }: { tagId: Tag['id'] }) {
     deleteTagAction.bind(null, tagId, params.tagId === tagId, locale),
     initialState,
   )
+  useFetchingIndicatorManager(isPending)
   useNotificationManager(state.message, state.isSuccess, !isPending)
   useCloseDialogOn(state.isSuccess)
 

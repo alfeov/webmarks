@@ -1,6 +1,6 @@
 import { MESSAGE_CODES } from '@/shared/api/types'
 import { prisma } from '@/shared/lib/prisma'
-import { createRandomUser } from '@/test/prisma/createRandomUser'
+import { createRandomUser } from '@/test/factories/createRandomUser'
 
 import { getAllUserTags } from './getAllUserTags'
 

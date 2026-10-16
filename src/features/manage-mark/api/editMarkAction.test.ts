@@ -37,6 +37,7 @@ describe('editMarkAction', () => {
     const result = await editMarkAction(markId, prevState, defaultFormData)
 
     expect(updateUserMark).not.toHaveBeenCalled()
+    expect(updateTag).not.toHaveBeenCalled()
     expect(result.isSuccess).toBe(false)
     expect(result.errors).toBeUndefined()
     expect(result.message).toBe(MESSAGE_CODES.UNAUTHORIZED)
@@ -47,6 +48,7 @@ describe('editMarkAction', () => {
     const result = await editMarkAction(markId, prevState, formData)
 
     expect(updateUserMark).not.toHaveBeenCalled()
+    expect(updateTag).not.toHaveBeenCalled()
     expect(result.isSuccess).toBe(false)
     expect(result.errors).not.toBeUndefined()
     expect(result.message).toBe(MESSAGE_CODES.VALIDATION_ERROR)
@@ -60,6 +62,7 @@ describe('editMarkAction', () => {
 
     const result = await editMarkAction(markId, prevState, defaultFormData)
 
+    expect(updateTag).not.toHaveBeenCalled()
     expect(result.isSuccess).toBe(false)
     expect(result.errors).toBeUndefined()
     expect(result.message).toBe(error)

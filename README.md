@@ -46,3 +46,12 @@ pn dev
   - FSD
   - next-intl (i18n)
   - jose (session)
+
+## Tests
+
+- Projects
+  - .node.test.ts:
+    - node environment
+    - Up DB in docker
+  - test.ts
+    - happy-dom environment

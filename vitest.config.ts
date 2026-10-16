@@ -20,10 +20,7 @@ export default defineConfig({
           environment: 'node',
           include: ['./src/**/*.node.test.{ts,tsx}'],
           fileParallelism: false,
-          setupFiles: [
-            './src/test/vitest.node.setup.ts',
-            './src/test/vitest.setup.ts',
-          ],
+          setupFiles: ['./src/test/vitest.node.setup.ts'],
         },
       },
     ],
@@ -37,7 +34,7 @@ export default defineConfig({
     tsconfigPaths: true,
     alias: {
       'server-only': fileURLToPath(
-        new URL('./src/test/stubs/empty.ts', import.meta.url),
+        new URL('./src/test/stubs/server-only.ts', import.meta.url),
       ),
     },
   },

@@ -30,6 +30,23 @@ const eslintConfig = defineConfig([
       ],
     },
   },
+  {
+    files: ['**/*.{ts,tsx}'],
+    ignores: ['**/*.test.{ts,tsx}'],
+    rules: {
+      'no-restricted-imports': [
+        'error',
+        {
+          patterns: [
+            {
+              group: ['@/test', '@/test/*'],
+              message: 'Testing utility can not be used in non test files',
+            },
+          ],
+        },
+      ],
+    },
+  },
   // Override default ignores of eslint-config-next.
   globalIgnores([
     // Default ignores of eslint-config-next:

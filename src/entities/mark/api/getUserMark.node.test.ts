@@ -1,5 +1,5 @@
-import { createRandomMark } from '@/test/prisma/createRandomMark'
-import { createRandomUser } from '@/test/prisma/createRandomUser'
+import { createRandomMark } from '@/test/factories/createRandomMark'
+import { createRandomUser } from '@/test/factories/createRandomUser'
 
 import { getUserMark } from './getUserMark'
 

@@ -4,6 +4,7 @@ import { useTranslations } from 'next-intl'
 import { useActionState } from 'react'
 
 import { useCloseDialogOn } from '@/shared/lib/hooks/useCloseDialogOn'
+import { useFetchingIndicatorManager } from '@/shared/lib/hooks/useFetchingIndicatorManager'
 import { useNotificationManager } from '@/shared/lib/hooks/useNotificationManager'
 import type { Tag } from '@/shared/lib/prisma/generated/client'
 import { Button } from '@/shared/ui/button'
@@ -25,6 +26,7 @@ export function EditTagForm({ ...tag }: EditTagFormProps) {
     editTagAction.bind(null, tag.id),
     initialState,
   )
+  useFetchingIndicatorManager(isPending)
   useNotificationManager(state.message, state.isSuccess, !isPending)
   useCloseDialogOn(state.isSuccess)
 

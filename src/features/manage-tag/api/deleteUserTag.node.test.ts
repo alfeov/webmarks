@@ -4,7 +4,7 @@ import { MESSAGE_CODES } from '@/shared/api/types'
 import { prisma } from '@/shared/lib/prisma'
 import { createRandomTag } from '@/test/factories/createRandomTag'
 import { createRandomUser } from '@/test/factories/createRandomUser'
-import { spyOnConsoleError } from '@/test/vitest.setup'
+import { spyOnConsoleError } from '@/test/helpers/spyOnConsoleError'
 
 import { deleteUserTag } from './deleteUserTag'
 

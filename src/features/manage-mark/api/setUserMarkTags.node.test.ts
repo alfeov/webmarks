@@ -5,7 +5,7 @@ import { prisma } from '@/shared/lib/prisma'
 import { createRandomMark } from '@/test/factories/createRandomMark'
 import { createRandomTag } from '@/test/factories/createRandomTag'
 import { createRandomUser } from '@/test/factories/createRandomUser'
-import { spyOnConsoleError } from '@/test/vitest.setup'
+import { spyOnConsoleError } from '@/test/helpers/spyOnConsoleError'
 
 import { setUserMarkTags } from './setUserMarkTags'
 

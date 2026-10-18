@@ -1,4 +1,4 @@
-import { spyOnConsoleError } from '@/test/vitest.setup'
+import { spyOnConsoleError } from '@/test/helpers/spyOnConsoleError'
 
 import { getLocalStorageData, setLocalStorageData } from './localStorage'
 

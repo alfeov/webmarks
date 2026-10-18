@@ -1,4 +1,4 @@
-import { spyOnConsoleError } from '@/test/vitest.setup'
+import { spyOnConsoleError } from '@/test/helpers/spyOnConsoleError'
 
 import { decrypt, encrypt } from './crypto'
 import type { SessionPayload } from './types'

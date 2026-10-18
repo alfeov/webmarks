@@ -1,5 +1,5 @@
 import { MESSAGE_CODES } from '@/shared/api/types'
-import { spyOnConsoleError } from '@/test/vitest.setup'
+import { spyOnConsoleError } from '@/test/helpers/spyOnConsoleError'
 
 import { copy } from './copy'
 

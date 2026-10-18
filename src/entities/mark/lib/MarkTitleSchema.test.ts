@@ -1,4 +1,4 @@
-import { extractNumber, messages } from '@/test/utils/messages'
+import { extractNumber, messages } from '@/test/helpers/messages'
 
 import { MAX_MARK_TITLE_LENGTH, MIN_MARK_TITLE_LENGTH } from './MarkTitleSchema'
 

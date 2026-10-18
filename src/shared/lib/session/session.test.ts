@@ -1,5 +1,7 @@
 import { cookies } from 'next/headers'
 
+import { spyOnConsoleError } from '@/test/helpers/spyOnConsoleError'
+
 import { SESSION_COOKIE_KEY } from './constants'
 import { decrypt, encrypt } from './crypto'
 import {
@@ -64,6 +66,7 @@ describe('session', () => {
     it('should return null when session or payload is falsy', async () => {
       const result = await updateSession()
 
+      expect(spyOnConsoleError).toHaveBeenCalledOnce()
       expect(result).toBeNull()
       expect(setFn).not.toHaveBeenCalled()
     })
@@ -96,6 +99,7 @@ describe('session', () => {
 
       vi.mocked(decrypt).mockResolvedValueOnce(payload)
 
+      expect(spyOnConsoleError).toHaveBeenCalledOnce()
       expect(await verifySession()).toMatchObject(payload)
     })
   })

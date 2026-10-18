@@ -15,10 +15,6 @@ vi.mock('../api/deleteTagAction', () => ({
   deleteTagAction,
 }))
 vi.mock('next/navigation')
-vi.mock('next-intl', () => ({
-  useTranslations: () => (key: string) => key,
-  useLocale: () => 'en',
-}))
 
 const defaultTagId = '1'
 

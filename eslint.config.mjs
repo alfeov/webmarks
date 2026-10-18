@@ -21,7 +21,7 @@ const eslintConfig = defineConfig([
         {
           groups: [
             ['server-only'], // 0.
-            ['^@?\\w'], // 1. Frameworks, libs
+            ['^@?\\w', '@'], // 1. Frameworks, libs
             ['^@\/'], // 2. FSD
             ['^\\.'], // 3. Relative imports
             ['css$', '@/shared/assets', '^lucide'], // 4. style imports, images, icons

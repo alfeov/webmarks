@@ -12,6 +12,7 @@ export default defineConfig({
           environment: 'happy-dom',
           include: ['./src/**/*.test.{ts,tsx}'],
           exclude: ['./src/**/*.node.test.{ts,tsx}'],
+          setupFiles: ['./src/test/vitest.dom.setup.ts'],
         },
       },
       {
@@ -25,7 +26,6 @@ export default defineConfig({
       },
     ],
     globals: true,
-    setupFiles: './src/test/vitest.setup.ts',
     env: {
       SESSION_SECRET: 'test-secret-key-at-least-32-chars-long',
     },

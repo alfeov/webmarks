@@ -1,6 +1,6 @@
 import { prisma } from '@/shared/lib/prisma'
 
-export const cleanDatabase = () => {
+export const clearDatabase = () => {
   const deleteUsers = prisma.user.deleteMany()
   const deleteTags = prisma.tag.deleteMany()
   const deleteWebMarks = prisma.webMark.deleteMany()

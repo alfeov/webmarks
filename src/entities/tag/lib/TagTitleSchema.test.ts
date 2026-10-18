@@ -1,4 +1,4 @@
-import { extractNumber, messages } from '@/test/utils/messages'
+import { extractNumber, messages } from '@/test/helpers/messages'
 
 import { MAX_TAG_TITLE_LENGTH, MIN_TAG_TITLE_LENGTH } from './TagTitleSchema'
 

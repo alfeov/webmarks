@@ -49,9 +49,24 @@ pn dev
 
 ## Tests
 
-- Projects
-  - .node.test.ts:
-    - node environment
-    - Up DB in docker
-  - test.ts
-    - happy-dom environment
+### Projects
+
+#### dom
+
+- Extension: `*.test.{ts,tsx}`
+- Runs in **happy-dom** environment
+- Uses `fileParallelism: true`
+
+#### node
+
+- Extension: `*.node.test.{ts,tsx}`
+- Runs in **node** environment
+- Uses `fileParallelism: false`
+- Up test DB in Docker to run tests
+
+### Commands
+
+- `pn test` - Up Docker test DB and runs tests in the both projects environments (dom and node). Watch for changes.
+- `pn test:run` - Same as `pn test` but run the tests once without watch mode.
+- `pn test:dom` - Runs **dom** project tests. Watch for changes.
+- `pn test:node` - Up Docker test DB and runs **node** project tests. Watch for changes.

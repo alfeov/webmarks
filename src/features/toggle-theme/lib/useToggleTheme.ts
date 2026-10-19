@@ -22,7 +22,6 @@ const NEXT_THEME: Record<Theme, Theme> = {
 
 export function useToggleTheme() {
   const [theme, setTheme] = useState<Theme>(() => {
-    if (typeof window === 'undefined') return 'system'
     return getLocalStorageData<Theme>(themeKey) ?? 'system'
   })
 

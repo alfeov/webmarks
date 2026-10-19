@@ -1,6 +1,7 @@
 'use client'
 
-import { createPortal } from 'react-dom'
+import { use } from 'react'
+import { browser, createPortal } from 'react-dom'
 
 import { cn } from '../lib/utils'
 
@@ -9,6 +10,8 @@ interface PortalWrapper {
 }
 
 export function PortalWrapper({ children }: PortalWrapper) {
+  use(browser())
+
   return createPortal(children, document.body)
 }
 

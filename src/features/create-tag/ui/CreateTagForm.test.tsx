@@ -2,7 +2,7 @@ import { screen } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 
 import { MESSAGE_CODES } from '@/shared/api/types'
-import { renderWithProviders } from '@/test/renderWithProviders'
+import { renderWithProviders } from '@/test/helpers/renderWithProviders'
 
 import { createTagAction } from '../api/createTagAction'
 import { CreateTagForm } from './CreateTagForm'

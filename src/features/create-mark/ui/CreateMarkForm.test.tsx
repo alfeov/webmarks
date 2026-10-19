@@ -1,8 +1,10 @@
 import { screen } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
+import { useParams } from 'next/navigation'
 
+import { Providers } from '@/app/[locale]/_providers/Providers'
 import { MESSAGE_CODES } from '@/shared/api/types'
-import { AllProviders, renderWithProviders } from '@/test/renderWithProviders'
+import { renderWithProviders } from '@/test/helpers/renderWithProviders'
 
 import { createMarkAction } from '../api/createMarkAction'
 import { CreateMarkForm } from './CreateMarkForm'
@@ -16,9 +18,9 @@ vi.mock('../model/MetaContext', async (importOriginal) => ({
   useMetaStateContext,
 }))
 vi.mock('../api/createMarkAction')
+vi.mock('next/navigation')
 
 const tagId = '1'
-const tagTitle = 'Vercel'
 
 const defaultData = {
   url: 'https://some-url.com',
@@ -28,6 +30,10 @@ const defaultData = {
 }
 
 describe('CreateMarkForm', () => {
+  beforeEach(() => {
+    vi.mocked(useParams).mockReturnValue({})
+  })
+
   it('should render enabled elements by default with default values', () => {
     renderWithProviders(<CreateMarkForm />)
 
@@ -45,9 +51,7 @@ describe('CreateMarkForm', () => {
   it('should set values from meta context when it received', () => {
     vi.mocked(useMetaStateContext).mockReturnValueOnce(defaultData)
 
-    renderWithProviders(
-      <CreateMarkForm currentTagId={tagId} currentTagTitle={tagTitle} />,
-    )
+    renderWithProviders(<CreateMarkForm />)
 
     expect(screen.getByPlaceholderText(/webmarks.com/i)).toHaveValue(
       defaultData.url,
@@ -70,9 +74,7 @@ describe('CreateMarkForm', () => {
       logoUrl: undefined,
     })
 
-    renderWithProviders(
-      <CreateMarkForm currentTagId={tagId} currentTagTitle={tagTitle} />,
-    )
+    renderWithProviders(<CreateMarkForm />)
 
     expect(screen.getByPlaceholderText(/webmarks.com/i)).toHaveValue('')
     expect(screen.getByPlaceholderText('WebMark')).toHaveValue('')
@@ -80,9 +82,7 @@ describe('CreateMarkForm', () => {
     expect(screen.getByPlaceholderText(/logo.com/i)).toHaveValue('')
   })
   it('should keep user input and fill only untouched fields when meta arrives', async () => {
-    const { rerender } = renderWithProviders(
-      <CreateMarkForm currentTagId={tagId} currentTagTitle={tagTitle} />,
-    )
+    const { rerender } = renderWithProviders(<CreateMarkForm />)
 
     const userInput = 'User Input'
     await userEvent.type(
@@ -94,9 +94,9 @@ describe('CreateMarkForm', () => {
     vi.mocked(useMetaStateContext).mockReturnValueOnce(defaultData)
 
     rerender(
-      <AllProviders>
-        <CreateMarkForm currentTagId={tagId} currentTagTitle={tagTitle} />
-      </AllProviders>,
+      <Providers>
+        <CreateMarkForm />
+      </Providers>,
     )
 
     expect(screen.getByPlaceholderText(/webmarks.com/i)).toHaveValue(userInput)
@@ -108,22 +108,10 @@ describe('CreateMarkForm', () => {
       defaultData.logoUrl,
     )
   })
-  it('should display default tag corresponding to page params (received from props)', () => {
-    renderWithProviders(
-      <CreateMarkForm currentTagId={tagId} currentTagTitle={tagTitle} />,
-    )
+  it('should call createMarkAction with tag id when it present in params', async () => {
+    vi.mocked(useParams).mockReturnValue({ tagId })
 
-    expect(screen.getByTestId('current-tag')).toHaveTextContent(tagTitle)
-  })
-  it('should not display default tag when it not received from props', () => {
     renderWithProviders(<CreateMarkForm />)
-
-    expect(screen.queryByTestId('current-tag')).not.toBeInTheDocument()
-  })
-  it('should call createMarkAction with defaultTagId received from props', async () => {
-    renderWithProviders(
-      <CreateMarkForm currentTagId={tagId} currentTagTitle={tagTitle} />,
-    )
 
     vi.mocked(createMarkAction).mockResolvedValueOnce({
       isSuccess: true,

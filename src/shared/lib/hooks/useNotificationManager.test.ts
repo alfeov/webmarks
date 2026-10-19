@@ -1,5 +1,5 @@
 import { MESSAGE_CODES, type MessageCode } from '@/shared/api/types'
-import { renderHookWithProviders } from '@/test/renderWithProviders'
+import { renderHookWithProviders } from '@/test/helpers/renderHookWithProviders'
 
 import { showToast } from '../utils/showToast'
 import { useNotificationManager } from './useNotificationManager'

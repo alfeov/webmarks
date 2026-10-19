@@ -21,7 +21,7 @@ import { FaceSlightlyFrowning, FaceSlightlySmiling } from 'lucide-react'
 
 export async function Profile() {
   const session = await verifySession()
-  const user = await getUserData({ id: session?.userId })
+  const user = session ? await getUserData({ id: session.userId }) : null
 
   const t = await getTranslations('Profile')
 

@@ -7,9 +7,11 @@ import { SwitchLocale } from '@/features/switch-locale/SwitchLocale'
 import { ThemeToggleButton } from '@/features/toggle-theme/ui/ThemeToggleButton'
 import { Link } from '@/shared/i18n/navigation'
 import { routing } from '@/shared/i18n/routing'
+import { verifySession } from '@/shared/lib/session'
 import { cn } from '@/shared/lib/utils'
 import { ScrollArea } from '@/shared/ui/scroll-area'
-import { SpinnerEmpty } from '@/shared/ui/SpinnerEmpty'
+import { Skeleton } from '@/shared/ui/skeleton'
+import { Auth } from '@/widgets/auth/ui/Auth'
 import { Profile } from '@/widgets/profile/ui/Profile'
 import { ProfileSkeleton } from '@/widgets/profile/ui/ProfileSkeleton'
 import { AppSidebar } from '@/widgets/sidebar/ui/AppSidebar'
@@ -27,6 +29,8 @@ const fontExcalidraw = localFont({
 const BASE_URL = new URL(
   String(process.env.NEXT_PUBLIC_SITE_URL) || 'http://localhost:3000',
 )
+
+export const instant = false
 
 export function generateStaticParams() {
   return routing.locales.map((locale) => ({ locale }))
@@ -98,15 +102,16 @@ export async function generateMetadata(): Promise<Metadata> {
 export default async function RootLayout({
   children,
 }: LayoutProps<'/[locale]'>) {
+  const session = await verifySession()
+
   const locale = await getLocale()
-  const t = await getTranslations('Layout')
 
   return (
     <html
       lang={locale}
       className={cn('h-full', 'antialiased', fontExcalidraw.variable)}
       data-scroll-behavior='smooth'
-      suppressHydrationWarning
+      suppressHydrationWarning // suppressing dark theme class application
     >
       <head>
         <script
@@ -131,38 +136,36 @@ export default async function RootLayout({
         />
       </head>
       <body className='flex min-h-full flex-col'>
-        <Suspense
-          fallback={
-            <SpinnerEmpty
-              title={t('loaderTitle')}
-              description={t('loaderDescription')}
-            />
-          }
+        <Providers
+          initialDialogOpen={!session}
+          initialDialogContent={!session ? <Auth initialMode='signin' /> : null}
         >
-          <Providers>
-            <header className='border-b'>
-              <div className='flex h-(--header-height) items-center justify-between px-[30px] md:px-[40px]'>
-                <Link href='/'>
-                  <h1 className='text-[30px] font-bold'>WebMarks</h1>
-                </Link>
-                <div className='flex items-center gap-[20px]'>
-                  <SwitchLocale />
+          <header className='border-b'>
+            <div className='flex h-(--header-height) items-center justify-between px-[30px] md:px-[40px]'>
+              <Link href='/'>
+                <h1 className='text-[30px] font-bold'>WebMarks</h1>
+              </Link>
+              <div className='flex items-center gap-[20px]'>
+                <SwitchLocale />
+                <Suspense
+                  fallback={<Skeleton className='size-9 rounded-4xl' />}
+                >
                   <ThemeToggleButton />
-                  <Suspense fallback={<ProfileSkeleton />}>
-                    <Profile />
-                  </Suspense>
-                </div>
+                </Suspense>
+                <Suspense fallback={<ProfileSkeleton />}>
+                  <Profile />
+                </Suspense>
               </div>
-            </header>
+            </div>
+          </header>
 
-            <main className='flex h-(--content-height)'>
-              <nav className='h-full'>
-                <AppSidebar />
-              </nav>
-              <ScrollArea className='h-full w-full'>{children}</ScrollArea>
-            </main>
-          </Providers>
-        </Suspense>
+          <main className='flex h-(--content-height)'>
+            <nav className='h-full'>
+              <AppSidebar />
+            </nav>
+            <ScrollArea className='h-full w-full'>{children}</ScrollArea>
+          </main>
+        </Providers>
       </body>
     </html>
   )

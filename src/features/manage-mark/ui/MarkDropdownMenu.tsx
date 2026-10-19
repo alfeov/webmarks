@@ -1,7 +1,9 @@
-import { useTranslations } from 'next-intl'
+import { getTranslations } from 'next-intl/server'
 
 import type { WebMarkWithTags } from '@/entities/mark/model/types'
+import { getAllUserTags } from '@/entities/tag/api/getAllUserTags'
 import { ChangeMarkTagsDropdownItem } from '@/features/manage-mark/ui/ChangeMarkTagsDropdownItem'
+import { verifySession } from '@/shared/lib/session'
 import { Button } from '@/shared/ui/button'
 import {
   DropdownMenu,
@@ -20,8 +22,11 @@ import { LucideEllipsis } from 'lucide-react'
 
 type MarkDropDownMenuProps = WebMarkWithTags
 
-export function MarkDropdownMenu({ ...mark }: MarkDropDownMenuProps) {
-  const t = useTranslations('MarkDropdownMenu')
+export async function MarkDropdownMenu({ ...mark }: MarkDropDownMenuProps) {
+  const session = await verifySession()
+  const tags = session ? await getAllUserTags({ userId: session.userId }) : []
+
+  const t = await getTranslations('MarkDropdownMenu')
 
   return (
     <DropdownMenu>
@@ -41,7 +46,11 @@ export function MarkDropdownMenu({ ...mark }: MarkDropDownMenuProps) {
         <DropdownMenuGroup>
           <OpenMarkDropdownItem url={mark.url} />
           <CopyLinkDropdownItem url={mark.url} />
-          <ChangeMarkTagsDropdownItem markId={mark.id} markTags={mark.tags} />
+          <ChangeMarkTagsDropdownItem
+            markId={mark.id}
+            markTags={mark.tags}
+            tags={tags}
+          />
           <EditMarkDropdownItem {...mark} />
           <PinMarkDropdownItem id={mark.id} pinned={mark.pinned} />
           <DeleteMarkDropdownItem id={mark.id} />

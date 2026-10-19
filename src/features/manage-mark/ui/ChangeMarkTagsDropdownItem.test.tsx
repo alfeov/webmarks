@@ -3,7 +3,7 @@ import userEvent from '@testing-library/user-event'
 
 import type { Tag } from '@/shared/lib/prisma/generated/client'
 import { DropdownMenu } from '@/shared/ui/dropdown-menu'
-import { renderWithProviders } from '@/test/renderWithProviders'
+import { renderWithProviders } from '@/test/helpers/renderWithProviders'
 
 import { ChangeMarkTagsDropdownItem } from './ChangeMarkTagsDropdownItem'
 import { ChangeMarkTagsForm } from './ChangeMarkTagsForm'
@@ -44,9 +44,9 @@ describe('ChangeMarkTagsDropdownItem', () => {
         <ChangeMarkTagsDropdownItem
           markId={defaultMarkId}
           markTags={defaultMarkTags}
+          tags={defaultTags}
         />
       </DropdownMenu>,
-      { tags: defaultTags },
     )
 
     await userEvent.click(screen.getByText('items.changeTags'))

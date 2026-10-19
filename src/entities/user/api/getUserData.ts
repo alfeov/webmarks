@@ -8,7 +8,7 @@ import type { User } from '@/shared/lib/prisma/generated/client'
 import { SafeUserData } from '../lib/SafeUserData'
 
 interface GetUserDataProps {
-  id?: User['id']
+  id: User['id']
 }
 
 export async function getUserData({ id }: GetUserDataProps) {
@@ -16,8 +16,6 @@ export async function getUserData({ id }: GetUserDataProps) {
 
   cacheTag(`user-${id}`)
   cacheLife('days')
-
-  if (!id) return null
 
   const user = await prisma.user.findUnique({
     where: {

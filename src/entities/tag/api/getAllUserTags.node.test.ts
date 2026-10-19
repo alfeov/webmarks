@@ -1,4 +1,3 @@
-import { MESSAGE_CODES } from '@/shared/api/types'
 import { prisma } from '@/shared/lib/prisma'
 import { createRandomUser } from '@/test/factories/createRandomUser'
 
@@ -9,18 +8,6 @@ describe('getAllUserTags', () => {
 
   beforeEach(async () => {
     userId = (await createRandomUser()).id
-  })
-  it('should return empty tags array and message when userId is not passed', async () => {
-    const result = await getAllUserTags({})
-
-    expect(result.tags).toEqual([])
-    expect(result.message).toEqual(MESSAGE_CODES.UNAUTHORIZED)
-  })
-  it('should return empty tags array and message if tags not found', async () => {
-    const result = await getAllUserTags({ userId: userId })
-
-    expect(result.tags).toEqual([])
-    expect(result.message).toEqual(MESSAGE_CODES.TAGS_NOT_FOUND)
   })
   it('should return tags in ascending order if they exist', async () => {
     const firstTitle = 'ABC'
@@ -34,15 +21,11 @@ describe('getAllUserTags', () => {
         { title: secondTitle, userId },
       ],
     })
-    const {
-      message,
-      tags: [first, second, third],
-    } = await getAllUserTags({ userId: userId })
+    const [first, second, third] = await getAllUserTags({ userId: userId })
 
     expect(first.title).toBe(firstTitle)
     expect(second.title).toBe(secondTitle)
     expect(third.title).toBe(thirdTitle)
-    expect(message).toBeUndefined()
   })
   it('should not return tags belonging to other users', async () => {
     const otherUser = await createRandomUser()
@@ -53,7 +36,7 @@ describe('getAllUserTags', () => {
       ],
     })
 
-    const { tags } = await getAllUserTags({ userId })
+    const tags = await getAllUserTags({ userId })
 
     expect(tags).toHaveLength(1)
     expect(tags[0].title).toBe('user tag')

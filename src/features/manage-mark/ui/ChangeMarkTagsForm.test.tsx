@@ -1,7 +1,7 @@
 import { screen } from '@testing-library/react'
 
 import type { Tag } from '@/shared/lib/prisma/generated/client'
-import { renderWithProviders } from '@/test/renderWithProviders'
+import { renderWithProviders } from '@/test/helpers/renderWithProviders'
 
 import { ChangeMarkTagsForm } from './ChangeMarkTagsForm'
 

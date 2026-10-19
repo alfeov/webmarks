@@ -1,5 +1,6 @@
 'use client'
 
+import { useParams } from 'next/navigation'
 import { startTransition, useActionState } from 'react'
 import { useForm } from 'react-hook-form'
 
@@ -13,11 +14,9 @@ export const initialState: CreateMarkFormState = {
   isSuccess: false,
 }
 
-export function useCreateMarkForm({
-  defaultTagId,
-}: {
-  defaultTagId?: Tag['id']
-}) {
+export function useCreateMarkForm() {
+  const params = useParams<{ tagId?: Tag['id'] }>()
+
   const metadata = useMetaStateContext()
   const { register, handleSubmit } = useForm({
     values: {
@@ -29,7 +28,7 @@ export function useCreateMarkForm({
   })
 
   const [state, formAction, isPending] = useActionState(
-    createMarkAction.bind(null, defaultTagId),
+    createMarkAction.bind(null, params.tagId),
     initialState,
   )
 

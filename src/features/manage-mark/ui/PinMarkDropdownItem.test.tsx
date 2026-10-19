@@ -3,7 +3,7 @@ import userEvent from '@testing-library/user-event'
 
 import { MESSAGE_CODES } from '@/shared/api/types'
 import { DropdownMenu } from '@/shared/ui/dropdown-menu'
-import { renderWithProviders } from '@/test/renderWithProviders'
+import { renderWithProviders } from '@/test/helpers/renderWithProviders'
 
 import { toggleMarkPinnedAction } from '../api/toggleMarkPinnedAction'
 import { PinMarkDropdownItem } from './PinMarkDropdownItem'

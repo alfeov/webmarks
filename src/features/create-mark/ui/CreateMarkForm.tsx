@@ -5,8 +5,6 @@ import { useTranslations } from 'next-intl'
 import { useCloseDialogOn } from '@/shared/lib/hooks/useCloseDialogOn'
 import { useFetchingIndicatorManager } from '@/shared/lib/hooks/useFetchingIndicatorManager'
 import { useNotificationManager } from '@/shared/lib/hooks/useNotificationManager'
-import type { Tag } from '@/shared/lib/prisma/generated/client'
-import { Badge } from '@/shared/ui/badge'
 import { Button } from '@/shared/ui/button'
 import { FieldLegend, FieldSet } from '@/shared/ui/field'
 import { InputField } from '@/shared/ui/InputField'
@@ -15,18 +13,9 @@ import { TextareaField } from '@/shared/ui/TextareaField'
 import { CREATE_MARK_FORMDATA } from '../lib/constants'
 import { useCreateMarkForm } from '../lib/useCreateMarkForm'
 
-interface CreateMarkFormProps {
-  currentTagId?: Tag['id']
-  currentTagTitle?: Tag['title']
-}
+export function CreateMarkForm() {
+  const { state, isPending, onSubmit, register } = useCreateMarkForm()
 
-export function CreateMarkForm({
-  currentTagId,
-  currentTagTitle,
-}: CreateMarkFormProps) {
-  const { state, isPending, onSubmit, register } = useCreateMarkForm({
-    defaultTagId: currentTagId,
-  })
   useNotificationManager(state.message, state.isSuccess, !isPending)
   useFetchingIndicatorManager(isPending)
   useCloseDialogOn(state.isSuccess)
@@ -69,10 +58,6 @@ export function CreateMarkForm({
             errors={state.errors?.logoUrl}
             {...register(CREATE_MARK_FORMDATA.LOGO_URL)}
           />
-          {/* default tag according to page params */}
-          {currentTagTitle && (
-            <Badge data-testid='current-tag'>{currentTagTitle}</Badge>
-          )}
         </FieldSet>
         <Button type='submit'>{tCreateMarkForm('submit')}</Button>
       </FieldSet>

@@ -3,7 +3,7 @@ import userEvent from '@testing-library/user-event'
 import { useParams } from 'next/navigation'
 
 import { MESSAGE_CODES } from '@/shared/api/types'
-import { renderWithProviders } from '@/test/renderWithProviders'
+import { renderWithProviders } from '@/test/helpers/renderWithProviders'
 
 import { DeleteTagForm } from './DeleteTagForm'
 

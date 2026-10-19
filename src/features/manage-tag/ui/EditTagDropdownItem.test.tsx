@@ -2,7 +2,7 @@ import { screen } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 
 import { DropdownMenu } from '@/shared/ui/dropdown-menu'
-import { renderWithProviders } from '@/test/renderWithProviders'
+import { renderWithProviders } from '@/test/helpers/renderWithProviders'
 
 import { EditTagDropdownItem } from './EditTagDropdownItem'
 import { EditTagForm } from './EditTagForm'

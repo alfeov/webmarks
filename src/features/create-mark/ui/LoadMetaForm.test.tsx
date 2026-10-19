@@ -4,7 +4,7 @@ import userEvent from '@testing-library/user-event'
 import { MESSAGE_CODES } from '@/shared/api/types'
 import { paste } from '@/shared/lib/utils/paste'
 import { showToast } from '@/shared/lib/utils/showToast'
-import { renderWithProviders } from '@/test/renderWithProviders'
+import { renderWithProviders } from '@/test/helpers/renderWithProviders'
 
 import { loadMetaAction } from '../api/loadMetaAction'
 import { LoadMetaForm } from './LoadMetaForm'

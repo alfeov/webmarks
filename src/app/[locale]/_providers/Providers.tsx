@@ -1,33 +1,31 @@
 import { NextIntlClientProvider } from 'next-intl'
 
-import { getAllUserTags } from '@/entities/tag/api/getAllUserTags'
-import { TagsProvider } from '@/entities/tag/model/TagsContext'
-import { DialogProvider } from '@/shared/lib/contexts/DialogContext'
+import {
+  DialogProvider,
+  type DialogProviderProps,
+} from '@/shared/lib/contexts/DialogContext'
 import { FetchingIndicatorProvider } from '@/shared/lib/contexts/FetchingIndicatorContext'
-import { verifySession } from '@/shared/lib/session'
 import { Toaster } from '@/shared/ui/toast'
 import { TooltipProvider } from '@/shared/ui/tooltip'
-import { Auth } from '@/widgets/auth/ui/Auth'
 
-export async function Providers({ children }: { children: React.ReactNode }) {
-  const session = await verifySession()
-  const { tags } = await getAllUserTags({ userId: session?.userId })
+export type ProvidersProps = DialogProviderProps
 
+export function Providers({
+  children,
+  initialDialogContent,
+  initialDialogOpen,
+}: ProvidersProps) {
   return (
     <NextIntlClientProvider>
       <TooltipProvider>
         <FetchingIndicatorProvider>
-          <TagsProvider tags={tags}>
-            <DialogProvider
-              initialDialogOpen={!session}
-              initialDialogContent={
-                !session ? <Auth initialMode='signin' /> : null
-              }
-            >
-              {children}
-              <Toaster />
-            </DialogProvider>
-          </TagsProvider>
+          <DialogProvider
+            initialDialogOpen={initialDialogOpen}
+            initialDialogContent={initialDialogContent}
+          >
+            {children}
+            <Toaster />
+          </DialogProvider>
         </FetchingIndicatorProvider>
       </TooltipProvider>
     </NextIntlClientProvider>

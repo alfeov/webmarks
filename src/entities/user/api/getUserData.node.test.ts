@@ -4,12 +4,6 @@ import type { SafeUserData } from '../lib/SafeUserData'
 import { getUserData } from './getUserData'
 
 describe('getUserData', () => {
-  it('should return null when id not passed', async () => {
-    const result = await getUserData({})
-
-    expect(result).toBeNull()
-  })
-
   it('should return null when user not found', async () => {
     const result = await getUserData({ id: 'non-existent-id' })
 

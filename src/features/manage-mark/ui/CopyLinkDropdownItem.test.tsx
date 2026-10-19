@@ -4,7 +4,7 @@ import userEvent from '@testing-library/user-event'
 import { MESSAGE_CODES } from '@/shared/api/types'
 import { copy } from '@/shared/lib/utils/copy'
 import { DropdownMenu } from '@/shared/ui/dropdown-menu'
-import { renderWithProviders } from '@/test/renderWithProviders'
+import { renderWithProviders } from '@/test/helpers/renderWithProviders'
 
 import { CopyLinkDropdownItem } from './CopyLinkDropdownItem'
 

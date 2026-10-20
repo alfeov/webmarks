@@ -5,7 +5,7 @@ export function EmptyMessage({
   ...props
 }: React.ComponentProps<'p'>) {
   return (
-    <div
+    <p
       className={cn('text-muted-foreground text-center', className)}
       {...props}
     />

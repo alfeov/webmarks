@@ -1,6 +1,6 @@
 'use client'
 
-import { use } from 'react'
+import { Suspense, use } from 'react'
 import { browser, createPortal } from 'react-dom'
 
 import { cn } from '../lib/utils'
@@ -9,15 +9,23 @@ interface PortalWrapper {
   children: React.ReactNode
 }
 
-export function PortalWrapper({ children }: PortalWrapper) {
+function PortalToBody({ children }: { children: React.ReactNode }) {
   use(browser())
 
   return createPortal(children, document.body)
 }
 
+export function PortalWrapper({ children }: PortalWrapper) {
+  return (
+    <Suspense>
+      <PortalToBody>{children}</PortalToBody>
+    </Suspense>
+  )
+}
+
 type AbsoluteWrapperProps = React.ComponentProps<'div'>
 export function AbsoluteWrapper({
-  className = '',
+  className,
   children,
   ...props
 }: AbsoluteWrapperProps) {
@@ -30,7 +38,7 @@ export function AbsoluteWrapper({
 
 type StickyWrapperProps = React.ComponentProps<'div'>
 export function StickyWrapper({
-  className = '',
+  className,
   children,
   ...props
 }: StickyWrapperProps) {

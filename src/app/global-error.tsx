@@ -3,11 +3,19 @@
 import localFont from 'next/font/local'
 import { useEffect } from 'react'
 
-import { ErrorEmpty } from '@/shared/components/ErrorEmpty'
 import { cn } from '@/shared/lib/utils'
 import { Button } from '@/shared/ui/button'
+import {
+  Empty,
+  EmptyContent,
+  EmptyDescription,
+  EmptyHeader,
+  EmptyMedia,
+  EmptyTitle,
+} from '@/shared/ui/empty'
 
 import './styles/index.css'
+import { FaceSlightlyFrowning } from 'lucide-react'
 
 const fontExcalidraw = localFont({
   src: './Excalifont-Regular.woff2',
@@ -33,14 +41,20 @@ export default function GlobalError({
       data-scroll-behavior='smooth'
     >
       <body className='flex min-h-full flex-col'>
-        <ErrorEmpty
-          title='Something went wrong'
-          description='App has been down...'
-        >
-          <Button onClick={retry} className='w-full'>
-            Retry
-          </Button>
-        </ErrorEmpty>
+        <Empty className='h-full'>
+          <EmptyHeader>
+            <EmptyMedia variant='icon'>
+              <FaceSlightlyFrowning />
+            </EmptyMedia>
+            <EmptyTitle>Something went wrong</EmptyTitle>
+            <EmptyDescription>App has been down...</EmptyDescription>
+            <EmptyContent>
+              <Button onClick={retry} className='w-full'>
+                Retry
+              </Button>
+            </EmptyContent>
+          </EmptyHeader>
+        </Empty>
       </body>
     </html>
   )

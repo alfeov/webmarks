@@ -5,7 +5,6 @@ interface TextareaFieldProps extends React.ComponentProps<'textarea'> {
   label: string
   req?: boolean
   errors?: string[]
-  className?: string
 }
 
 export function TextareaField({

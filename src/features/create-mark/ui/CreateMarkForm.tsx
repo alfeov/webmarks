@@ -2,13 +2,13 @@
 
 import { useTranslations } from 'next-intl'
 
+import { InputField } from '@/shared/components/InputField'
 import { TextareaField } from '@/shared/components/TextareaField'
 import { useCloseDialogOn } from '@/shared/lib/hooks/useCloseDialogOn'
 import { useFetchingIndicatorManager } from '@/shared/lib/hooks/useFetchingIndicatorManager'
 import { useNotificationManager } from '@/shared/lib/hooks/useNotificationManager'
 import { Button } from '@/shared/ui/button'
 import { FieldLegend, FieldSet } from '@/shared/ui/field'
-import { InputField } from '@/shared/ui/InputField'
 
 import { CREATE_MARK_FORMDATA } from '../lib/constants'
 import { useCreateMarkForm } from '../lib/useCreateMarkForm'

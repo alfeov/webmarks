@@ -6,11 +6,19 @@ import { getUserMarks } from '@/entities/mark/api/getUserMarks'
 import { MarkItem } from '@/entities/mark/ui/MarkItem'
 import { getUserTag } from '@/entities/tag/api/getUserTag'
 import { MarkDropdownMenu } from '@/features/manage-mark/ui/MarkDropdownMenu'
-import { ErrorEmpty } from '@/shared/components/ErrorEmpty'
 import type { Tag } from '@/shared/lib/prisma/generated/client'
 import { verifySession } from '@/shared/lib/session'
+import {
+  Empty,
+  EmptyDescription,
+  EmptyHeader,
+  EmptyMedia,
+  EmptyTitle,
+} from '@/shared/ui/empty'
 
 import { MarkGrid } from './MarkGrid'
+
+import { FaceSlightlyFrowning } from 'lucide-react'
 
 interface MarkListProps {
   params?: Promise<{
@@ -31,10 +39,15 @@ export async function MarkList({ params, searchParams }: MarkListProps) {
   const session = await verifySession()
   if (!session) {
     return (
-      <ErrorEmpty
-        title={t('unauthorizedTitle')}
-        description={t('unauthorizedDescription')}
-      />
+      <Empty className='h-full'>
+        <EmptyHeader>
+          <EmptyMedia variant='icon'>
+            <FaceSlightlyFrowning />
+          </EmptyMedia>
+          <EmptyTitle>{t('unauthorizedTitle')}</EmptyTitle>
+          <EmptyDescription>{t('unauthorizedDescription')}</EmptyDescription>
+        </EmptyHeader>
+      </Empty>
     )
   }
 
@@ -69,11 +82,18 @@ export async function MarkList({ params, searchParams }: MarkListProps) {
       ))}
     </MarkGrid>
   ) : (
-    <ErrorEmpty
-      title={t('notFoundTitle')}
-      description={
-        resultQuery ? t('notFoundByQueryDescription') : t('notFoundDescription')
-      }
-    />
+    <Empty className='h-full'>
+      <EmptyHeader>
+        <EmptyMedia variant='icon'>
+          <FaceSlightlyFrowning />
+        </EmptyMedia>
+        <EmptyTitle>{t('notFoundTitle')}</EmptyTitle>
+        <EmptyDescription>
+          {resultQuery
+            ? t('notFoundByQueryDescription')
+            : t('notFoundDescription')}
+        </EmptyDescription>
+      </EmptyHeader>
+    </Empty>
   )
 }

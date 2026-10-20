@@ -3,13 +3,13 @@
 import { useTranslations } from 'next-intl'
 import { useActionState } from 'react'
 
+import { InputField } from '@/shared/components/InputField'
 import { useCloseDialogOn } from '@/shared/lib/hooks/useCloseDialogOn'
 import { useFetchingIndicatorManager } from '@/shared/lib/hooks/useFetchingIndicatorManager'
 import { useNotificationManager } from '@/shared/lib/hooks/useNotificationManager'
 import type { Tag } from '@/shared/lib/prisma/generated/client'
 import { Button } from '@/shared/ui/button'
 import { FieldDescription, FieldLegend, FieldSet } from '@/shared/ui/field'
-import { InputField } from '@/shared/ui/InputField'
 
 import { editTagAction } from '../api/editTagAction'
 import { EDIT_TAG_FORMDATA } from '../lib/constants'

@@ -3,6 +3,7 @@
 import { useTranslations } from 'next-intl'
 import { useActionState } from 'react'
 
+import { InputField } from '@/shared/components/InputField'
 import { TextareaField } from '@/shared/components/TextareaField'
 import { useCloseDialogOn } from '@/shared/lib/hooks/useCloseDialogOn'
 import { useFetchingIndicatorManager } from '@/shared/lib/hooks/useFetchingIndicatorManager'
@@ -10,7 +11,6 @@ import { useNotificationManager } from '@/shared/lib/hooks/useNotificationManage
 import type { WebMark } from '@/shared/lib/prisma/generated/client'
 import { Button } from '@/shared/ui/button'
 import { FieldDescription, FieldLegend, FieldSet } from '@/shared/ui/field'
-import { InputField } from '@/shared/ui/InputField'
 
 import { editMarkAction } from '../api/editMarkAction'
 import { EDIT_MARK_FORMDATA } from '../lib/constants'

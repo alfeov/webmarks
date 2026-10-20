@@ -1,29 +1,32 @@
-import { Badge } from '@/shared/ui/badge'
+import { useTranslations } from 'next-intl'
+
 import { Field, FieldError, FieldLabel } from '@/shared/ui/field'
 import { Input } from '@/shared/ui/input'
 
 interface InputFieldProps extends React.ComponentProps<'input'> {
   label: string
-  badgeLabel: string
+  req?: boolean
   errors?: string[]
-  className?: string
 }
 
-export function BadgeField({
+export function InputField({
   label,
-  badgeLabel,
   errors,
+  req = false,
   className,
   ...props
 }: InputFieldProps) {
+  const t = useTranslations('errors')
+
   return (
     <Field data-invalid={Boolean(errors?.length)} className={className}>
-      <div className='flex gap-[10px]'>
-        <FieldLabel>{label}</FieldLabel>
-        <Badge>{badgeLabel}</Badge>
-      </div>
+      <FieldLabel
+        className={req ? "after:text-red-500 after:content-['*']" : ''}
+      >
+        {label}
+      </FieldLabel>
       <Input aria-invalid={Boolean(errors?.length)} {...props} />
-      <FieldError errors={errors?.map((error) => ({ message: error }))} />
+      <FieldError errors={errors?.map((error) => ({ message: t(error) }))} />
     </Field>
   )
 }

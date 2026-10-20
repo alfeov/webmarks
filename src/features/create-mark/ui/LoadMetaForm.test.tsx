@@ -1,4 +1,4 @@
-import { screen } from '@testing-library/react'
+import { screen, waitFor } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 
 import { MESSAGE_CODES } from '@/shared/api/types'
@@ -53,7 +53,16 @@ describe('LoadMetaForm', () => {
     expect(screen.getByPlaceholderText(/url/i)).toHaveValue('')
     expect(showToast).toHaveBeenCalledWith('errorTitle', 'PASTE_ERROR', false)
   })
-  it('should call loadMetadataAction and set in with setMetadata fn when load button clicked', async () => {
+  it('should set url on input type', async () => {
+    renderWithProviders(<LoadMetaForm />)
+
+    const url = 'https://some-url.com'
+    const input = screen.getByPlaceholderText(/url/i)
+    await userEvent.type(input, url)
+
+    expect(screen.getByPlaceholderText(/url/i)).toHaveValue(url)
+  })
+  it('should call loadMetadataAction and set it with setMetadata fn when load button clicked', async () => {
     renderWithProviders(<LoadMetaForm />)
 
     const metadata = {
@@ -72,7 +81,7 @@ describe('LoadMetaForm', () => {
     await userEvent.click(loadBtn)
 
     expect(loadMetaAction).toHaveBeenCalled()
-    expect(setMetadata).toHaveBeenCalledWith(metadata)
+    await waitFor(() => expect(setMetadata).toHaveBeenCalledWith(metadata))
   })
   it('should not call setMetadata and show validation error when received error', async () => {
     renderWithProviders(<LoadMetaForm />)
@@ -90,7 +99,7 @@ describe('LoadMetaForm', () => {
     await userEvent.click(loadBtn)
 
     expect(loadMetaAction).toHaveBeenCalled()
-    expect(setMetadata).not.toHaveBeenCalled()
+    await waitFor(() => expect(setMetadata).not.toHaveBeenCalled())
 
     expect(screen.getByRole('alert')).toHaveTextContent(validationMessage)
   })

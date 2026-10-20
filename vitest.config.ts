@@ -29,6 +29,11 @@ export default defineConfig({
     env: {
       SESSION_SECRET: 'test-secret-key-at-least-32-chars-long',
     },
+    coverage: {
+      provider: 'v8',
+      // include: ['src/**/*.{ts,tsx}'],
+      exclude: ['./src/shared/ui/**/*.{ts,tsx}', './src/test/**/*.{ts,tsx}'],
+    },
   },
   resolve: {
     tsconfigPaths: true,

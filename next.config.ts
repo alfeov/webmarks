@@ -2,7 +2,14 @@ import type { NextConfig } from 'next'
 import createNextIntlPlugin from 'next-intl/plugin'
 
 const nextConfig: NextConfig = {
-  // output: 'standalone', // turn on to deploy with Docker
+  // uncomment to deploy with Docker
+  // output: 'standalone',
+
+  // uncomment to increase build speed
+  // typescript: {
+  //   ignoreBuildErrors: true,
+  // },
+
   cacheComponents: true,
   partialPrefetching: true,
   turbopack: {
@@ -17,9 +24,6 @@ const nextConfig: NextConfig = {
   reactStrictMode: true,
   productionBrowserSourceMaps: false,
   compress: false,
-  // typescript: { // uncomment to increase build speed
-  //   ignoreBuildErrors: true,
-  // },
   logging: {
     fetches: {
       fullUrl: true,

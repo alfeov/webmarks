@@ -1,5 +1,6 @@
 import z from 'zod'
 
+import { EmailSchema } from '@/shared/lib/schemas/EmailSchema'
 import { PasswordSchema } from '@/shared/lib/schemas/PasswordSchema'
 import { UsernameSchema } from '@/shared/lib/schemas/UsernameSchema'
 
@@ -8,7 +9,7 @@ import { SIGNUP_FORMDATA } from './constants'
 export const SignupFormSchema = z
   .object({
     [SIGNUP_FORMDATA.USERNAME]: UsernameSchema,
-    [SIGNUP_FORMDATA.EMAIL]: z.email('email.invalid'),
+    [SIGNUP_FORMDATA.EMAIL]: EmailSchema,
     [SIGNUP_FORMDATA.PASSWORD]: PasswordSchema,
     [SIGNUP_FORMDATA.CONFIRM_PASSWORD]: z.string(),
   })

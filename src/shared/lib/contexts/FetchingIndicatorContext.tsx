@@ -2,7 +2,7 @@
 
 import { createContext, useCallback, useMemo, useState } from 'react'
 
-import { FetchingIndicator } from '@/shared/ui/FetchingIndicator'
+import { FetchingIndicator } from '@/shared/components/FetchingIndicator'
 
 import { createUseContextHook } from '../utils/createUseContextHook'
 

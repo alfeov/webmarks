@@ -1,4 +1,4 @@
-import { Button } from './button'
+import { Button } from '@/shared/ui/button'
 
 import { X } from 'lucide-react'
 

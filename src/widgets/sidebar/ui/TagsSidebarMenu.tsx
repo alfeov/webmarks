@@ -1,8 +1,8 @@
 import { getTranslations } from 'next-intl/server'
 
 import { getAllUserTags } from '@/entities/tag/api/getAllUserTags'
+import { EmptyMessage } from '@/shared/components/EmptyMessage'
 import { verifySession } from '@/shared/lib/session'
-import { EmptyMessage } from '@/shared/ui/EmptyMessage'
 import { SidebarMenu } from '@/shared/ui/sidebar'
 
 import { TagSidebarMenuItem } from './TagSidebarMenuItem'

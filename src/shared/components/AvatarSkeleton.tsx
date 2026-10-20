@@ -1,4 +1,4 @@
-import { Skeleton } from './skeleton'
+import { Skeleton } from '@/shared/ui/skeleton'
 
 interface AvatarSkeletonProps {
   size?: 'default' | 'sm' | 'lg'

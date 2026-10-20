@@ -1,6 +1,5 @@
 import { Field, FieldError, FieldLabel } from '@/shared/ui/field'
-
-import { Textarea } from './textarea'
+import { Textarea } from '@/shared/ui/textarea'
 
 interface TextareaFieldProps extends React.ComponentProps<'textarea'> {
   label: string

@@ -2,7 +2,7 @@
 
 import { createContext, useCallback, useMemo, useState } from 'react'
 
-import { UniversalDialog } from '@/shared/ui/UniversalDialog'
+import { UniversalDialog } from '@/shared/components/UniversalDialog'
 
 import { createUseContextHook } from '../utils/createUseContextHook'
 

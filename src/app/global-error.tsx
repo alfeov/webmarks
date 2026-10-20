@@ -3,9 +3,9 @@
 import localFont from 'next/font/local'
 import { useEffect } from 'react'
 
+import { ErrorEmpty } from '@/shared/components/ErrorEmpty'
 import { cn } from '@/shared/lib/utils'
 import { Button } from '@/shared/ui/button'
-import { ErrorEmpty } from '@/shared/ui/ErrorEmpty'
 
 import './styles/index.css'
 

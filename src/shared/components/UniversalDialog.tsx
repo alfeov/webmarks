@@ -2,12 +2,12 @@
 
 import { useTranslations } from 'next-intl'
 
-import { CloseDialogButton } from '@/shared/ui/CloseDialogButton'
+import { Button } from '@/shared/ui/button'
 import { Dialog, DialogContent } from '@/shared/ui/dialog'
 
 import { useDialogContext } from '../lib/contexts/DialogContext'
 import { useClickOutside } from '../lib/hooks/useClickOutside'
-import { Button } from './button'
+import { CloseDialogButton } from './CloseDialogButton'
 
 export function UniversalDialog({
   isOpen,

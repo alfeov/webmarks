@@ -2,12 +2,12 @@
 
 import { Suspense } from 'react'
 
-import { Spinner } from '@/shared/ui/spinner'
 import {
   AbsoluteWrapper,
   PortalWrapper,
   StickyWrapper,
-} from '@/shared/ui/Sticky'
+} from '@/shared/components/Sticky'
+import { Spinner } from '@/shared/ui/spinner'
 
 import styles from './FetchingIndicator.module.css'
 

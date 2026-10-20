@@ -1,4 +1,4 @@
-import { AvatarSkeleton } from '@/shared/ui/AvatarSkeleton'
+import { AvatarSkeleton } from '@/shared/components/AvatarSkeleton'
 import { Card, CardContent, CardFooter, CardHeader } from '@/shared/ui/card'
 import { Skeleton } from '@/shared/ui/skeleton'
 

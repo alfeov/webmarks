@@ -1,6 +1,7 @@
 import { getTranslations } from 'next-intl/server'
 
 import { getUserData } from '@/entities/user/api/getUserData'
+import { SwitchLocaleMenuGroup } from '@/features/switch-locale/SwitchLocaleMenuGroup'
 import { verifySession } from '@/shared/lib/session'
 import { Avatar, AvatarFallback, AvatarImage } from '@/shared/ui/avatar'
 import { Button } from '@/shared/ui/button'
@@ -9,6 +10,9 @@ import {
   DropdownMenuContent,
   DropdownMenuGroup,
   DropdownMenuSeparator,
+  DropdownMenuSub,
+  DropdownMenuSubContent,
+  DropdownMenuSubTrigger,
   DropdownMenuTrigger,
 } from '@/shared/ui/dropdown-menu'
 
@@ -48,6 +52,14 @@ export async function Profile() {
         }
       />
       <DropdownMenuContent>
+        <DropdownMenuGroup>
+          <DropdownMenuSub>
+            <DropdownMenuSubTrigger>{t('translate')}</DropdownMenuSubTrigger>
+            <DropdownMenuSubContent>
+              <SwitchLocaleMenuGroup />
+            </DropdownMenuSubContent>
+          </DropdownMenuSub>
+        </DropdownMenuGroup>
         {session && user ? (
           <>
             <DropdownMenuGroup>
@@ -59,10 +71,13 @@ export async function Profile() {
             </DropdownMenuGroup>
           </>
         ) : (
-          <DropdownMenuGroup>
-            <SignupDropdownItem />
-            <SigninDropdownItem />
-          </DropdownMenuGroup>
+          <>
+            <DropdownMenuSeparator />
+            <DropdownMenuGroup>
+              <SignupDropdownItem />
+              <SigninDropdownItem />
+            </DropdownMenuGroup>
+          </>
         )}
       </DropdownMenuContent>
     </DropdownMenu>

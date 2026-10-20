@@ -72,7 +72,6 @@
     "PASTE_ERROR": "Your browser doesn't support paste API"
   },
   "SwitchLocale": {
-    "button": "Language",
     "en": "English",
     "ru": "Русский"
   },
@@ -134,7 +133,8 @@
     "ariaLabel": "Open create Tag dialog"
   },
   "Profile": {
-    "ariaLabel": "Profile menu"
+    "ariaLabel": "Profile menu",
+    "translate": "Language"
   },
   "ProfileDropdownMenu": {
     "items": {

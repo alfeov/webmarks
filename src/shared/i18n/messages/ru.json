@@ -72,7 +72,6 @@
     "PASTE_ERROR": "Ваш браузер не поддерживает API вставки"
   },
   "SwitchLocale": {
-    "button": "Язык",
     "en": "English",
     "ru": "Русский"
   },
@@ -134,7 +133,8 @@
     "ariaLabel": "Открыть диалог создания тега"
   },
   "Profile": {
-    "ariaLabel": "Меню профиля"
+    "ariaLabel": "Меню профиля",
+    "translate": "Язык"
   },
   "ProfileDropdownMenu": {
     "items": {

@@ -29,8 +29,8 @@ export function useToggleTheme() {
     if (theme !== 'system') return
     const mql = window.matchMedia('(prefers-color-scheme: dark)')
 
-    const onChange = () => {
-      document.documentElement.classList.toggle('dark', mql.matches)
+    const onChange = (event: MediaQueryListEvent) => {
+      document.documentElement.classList.toggle('dark', event.matches)
     }
 
     mql.addEventListener('change', onChange)

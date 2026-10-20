@@ -3,7 +3,6 @@ import localFont from 'next/font/local'
 import { getLocale, getTranslations } from 'next-intl/server'
 import { Suspense } from 'react'
 
-import { SwitchLocale } from '@/features/switch-locale/SwitchLocale'
 import { ThemeToggleButton } from '@/features/toggle-theme/ui/ThemeToggleButton'
 import { Link } from '@/shared/i18n/navigation'
 import { routing } from '@/shared/i18n/routing'
@@ -146,7 +145,6 @@ export default async function RootLayout({
                 <h1 className='text-[30px] font-bold'>WebMarks</h1>
               </Link>
               <div className='flex items-center gap-[20px]'>
-                <SwitchLocale />
                 <Suspense
                   fallback={<Skeleton className='size-9 rounded-4xl' />}
                 >

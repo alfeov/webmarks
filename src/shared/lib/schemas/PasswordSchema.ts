@@ -8,5 +8,5 @@ export const PasswordSchema = z
   .regex(/^[A-Za-z0-9]+$/, 'password.allowed')
   .regex(/[A-Z]/, 'password.capital')
   .regex(/[0-9]/, 'password.digit')
-  .min(MIN_PASSWORD_LENGTH, 'password.min')
-  .max(MAX_PASSWORD_LENGTH, 'password.max')
+  .min(MIN_PASSWORD_LENGTH, 'password.minLength')
+  .max(MAX_PASSWORD_LENGTH, 'password.maxLength')

@@ -6,5 +6,5 @@ export const MAX_MARK_TITLE_LENGTH = 50
 export const MarkTitleSchema = z
   .string()
   .trim()
-  .min(MIN_MARK_TITLE_LENGTH, 'markTitle.min')
-  .max(MAX_MARK_TITLE_LENGTH, 'markTitle.max')
+  .min(MIN_MARK_TITLE_LENGTH, 'markTitle.minLength')
+  .max(MAX_MARK_TITLE_LENGTH, 'markTitle.maxLength')

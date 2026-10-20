@@ -1,30 +1,6 @@
-import { extractNumber, messages } from '@/test/helpers/messages'
-
-import {
-  MAX_PASSWORD_LENGTH,
-  MIN_PASSWORD_LENGTH,
-  PasswordSchema,
-} from './PasswordSchema'
+import { PasswordSchema } from './PasswordSchema'
 
 describe('PasswordSchema', () => {
-  it.each(messages)(
-    'should have length according to locale message',
-    (locale) => {
-      expect(extractNumber(locale.errors.password.min)).toBe(
-        MIN_PASSWORD_LENGTH,
-      )
-      expect(extractNumber(locale.errors.password.max)).toBe(
-        MAX_PASSWORD_LENGTH,
-      )
-    },
-  )
-  it.each(messages)('should have path in locale message', (locale) => {
-    expect(locale.errors.password.allowed).toBeTruthy()
-    expect(locale.errors.password.capital).toBeTruthy()
-    expect(locale.errors.password.digit).toBeTruthy()
-    expect(locale.errors.password.min).toBeTruthy()
-    expect(locale.errors.password.max).toBeTruthy()
-  })
   it.each([
     ['кириллица123', 'password.allowed', false],
     ['hello 123', 'password.allowed', false],

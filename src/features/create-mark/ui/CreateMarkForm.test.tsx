@@ -7,16 +7,10 @@ import { MESSAGE_CODES } from '@/shared/api/types'
 import { renderWithProviders } from '@/test/helpers/renderWithProviders'
 
 import { createMarkAction } from '../api/createMarkAction'
+import { useMetaStateContext } from '../model/MetaContext'
 import { CreateMarkForm } from './CreateMarkForm'
 
-const { useMetaStateContext } = vi.hoisted(() => ({
-  useMetaStateContext: vi.fn(),
-}))
-
-vi.mock('../model/MetaContext', async (importOriginal) => ({
-  ...(await importOriginal()),
-  useMetaStateContext,
-}))
+vi.mock('../model/MetaContext')
 vi.mock('../api/createMarkAction')
 vi.mock('next/navigation')
 
@@ -67,12 +61,7 @@ describe('CreateMarkForm', () => {
     )
   })
   it('should not set values from meta context when received undefined', () => {
-    vi.mocked(useMetaStateContext).mockReturnValueOnce({
-      url: undefined,
-      title: undefined,
-      description: undefined,
-      logoUrl: undefined,
-    })
+    vi.mocked(useMetaStateContext).mockReturnValueOnce({})
 
     renderWithProviders(<CreateMarkForm />)
 

@@ -7,21 +7,21 @@ import { showToast } from '@/shared/lib/utils/showToast'
 import { renderWithProviders } from '@/test/helpers/renderWithProviders'
 
 import { loadMetaAction } from '../api/loadMetaAction'
+import { MetaProvider, useMetaActionContext } from '../model/MetaContext'
 import { LoadMetaForm } from './LoadMetaForm'
-
-const setMetadata = vi.fn()
 
 vi.mock('@/shared/lib/utils/paste')
 vi.mock('@/shared/lib/utils/showToast')
 vi.mock('@/features/create-mark/api/loadMetaAction')
-vi.mock('../model/MetaContext', async (importOriginal) => ({
-  ...(await importOriginal()),
-  useMetaActionContext: () => setMetadata,
-}))
+vi.mock('../model/MetaContext', { spy: true })
 
 describe('LoadMetaForm', () => {
   it('should render enabled elements by default with default values', () => {
-    renderWithProviders(<LoadMetaForm />)
+    renderWithProviders(
+      <MetaProvider>
+        <LoadMetaForm />
+      </MetaProvider>,
+    )
 
     const input = screen.getByPlaceholderText(/url/i)
 
@@ -32,7 +32,11 @@ describe('LoadMetaForm', () => {
     expect(screen.getByRole('button', { name: /load/i })).toBeEnabled()
   })
   it('should paste url to input from clipboard on paste button click', async () => {
-    renderWithProviders(<LoadMetaForm />)
+    renderWithProviders(
+      <MetaProvider>
+        <LoadMetaForm />
+      </MetaProvider>,
+    )
 
     const clipText = 'clipText'
     vi.mocked(paste).mockResolvedValueOnce({ clipText })
@@ -43,7 +47,11 @@ describe('LoadMetaForm', () => {
     expect(screen.getByPlaceholderText(/url/i)).toHaveValue(clipText)
   })
   it('should call showToast with corresponding arguments on paste error', async () => {
-    renderWithProviders(<LoadMetaForm />)
+    renderWithProviders(
+      <MetaProvider>
+        <LoadMetaForm />
+      </MetaProvider>,
+    )
 
     vi.mocked(paste).mockResolvedValueOnce({ error: 'PASTE_ERROR' })
 
@@ -54,7 +62,11 @@ describe('LoadMetaForm', () => {
     expect(showToast).toHaveBeenCalledWith('errorTitle', 'PASTE_ERROR', false)
   })
   it('should set url on input type', async () => {
-    renderWithProviders(<LoadMetaForm />)
+    renderWithProviders(
+      <MetaProvider>
+        <LoadMetaForm />
+      </MetaProvider>,
+    )
 
     const url = 'https://some-url.com'
     const input = screen.getByPlaceholderText(/url/i)
@@ -63,7 +75,14 @@ describe('LoadMetaForm', () => {
     expect(screen.getByPlaceholderText(/url/i)).toHaveValue(url)
   })
   it('should call loadMetadataAction and set it with setMetadata fn when load button clicked', async () => {
-    renderWithProviders(<LoadMetaForm />)
+    const setMetadata = vi.fn()
+    vi.mocked(useMetaActionContext).mockReturnValue(setMetadata)
+
+    renderWithProviders(
+      <MetaProvider>
+        <LoadMetaForm />
+      </MetaProvider>,
+    )
 
     const metadata = {
       url: 'https://some-url.com',
@@ -81,10 +100,17 @@ describe('LoadMetaForm', () => {
     await userEvent.click(loadBtn)
 
     expect(loadMetaAction).toHaveBeenCalled()
-    await waitFor(() => expect(setMetadata).toHaveBeenCalledWith(metadata))
+    expect(setMetadata).toHaveBeenCalledWith(metadata)
   })
   it('should not call setMetadata and show validation error when received error', async () => {
-    renderWithProviders(<LoadMetaForm />)
+    const setMetadata = vi.fn()
+    vi.mocked(useMetaActionContext).mockReturnValue(setMetadata)
+
+    renderWithProviders(
+      <MetaProvider>
+        <LoadMetaForm />
+      </MetaProvider>,
+    )
 
     const validationMessage = 'SOME_ERROR_CODE'
     vi.mocked(loadMetaAction).mockResolvedValueOnce({
@@ -99,7 +125,7 @@ describe('LoadMetaForm', () => {
     await userEvent.click(loadBtn)
 
     expect(loadMetaAction).toHaveBeenCalled()
-    await waitFor(() => expect(setMetadata).not.toHaveBeenCalled())
+    expect(setMetadata).not.toHaveBeenCalled()
 
     expect(screen.getByRole('alert')).toHaveTextContent(validationMessage)
   })

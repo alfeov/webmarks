@@ -19,7 +19,7 @@ const MetaStateContext = createContext<null | MetaStateContextValue>(null)
 const MetaActionContext = createContext<null | MetaActionContextValue>(null)
 
 export function MetaProvider({ children }: { children: React.ReactNode }) {
-  const [metadata, setMetadata] = useState<MetaData>(null)
+  const [metadata, setMetadata] = useState<MetaData>({})
 
   return (
     <MetaStateContext value={metadata}>

@@ -12,7 +12,7 @@ export type CreateMarkFormState = ActionFormStateWithErrors<{
   logoUrl?: string[]
 }>
 
-export type MetaData = CreateMark | null
+export type MetaData = CreateMark
 
 export type LoadMetaFormState = ActionFormStateWithErrors<{
   url?: string[]

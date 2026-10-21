@@ -1,4 +1,4 @@
-export const SIGNUP_FORMDATA = {
+export const SIGNUP_FORM = {
   USERNAME: 'username',
   EMAIL: 'email',
   PASSWORD: 'password',

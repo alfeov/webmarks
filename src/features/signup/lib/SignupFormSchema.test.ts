@@ -1,13 +1,13 @@
 import { messages } from '@/test/helpers/messages'
 
-import { SIGNUP_FORMDATA } from './constants'
+import { SIGNUP_FORM } from './constants'
 import { SignupFormSchema } from './SignupFormSchema'
 
 const input = {
-  [SIGNUP_FORMDATA.USERNAME]: 'Username',
-  [SIGNUP_FORMDATA.EMAIL]: 'user@gmail.com',
-  [SIGNUP_FORMDATA.PASSWORD]: 'Password1',
-  [SIGNUP_FORMDATA.CONFIRM_PASSWORD]: 'Password1',
+  [SIGNUP_FORM.USERNAME]: 'Username',
+  [SIGNUP_FORM.EMAIL]: 'user@gmail.com',
+  [SIGNUP_FORM.PASSWORD]: 'Password1',
+  [SIGNUP_FORM.CONFIRM_PASSWORD]: 'Password1',
 }
 
 describe('SignupFormSchema', () => {
@@ -17,7 +17,7 @@ describe('SignupFormSchema', () => {
   it('should return error if password and confirm password not match', () => {
     const result = SignupFormSchema.safeParse({
       ...input,
-      [SIGNUP_FORMDATA.CONFIRM_PASSWORD]: 'not-match',
+      [SIGNUP_FORM.CONFIRM_PASSWORD]: 'not-match',
     })
     expect(result.error?.issues?.[0].message).toBe('password.notMatch')
     expect(result.success).toBe(false)

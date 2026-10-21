@@ -1,4 +1,5 @@
 import { useTranslations } from 'next-intl'
+import { useId } from 'react'
 
 import { Field, FieldError, FieldLabel } from '@/shared/ui/field'
 import { Input } from '@/shared/ui/input'
@@ -16,16 +17,18 @@ export function InputField({
   className,
   ...props
 }: InputFieldProps) {
+  const id = useId()
   const t = useTranslations('errors')
 
   return (
     <Field data-invalid={Boolean(errors?.length)} className={className}>
       <FieldLabel
+        htmlFor={id}
         className={req ? "after:text-red-500 after:content-['*']" : ''}
       >
         {label}
       </FieldLabel>
-      <Input aria-invalid={Boolean(errors?.length)} {...props} />
+      <Input id={id} aria-invalid={Boolean(errors?.length)} {...props} />
       <FieldError errors={errors?.map((error) => ({ message: t(error) }))} />
     </Field>
   )

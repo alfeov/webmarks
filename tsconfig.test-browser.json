@@ -1,0 +1,15 @@
+{
+  "extends": "./tsconfig.app.json",
+  "compilerOptions": {
+    "types": ["node"],
+    "incremental": false
+  },
+  "include": [
+    "next-env.d.ts",
+    ".next/types/**/*.ts",
+    ".next/dev/types/**/*.ts",
+    "test-browser/**/*.spec.ts",
+    "test-browser/**/*.spec.tsx"
+  ],
+  "exclude": ["node_modules"]
+}

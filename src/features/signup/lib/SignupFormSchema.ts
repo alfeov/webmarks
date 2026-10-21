@@ -4,18 +4,17 @@ import { EmailSchema } from '@/shared/lib/schemas/EmailSchema'
 import { PasswordSchema } from '@/shared/lib/schemas/PasswordSchema'
 import { UsernameSchema } from '@/shared/lib/schemas/UsernameSchema'
 
-import { SIGNUP_FORMDATA } from './constants'
+import { SIGNUP_FORM } from './constants'
 
 export const SignupFormSchema = z
   .object({
-    [SIGNUP_FORMDATA.USERNAME]: UsernameSchema,
-    [SIGNUP_FORMDATA.EMAIL]: EmailSchema,
-    [SIGNUP_FORMDATA.PASSWORD]: PasswordSchema,
-    [SIGNUP_FORMDATA.CONFIRM_PASSWORD]: z.string(),
+    [SIGNUP_FORM.USERNAME]: UsernameSchema,
+    [SIGNUP_FORM.EMAIL]: EmailSchema,
+    [SIGNUP_FORM.PASSWORD]: PasswordSchema,
+    [SIGNUP_FORM.CONFIRM_PASSWORD]: z.string(),
   })
   .refine(
-    (data) =>
-      data[SIGNUP_FORMDATA.CONFIRM_PASSWORD] === data[SIGNUP_FORMDATA.PASSWORD],
+    (data) => data[SIGNUP_FORM.CONFIRM_PASSWORD] === data[SIGNUP_FORM.PASSWORD],
     {
       error: 'password.notMatch',
       path: ['confirmPassword'],

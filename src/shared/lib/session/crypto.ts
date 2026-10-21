@@ -18,8 +18,7 @@ export const decrypt = async (jwt: string = '') => {
       algorithms: ['HS256'],
     })
     return payload
-  } catch (error) {
-    console.error('Failed to verify session: ' + error)
+  } catch {
     return null
   }
 }

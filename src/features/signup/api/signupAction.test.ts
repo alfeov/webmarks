@@ -1,7 +1,7 @@
 import { MESSAGE_CODES } from '@/shared/api/types'
 import { createSession } from '@/shared/lib/session'
 
-import { SIGNUP_FORMDATA } from '../lib/constants'
+import { SIGNUP_FORM } from '../lib/constants'
 import { createUser } from './createUser'
 import { signupAction } from './signupAction'
 
@@ -11,10 +11,10 @@ vi.mock('./createUser')
 const prevState = { isSuccess: false }
 
 const defaultFormData = new FormData()
-defaultFormData.set(SIGNUP_FORMDATA.USERNAME, 'username')
-defaultFormData.set(SIGNUP_FORMDATA.EMAIL, 'some@mail.com')
-defaultFormData.set(SIGNUP_FORMDATA.PASSWORD, 'Password1')
-defaultFormData.set(SIGNUP_FORMDATA.CONFIRM_PASSWORD, 'Password1')
+defaultFormData.set(SIGNUP_FORM.USERNAME, 'username')
+defaultFormData.set(SIGNUP_FORM.EMAIL, 'some@mail.com')
+defaultFormData.set(SIGNUP_FORM.PASSWORD, 'Password1')
+defaultFormData.set(SIGNUP_FORM.CONFIRM_PASSWORD, 'Password1')
 
 const userId = 'id-1'
 const avatarUrl = 'https://some-url.com/avatar.png'

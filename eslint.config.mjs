@@ -39,7 +39,7 @@ const eslintConfig = defineConfig([
         {
           patterns: [
             {
-              group: ['@/test', '@/test/*'],
+              group: ['@/test', '@/test/*', 'test-browser', 'test-browser/*'],
               message: 'Testing utility can not be used in non test files',
             },
           ],

@@ -5,6 +5,7 @@ import {
   PortalWrapper,
   StickyWrapper,
 } from '@/shared/components/Sticky'
+import { TEST_IDS } from '@/shared/config/testids'
 import { Spinner } from '@/shared/ui/spinner'
 
 import styles from './FetchingIndicator.module.css'
@@ -30,7 +31,10 @@ export function FetchingIndicator({
             <div
               className={`bg-input dark:bg-chart-4 rounded-2xl p-[5px] ${styles.animation}`}
             >
-              <Spinner data-testid='fetching-indicator' className='size-6' />
+              <Spinner
+                data-testid={TEST_IDS.STATIC.FETCHING_INDICATOR}
+                className='size-6'
+              />
             </div>
           )}
         </StickyWrapper>

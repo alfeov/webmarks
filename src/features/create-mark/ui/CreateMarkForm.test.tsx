@@ -26,6 +26,7 @@ const defaultData = {
 describe('CreateMarkForm', () => {
   beforeEach(() => {
     vi.mocked(useParams).mockReturnValue({})
+    vi.mocked(useMetaStateContext).mockReturnValue({})
   })
 
   it('should render enabled elements by default with default values', () => {
@@ -43,7 +44,7 @@ describe('CreateMarkForm', () => {
     expect(screen.getByPlaceholderText(/logo.com/i)).toHaveValue('')
   })
   it('should set values from meta context when it received', () => {
-    vi.mocked(useMetaStateContext).mockReturnValueOnce(defaultData)
+    vi.mocked(useMetaStateContext).mockReturnValue(defaultData)
 
     renderWithProviders(<CreateMarkForm />)
 
@@ -61,8 +62,6 @@ describe('CreateMarkForm', () => {
     )
   })
   it('should not set values from meta context when received undefined', () => {
-    vi.mocked(useMetaStateContext).mockReturnValueOnce({})
-
     renderWithProviders(<CreateMarkForm />)
 
     expect(screen.getByPlaceholderText(/webmarks.com/i)).toHaveValue('')
@@ -80,7 +79,7 @@ describe('CreateMarkForm', () => {
     )
     await userEvent.type(screen.getByPlaceholderText(/description/i), userInput)
 
-    vi.mocked(useMetaStateContext).mockReturnValueOnce(defaultData)
+    vi.mocked(useMetaStateContext).mockReturnValue(defaultData)
 
     rerender(
       <Providers>

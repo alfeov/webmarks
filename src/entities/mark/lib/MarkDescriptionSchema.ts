@@ -7,4 +7,4 @@ export const MarkDescriptionSchema = z
   .string()
   .trim()
   .min(MIN_MARK_DESC_LENGTH, 'markDescription.minLength')
-  .max(MAX_MARK_DESC_LENGTH, `markDescription.maxLength`)
+  .max(MAX_MARK_DESC_LENGTH, 'markDescription.maxLength')

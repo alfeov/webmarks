@@ -99,8 +99,10 @@ describe('LoadMetaForm', () => {
     const loadBtn = screen.getByRole('button', { name: /load/i })
     await userEvent.click(loadBtn)
 
-    expect(loadMetaAction).toHaveBeenCalled()
-    expect(setMetadata).toHaveBeenCalledWith(metadata)
+    await waitFor(() => {
+      expect(loadMetaAction).toHaveBeenCalled()
+      expect(setMetadata).toHaveBeenCalledWith(metadata)
+    })
   })
   it('should not call setMetadata and show validation error when received error', async () => {
     const setMetadata = vi.fn()

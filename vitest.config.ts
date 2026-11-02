@@ -31,6 +31,8 @@ export default defineConfig({
     },
     coverage: {
       provider: 'v8',
+      include: ['src'],
+      exclude: ['src/shared/ui', 'src/shared/i18n', 'src/test'],
     },
   },
   resolve: {

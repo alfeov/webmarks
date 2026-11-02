@@ -87,6 +87,29 @@ export async function generateMetadata(): Promise<Metadata> {
         routing.locales.map((locale) => [locale, '/' + locale]),
       ),
     },
+    icons: [
+      {
+        url: '/favicon.ico',
+        sizes: '48x48',
+        type: 'image/x-icon',
+      },
+      {
+        url: '/icon1.png',
+        sizes: '192x192',
+        type: 'image/png',
+      },
+      {
+        url: '/icon2.png',
+        sizes: '512x512',
+        type: 'image/png',
+      },
+      {
+        rel: 'apple-touch-icon',
+        url: '/apple-icon.png',
+        sizes: '180x180',
+        type: 'image/png',
+      },
+    ],
     openGraph: {
       url: '/',
       title: 'WebMarks',

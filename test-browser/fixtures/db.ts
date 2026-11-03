@@ -1,8 +1,19 @@
-import { prisma } from '@/shared/lib/prisma'
+import { test as base } from '@playwright/test'
 
-export const clearDatabase = () => {
-  const deleteUsers = prisma.user.deleteMany()
-  const deleteTags = prisma.tag.deleteMany()
-  const deleteWebMarks = prisma.webMark.deleteMany()
-  return prisma.$transaction([deleteUsers, deleteTags, deleteWebMarks])
+import { clearDatabase } from '@/test/factories/clearDatabase'
+
+type Fixtures = {
+  cleanDB: void
 }
+
+export const test = base.extend<Fixtures>({
+  cleanDB: [
+    async ({}, use) => {
+      await clearDatabase()
+      await use()
+    },
+    { auto: true },
+  ],
+})
+
+export { expect } from '@playwright/test'

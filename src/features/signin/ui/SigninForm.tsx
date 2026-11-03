@@ -4,8 +4,8 @@ import { useTranslations } from 'next-intl'
 import { useActionState } from 'react'
 
 import { InputField } from '@/shared/components/InputField'
-import { TEST_IDS } from '@/shared/config/testids'
 import { useCloseDialogOn } from '@/shared/lib/hooks/useCloseDialogOn'
+import { useFetchingIndicatorManager } from '@/shared/lib/hooks/useFetchingIndicatorManager'
 import { useNotificationManager } from '@/shared/lib/hooks/useNotificationManager'
 import { Button } from '@/shared/ui/button'
 import { FieldSet } from '@/shared/ui/field'
@@ -23,6 +23,7 @@ export function SigninForm() {
     SigninFormState,
     FormData
   >(signinAction, initialState)
+  useFetchingIndicatorManager(isPending)
   useNotificationManager(state.message, state.isSuccess, !isPending)
   useCloseDialogOn(state.isSuccess)
 
@@ -30,11 +31,7 @@ export function SigninForm() {
   const tSigninForm = useTranslations('SigninForm')
 
   return (
-    <form
-      className='flex flex-col gap-[20px]'
-      action={formAction}
-      data-testid={TEST_IDS.STATIC.FORMS.SIGNIN}
-    >
+    <form className='flex flex-col gap-[20px]' action={formAction}>
       <FieldSet disabled={isPending}>
         <InputField
           autoFocus
@@ -42,14 +39,14 @@ export function SigninForm() {
           placeholder={tAuthFrom('fields.email.placeholder')}
           type='text'
           name={SIGNIN_FORM.EMAIL}
-          errors={state?.errors?.email}
+          errors={state?.errors?.signinEmail}
         />
         <InputField
           label={tAuthFrom('fields.password.label')}
           placeholder={tAuthFrom('fields.password.label')}
           type='password'
           name={SIGNIN_FORM.PASSWORD}
-          errors={state?.errors?.password}
+          errors={state?.errors?.signinPassword}
         />
         <Button type='submit'>{tSigninForm('submit')}</Button>
       </FieldSet>

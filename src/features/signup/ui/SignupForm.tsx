@@ -4,7 +4,6 @@ import { useTranslations } from 'next-intl'
 import { useActionState } from 'react'
 
 import { InputField } from '@/shared/components/InputField'
-import { TEST_IDS } from '@/shared/config/testids'
 import { useCloseDialogOn } from '@/shared/lib/hooks/useCloseDialogOn'
 import { useFetchingIndicatorManager } from '@/shared/lib/hooks/useFetchingIndicatorManager'
 import { useNotificationManager } from '@/shared/lib/hooks/useNotificationManager'
@@ -20,10 +19,10 @@ export const initialState: SignupFormState = {
 }
 
 export function SignupForm() {
-  const [state, formAction, isPending] = useActionState<
-    SignupFormState,
-    FormData
-  >(signupAction, initialState)
+  const [state, formAction, isPending] = useActionState(
+    signupAction,
+    initialState,
+  )
   useFetchingIndicatorManager(isPending)
   useNotificationManager(state.message, state.isSuccess, !isPending)
   useCloseDialogOn(state.isSuccess)
@@ -32,11 +31,7 @@ export function SignupForm() {
   const tSignupForm = useTranslations('SignupForm')
 
   return (
-    <form
-      className='flex flex-col gap-[20px]'
-      action={formAction}
-      data-testid={TEST_IDS.STATIC.FORMS.SIGNUP}
-    >
+    <form className='flex flex-col gap-[20px]' action={formAction}>
       <FieldSet disabled={isPending}>
         <InputField
           autoFocus
@@ -51,14 +46,14 @@ export function SignupForm() {
           placeholder={tAuthFrom('fields.email.placeholder')}
           type='text'
           name={SIGNUP_FORM.EMAIL}
-          errors={state?.errors?.email}
+          errors={state?.errors?.signupEmail}
         />
         <InputField
           label={tAuthFrom('fields.password.label')}
           placeholder={tAuthFrom('fields.password.label')}
           type='password'
           name={SIGNUP_FORM.PASSWORD}
-          errors={state?.errors?.password}
+          errors={state?.errors?.signupPassword}
         />
         <InputField
           label={tSignupForm('fields.confirmPassword.label')}

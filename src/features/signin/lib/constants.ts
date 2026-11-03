@@ -1,4 +1,4 @@
 export const SIGNIN_FORM = {
-  EMAIL: 'email',
-  PASSWORD: 'password',
+  EMAIL: 'signinEmail',
+  PASSWORD: 'signinPassword',
 } as const

@@ -11,6 +11,7 @@ interface InputFieldProps extends React.ComponentProps<'input'> {
 }
 
 export function InputField({
+  name,
   label,
   errors,
   req = false,
@@ -28,8 +29,17 @@ export function InputField({
       >
         {label}
       </FieldLabel>
-      <Input id={id} aria-invalid={Boolean(errors?.length)} {...props} />
-      <FieldError errors={errors?.map((error) => ({ message: t(error) }))} />
+      <Input
+        id={id}
+        data-testid={`${name}-input`}
+        name={name}
+        aria-invalid={Boolean(errors?.length)}
+        {...props}
+      />
+      <FieldError
+        data-testid={`${name}-error`}
+        errors={errors?.map((error) => ({ message: t(error) }))}
+      />
     </Field>
   )
 }

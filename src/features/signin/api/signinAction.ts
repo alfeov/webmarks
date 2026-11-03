@@ -25,7 +25,10 @@ export async function signinAction(
     }
 
   // finding user in db and compare password
-  const { data, error } = await verifyUser(validatedData)
+  const { data, error } = await verifyUser({
+    email: validatedData.signinEmail,
+    password: validatedData.signinPassword,
+  })
   if (!data)
     return {
       isSuccess: false,

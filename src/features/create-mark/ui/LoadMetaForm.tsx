@@ -4,6 +4,7 @@ import { useTranslations } from 'next-intl'
 import { useActionState, useEffect, useState } from 'react'
 
 import { loadMetaAction } from '@/features/create-mark/api/loadMetaAction'
+import { TEST_IDS } from '@/shared/config/testids'
 import { useFetchingIndicatorManager } from '@/shared/lib/hooks/useFetchingIndicatorManager'
 import { useNotificationManager } from '@/shared/lib/hooks/useNotificationManager'
 import { paste } from '@/shared/lib/utils/paste'
@@ -16,7 +17,7 @@ import {
   InputGroupInput,
 } from '@/shared/ui/input-group'
 
-import { LOAD_META_FORMDATA } from '../lib/constants'
+import { LOAD_META_FORM } from '../lib/constants'
 import { useMetaActionContext } from '../model/MetaContext'
 import type { LoadMetaFormState } from '../model/types'
 
@@ -66,6 +67,7 @@ export function LoadMetaForm() {
               <InputGroupButton
                 aria-label={tLoadMetaForm('buttons.paste.ariaLabel')}
                 onClick={handlePasteClick}
+                data-testid={TEST_IDS.CLICKABLE.BUTTON.PASTE}
               >
                 <ClipboardPaste /> {tLoadMetaForm('buttons.paste.title')}
               </InputGroupButton>
@@ -74,10 +76,11 @@ export function LoadMetaForm() {
             <InputGroupInput
               autoFocus
               placeholder={tLoadMetaForm('fields.url.placeholder')}
-              name={LOAD_META_FORMDATA.URL}
+              name={LOAD_META_FORM.URL}
               aria-invalid={Boolean(state.errors)}
               value={url}
               onChange={(e) => setUrl(e.target.value)}
+              data-testid={`${LOAD_META_FORM.URL}-input`}
             />
 
             <InputGroupAddon align='inline-end'>
@@ -85,6 +88,7 @@ export function LoadMetaForm() {
                 aria-label={tLoadMetaForm('buttons.load.ariaLabel')}
                 type='submit'
                 disabled={isPending}
+                data-testid={TEST_IDS.CLICKABLE.BUTTON.LOAD}
               >
                 {tLoadMetaForm('buttons.load.title')}
                 <CloudDownload data-icon='inline-end' />
@@ -92,7 +96,7 @@ export function LoadMetaForm() {
             </InputGroupAddon>
           </InputGroup>
           <FieldError
-            errors={state.errors?.url?.map((code) => ({
+            errors={state.errors?.loadUrl?.map((code) => ({
               message: tErrors(code),
             }))}
           />

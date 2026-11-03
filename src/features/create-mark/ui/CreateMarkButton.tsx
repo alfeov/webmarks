@@ -2,6 +2,7 @@
 
 import { useTranslations } from 'next-intl'
 
+import { TEST_IDS } from '@/shared/config/testids'
 import { useDialogContext } from '@/shared/lib/contexts/DialogContext'
 import { Button } from '@/shared/ui/button'
 
@@ -17,7 +18,11 @@ export function CreateMarkButton({ ...props }: CreateMarkButtonProps) {
   const t = useTranslations('CreateMarkButton')
 
   return (
-    <Button {...props} onClick={() => openDialog(<CreateMark />)}>
+    <Button
+      {...props}
+      onClick={() => openDialog(<CreateMark />)}
+      data-testid={TEST_IDS.CLICKABLE.BUTTON.CREATE_MARK}
+    >
       {t('title')}
       <Plus data-icon='inline-end' />
     </Button>

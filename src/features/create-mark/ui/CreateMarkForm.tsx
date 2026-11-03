@@ -4,13 +4,14 @@ import { useTranslations } from 'next-intl'
 
 import { InputField } from '@/shared/components/InputField'
 import { TextareaField } from '@/shared/components/TextareaField'
+import { TEST_IDS } from '@/shared/config/testids'
 import { useCloseDialogOn } from '@/shared/lib/hooks/useCloseDialogOn'
 import { useFetchingIndicatorManager } from '@/shared/lib/hooks/useFetchingIndicatorManager'
 import { useNotificationManager } from '@/shared/lib/hooks/useNotificationManager'
 import { Button } from '@/shared/ui/button'
 import { FieldLegend, FieldSet } from '@/shared/ui/field'
 
-import { CREATE_MARK_FORMDATA } from '../lib/constants'
+import { CREATE_MARK_FORM } from '../lib/constants'
 import { useCreateMarkForm } from '../lib/useCreateMarkForm'
 
 export function CreateMarkForm() {
@@ -32,21 +33,21 @@ export function CreateMarkForm() {
             label={tMarkForm('fields.url.label')}
             placeholder='https://webmarks.com'
             errors={state.errors?.url}
-            {...register(CREATE_MARK_FORMDATA.URL)}
+            {...register(CREATE_MARK_FORM.URL)}
             req
           />
           <InputField
             label={tMarkForm('fields.title.label')}
             placeholder='WebMark'
             errors={state.errors?.title}
-            {...register(CREATE_MARK_FORMDATA.TITLE)}
+            {...register(CREATE_MARK_FORM.TITLE)}
             req
           />
           <TextareaField
             label={tMarkForm('fields.description.label')}
             placeholder={tMarkForm('fields.description.placeholder')}
             errors={state.errors?.description}
-            {...register(CREATE_MARK_FORMDATA.DESCRIPTION)}
+            {...register(CREATE_MARK_FORM.DESCRIPTION)}
             req
           />
         </FieldSet>
@@ -56,10 +57,12 @@ export function CreateMarkForm() {
             label={tMarkForm('fields.logoUrl.label')}
             placeholder='https://logo.com'
             errors={state.errors?.logoUrl}
-            {...register(CREATE_MARK_FORMDATA.LOGO_URL)}
+            {...register(CREATE_MARK_FORM.LOGO_URL)}
           />
         </FieldSet>
-        <Button type='submit'>{tCreateMarkForm('submit')}</Button>
+        <Button type='submit' data-testid={TEST_IDS.CLICKABLE.BUTTON.SUBMIT}>
+          {tCreateMarkForm('submit')}
+        </Button>
       </FieldSet>
     </form>
   )

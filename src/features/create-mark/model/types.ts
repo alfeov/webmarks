@@ -15,7 +15,7 @@ export type CreateMarkFormState = ActionFormStateWithErrors<{
 export type MetaData = CreateMark
 
 export type LoadMetaFormState = ActionFormStateWithErrors<{
-  url?: string[]
+  loadUrl?: string[]
 }> & {
   data?: MetaData
 }

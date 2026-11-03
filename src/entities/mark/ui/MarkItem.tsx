@@ -1,3 +1,4 @@
+import { TEST_IDS } from '@/shared/config/testids'
 import { Avatar, AvatarFallback, AvatarImage } from '@/shared/ui/avatar'
 import { Badge } from '@/shared/ui/badge'
 import {
@@ -26,7 +27,7 @@ export function MarkItem({
   children,
 }: MarkItemProps) {
   return (
-    <Card>
+    <Card data-testid={TEST_IDS.STATIC.MARK_ITEM}>
       <div className='flex items-center gap-[10px] px-(--card-spacing)'>
         <a href={url} target='_blank' className='rounded-[50%]'>
           <Avatar size='lg'>

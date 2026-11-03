@@ -11,6 +11,7 @@ interface TextareaFieldProps extends React.ComponentProps<'textarea'> {
 }
 
 export function TextareaField({
+  name,
   label,
   errors,
   req = false,
@@ -28,8 +29,17 @@ export function TextareaField({
       >
         {label}
       </FieldLabel>
-      <Textarea id={id} aria-invalid={Boolean(errors?.length)} {...props} />
-      <FieldError errors={errors?.map((error) => ({ message: t(error) }))} />
+      <Textarea
+        id={id}
+        name={name}
+        data-testid={`${name}-input`}
+        aria-invalid={Boolean(errors?.length)}
+        {...props}
+      />
+      <FieldError
+        data-testid={`${name}-error`}
+        errors={errors?.map((error) => ({ message: t(error) }))}
+      />
     </Field>
   )
 }

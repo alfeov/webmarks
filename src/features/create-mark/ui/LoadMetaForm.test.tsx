@@ -121,7 +121,7 @@ describe('LoadMetaForm', () => {
     vi.mocked(loadMetaAction).mockResolvedValueOnce({
       isSuccess: false,
       errors: {
-        url: [validationMessage],
+        loadUrl: [validationMessage],
       },
       message: MESSAGE_CODES.VALIDATION_ERROR,
     })

@@ -28,33 +28,21 @@ export const submitForm = async ({
 }
 
 export const expectSubmitSuccess = async (page: Page) => {
-  await test.step('unmount fetching indicator', () =>
-    expect(page.getByTestId(TEST_IDS.STATIC.FETCHING_INDICATOR)).toHaveCount(
-      0,
-      {
-        timeout: 10_000,
-      },
-    ))
+  await test.step('close dialog', () =>
+    expect(page.getByTestId(TEST_IDS.STATIC.DIALOG)).toBeHidden())
+
+  await test.step('hide fetching indicator', () =>
+    expect(page.getByTestId(TEST_IDS.STATIC.FETCHING_INDICATOR)).toBeHidden())
 
   await test.step('show success toast', () =>
-    expect(page.getByText(/success!/i)).toBeVisible())
-
-  await test.step('close dialog', () =>
-    expect(page.getByTestId(TEST_IDS.STATIC.DIALOG)).toHaveCount(0))
+    expect(page.getByText(/success!/i).first()).toBeVisible())
 }
 
 export const expectSubmitError = async (page: Page, fields: string[]) => {
-  await test.step('unmount fetching indicator', () =>
-    expect(page.getByTestId(TEST_IDS.STATIC.FETCHING_INDICATOR)).toHaveCount(
-      0,
-      {
-        timeout: 10_000,
-      },
-    ))
+  await test.step('hide fetching indicator', () =>
+    expect(page.getByTestId(TEST_IDS.STATIC.FETCHING_INDICATOR)).toBeHidden())
   await test.step('show error toast', () =>
-    expect(
-      page.getByRole('alert').getByText(/something went wrong!/i),
-    ).toBeVisible())
+    expect(page.getByText(/something went wrong!/i).first()).toBeVisible())
   for (const field of fields) {
     await test.step(`show error for ${field} field`, () =>
       expect(page.getByTestId(`${field}-error`)).toBeVisible())

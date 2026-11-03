@@ -33,7 +33,7 @@ export async function loadMetaAction(
     }
 
   // get metadata with api
-  const metadata = await getMetadata(validatedData.url)
+  const metadata = await getMetadata(validatedData.loadUrl)
   if (!metadata.data)
     return {
       isSuccess: false,

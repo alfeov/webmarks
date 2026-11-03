@@ -1,8 +1,8 @@
-export const LOAD_META_FORMDATA = {
-  URL: 'url',
+export const LOAD_META_FORM = {
+  URL: 'loadUrl',
 } as const
 
-export const CREATE_MARK_FORMDATA = {
+export const CREATE_MARK_FORM = {
   TITLE: 'title',
   URL: 'url',
   DESCRIPTION: 'description',

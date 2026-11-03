@@ -2,6 +2,7 @@ import { getTranslations } from 'next-intl/server'
 
 import { getUserData } from '@/entities/user/api/getUserData'
 import { SwitchLocaleMenuGroup } from '@/features/switch-locale/SwitchLocaleMenuGroup'
+import { TEST_IDS } from '@/shared/config/testids'
 import { verifySession } from '@/shared/lib/session'
 import { Avatar, AvatarFallback, AvatarImage } from '@/shared/ui/avatar'
 import { Button } from '@/shared/ui/button'
@@ -38,6 +39,7 @@ export async function Profile() {
             size='icon'
             className='rounded-[50%]'
             aria-label={t('ariaLabel')}
+            data-testid={TEST_IDS.CLICKABLE.BUTTON.PROFILE}
           >
             <Avatar size='lg'>
               <AvatarImage

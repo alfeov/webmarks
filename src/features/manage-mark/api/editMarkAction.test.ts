@@ -1,9 +1,9 @@
 import { updateTag } from 'next/cache'
 
+import { EDIT_MARK_FORMDATA } from '@/features/manage-mark/lib/constants'
 import { MESSAGE_CODES } from '@/shared/api/types'
 import { verifySession } from '@/shared/lib/session'
 
-import { EDIT_MARK_FORMDATA } from '../lib/constants'
 import { editMarkAction } from './editMarkAction'
 import { updateUserMark } from './updateUserMark'
 

@@ -4,6 +4,7 @@
     "types": ["node", "vitest/globals", "@testing-library/user-event"],
     "paths": {
       "@/*": ["./src/*"],
+      "tests/*": ["./test-browser/*"],
       "server-only": ["./src/test/stubs/server-only.ts"]
     },
     "incremental": false

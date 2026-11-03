@@ -1,9 +1,9 @@
 import { updateTag } from 'next/cache'
 
+import { EDIT_TAG_FORMDATA } from '@/features/manage-tag/lib/constants'
 import { MESSAGE_CODES } from '@/shared/api/types'
 import { verifySession } from '@/shared/lib/session'
 
-import { EDIT_TAG_FORMDATA } from '../lib/constants'
 import { editTagAction } from './editTagAction'
 import { updateUserTag } from './updateUserTag'
 

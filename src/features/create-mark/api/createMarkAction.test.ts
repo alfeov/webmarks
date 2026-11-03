@@ -1,9 +1,9 @@
 import { updateTag } from 'next/cache'
 
+import type { CreateMark } from '@/features/create-mark/model/types'
 import { MESSAGE_CODES } from '@/shared/api/types'
 import { verifySession } from '@/shared/lib/session'
 
-import type { CreateMark } from '../model/types'
 import { createMark } from './createMark'
 import { createMarkAction } from './createMarkAction'
 

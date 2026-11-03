@@ -1,9 +1,9 @@
 import { updateTag } from 'next/cache'
 
+import { CREATE_TAG_FORMDATA } from '@/features/create-tag/lib/constants'
 import { MESSAGE_CODES } from '@/shared/api/types'
 import { verifySession } from '@/shared/lib/session'
 
-import { CREATE_TAG_FORMDATA } from '../lib/constants'
 import { createTag } from './createTag'
 import { createTagAction } from './createTagAction'
 

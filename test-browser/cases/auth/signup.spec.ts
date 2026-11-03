@@ -1,11 +1,11 @@
-import { SIGNUP_FORM } from '@/features/signup/lib/constants'
-
-import { test } from '../../fixtures/db'
+import { test } from 'tests/fixtures/db'
 import {
   expectSubmitError,
   expectSubmitSuccess,
   submitForm,
-} from '../../utils/formCases'
+} from 'tests/utils/formCases'
+
+import { SIGNUP_FORM } from '@/features/signup/lib/constants'
 
 test.describe('signup', () => {
   test.beforeEach(async ({ page }) => {

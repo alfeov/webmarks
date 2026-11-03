@@ -1,11 +1,11 @@
 import { screen } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 
+import { toggleMarkPinnedAction } from '@/features/manage-mark/api/toggleMarkPinnedAction'
 import { MESSAGE_CODES } from '@/shared/api/types'
 import { DropdownMenu } from '@/shared/ui/dropdown-menu'
 import { renderWithProviders } from '@/test/helpers/renderWithProviders'
 
-import { toggleMarkPinnedAction } from '../api/toggleMarkPinnedAction'
 import { PinMarkDropdownItem } from './PinMarkDropdownItem'
 
 vi.mock('../api/toggleMarkPinnedAction')

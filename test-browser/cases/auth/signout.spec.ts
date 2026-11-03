@@ -1,6 +1,6 @@
-import { TEST_IDS } from '@/shared/config/testids'
+import { expect, test } from 'tests/fixtures/auth'
 
-import { expect, test } from '../../fixtures/auth'
+import { TEST_IDS } from '@/shared/config/testids'
 
 test('should logout from profile', async ({ authorizedPage }) => {
   await authorizedPage.goto('/')

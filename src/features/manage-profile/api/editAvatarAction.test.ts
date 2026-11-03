@@ -1,9 +1,9 @@
 import { updateTag } from 'next/cache'
 
+import { EDIT_AVATAR_FORMDATA } from '@/features/manage-profile/lib/constants'
 import { MESSAGE_CODES } from '@/shared/api/types'
 import { verifySession } from '@/shared/lib/session'
 
-import { EDIT_AVATAR_FORMDATA } from '../lib/constants'
 import { editAvatarAction } from './editAvatarAction'
 import { updateUserAvatar } from './updateUserAvatar'
 

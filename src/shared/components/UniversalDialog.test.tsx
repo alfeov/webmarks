@@ -1,7 +1,7 @@
 import { render, screen } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 
-import { DialogProvider } from '../lib/contexts/DialogContext'
+import { DialogProvider } from '@/shared/lib/contexts/DialogContext'
 
 describe('UniversalDialog', () => {
   it('should render inside provider and show dialog content when isDialogOpen true', () => {

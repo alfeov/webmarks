@@ -28,6 +28,18 @@ const eslintConfig = defineConfig([
           ],
         },
       ],
+      'no-restricted-imports': [
+        'warn',
+        {
+          patterns: [
+            {
+              group: ['../**'],
+              message:
+                'Relative imports from parent directories are disabled. Please use an absolute path or alias instead.',
+            },
+          ],
+        },
+      ],
     },
   },
   {

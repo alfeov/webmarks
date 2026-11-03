@@ -1,10 +1,10 @@
 import { screen } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 
+import { editMarkAction } from '@/features/manage-mark/api/editMarkAction'
 import { MESSAGE_CODES } from '@/shared/api/types'
 import { renderWithProviders } from '@/test/helpers/renderWithProviders'
 
-import { editMarkAction } from '../api/editMarkAction'
 import { EditMarkForm } from './EditMarkForm'
 
 vi.mock('../api/editMarkAction')

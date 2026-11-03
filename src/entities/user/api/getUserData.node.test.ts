@@ -1,6 +1,6 @@
+import type { SafeUserData } from '@/entities/user/lib/SafeUserData'
 import { createRandomUser } from '@/test/factories/createRandomUser'
 
-import type { SafeUserData } from '../lib/SafeUserData'
 import { getUserData } from './getUserData'
 
 describe('getUserData', () => {

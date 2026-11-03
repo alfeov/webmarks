@@ -1,11 +1,11 @@
-import { SIGNIN_FORM } from '@/features/signin/lib/constants'
-
-import { test } from '../../fixtures/auth'
+import { test } from 'tests/fixtures/auth'
 import {
   expectSubmitError,
   expectSubmitSuccess,
   submitForm,
-} from '../../utils/formCases'
+} from 'tests/utils/formCases'
+
+import { SIGNIN_FORM } from '@/features/signin/lib/constants'
 
 test.describe('signin', () => {
   test('should login to existing account, show toast and close dialog on creation', async ({

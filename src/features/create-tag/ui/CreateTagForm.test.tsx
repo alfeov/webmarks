@@ -1,10 +1,10 @@
 import { screen } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 
+import { createTagAction } from '@/features/create-tag/api/createTagAction'
 import { MESSAGE_CODES } from '@/shared/api/types'
 import { renderWithProviders } from '@/test/helpers/renderWithProviders'
 
-import { createTagAction } from '../api/createTagAction'
 import { CreateTagForm } from './CreateTagForm'
 
 vi.mock('../api/createTagAction')

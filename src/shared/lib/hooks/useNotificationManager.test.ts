@@ -1,7 +1,7 @@
 import { MESSAGE_CODES, type MessageCode } from '@/shared/api/types'
+import { showToast } from '@/shared/lib/utils/showToast'
 import { renderHookWithProviders } from '@/test/helpers/renderHookWithProviders'
 
-import { showToast } from '../utils/showToast'
 import { useNotificationManager } from './useNotificationManager'
 
 vi.mock('@/shared/lib/utils/showToast')

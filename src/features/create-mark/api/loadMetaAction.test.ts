@@ -1,7 +1,7 @@
+import { LOAD_META_FORMDATA } from '@/features/create-mark/lib/constants'
 import { MESSAGE_CODES } from '@/shared/api/types'
 import { verifySession } from '@/shared/lib/session'
 
-import { LOAD_META_FORMDATA } from '../lib/constants'
 import { getMetadata } from './getMetadata'
 import { loadMetaAction } from './loadMetaAction'
 

@@ -68,21 +68,18 @@ export const seeds = async () => {
       },
     })
   }
-  console.log('✨ users successfully created!')
 
   for (const webMark of webMarks) {
     await prisma.webMark.create({
       data: webMark,
     })
   }
-  console.log('✨ webMarks successfully created!')
 
   for (const tag of tags) {
     await prisma.tag.create({
       data: tag,
     })
   }
-  console.log('✨ tags successfully created!')
 }
 
 seeds()

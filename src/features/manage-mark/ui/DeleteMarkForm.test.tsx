@@ -1,10 +1,10 @@
 import { screen } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 
+import { deleteMarkAction } from '@/features/manage-mark/api/deleteMarkAction'
 import { MESSAGE_CODES } from '@/shared/api/types'
 import { renderWithProviders } from '@/test/helpers/renderWithProviders'
 
-import { deleteMarkAction } from '../api/deleteMarkAction'
 import { DeleteMarkForm } from './DeleteMarkForm'
 
 vi.mock('../api/deleteMarkAction')

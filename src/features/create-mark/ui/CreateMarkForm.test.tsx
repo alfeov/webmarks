@@ -3,11 +3,11 @@ import userEvent from '@testing-library/user-event'
 import { useParams } from 'next/navigation'
 
 import { Providers } from '@/app/[locale]/_providers/Providers'
+import { createMarkAction } from '@/features/create-mark/api/createMarkAction'
+import { useMetaStateContext } from '@/features/create-mark/model/MetaContext'
 import { MESSAGE_CODES } from '@/shared/api/types'
 import { renderWithProviders } from '@/test/helpers/renderWithProviders'
 
-import { createMarkAction } from '../api/createMarkAction'
-import { useMetaStateContext } from '../model/MetaContext'
 import { CreateMarkForm } from './CreateMarkForm'
 
 vi.mock('../model/MetaContext')

@@ -1,10 +1,10 @@
 import { screen } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 
+import { editAvatarAction } from '@/features/manage-profile/api/editAvatarAction'
 import { MESSAGE_CODES } from '@/shared/api/types'
 import { renderWithProviders } from '@/test/helpers/renderWithProviders'
 
-import { editAvatarAction } from '../api/editAvatarAction'
 import { EditAvatarForm } from './EditAvatarForm'
 
 vi.mock('../api/editAvatarAction')

@@ -1,13 +1,16 @@
 import { screen, waitFor } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 
+import { loadMetaAction } from '@/features/create-mark/api/loadMetaAction'
+import {
+  MetaProvider,
+  useMetaActionContext,
+} from '@/features/create-mark/model/MetaContext'
 import { MESSAGE_CODES } from '@/shared/api/types'
 import { paste } from '@/shared/lib/utils/paste'
 import { showToast } from '@/shared/lib/utils/showToast'
 import { renderWithProviders } from '@/test/helpers/renderWithProviders'
 
-import { loadMetaAction } from '../api/loadMetaAction'
-import { MetaProvider, useMetaActionContext } from '../model/MetaContext'
 import { LoadMetaForm } from './LoadMetaForm'
 
 vi.mock('@/shared/lib/utils/paste')

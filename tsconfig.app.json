@@ -38,6 +38,8 @@
     "node_modules",
     "src/**/*.test.ts",
     "src/**/*.test.tsx",
-    "src/test"
+    "src/test",
+    "test-browser/**/*.ts",
+    "test-browser/**/*.tsx"
   ]
 }

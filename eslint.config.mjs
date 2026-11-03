@@ -32,7 +32,7 @@ const eslintConfig = defineConfig([
   },
   {
     files: ['**/*.{ts,tsx}'],
-    ignores: ['**/*.test.{ts,tsx}'],
+    ignores: ['**/*.test.{ts,tsx}', 'test-browser/**/*.{ts,tsx}'],
     rules: {
       'no-restricted-imports': [
         'error',

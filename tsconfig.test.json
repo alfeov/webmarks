@@ -2,6 +2,10 @@
   "extends": "./tsconfig.app.json",
   "compilerOptions": {
     "types": ["node", "vitest/globals", "@testing-library/user-event"],
+    "paths": {
+      "@/*": ["./src/*"],
+      "server-only": ["./src/test/stubs/server-only.ts"]
+    },
     "incremental": false
   },
   "include": [
@@ -11,7 +15,9 @@
     "src/**/*.test.ts",
     "src/**/*.test.tsx",
     "src/test/**/*.ts",
-    "src/test/**/*.tsx"
+    "src/test/**/*.tsx",
+    "test-browser/**/*.ts",
+    "test-browser/**/*.tsx"
   ],
   "exclude": ["node_modules"]
 }

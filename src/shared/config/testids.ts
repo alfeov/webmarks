@@ -3,6 +3,8 @@ export const TEST_IDS = {
     DIALOG: 'universal-dialog',
     FETCHING_INDICATOR: 'fetching-indicator',
     MARK_ITEM: 'mark-item',
+    MARK_ITEM_TAG: 'mark-item-tag',
+    THEME_BUTTON_FALLBACK: 'theme-button-fallback',
   },
   CLICKABLE: {
     BUTTON: {

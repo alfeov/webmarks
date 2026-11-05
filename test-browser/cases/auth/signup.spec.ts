@@ -4,12 +4,14 @@ import {
   expectSubmitSuccess,
   submitForm,
 } from 'tests/utils/formCases'
+import { waitForHydration } from 'tests/utils/hydration'
 
 import { SIGNUP_FORM } from '@/features/signup/lib/constants'
 
 test.describe('signup', () => {
   test.beforeEach(async ({ page }) => {
     await page.goto('/')
+    await waitForHydration(page)
 
     const dialog = page.getByRole('dialog')
     await dialog.getByRole('button', { name: /sign up/i }).click()
@@ -26,7 +28,7 @@ test.describe('signup', () => {
         [SIGNUP_FORM.PASSWORD]: 'Password1',
         [SIGNUP_FORM.CONFIRM_PASSWORD]: 'Password1',
       },
-      submitButtonName: /sign up/i,
+      submitButton: page.getByRole('button', { name: /sign up/i }),
     })
 
     await expectSubmitSuccess(page)
@@ -37,7 +39,7 @@ test.describe('signup', () => {
       inputs: {
         [SIGNUP_FORM.CONFIRM_PASSWORD]: 'not match',
       },
-      submitButtonName: /sign up/i,
+      submitButton: page.getByRole('button', { name: /sign up/i }),
     })
 
     await expectSubmitError(page, Object.values(SIGNUP_FORM))

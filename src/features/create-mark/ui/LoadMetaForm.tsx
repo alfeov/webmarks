@@ -96,6 +96,7 @@ export function LoadMetaForm() {
             </InputGroupAddon>
           </InputGroup>
           <FieldError
+            data-testid={`${LOAD_META_FORM.URL}-error`}
             errors={state.errors?.loadUrl?.map((code) => ({
               message: tErrors(code),
             }))}

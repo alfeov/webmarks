@@ -1,3 +1,4 @@
 #!/usr/bin/env sh
 
 pn test:run
+pn test:browser

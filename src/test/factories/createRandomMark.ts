@@ -7,10 +7,7 @@ import type { WebMarkCreateInput } from '@/shared/lib/prisma/generated/models'
 export const createRandomMark = async (
   userId: User['id'],
   tagId?: Tag['id'],
-  restData?: Omit<
-    WebMarkCreateInput,
-    'url' | 'title' | 'description' | 'userId' | 'tags' | 'user'
-  >,
+  restData?: Partial<Omit<WebMarkCreateInput, 'user' | 'tags'>>,
 ) => {
   const randomId = randomUUID()
 

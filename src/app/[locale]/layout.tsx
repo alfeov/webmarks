@@ -4,6 +4,7 @@ import { getLocale, getTranslations } from 'next-intl/server'
 import { Suspense } from 'react'
 
 import { ThemeToggleButton } from '@/features/toggle-theme/ui/ThemeToggleButton'
+import { TEST_IDS } from '@/shared/config/testids'
 import { Link } from '@/shared/i18n/navigation'
 import { routing } from '@/shared/i18n/routing'
 import { verifySession } from '@/shared/lib/session'
@@ -169,7 +170,12 @@ export default async function RootLayout({
               </Link>
               <div className='flex items-center gap-[20px]'>
                 <Suspense
-                  fallback={<Skeleton className='size-9 rounded-4xl' />}
+                  fallback={
+                    <Skeleton
+                      className='size-9 rounded-4xl'
+                      data-testid={TEST_IDS.STATIC.THEME_BUTTON_FALLBACK}
+                    />
+                  }
                 >
                   <ThemeToggleButton />
                 </Suspense>

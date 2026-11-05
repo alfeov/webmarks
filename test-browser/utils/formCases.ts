@@ -1,4 +1,4 @@
-import type { Page } from '@playwright/test'
+import type { Locator, Page } from '@playwright/test'
 import { expect, test } from '@playwright/test'
 
 import { TEST_IDS } from '@/shared/config/testids'
@@ -6,13 +6,13 @@ import { TEST_IDS } from '@/shared/config/testids'
 interface SubmitFormParams {
   page: Page
   inputs: Record<string, string>
-  submitButtonName: string | RegExp
+  submitButton?: Locator
 }
 
 export const submitForm = async ({
   page,
   inputs,
-  submitButtonName,
+  submitButton,
 }: SubmitFormParams) => {
   await test.step('fill inputs', async () => {
     for (const [name, value] of Object.entries(inputs)) {
@@ -21,7 +21,9 @@ export const submitForm = async ({
   })
 
   await test.step('click submit btn', () =>
-    page.getByRole('button', { name: submitButtonName }).click())
+    submitButton
+      ? submitButton.click()
+      : page.getByTestId(TEST_IDS.CLICKABLE.BUTTON.SUBMIT).click())
 
   await test.step('show fetching indicator during submitting', () =>
     expect(page.getByTestId(TEST_IDS.STATIC.FETCHING_INDICATOR)).toBeVisible())

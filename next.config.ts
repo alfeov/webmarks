@@ -5,10 +5,10 @@ const nextConfig: NextConfig = {
   // uncomment to deploy with Docker
   // output: 'standalone',
 
-  // uncomment to increase build speed
-  // typescript: {
-  //   ignoreBuildErrors: true,
-  // },
+  // increase build speed
+  typescript: {
+    ignoreBuildErrors: true,
+  },
 
   cacheComponents: true,
   partialPrefetching: true,

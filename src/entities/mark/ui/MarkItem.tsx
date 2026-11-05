@@ -48,7 +48,12 @@ export function MarkItem({
         {Boolean(tags.length) ? (
           <div className='flex flex-wrap gap-[10px]'>
             {tags.map((tag) => (
-              <Badge key={`${tag.id}-${tag.updatedAt}`}>{tag.title}</Badge>
+              <Badge
+                key={`${tag.id}-${tag.updatedAt}`}
+                data-testid={TEST_IDS.STATIC.MARK_ITEM_TAG}
+              >
+                {tag.title}
+              </Badge>
             ))}
           </div>
         ) : (

@@ -4,6 +4,7 @@ import { useParams } from 'next/navigation'
 import { memo } from 'react'
 
 import { TagDropdownMenu } from '@/features/manage-tag/ui/TagDropdownMenu'
+import { TEST_IDS } from '@/shared/config/testids'
 import { Link } from '@/shared/i18n/navigation'
 import type { Tag } from '@/shared/lib/prisma/generated/client'
 import { SidebarMenuButton, SidebarMenuItem } from '@/shared/ui/sidebar'
@@ -19,7 +20,7 @@ export const TagSidebarMenuItem = memo(function Memoized({
   const handleClick = useCloseMobileSidebarOnClick()
 
   return (
-    <SidebarMenuItem>
+    <SidebarMenuItem data-testid={TEST_IDS.STATIC.TAG_ITEM}>
       <Link
         href={tag.id}
         prefetch

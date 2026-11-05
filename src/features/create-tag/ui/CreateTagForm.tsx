@@ -4,6 +4,7 @@ import { useTranslations } from 'next-intl'
 import { useActionState } from 'react'
 
 import { InputField } from '@/shared/components/InputField'
+import { TEST_IDS } from '@/shared/config/testids'
 import { useCloseDialogOn } from '@/shared/lib/hooks/useCloseDialogOn'
 import { useFetchingIndicatorManager } from '@/shared/lib/hooks/useFetchingIndicatorManager'
 import { useNotificationManager } from '@/shared/lib/hooks/useNotificationManager'
@@ -42,7 +43,9 @@ export function CreateTagForm() {
           name={CREATE_TAG_FORMDATA.TITLE}
           errors={state.errors?.title}
         />
-        <Button type='submit'>{t('submit')}</Button>
+        <Button type='submit' data-testid={TEST_IDS.CLICKABLE.BUTTON.SUBMIT}>
+          {t('submit')}
+        </Button>
       </FieldSet>
     </form>
   )

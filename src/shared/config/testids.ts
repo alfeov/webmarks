@@ -5,7 +5,7 @@ export const TEST_IDS = {
     MARK_ITEM: 'mark-item',
     MARK_ITEM_TAG: 'mark-item-tag',
     TAG_ITEM: 'tag-item',
-    THEME_BUTTON_FALLBACK: 'theme-button-fallback',
+    SKELETON_FALLBACK: 'skeleton-fallback',
   },
   CLICKABLE: {
     BUTTON: {
@@ -16,6 +16,9 @@ export const TEST_IDS = {
       CHANGE_AVATAR: 'clickable-button-change-avatar',
       CREATE_MARK: 'clickable-button-create-mark',
       CREATE_TAG: 'clickable-button-create-tag',
+      MANAGE_TAG: 'clickable-button-manage-tag',
+      EDIT_TAG: 'clickable-button-edit-tag',
+      DELETE_TAG: 'clickable-button-delete-tag',
       PASTE: 'clickable-button-paste',
       LOAD: 'clickable-button-load',
       SUBMIT: 'clickable-button-submit',

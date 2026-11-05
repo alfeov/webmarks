@@ -6,7 +6,7 @@ import {
 } from 'tests/utils/formCases'
 import { waitForHydration } from 'tests/utils/hydration'
 
-import { CREATE_TAG_FORMDATA } from '@/features/create-tag/lib/constants'
+import { CREATE_TAG_FORM } from '@/features/create-tag/lib/constants'
 import { TEST_IDS } from '@/shared/config/testids'
 
 test.describe('create-tag', () => {
@@ -29,7 +29,7 @@ test.describe('create-tag', () => {
     await submitForm({
       page: authorizedPage,
       inputs: {
-        [CREATE_TAG_FORMDATA.TITLE]: title,
+        [CREATE_TAG_FORM.TITLE]: title,
       },
     })
 
@@ -49,6 +49,6 @@ test.describe('create-tag', () => {
       inputs: {},
     })
 
-    await expectSubmitError(authorizedPage, Object.values(CREATE_TAG_FORMDATA))
+    await expectSubmitError(authorizedPage, Object.values(CREATE_TAG_FORM))
   })
 })

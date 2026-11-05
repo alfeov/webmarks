@@ -1,6 +1,6 @@
 import { updateTag } from 'next/cache'
 
-import { CREATE_TAG_FORMDATA } from '@/features/create-tag/lib/constants'
+import { CREATE_TAG_FORM } from '@/features/create-tag/lib/constants'
 import { MESSAGE_CODES } from '@/shared/api/types'
 import { verifySession } from '@/shared/lib/session'
 
@@ -13,7 +13,7 @@ vi.mock('./createTag')
 const prevState = { isSuccess: false }
 
 const defaultFormData = new FormData()
-defaultFormData.set(CREATE_TAG_FORMDATA.TITLE, 'Vercel')
+defaultFormData.set(CREATE_TAG_FORM.TITLE, 'Vercel')
 
 const userId = 'id-1'
 

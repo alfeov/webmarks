@@ -4,6 +4,7 @@ import { useTranslations } from 'next-intl'
 import { useActionState } from 'react'
 
 import { InputField } from '@/shared/components/InputField'
+import { TEST_IDS } from '@/shared/config/testids'
 import { useCloseDialogOn } from '@/shared/lib/hooks/useCloseDialogOn'
 import { useFetchingIndicatorManager } from '@/shared/lib/hooks/useFetchingIndicatorManager'
 import { useNotificationManager } from '@/shared/lib/hooks/useNotificationManager'
@@ -12,7 +13,7 @@ import { Button } from '@/shared/ui/button'
 import { FieldDescription, FieldLegend, FieldSet } from '@/shared/ui/field'
 
 import { editTagAction } from '../api/editTagAction'
-import { EDIT_TAG_FORMDATA } from '../lib/constants'
+import { EDIT_TAG_FORM } from '../lib/constants'
 import type { EditTagFormState } from '../model/types'
 
 type EditTagFormProps = Tag
@@ -42,10 +43,12 @@ export function EditTagForm({ ...tag }: EditTagFormProps) {
           label={t('label')}
           req
           placeholder={tag.title}
-          name={EDIT_TAG_FORMDATA.TITLE}
+          name={EDIT_TAG_FORM.TITLE}
           errors={state.errors?.title}
         />
-        <Button type='submit'>{t('submit')}</Button>
+        <Button type='submit' data-testid={TEST_IDS.CLICKABLE.BUTTON.SUBMIT}>
+          {t('submit')}
+        </Button>
       </FieldSet>
     </form>
   )

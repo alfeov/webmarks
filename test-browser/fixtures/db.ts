@@ -2,10 +2,10 @@
 import { test as base } from '@playwright/test'
 import bcrypt from 'bcrypt'
 
-import type { User } from '@/shared/lib/prisma/generated/client'
-import type { Tag } from '@/shared/lib/prisma/generated/client'
+import type { Tag, User, WebMark } from '@/shared/lib/prisma/generated/client'
 import { saltOrRounds } from '@/shared/lib/session/constants'
 import { clearDatabase } from '@/test/factories/clearDatabase'
+import { createRandomMark } from '@/test/factories/createRandomMark'
 import { createRandomTag } from '@/test/factories/createRandomTag'
 import { createRandomUser } from '@/test/factories/createRandomUser'
 
@@ -13,6 +13,7 @@ type Fixtures = {
   cleanDB: void
   user: User
   tag: Tag
+  webmark: WebMark
 }
 
 export const test = base.extend<Fixtures>({
@@ -35,15 +36,20 @@ export const test = base.extend<Fixtures>({
     })
   },
   tag: async ({ user }, use) => {
-    const title = 'Tag'
+    const title = 'Tag Title'
     const tag = await createRandomTag(user.id, {
       title,
     })
 
-    await use({
-      ...tag,
+    await use(tag)
+  },
+  webmark: async ({ user, tag }, use) => {
+    const title = 'WebMark'
+    const webmark = await createRandomMark(user.id, tag.id, {
       title,
     })
+
+    await use(webmark)
   },
 })
 

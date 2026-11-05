@@ -2,6 +2,7 @@
 
 import { useTranslations } from 'next-intl'
 
+import { TEST_IDS } from '@/shared/config/testids'
 import type { Tag } from '@/shared/lib/prisma/generated/client'
 import { Button } from '@/shared/ui/button'
 import {
@@ -30,6 +31,7 @@ export function TagDropdownMenu({ ...tag }: TagDropdownMenuProps) {
             size='icon-xs'
             data-slot='dropdown-menu-trigger'
             aria-label={t('ariaLabel')}
+            data-testid={TEST_IDS.CLICKABLE.BUTTON.MANAGE_TAG}
           >
             <LucideEllipsis />
           </Button>

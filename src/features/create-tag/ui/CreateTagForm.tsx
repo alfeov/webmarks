@@ -12,7 +12,7 @@ import { Button } from '@/shared/ui/button'
 import { FieldDescription, FieldLegend, FieldSet } from '@/shared/ui/field'
 
 import { createTagAction } from '../api/createTagAction'
-import { CREATE_TAG_FORMDATA } from '../lib/constants'
+import { CREATE_TAG_FORM } from '../lib/constants'
 import type { CreateTagFormState } from '../model/types'
 
 const initialState: CreateTagFormState = {
@@ -40,7 +40,7 @@ export function CreateTagForm() {
           label={t('fields.title.label')}
           req
           placeholder={t('fields.title.placeholder')}
-          name={CREATE_TAG_FORMDATA.TITLE}
+          name={CREATE_TAG_FORM.TITLE}
           errors={state.errors?.title}
         />
         <Button type='submit' data-testid={TEST_IDS.CLICKABLE.BUTTON.SUBMIT}>

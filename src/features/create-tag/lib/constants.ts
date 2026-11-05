@@ -1,3 +1,3 @@
-export const CREATE_TAG_FORMDATA = {
+export const CREATE_TAG_FORM = {
   TITLE: 'title',
 } as const

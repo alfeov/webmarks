@@ -1,6 +1,6 @@
 import { updateTag } from 'next/cache'
 
-import { EDIT_TAG_FORMDATA } from '@/features/manage-tag/lib/constants'
+import { EDIT_TAG_FORM } from '@/features/manage-tag/lib/constants'
 import { MESSAGE_CODES } from '@/shared/api/types'
 import { verifySession } from '@/shared/lib/session'
 
@@ -13,7 +13,7 @@ vi.mock('./updateUserTag')
 const prevState = { isSuccess: false }
 
 const defaultFormData = new FormData()
-defaultFormData.set(EDIT_TAG_FORMDATA.TITLE, 'title')
+defaultFormData.set(EDIT_TAG_FORM.TITLE, 'title')
 
 const userId = 'id-1'
 const tagId = '1'

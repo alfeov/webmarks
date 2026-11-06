@@ -1,5 +1,6 @@
 import { screen } from '@testing-library/react'
 
+import { TEST_IDS } from '@/shared/config/testids'
 import type { Tag } from '@/shared/lib/prisma/generated/client'
 import { renderWithProviders } from '@/test/helpers/renderWithProviders'
 
@@ -42,9 +43,16 @@ describe('ChangeMarkTagsForm', () => {
       />,
     )
 
-    const checkboxes = screen.getAllByRole('checkbox')
-    expect(checkboxes[0]).toBeEnabled()
-    expect(checkboxes[1]).toBeEnabled()
+    expect(
+      screen.getByTestId(
+        TEST_IDS.CHANGEABLE.INPUT.MARK_TAG_ITEM(defaultTags[0].id),
+      ),
+    ).toBeEnabled()
+    expect(
+      screen.getByTestId(
+        TEST_IDS.CHANGEABLE.INPUT.MARK_TAG_ITEM(defaultTags[1].id),
+      ),
+    ).toBeEnabled()
 
     expect(screen.getByRole('button')).toBeEnabled()
   })
@@ -57,9 +65,16 @@ describe('ChangeMarkTagsForm', () => {
       />,
     )
 
-    const checkboxes = screen.getAllByRole('checkbox')
-    expect(checkboxes[0]).toBeChecked()
-    expect(checkboxes[1]).not.toBeChecked()
+    expect(
+      screen.getByTestId(
+        TEST_IDS.CHANGEABLE.INPUT.MARK_TAG_ITEM(defaultTags[0].id),
+      ),
+    ).toBeChecked()
+    expect(
+      screen.getByTestId(
+        TEST_IDS.CHANGEABLE.INPUT.MARK_TAG_ITEM(defaultTags[1].id),
+      ),
+    ).not.toBeChecked()
   })
   it('should render empty message if tags is empty', () => {
     renderWithProviders(

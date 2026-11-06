@@ -3,7 +3,7 @@ export const TEST_IDS = {
     DIALOG: 'universal-dialog',
     FETCHING_INDICATOR: 'fetching-indicator',
     MARK_ITEM: 'mark-item',
-    MARK_ITEM_TAG: 'mark-item-tag',
+    MARK_ITEM_TAG_BADGE: 'mark-item-tag-badge',
     TAG_ITEM: 'tag-item',
     SKELETON_FALLBACK: 'skeleton-fallback',
   },
@@ -31,6 +31,11 @@ export const TEST_IDS = {
     },
     LINK: {
       OPEN_MARK: 'clickable-link-open-mark',
+    },
+  },
+  CHANGEABLE: {
+    INPUT: {
+      MARK_TAG_ITEM: (id: string) => `mark-tag-item-${id}`,
     },
   },
 } as const

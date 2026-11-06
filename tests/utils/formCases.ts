@@ -20,7 +20,7 @@ export const submitForm = async ({
     }
   })
 
-  await test.step('click submit btn', () =>
+  await test.step('click submit form button', () =>
     submitButton
       ? submitButton.click()
       : page.getByTestId(TEST_IDS.CLICKABLE.BUTTON.SUBMIT).click())

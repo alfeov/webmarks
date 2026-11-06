@@ -6,6 +6,7 @@ import { useActionState } from 'react'
 import type { WebMarkWithTags } from '@/entities/mark/model/types'
 import { TEST_IDS } from '@/shared/config/testids'
 import { useCloseDialogOn } from '@/shared/lib/hooks/useCloseDialogOn'
+import { useFetchingIndicatorManager } from '@/shared/lib/hooks/useFetchingIndicatorManager'
 import { useNotificationManager } from '@/shared/lib/hooks/useNotificationManager'
 import type { Tag } from '@/shared/lib/prisma/generated/client'
 import { Button } from '@/shared/ui/button'
@@ -33,6 +34,7 @@ export function ChangeMarkTagsForm({
     initialState,
   )
   useCloseDialogOn(state.isSuccess)
+  useFetchingIndicatorManager(isPending)
   useNotificationManager(state.message, state.isSuccess, !isPending)
 
   const t = useTranslations('ChangeMarkTagsForm')

@@ -151,7 +151,7 @@ test.describe('create-mark', () => {
 
     await test.step('show webmark with tag on page', async () => {
       await expect(
-        authorizedPage.getByTestId(TEST_IDS.STATIC.MARK_ITEM_TAG),
+        authorizedPage.getByTestId(TEST_IDS.STATIC.MARK_ITEM_TAG_BADGE),
       ).toHaveText(tag.title)
     })
   })

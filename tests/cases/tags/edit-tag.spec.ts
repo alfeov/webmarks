@@ -56,7 +56,7 @@ test.describe('edit-tag', () => {
     await waitForHydration(authorizedPage)
 
     await expect(
-      authorizedPage.getByTestId(TEST_IDS.STATIC.MARK_ITEM_TAG),
+      authorizedPage.getByTestId(TEST_IDS.STATIC.MARK_ITEM_TAG_BADGE),
     ).toHaveText(tag.title)
 
     await authorizedPage
@@ -76,7 +76,7 @@ test.describe('edit-tag', () => {
     })
 
     await expect(
-      authorizedPage.getByTestId(TEST_IDS.STATIC.MARK_ITEM_TAG),
+      authorizedPage.getByTestId(TEST_IDS.STATIC.MARK_ITEM_TAG_BADGE),
     ).toHaveText(newTitle)
   })
 

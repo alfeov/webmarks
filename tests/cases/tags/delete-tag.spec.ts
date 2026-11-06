@@ -77,7 +77,7 @@ test.describe('delete-tag', () => {
     await waitForHydration(authorizedPage)
 
     await expect(
-      authorizedPage.getByTestId(TEST_IDS.STATIC.MARK_ITEM_TAG),
+      authorizedPage.getByTestId(TEST_IDS.STATIC.MARK_ITEM_TAG_BADGE),
     ).toHaveText(tag.title)
 
     await authorizedPage
@@ -96,7 +96,7 @@ test.describe('delete-tag', () => {
     })
 
     await expect(
-      authorizedPage.getByTestId(TEST_IDS.STATIC.MARK_ITEM_TAG),
+      authorizedPage.getByTestId(TEST_IDS.STATIC.MARK_ITEM_TAG_BADGE),
     ).toBeHidden()
   })
 

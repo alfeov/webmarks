@@ -29,33 +29,26 @@ describe('toggleMarkPinnedAction', () => {
     })
   })
 
-  it('should return error when user is not authorized', async () => {
+  it('should not call fn when user is not authorized', async () => {
     vi.mocked(verifySession).mockResolvedValueOnce(null)
-
-    const result = await toggleMarkPinnedAction(defaultData)
+    await toggleMarkPinnedAction(defaultData)
 
     expect(updateTag).not.toHaveBeenCalled()
     expect(toggleUserMarkPinned).not.toHaveBeenCalled()
-    expect(result.isSuccess).toBe(false)
-    expect(result.message).toBe(MESSAGE_CODES.UNAUTHORIZED)
   })
-  it('should return error when occurred db error', async () => {
+  it('should not update on db error', async () => {
     const error = MESSAGE_CODES.INTERNAL_ERROR
     vi.mocked(toggleUserMarkPinned).mockResolvedValueOnce({
       error,
     })
 
-    const result = await toggleMarkPinnedAction(defaultData)
+    await toggleMarkPinnedAction(defaultData)
 
     expect(updateTag).not.toHaveBeenCalled()
-    expect(result.isSuccess).toBe(false)
-    expect(result.message).toBe(error)
   })
-  it('should return success when all operations completed successfully', async () => {
-    const result = await toggleMarkPinnedAction(defaultData)
+  it('should call updateTag when all operations completed successfully', async () => {
+    await toggleMarkPinnedAction(defaultData)
 
     expect(updateTag).toHaveBeenCalledWith(`marks-${userId}`)
-    expect(result.isSuccess).toBe(true)
-    expect(result.message).toBe(MESSAGE_CODES.TOGGLE_MARK_PIN_SUCCESS)
   })
 })

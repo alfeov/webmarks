@@ -5,17 +5,17 @@ import { TEST_IDS } from '@/shared/config/testids'
 
 interface SubmitFormParams {
   page: Page
-  inputs: Record<string, string>
+  fields: Record<string, string>
   submitButton?: Locator
 }
 
 export const submitForm = async ({
   page,
-  inputs,
+  fields,
   submitButton,
 }: SubmitFormParams) => {
   await test.step('fill inputs', async () => {
-    for (const [name, value] of Object.entries(inputs)) {
+    for (const [name, value] of Object.entries(fields)) {
       await page.getByTestId(`${name}-input`).fill(value)
     }
   })
@@ -40,13 +40,13 @@ export const expectSubmitSuccess = async (page: Page) => {
     expect(page.getByText(/success!/i).first()).toBeVisible())
 }
 
-export const expectSubmitError = async (page: Page, fields: string[]) => {
+export const expectSubmitError = async (page: Page, inputs: string[]) => {
   await test.step('hide fetching indicator', () =>
     expect(page.getByTestId(TEST_IDS.STATIC.FETCHING_INDICATOR)).toBeHidden())
   await test.step('show error toast', () =>
     expect(page.getByText(/something went wrong!/i).first()).toBeVisible())
-  for (const field of fields) {
-    await test.step(`show error for ${field} field`, () =>
-      expect(page.getByTestId(`${field}-error`)).toBeVisible())
+  for (const input of inputs) {
+    await test.step(`show error for ${input} field`, () =>
+      expect(page.getByTestId(`${input}-error`)).toBeVisible())
   }
 }

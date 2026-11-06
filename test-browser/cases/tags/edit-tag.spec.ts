@@ -32,7 +32,7 @@ test.describe('edit-tag', () => {
     const newTitle = 'New Tag Title'
     await submitForm({
       page: authorizedPage,
-      inputs: {
+      fields: {
         [EDIT_TAG_FORM.TITLE]: newTitle,
       },
     })
@@ -70,7 +70,7 @@ test.describe('edit-tag', () => {
     const newTitle = 'New Tag Title'
     await submitForm({
       page: authorizedPage,
-      inputs: {
+      fields: {
         [EDIT_TAG_FORM.TITLE]: newTitle,
       },
     })
@@ -101,7 +101,7 @@ test.describe('edit-tag', () => {
 
     await submitForm({
       page: authorizedPage,
-      inputs: {},
+      fields: {},
     })
 
     await expectSubmitError(authorizedPage, Object.values(EDIT_TAG_FORM))

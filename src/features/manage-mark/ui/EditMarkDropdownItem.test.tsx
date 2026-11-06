@@ -1,6 +1,7 @@
 import { screen } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 
+import { TEST_IDS } from '@/shared/config/testids'
 import { DropdownMenu } from '@/shared/ui/dropdown-menu'
 import { renderWithProviders } from '@/test/helpers/renderWithProviders'
 
@@ -38,7 +39,9 @@ describe('EditMarkDropdownItem', () => {
       </DropdownMenu>,
     )
 
-    await userEvent.click(screen.getByText('items.edit'))
+    await userEvent.click(
+      screen.getByTestId(TEST_IDS.CLICKABLE.BUTTON.EDIT_MARK),
+    )
 
     expect(EditMarkForm).toHaveBeenCalledWith(defaultProps, undefined)
   })

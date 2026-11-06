@@ -5,8 +5,6 @@ import type {
 
 export type ChangeMarkTagsFormState = ActionFormState
 
-export type PinMarkFormState = ActionFormState
-
 export type DeleteMarkFormState = ActionFormState
 
 export type EditMarkFormState = ActionFormStateWithErrors<{

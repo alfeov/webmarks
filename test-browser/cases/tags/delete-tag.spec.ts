@@ -33,7 +33,7 @@ test.describe('delete-tag', () => {
 
     await submitForm({
       page: authorizedPage,
-      inputs: {},
+      fields: {},
     })
 
     await expectSubmitSuccess(authorizedPage)
@@ -62,7 +62,7 @@ test.describe('delete-tag', () => {
 
     await submitForm({
       page: authorizedPage,
-      inputs: {},
+      fields: {},
     })
 
     await expect(authorizedPage).toHaveURL('/en')
@@ -92,7 +92,7 @@ test.describe('delete-tag', () => {
 
     await submitForm({
       page: authorizedPage,
-      inputs: {},
+      fields: {},
     })
 
     await expect(
@@ -127,7 +127,7 @@ test.describe('delete-tag', () => {
 
     await submitForm({
       page: authorizedPage,
-      inputs: {},
+      fields: {},
     })
 
     await expectSubmitError(authorizedPage, [])

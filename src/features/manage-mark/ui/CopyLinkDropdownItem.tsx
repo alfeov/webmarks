@@ -2,6 +2,7 @@
 
 import { useTranslations } from 'next-intl'
 
+import { TEST_IDS } from '@/shared/config/testids'
 import { copy } from '@/shared/lib/utils/copy'
 import { showToast } from '@/shared/lib/utils/showToast'
 import { DropdownMenuItem } from '@/shared/ui/dropdown-menu'
@@ -17,7 +18,10 @@ export function CopyLinkDropdownItem({ url }: { url: string }) {
   }
 
   return (
-    <DropdownMenuItem onClick={handleClick}>
+    <DropdownMenuItem
+      onClick={handleClick}
+      data-testid={TEST_IDS.CLICKABLE.BUTTON.COPY_MARK_LINK}
+    >
       {tMarkDropdownMenu('items.copy')}
     </DropdownMenuItem>
   )

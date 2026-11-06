@@ -1,6 +1,6 @@
 import { updateTag } from 'next/cache'
 
-import { EDIT_MARK_FORMDATA } from '@/features/manage-mark/lib/constants'
+import { EDIT_MARK_FORM } from '@/features/manage-mark/lib/constants'
 import { MESSAGE_CODES } from '@/shared/api/types'
 import { verifySession } from '@/shared/lib/session'
 
@@ -13,10 +13,10 @@ vi.mock('./updateUserMark')
 const prevState = { isSuccess: false }
 
 const defaultFormData = new FormData()
-defaultFormData.set(EDIT_MARK_FORMDATA.URL, 'https://some-url.com')
-defaultFormData.set(EDIT_MARK_FORMDATA.TITLE, 'title')
-defaultFormData.set(EDIT_MARK_FORMDATA.DESCRIPTION, 'some webmark desc')
-defaultFormData.set(EDIT_MARK_FORMDATA.LOGO_URL, 'https://some-url.com')
+defaultFormData.set(EDIT_MARK_FORM.URL, 'https://some-url.com')
+defaultFormData.set(EDIT_MARK_FORM.TITLE, 'title')
+defaultFormData.set(EDIT_MARK_FORM.DESCRIPTION, 'some webmark desc')
+defaultFormData.set(EDIT_MARK_FORM.LOGO_URL, 'https://some-url.com')
 
 const userId = 'id-1'
 const markId = '1'

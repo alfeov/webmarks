@@ -5,6 +5,7 @@ import { useActionState } from 'react'
 
 import { InputField } from '@/shared/components/InputField'
 import { TextareaField } from '@/shared/components/TextareaField'
+import { TEST_IDS } from '@/shared/config/testids'
 import { useCloseDialogOn } from '@/shared/lib/hooks/useCloseDialogOn'
 import { useFetchingIndicatorManager } from '@/shared/lib/hooks/useFetchingIndicatorManager'
 import { useNotificationManager } from '@/shared/lib/hooks/useNotificationManager'
@@ -13,7 +14,7 @@ import { Button } from '@/shared/ui/button'
 import { FieldDescription, FieldLegend, FieldSet } from '@/shared/ui/field'
 
 import { editMarkAction } from '../api/editMarkAction'
-import { EDIT_MARK_FORMDATA } from '../lib/constants'
+import { EDIT_MARK_FORM } from '../lib/constants'
 import type { EditMarkFormState } from '../model/types'
 
 type EditMarkFormProps = WebMark
@@ -41,7 +42,7 @@ export function EditMarkForm({ ...mark }: EditMarkFormProps) {
         <FieldDescription>{tEditMarkForm('formDescription')}</FieldDescription>
         <InputField
           autoFocus
-          name={EDIT_MARK_FORMDATA.URL}
+          name={EDIT_MARK_FORM.URL}
           errors={state.errors?.url}
           defaultValue={mark.url}
           label={tMarkForm('fields.url.label')}
@@ -49,7 +50,7 @@ export function EditMarkForm({ ...mark }: EditMarkFormProps) {
           req
         />
         <InputField
-          name={EDIT_MARK_FORMDATA.TITLE}
+          name={EDIT_MARK_FORM.TITLE}
           errors={state.errors?.title}
           defaultValue={mark.title}
           label={tMarkForm('fields.title.label')}
@@ -57,7 +58,7 @@ export function EditMarkForm({ ...mark }: EditMarkFormProps) {
           req
         />
         <TextareaField
-          name={EDIT_MARK_FORMDATA.DESCRIPTION}
+          name={EDIT_MARK_FORM.DESCRIPTION}
           errors={state.errors?.description}
           defaultValue={mark.description}
           label={tMarkForm('fields.description.label')}
@@ -65,13 +66,15 @@ export function EditMarkForm({ ...mark }: EditMarkFormProps) {
           req
         />
         <InputField
-          name={EDIT_MARK_FORMDATA.LOGO_URL}
+          name={EDIT_MARK_FORM.LOGO_URL}
           errors={state.errors?.logoUrl}
           defaultValue={mark.logoUrl ?? ''}
           label={tMarkForm('fields.logoUrl.label')}
           placeholder='https://logo.com'
         />
-        <Button type='submit'>{tEditMarkForm('submit')}</Button>
+        <Button type='submit' data-testid={TEST_IDS.CLICKABLE.BUTTON.SUBMIT}>
+          {tEditMarkForm('submit')}
+        </Button>
       </FieldSet>
     </form>
   )

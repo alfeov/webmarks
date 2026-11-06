@@ -28,7 +28,7 @@ test.describe('create-tag', () => {
     const title = 'Tag Title'
     await submitForm({
       page: authorizedPage,
-      inputs: {
+      fields: {
         [CREATE_TAG_FORM.TITLE]: title,
       },
     })
@@ -46,7 +46,7 @@ test.describe('create-tag', () => {
   test('should show corresponding error states', async ({ authorizedPage }) => {
     await submitForm({
       page: authorizedPage,
-      inputs: {},
+      fields: {},
     })
 
     await expectSubmitError(authorizedPage, Object.values(CREATE_TAG_FORM))

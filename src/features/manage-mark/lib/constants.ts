@@ -1,4 +1,4 @@
-export const EDIT_MARK_FORMDATA = {
+export const EDIT_MARK_FORM = {
   TITLE: 'title',
   URL: 'url',
   DESCRIPTION: 'description',

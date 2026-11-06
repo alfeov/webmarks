@@ -3,6 +3,7 @@ import userEvent from '@testing-library/user-event'
 
 import { deleteMarkAction } from '@/features/manage-mark/api/deleteMarkAction'
 import { MESSAGE_CODES } from '@/shared/api/types'
+import { TEST_IDS } from '@/shared/config/testids'
 import { renderWithProviders } from '@/test/helpers/renderWithProviders'
 
 import { DeleteMarkForm } from './DeleteMarkForm'
@@ -15,7 +16,7 @@ describe('DeleteMarkForm', () => {
   it('should render enabled elements by default', () => {
     renderWithProviders(<DeleteMarkForm markId={defaultMarkId} />)
 
-    expect(screen.getByRole('button')).toBeEnabled()
+    expect(screen.getByTestId(TEST_IDS.CLICKABLE.BUTTON.SUBMIT)).toBeEnabled()
   })
   it('should call deleteMarkAction with markId', async () => {
     renderWithProviders(<DeleteMarkForm markId={defaultMarkId} />)
@@ -25,7 +26,7 @@ describe('DeleteMarkForm', () => {
       message: MESSAGE_CODES.MARK_DELETE_SUCCESS,
     })
 
-    const submit = screen.getByRole('button')
+    const submit = screen.getByTestId(TEST_IDS.CLICKABLE.BUTTON.SUBMIT)
     await userEvent.click(submit)
 
     expect(deleteMarkAction).toHaveBeenCalledWith(

@@ -2,7 +2,7 @@ import { screen } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 
 import { toggleMarkPinnedAction } from '@/features/manage-mark/api/toggleMarkPinnedAction'
-import { MESSAGE_CODES } from '@/shared/api/types'
+import { TEST_IDS } from '@/shared/config/testids'
 import { DropdownMenu } from '@/shared/ui/dropdown-menu'
 import { renderWithProviders } from '@/test/helpers/renderWithProviders'
 
@@ -13,15 +13,6 @@ vi.mock('../api/toggleMarkPinnedAction')
 const defaultMarkId = '1'
 
 describe('PinMarkDropdownItem', () => {
-  it('should render enabled elements by default', () => {
-    renderWithProviders(
-      <DropdownMenu>
-        <PinMarkDropdownItem id={defaultMarkId} pinned />
-      </DropdownMenu>,
-    )
-
-    expect(screen.getByRole('button')).toBeEnabled()
-  })
   it('should render unpin text when received pinned', () => {
     renderWithProviders(
       <DropdownMenu>
@@ -29,7 +20,9 @@ describe('PinMarkDropdownItem', () => {
       </DropdownMenu>,
     )
 
-    expect(screen.getByRole('button')).toHaveTextContent('items.unpin')
+    expect(
+      screen.getByTestId(TEST_IDS.CLICKABLE.BUTTON.PIN_MARK),
+    ).toHaveTextContent('items.unpin')
   })
   it('should render pin text when received pinned is false', () => {
     renderWithProviders(
@@ -38,7 +31,9 @@ describe('PinMarkDropdownItem', () => {
       </DropdownMenu>,
     )
 
-    expect(screen.getByRole('button')).toHaveTextContent('items.pin')
+    expect(
+      screen.getByTestId(TEST_IDS.CLICKABLE.BUTTON.PIN_MARK),
+    ).toHaveTextContent('items.pin')
   })
   it('should call Action with mark id and pinned state', async () => {
     const isPinned = false
@@ -48,12 +43,9 @@ describe('PinMarkDropdownItem', () => {
       </DropdownMenu>,
     )
 
-    vi.mocked(toggleMarkPinnedAction).mockResolvedValueOnce({
-      isSuccess: true,
-      message: MESSAGE_CODES.TOGGLE_MARK_PIN_SUCCESS,
-    })
+    vi.mocked(toggleMarkPinnedAction).mockResolvedValueOnce()
 
-    const submit = screen.getByRole('button')
+    const submit = screen.getByTestId(TEST_IDS.CLICKABLE.BUTTON.PIN_MARK)
     await userEvent.click(submit)
 
     expect(toggleMarkPinnedAction).toHaveBeenCalledWith(
@@ -61,8 +53,8 @@ describe('PinMarkDropdownItem', () => {
         id: defaultMarkId,
         pinned: isPinned,
       },
-      expect.any(Object),
-      expect.any(Object),
+      undefined,
+      undefined,
     )
   })
 })

@@ -15,6 +15,12 @@ export const TEST_IDS = {
       LOGOUT: 'clickable-button-logout',
       CHANGE_AVATAR: 'clickable-button-change-avatar',
       CREATE_MARK: 'clickable-button-create-mark',
+      MANAGE_MARK: 'clickable-button-manage-mark',
+      COPY_MARK_LINK: 'clickable-button-copy-mark-link',
+      CHANGE_MARK_TAGS: 'clickable-button-change-mark-tags',
+      EDIT_MARK: 'clickable-button-edit-mark',
+      PIN_MARK: 'clickable-button-pin-mark',
+      DELETE_MARK: 'clickable-button-delete-mark',
       CREATE_TAG: 'clickable-button-create-tag',
       MANAGE_TAG: 'clickable-button-manage-tag',
       EDIT_TAG: 'clickable-button-edit-tag',
@@ -22,6 +28,9 @@ export const TEST_IDS = {
       PASTE: 'clickable-button-paste',
       LOAD: 'clickable-button-load',
       SUBMIT: 'clickable-button-submit',
+    },
+    LINK: {
+      OPEN_MARK: 'clickable-link-open-mark',
     },
   },
 } as const

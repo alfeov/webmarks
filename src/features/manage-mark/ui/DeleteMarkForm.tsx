@@ -3,6 +3,7 @@
 import { useTranslations } from 'next-intl'
 import { useActionState } from 'react'
 
+import { TEST_IDS } from '@/shared/config/testids'
 import { useCloseDialogOn } from '@/shared/lib/hooks/useCloseDialogOn'
 import { useFetchingIndicatorManager } from '@/shared/lib/hooks/useFetchingIndicatorManager'
 import { useNotificationManager } from '@/shared/lib/hooks/useNotificationManager'
@@ -33,7 +34,9 @@ export function DeleteMarkForm({ markId }: { markId: WebMark['id'] }) {
       <FieldSet disabled={isPending}>
         <FieldLegend>{t('formTitle')}</FieldLegend>
         <FieldDescription>{t('formDescription')}</FieldDescription>
-        <Button type='submit'>{t('submit')}</Button>
+        <Button type='submit' data-testid={TEST_IDS.CLICKABLE.BUTTON.SUBMIT}>
+          {t('submit')}
+        </Button>
       </FieldSet>
     </form>
   )

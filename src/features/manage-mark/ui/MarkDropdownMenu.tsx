@@ -3,6 +3,7 @@ import { getTranslations } from 'next-intl/server'
 import type { WebMarkWithTags } from '@/entities/mark/model/types'
 import { getAllUserTags } from '@/entities/tag/api/getAllUserTags'
 import { ChangeMarkTagsDropdownItem } from '@/features/manage-mark/ui/ChangeMarkTagsDropdownItem'
+import { TEST_IDS } from '@/shared/config/testids'
 import { verifySession } from '@/shared/lib/session'
 import { Button } from '@/shared/ui/button'
 import {
@@ -37,6 +38,7 @@ export async function MarkDropdownMenu({ ...mark }: MarkDropDownMenuProps) {
             variant='ghost'
             data-slot='dropdown-menu-trigger'
             aria-label={t('ariaLabel')}
+            data-testid={TEST_IDS.CLICKABLE.BUTTON.MANAGE_MARK}
           >
             <LucideEllipsis />
           </Button>

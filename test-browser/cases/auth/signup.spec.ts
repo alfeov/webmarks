@@ -22,7 +22,7 @@ test.describe('signup', () => {
   }) => {
     await submitForm({
       page,
-      inputs: {
+      fields: {
         [SIGNUP_FORM.USERNAME]: 'Username',
         [SIGNUP_FORM.EMAIL]: 'username@gmail.com',
         [SIGNUP_FORM.PASSWORD]: 'Password1',
@@ -36,7 +36,7 @@ test.describe('signup', () => {
   test('should show field errors and toast', async ({ page }) => {
     await submitForm({
       page,
-      inputs: {
+      fields: {
         [SIGNUP_FORM.CONFIRM_PASSWORD]: 'not match',
       },
       submitButton: page.getByRole('button', { name: /sign up/i }),

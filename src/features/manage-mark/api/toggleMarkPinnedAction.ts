@@ -2,7 +2,6 @@
 
 import { updateTag } from 'next/cache'
 
-import { MESSAGE_CODES } from '@/shared/api/types'
 import type { WebMark } from '@/shared/lib/prisma/generated/client'
 import { verifySession } from '@/shared/lib/session'
 
@@ -16,12 +15,7 @@ export async function toggleMarkPinnedAction({
 }: ToggleMarkPinnedActionParams) {
   // check user
   const session = await verifySession()
-  if (!session) {
-    return {
-      isSuccess: false,
-      message: MESSAGE_CODES.UNAUTHORIZED,
-    }
-  }
+  if (!session) return
 
   // toggling webmark pinned state
   // ! provide the current pinned state
@@ -30,19 +24,8 @@ export async function toggleMarkPinnedAction({
     pinned,
     userId: session.userId,
   })
-  if (error) {
-    return {
-      isSuccess: false,
-      message: error,
-    }
-  }
+  if (error) return
 
   // revalidation
   updateTag(`marks-${session.userId}`)
-
-  // return success result
-  return {
-    isSuccess: true,
-    message: MESSAGE_CODES.TOGGLE_MARK_PIN_SUCCESS,
-  }
 }

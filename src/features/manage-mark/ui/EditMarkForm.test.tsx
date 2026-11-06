@@ -3,8 +3,12 @@ import userEvent from '@testing-library/user-event'
 
 import { editMarkAction } from '@/features/manage-mark/api/editMarkAction'
 import { MESSAGE_CODES } from '@/shared/api/types'
+import { TEST_IDS } from '@/shared/config/testids'
+import { expectFieldsToBeEnabled } from '@/test/helpers/expectFieldsToBeEnabled'
+import { expectFieldsToHaveValues } from '@/test/helpers/expectFieldsToHaveValues'
 import { renderWithProviders } from '@/test/helpers/renderWithProviders'
 
+import { EDIT_MARK_FORM } from '../lib/constants'
 import { EditMarkForm } from './EditMarkForm'
 
 vi.mock('../api/editMarkAction')
@@ -34,24 +38,15 @@ describe('EditMarkForm', () => {
   it('should render enabled elements by default with default values', () => {
     renderWithProviders(<EditMarkForm {...defaultData} />)
 
-    expect(screen.getByPlaceholderText(/webmarks.com/i)).toBeEnabled()
-    expect(screen.getByPlaceholderText('WebMark')).toBeEnabled()
-    expect(screen.getByPlaceholderText(/description/i)).toBeEnabled()
-    expect(screen.getByPlaceholderText(/logo.com/i)).toBeEnabled()
-    expect(screen.getByRole('button')).toBeEnabled()
+    expectFieldsToBeEnabled(Object.values(EDIT_MARK_FORM))
+    expect(screen.getByTestId(TEST_IDS.CLICKABLE.BUTTON.SUBMIT)).toBeEnabled()
 
-    expect(screen.getByPlaceholderText(/webmarks.com/i)).toHaveValue(
-      defaultData.url,
-    )
-    expect(screen.getByPlaceholderText('WebMark')).toHaveValue(
-      defaultData.title,
-    )
-    expect(screen.getByPlaceholderText(/description/i)).toHaveValue(
-      defaultData.description,
-    )
-    expect(screen.getByPlaceholderText(/logo.com/i)).toHaveValue(
-      defaultData.logoUrl,
-    )
+    expectFieldsToHaveValues({
+      [EDIT_MARK_FORM.URL]: defaultData.url,
+      [EDIT_MARK_FORM.TITLE]: defaultData.title,
+      [EDIT_MARK_FORM.DESCRIPTION]: defaultData.description,
+      [EDIT_MARK_FORM.LOGO_URL]: defaultData.logoUrl,
+    })
   })
   it('should call Action with mark id received from props', async () => {
     renderWithProviders(<EditMarkForm {...defaultData} />)

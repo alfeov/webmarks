@@ -2,6 +2,7 @@ import { screen } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 
 import { MESSAGE_CODES } from '@/shared/api/types'
+import { TEST_IDS } from '@/shared/config/testids'
 import { copy } from '@/shared/lib/utils/copy'
 import { DropdownMenu } from '@/shared/ui/dropdown-menu'
 import { renderWithProviders } from '@/test/helpers/renderWithProviders'
@@ -26,8 +27,8 @@ describe('CopyLinkDropdownItem', () => {
       message,
     })
 
-    const btn = screen.getByText('items.copy')
-    await userEvent.click(btn)
+    const button = screen.getByTestId(TEST_IDS.CLICKABLE.BUTTON.COPY_MARK_LINK)
+    await userEvent.click(button)
 
     expect(copy).toHaveBeenCalledWith(url)
     expect(await screen.findByText('successTitle')).toBeInTheDocument()
@@ -46,8 +47,8 @@ describe('CopyLinkDropdownItem', () => {
       message,
     })
 
-    const btn = screen.getByText('items.copy')
-    await userEvent.click(btn)
+    const button = screen.getByTestId(TEST_IDS.CLICKABLE.BUTTON.COPY_MARK_LINK)
+    await userEvent.click(button)
 
     expect(copy).toHaveBeenCalledWith(url)
     expect(await screen.findAllByText('errorTitle')).toHaveLength(2) // toast and sr-only toast version

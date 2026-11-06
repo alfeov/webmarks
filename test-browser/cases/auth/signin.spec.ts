@@ -19,7 +19,7 @@ test.describe('signin', () => {
     user,
   }) => {
     await submitForm({
-      inputs: {
+      fields: {
         [SIGNIN_FORM.EMAIL]: user.email,
         [SIGNIN_FORM.PASSWORD]: user.password,
       },
@@ -33,7 +33,7 @@ test.describe('signin', () => {
   test('should show field errors and toast', async ({ page }) => {
     await submitForm({
       page,
-      inputs: {},
+      fields: {},
       submitButton: page.getByRole('button', { name: /login/i }),
     })
 

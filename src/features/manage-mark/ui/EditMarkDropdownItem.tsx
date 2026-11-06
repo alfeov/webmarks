@@ -3,6 +3,7 @@
 import { useTranslations } from 'next-intl'
 
 import type { WebMarkWithTags } from '@/entities/mark/model/types'
+import { TEST_IDS } from '@/shared/config/testids'
 import { useDialogContext } from '@/shared/lib/contexts/DialogContext'
 import { DropdownMenuItem } from '@/shared/ui/dropdown-menu'
 
@@ -14,7 +15,10 @@ export function EditMarkDropdownItem({ ...mark }: WebMarkWithTags) {
   const t = useTranslations('MarkDropdownMenu')
 
   return (
-    <DropdownMenuItem onClick={() => openDialog(<EditMarkForm {...mark} />)}>
+    <DropdownMenuItem
+      onClick={() => openDialog(<EditMarkForm {...mark} />)}
+      data-testid={TEST_IDS.CLICKABLE.BUTTON.EDIT_MARK}
+    >
       {t('items.edit')}
     </DropdownMenuItem>
   )

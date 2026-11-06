@@ -100,7 +100,7 @@ test.describe('create-mark', () => {
     await test.step('errors for load form', async () => {
       await submitForm({
         page: authorizedPage,
-        inputs: {},
+        fields: {},
         submitButton: authorizedPage.getByTestId(
           TEST_IDS.CLICKABLE.BUTTON.LOAD,
         ),
@@ -112,7 +112,7 @@ test.describe('create-mark', () => {
     await test.step('errors for create form', async () => {
       await submitForm({
         page: authorizedPage,
-        inputs: {
+        fields: {
           [CREATE_MARK_FORM.LOGO_URL]: 'error',
         },
       })
@@ -140,7 +140,7 @@ test.describe('create-mark', () => {
     const desc = 'some webmark description'
     await submitForm({
       page: authorizedPage,
-      inputs: {
+      fields: {
         [CREATE_MARK_FORM.URL]: url,
         [CREATE_MARK_FORM.TITLE]: title,
         [CREATE_MARK_FORM.DESCRIPTION]: desc,

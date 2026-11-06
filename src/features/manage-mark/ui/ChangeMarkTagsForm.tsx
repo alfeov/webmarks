@@ -4,6 +4,7 @@ import { useTranslations } from 'next-intl'
 import { useActionState } from 'react'
 
 import type { WebMarkWithTags } from '@/entities/mark/model/types'
+import { TEST_IDS } from '@/shared/config/testids'
 import { useCloseDialogOn } from '@/shared/lib/hooks/useCloseDialogOn'
 import { useNotificationManager } from '@/shared/lib/hooks/useNotificationManager'
 import type { Tag } from '@/shared/lib/prisma/generated/client'
@@ -58,7 +59,9 @@ export function ChangeMarkTagsForm({
             {t('emptyTags')}
           </FieldDescription>
         )}
-        <Button type='submit'>{t('submit')}</Button>
+        <Button type='submit' data-testid={TEST_IDS.CLICKABLE.BUTTON.SUBMIT}>
+          {t('submit')}
+        </Button>
       </FieldSet>
     </form>
   )

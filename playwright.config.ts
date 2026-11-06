@@ -15,7 +15,7 @@ import { defineConfig, devices } from '@playwright/test'
 const baseURL = 'http://localhost:3000'
 
 export default defineConfig({
-  testDir: './test-browser',
+  testDir: './tests',
   tsconfig: './tsconfig.test.json',
   snapshotPathTemplate:
     '{testDir}/{testFileDir}/(snapshots)/{testFileName}/{arg}-{projectName}-{platform}{ext}',

@@ -12,7 +12,7 @@ import { setUserMarkTags } from './setUserMarkTags'
 
 export async function changeMarkTagsAction(
   markId: WebMark['id'] | undefined,
-  prevState: ChangeMarkTagsFormState,
+  _prevState: ChangeMarkTagsFormState,
   formData: FormData,
 ) {
   if (!markId)

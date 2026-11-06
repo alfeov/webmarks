@@ -4,7 +4,7 @@
     "types": ["node", "vitest/globals", "@testing-library/user-event"],
     "paths": {
       "@/*": ["./src/*"],
-      "tests/*": ["./test-browser/*"],
+      "tests/*": ["./tests/*"],
       "server-only": ["./src/test/stubs/server-only.ts"]
     },
     "incremental": false
@@ -17,8 +17,8 @@
     "src/**/*.test.tsx",
     "src/test/**/*.ts",
     "src/test/**/*.tsx",
-    "test-browser/**/*.ts",
-    "test-browser/**/*.tsx"
+    "tests/**/*.ts",
+    "tests/**/*.tsx"
   ],
   "exclude": ["node_modules"]
 }

@@ -56,14 +56,14 @@ const eslintConfig = defineConfig([
   },
   {
     files: ['**/*.{ts,tsx}'],
-    ignores: ['**/*.test.{ts,tsx}', 'test-browser/**/*.{ts,tsx}'],
+    ignores: ['**/*.test.{ts,tsx}', 'tests/**/*.{ts,tsx}'],
     rules: {
       'no-restricted-imports': [
         'error',
         {
           patterns: [
             {
-              group: ['@/test', '@/test/*', 'test-browser', 'test-browser/*'],
+              group: ['@/test/*', 'tests/*'],
               message: 'Testing utility can not be used in non test files',
             },
           ],

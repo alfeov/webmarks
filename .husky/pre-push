@@ -1,4 +1,5 @@
 #!/usr/bin/env sh
 
-pn test:run
-pn test:browser --project=chromium --project=webkit --project="Mobile Chrome"
+pnpm test:db:prepare
+pnpm test:run
+pnpm test:browser

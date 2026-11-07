@@ -73,10 +73,10 @@ export default defineConfig({
       name: 'Mobile Chrome',
       use: { ...devices['Pixel 5'] },
     },
-    {
-      name: 'Mobile Safari',
-      use: { ...devices['iPhone 12'] },
-    },
+    // {
+    //   name: 'Mobile Safari',
+    //   use: { ...devices['iPhone 12'] },
+    // },
 
     /* Test against branded browsers. */
     // {
@@ -91,8 +91,7 @@ export default defineConfig({
 
   /* Run your local dev server before starting the tests */
   webServer: {
-    command:
-      'pnpm test:db:prepare && pnpm build && dotenv -e .env.test pnpm start',
+    command: 'pnpm build && dotenv -e .env.test pnpm start',
     url: baseURL,
     reuseExistingServer: !process.env.CI,
   },

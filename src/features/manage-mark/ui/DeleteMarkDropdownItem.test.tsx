@@ -1,6 +1,7 @@
 import { screen } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 
+import { TEST_IDS } from '@/shared/config/testids'
 import { DropdownMenu } from '@/shared/ui/dropdown-menu'
 import { renderWithProviders } from '@/test/helpers/renderWithProviders'
 
@@ -19,7 +20,9 @@ describe('DeleteMarkDropdownItem', () => {
       </DropdownMenu>,
     )
 
-    await userEvent.click(screen.getByText('items.delete'))
+    await userEvent.click(
+      screen.getByTestId(TEST_IDS.CLICKABLE.BUTTON.DELETE_MARK),
+    )
 
     expect(DeleteMarkForm).toHaveBeenCalledWith(
       {

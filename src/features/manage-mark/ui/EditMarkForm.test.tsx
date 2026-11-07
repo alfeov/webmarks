@@ -56,7 +56,7 @@ describe('EditMarkForm', () => {
       message: MESSAGE_CODES.MARK_EDIT_SUCCESS,
     })
 
-    const submit = screen.getByRole('button')
+    const submit = screen.getByTestId(TEST_IDS.CLICKABLE.BUTTON.SUBMIT)
     await userEvent.click(submit)
 
     expect(editMarkAction).toHaveBeenCalledWith(
@@ -80,7 +80,7 @@ describe('EditMarkForm', () => {
       message: MESSAGE_CODES.VALIDATION_ERROR,
     })
 
-    const submit = screen.getByRole('button')
+    const submit = screen.getByTestId(TEST_IDS.CLICKABLE.BUTTON.SUBMIT)
     await userEvent.click(submit)
 
     expect(await screen.findAllByText(validationMessage)).toHaveLength(4)

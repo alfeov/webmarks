@@ -3,8 +3,8 @@ export const LOAD_META_FORM = {
 } as const
 
 export const CREATE_MARK_FORM = {
-  TITLE: 'title',
   URL: 'url',
+  TITLE: 'title',
   DESCRIPTION: 'description',
   LOGO_URL: 'logoUrl',
 } as const

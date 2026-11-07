@@ -1,6 +1,7 @@
 import { screen } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 
+import { TEST_IDS } from '@/shared/config/testids'
 import type { Tag } from '@/shared/lib/prisma/generated/client'
 import { DropdownMenu } from '@/shared/ui/dropdown-menu'
 import { renderWithProviders } from '@/test/helpers/renderWithProviders'
@@ -49,7 +50,9 @@ describe('ChangeMarkTagsDropdownItem', () => {
       </DropdownMenu>,
     )
 
-    await userEvent.click(screen.getByText('items.changeTags'))
+    await userEvent.click(
+      screen.getByTestId(TEST_IDS.CLICKABLE.BUTTON.CHANGE_MARK_TAGS),
+    )
 
     expect(ChangeMarkTagsForm).toHaveBeenCalledWith(
       {

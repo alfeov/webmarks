@@ -6,8 +6,12 @@ import { Providers } from '@/app/[locale]/_providers/Providers'
 import { createMarkAction } from '@/features/create-mark/api/createMarkAction'
 import { useMetaStateContext } from '@/features/create-mark/model/MetaContext'
 import { MESSAGE_CODES } from '@/shared/api/types'
+import { TEST_IDS } from '@/shared/config/testids'
+import { expectFieldsToBeEnabled } from '@/test/helpers/expectFieldsToBeEnabled'
+import { expectFieldsToHaveValues } from '@/test/helpers/expectFieldsToHaveValues'
 import { renderWithProviders } from '@/test/helpers/renderWithProviders'
 
+import { CREATE_MARK_FORM } from '../lib/constants'
 import { CreateMarkForm } from './CreateMarkForm'
 
 vi.mock('../model/MetaContext')
@@ -32,52 +36,40 @@ describe('CreateMarkForm', () => {
   it('should render enabled elements by default with default values', () => {
     renderWithProviders(<CreateMarkForm />)
 
-    expect(screen.getByPlaceholderText(/webmarks.com/i)).toBeEnabled()
-    expect(screen.getByPlaceholderText('WebMark')).toBeEnabled()
-    expect(screen.getByPlaceholderText(/description/i)).toBeEnabled()
-    expect(screen.getByPlaceholderText(/logo.com/i)).toBeEnabled()
-    expect(screen.getByRole('button')).toBeEnabled()
+    expectFieldsToBeEnabled(Object.values(CREATE_MARK_FORM))
+    expect(screen.getByTestId(TEST_IDS.CLICKABLE.BUTTON.SUBMIT)).toBeEnabled()
 
-    expect(screen.getByPlaceholderText(/webmarks.com/i)).toHaveValue('')
-    expect(screen.getByPlaceholderText('WebMark')).toHaveValue('')
-    expect(screen.getByPlaceholderText(/description/i)).toHaveValue('')
-    expect(screen.getByPlaceholderText(/logo.com/i)).toHaveValue('')
+    expectFieldsToHaveValues({
+      [CREATE_MARK_FORM.URL]: '',
+      [CREATE_MARK_FORM.TITLE]: '',
+      [CREATE_MARK_FORM.DESCRIPTION]: '',
+      [CREATE_MARK_FORM.LOGO_URL]: '',
+    })
   })
   it('should set values from meta context when it received', () => {
     vi.mocked(useMetaStateContext).mockReturnValue(defaultData)
 
     renderWithProviders(<CreateMarkForm />)
 
-    expect(screen.getByPlaceholderText(/webmarks.com/i)).toHaveValue(
-      defaultData.url,
-    )
-    expect(screen.getByPlaceholderText('WebMark')).toHaveValue(
-      defaultData.title,
-    )
-    expect(screen.getByPlaceholderText(/description/i)).toHaveValue(
-      defaultData.description,
-    )
-    expect(screen.getByPlaceholderText(/logo.com/i)).toHaveValue(
-      defaultData.logoUrl,
-    )
-  })
-  it('should not set values from meta context when received undefined', () => {
-    renderWithProviders(<CreateMarkForm />)
-
-    expect(screen.getByPlaceholderText(/webmarks.com/i)).toHaveValue('')
-    expect(screen.getByPlaceholderText('WebMark')).toHaveValue('')
-    expect(screen.getByPlaceholderText(/description/i)).toHaveValue('')
-    expect(screen.getByPlaceholderText(/logo.com/i)).toHaveValue('')
+    expectFieldsToHaveValues({
+      [CREATE_MARK_FORM.URL]: defaultData.url,
+      [CREATE_MARK_FORM.TITLE]: defaultData.title,
+      [CREATE_MARK_FORM.DESCRIPTION]: defaultData.description,
+      [CREATE_MARK_FORM.LOGO_URL]: defaultData.logoUrl,
+    })
   })
   it('should keep user input and fill only untouched fields when meta arrives', async () => {
     const { rerender } = renderWithProviders(<CreateMarkForm />)
 
     const userInput = 'User Input'
     await userEvent.type(
-      screen.getByPlaceholderText(/webmarks.com/i),
+      screen.getByTestId(`${CREATE_MARK_FORM.URL}-input`),
       userInput,
     )
-    await userEvent.type(screen.getByPlaceholderText(/description/i), userInput)
+    await userEvent.type(
+      screen.getByTestId(`${CREATE_MARK_FORM.DESCRIPTION}-input`),
+      userInput,
+    )
 
     vi.mocked(useMetaStateContext).mockReturnValue(defaultData)
 
@@ -87,14 +79,12 @@ describe('CreateMarkForm', () => {
       </Providers>,
     )
 
-    expect(screen.getByPlaceholderText(/webmarks.com/i)).toHaveValue(userInput)
-    expect(screen.getByPlaceholderText('WebMark')).toHaveValue(
-      defaultData.title,
-    )
-    expect(screen.getByPlaceholderText(/description/i)).toHaveValue(userInput)
-    expect(screen.getByPlaceholderText(/logo.com/i)).toHaveValue(
-      defaultData.logoUrl,
-    )
+    expectFieldsToHaveValues({
+      [CREATE_MARK_FORM.URL]: userInput,
+      [CREATE_MARK_FORM.TITLE]: defaultData.title,
+      [CREATE_MARK_FORM.DESCRIPTION]: userInput,
+      [CREATE_MARK_FORM.LOGO_URL]: defaultData.logoUrl,
+    })
   })
   it('should call createMarkAction with tag id when it present in params', async () => {
     vi.mocked(useParams).mockReturnValue({ tagId })
@@ -106,7 +96,7 @@ describe('CreateMarkForm', () => {
       message: MESSAGE_CODES.MARK_CREATE_SUCCESS,
     })
 
-    const submit = screen.getByRole('button')
+    const submit = screen.getByTestId(TEST_IDS.CLICKABLE.BUTTON.SUBMIT)
     await userEvent.click(submit)
 
     expect(createMarkAction).toHaveBeenCalledWith(
@@ -130,7 +120,7 @@ describe('CreateMarkForm', () => {
       message: MESSAGE_CODES.VALIDATION_ERROR,
     })
 
-    const submit = screen.getByRole('button')
+    const submit = screen.getByTestId(TEST_IDS.CLICKABLE.BUTTON.SUBMIT)
     await userEvent.click(submit)
 
     expect(createMarkAction).toHaveBeenCalledWith(

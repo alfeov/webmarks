@@ -51,7 +51,8 @@ describe('CopyLinkDropdownItem', () => {
     await userEvent.click(button)
 
     expect(copy).toHaveBeenCalledWith(url)
-    expect(await screen.findAllByText('errorTitle')).toHaveLength(2) // toast and sr-only toast version
-    expect(await screen.findAllByText(message)).toHaveLength(2)
+    const toast = await screen.findByRole('alert')
+    expect(toast).toHaveTextContent('errorTitle')
+    expect(toast).toHaveTextContent(message)
   })
 })

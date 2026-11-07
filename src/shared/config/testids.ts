@@ -6,9 +6,11 @@ export const TEST_IDS = {
     MARK_ITEM_TAG_BADGE: 'mark-item-tag-badge',
     TAG_ITEM: 'tag-item',
     SKELETON_FALLBACK: 'skeleton-fallback',
+    SIDEBAR_CONTENT: 'sidebar-content',
   },
   CLICKABLE: {
     BUTTON: {
+      TOGGLE_SIDEBAR: 'clickable-button-toggle-sidebar',
       PROFILE: 'clickable-button-profile',
       SIGNIN: 'clickable-button-signin',
       SIGNUP: 'clickable-button-signup',

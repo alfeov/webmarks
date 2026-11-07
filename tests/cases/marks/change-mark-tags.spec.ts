@@ -1,9 +1,23 @@
+import type { Page } from '@playwright/test'
 import { expect, test } from 'tests/fixtures/auth'
-import { expectSubmitSuccess, submitForm } from 'tests/utils/formCases'
-import { waitForHydration } from 'tests/utils/hydration'
+import {
+  expectSubmitError,
+  expectSubmitSuccess,
+  submitForm,
+} from 'tests/utils/form'
+import { gotoAndWaitForHydration } from 'tests/utils/navigation'
 
 import { TEST_IDS } from '@/shared/config/testids'
+import { prisma } from '@/shared/lib/prisma'
 import { createRandomTag } from '@/test/factories/createRandomTag'
+
+const openChangeMarkTagsDialog = async (page: Page) => {
+  await test.step('open change mark tags dialog', async () => {
+    await page.getByTestId(TEST_IDS.CLICKABLE.BUTTON.MANAGE_MARK).click()
+    await page.getByTestId(TEST_IDS.CLICKABLE.BUTTON.CHANGE_MARK_TAGS).click()
+    await expect(page.getByTestId(TEST_IDS.STATIC.DIALOG)).toBeVisible()
+  })
+}
 
 test.describe('change-mark-tags', () => {
   test('should apply tags to mark and show in tag list checked tags if mark has tag', async ({
@@ -17,8 +31,7 @@ test.describe('change-mark-tags', () => {
       title: anotherTagTitle,
     })
 
-    await authorizedPage.goto('/')
-    await waitForHydration(authorizedPage)
+    await gotoAndWaitForHydration(authorizedPage)
 
     const markItemBadge = authorizedPage.getByTestId(
       TEST_IDS.STATIC.MARK_ITEM_TAG_BADGE,
@@ -28,17 +41,7 @@ test.describe('change-mark-tags', () => {
       await expect(markItemBadge).not.toHaveText(anotherTag.title)
     })
 
-    await test.step('open change mark tags dialog', async () => {
-      await authorizedPage
-        .getByTestId(TEST_IDS.CLICKABLE.BUTTON.MANAGE_MARK)
-        .click()
-      await authorizedPage
-        .getByTestId(TEST_IDS.CLICKABLE.BUTTON.CHANGE_MARK_TAGS)
-        .click()
-      await expect(
-        authorizedPage.getByTestId(TEST_IDS.STATIC.DIALOG),
-      ).toBeVisible()
-    })
+    await openChangeMarkTagsDialog(authorizedPage)
 
     const tagCheckbox = authorizedPage.getByTestId(
       TEST_IDS.CHANGEABLE.INPUT.MARK_TAG_ITEM(tag.id),
@@ -57,7 +60,7 @@ test.describe('change-mark-tags', () => {
       await anotherTagCheckbox.click()
     })
 
-    submitForm({
+    await submitForm({
       page: authorizedPage,
       fields: {},
     })
@@ -68,5 +71,28 @@ test.describe('change-mark-tags', () => {
       await expect(markItemBadge).not.toHaveText(tag.title)
       await expect(markItemBadge).toHaveText(anotherTag.title)
     })
+  })
+  test('should show corresponding error states', async ({
+    authorizedPage,
+    tag,
+    webmark: _webmark,
+  }) => {
+    await gotoAndWaitForHydration(authorizedPage)
+
+    // delete tag from db to emulate error
+    await prisma.tag.delete({
+      where: {
+        id: tag.id,
+      },
+    })
+
+    await openChangeMarkTagsDialog(authorizedPage)
+
+    await submitForm({
+      page: authorizedPage,
+      fields: {},
+    })
+
+    await expectSubmitError(authorizedPage, [])
   })
 })

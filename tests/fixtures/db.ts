@@ -1,5 +1,4 @@
 /* eslint-disable react-hooks/rules-of-hooks */
-import { test as base } from '@playwright/test'
 import bcrypt from 'bcrypt'
 
 import type { Tag, User, WebMark } from '@/shared/lib/prisma/generated/client'
@@ -8,6 +7,8 @@ import { clearDatabase } from '@/test/factories/clearDatabase'
 import { createRandomMark } from '@/test/factories/createRandomMark'
 import { createRandomTag } from '@/test/factories/createRandomTag'
 import { createRandomUser } from '@/test/factories/createRandomUser'
+
+import { test as base } from './base'
 
 type Fixtures = {
   cleanDB: void
@@ -53,4 +54,4 @@ export const test = base.extend<Fixtures>({
   },
 })
 
-export { expect } from '@playwright/test'
+export { expect } from './base'

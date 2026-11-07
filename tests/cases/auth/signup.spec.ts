@@ -3,15 +3,14 @@ import {
   expectSubmitError,
   expectSubmitSuccess,
   submitForm,
-} from 'tests/utils/formCases'
-import { waitForHydration } from 'tests/utils/hydration'
+} from 'tests/utils/form'
+import { gotoAndWaitForHydration } from 'tests/utils/navigation'
 
 import { SIGNUP_FORM } from '@/features/signup/lib/constants'
 
 test.describe('signup', () => {
   test.beforeEach(async ({ page }) => {
-    await page.goto('/')
-    await waitForHydration(page)
+    await gotoAndWaitForHydration(page)
 
     const dialog = page.getByRole('dialog')
     await dialog.getByRole('button', { name: /sign up/i }).click()

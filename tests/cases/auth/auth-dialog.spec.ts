@@ -1,5 +1,5 @@
 import { expect, test } from '@playwright/test'
-import { waitForHydration } from 'tests/utils/hydration'
+import { gotoAndWaitForHydration } from 'tests/utils/navigation'
 
 import { SIGNIN_FORM } from '@/features/signin/lib/constants'
 import { SIGNUP_FORM } from '@/features/signup/lib/constants'
@@ -7,8 +7,7 @@ import { SIGNUP_FORM } from '@/features/signup/lib/constants'
 test('should show signin dialog if user is not auth and ability to switch on signup', async ({
   page,
 }) => {
-  await page.goto('/')
-  await waitForHydration(page)
+  await gotoAndWaitForHydration(page)
 
   await expect(page.getByRole('dialog')).toBeVisible()
 

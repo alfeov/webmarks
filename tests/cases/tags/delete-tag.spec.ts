@@ -1,35 +1,44 @@
+import type { Page } from '@playwright/test'
 import { expect, test } from 'tests/fixtures/auth'
 import {
   expectSubmitError,
   expectSubmitSuccess,
   submitForm,
-} from 'tests/utils/formCases'
-import { waitForHydration } from 'tests/utils/hydration'
+} from 'tests/utils/form'
+import { gotoAndWaitForHydration } from 'tests/utils/navigation'
+import { openSidebar } from 'tests/utils/sidebar'
 
 import { TEST_IDS } from '@/shared/config/testids'
 import { prisma } from '@/shared/lib/prisma'
+
+const openDeleteTagDialog = async (page: Page) => {
+  await test.step('open delete tag dialog', async () => {
+    await page.getByTestId(TEST_IDS.CLICKABLE.BUTTON.MANAGE_TAG).click()
+    await page.getByTestId(TEST_IDS.CLICKABLE.BUTTON.DELETE_TAG).click()
+    await expect(page.getByTestId(TEST_IDS.STATIC.DIALOG)).toBeVisible()
+  })
+}
 
 test.describe('delete-tag', () => {
   test('should delete tag and remove it from interface', async ({
     authorizedPage,
     tag,
+    isMobile,
   }) => {
-    await authorizedPage.goto('/')
-    await waitForHydration(authorizedPage)
+    await gotoAndWaitForHydration(authorizedPage)
+
+    if (isMobile) {
+      await test.step('open sidebar on mobile', () =>
+        authorizedPage
+          .getByTestId(TEST_IDS.CLICKABLE.BUTTON.TOGGLE_SIDEBAR)
+          .click())
+    }
 
     await expect(
       authorizedPage.getByTestId(TEST_IDS.STATIC.TAG_ITEM),
     ).toHaveText(tag.title)
 
-    await authorizedPage
-      .getByTestId(TEST_IDS.CLICKABLE.BUTTON.MANAGE_TAG)
-      .click()
-    await authorizedPage
-      .getByTestId(TEST_IDS.CLICKABLE.BUTTON.DELETE_TAG)
-      .click()
-    await expect(
-      authorizedPage.getByTestId(TEST_IDS.STATIC.DIALOG),
-    ).toBeVisible()
+    await openDeleteTagDialog(authorizedPage)
 
     await submitForm({
       page: authorizedPage,
@@ -45,20 +54,14 @@ test.describe('delete-tag', () => {
 
   test('should redirect to home page if on tag page', async ({
     authorizedPage,
-    tag,
+    tag: _tag,
+    isMobile,
   }) => {
-    await authorizedPage.goto(`/${tag.id}`)
-    await waitForHydration(authorizedPage)
+    await gotoAndWaitForHydration(authorizedPage)
 
-    await authorizedPage
-      .getByTestId(TEST_IDS.CLICKABLE.BUTTON.MANAGE_TAG)
-      .click()
-    await authorizedPage
-      .getByTestId(TEST_IDS.CLICKABLE.BUTTON.DELETE_TAG)
-      .click()
-    await expect(
-      authorizedPage.getByTestId(TEST_IDS.STATIC.DIALOG),
-    ).toBeVisible()
+    await openSidebar(authorizedPage, isMobile)
+
+    await openDeleteTagDialog(authorizedPage)
 
     await submitForm({
       page: authorizedPage,
@@ -70,25 +73,15 @@ test.describe('delete-tag', () => {
 
   test('should remove tag from webmark item on delete', async ({
     authorizedPage,
-    tag,
-    webmark,
+    tag: _tag,
+    webmark: _webmark,
+    isMobile,
   }) => {
-    await authorizedPage.goto('/')
-    await waitForHydration(authorizedPage)
+    await gotoAndWaitForHydration(authorizedPage)
 
-    await expect(
-      authorizedPage.getByTestId(TEST_IDS.STATIC.MARK_ITEM_TAG_BADGE),
-    ).toHaveText(tag.title)
+    await openSidebar(authorizedPage, isMobile)
 
-    await authorizedPage
-      .getByTestId(TEST_IDS.CLICKABLE.BUTTON.MANAGE_TAG)
-      .click()
-    await authorizedPage
-      .getByTestId(TEST_IDS.CLICKABLE.BUTTON.DELETE_TAG)
-      .click()
-    await expect(
-      authorizedPage.getByTestId(TEST_IDS.STATIC.DIALOG),
-    ).toBeVisible()
+    await openDeleteTagDialog(authorizedPage)
 
     await submitForm({
       page: authorizedPage,
@@ -100,13 +93,12 @@ test.describe('delete-tag', () => {
     ).toBeHidden()
   })
 
-  test('should show corresponding error', async ({ authorizedPage, tag }) => {
-    await authorizedPage.goto('/')
-    await waitForHydration(authorizedPage)
-
-    await expect(
-      authorizedPage.getByTestId(TEST_IDS.STATIC.TAG_ITEM),
-    ).toHaveText(tag.title)
+  test('should show corresponding error states', async ({
+    authorizedPage,
+    tag,
+    isMobile,
+  }) => {
+    await gotoAndWaitForHydration(authorizedPage)
 
     // delete tag from db to emulate error
     await prisma.tag.delete({
@@ -115,15 +107,9 @@ test.describe('delete-tag', () => {
       },
     })
 
-    await authorizedPage
-      .getByTestId(TEST_IDS.CLICKABLE.BUTTON.MANAGE_TAG)
-      .click()
-    await authorizedPage
-      .getByTestId(TEST_IDS.CLICKABLE.BUTTON.DELETE_TAG)
-      .click()
-    await expect(
-      authorizedPage.getByTestId(TEST_IDS.STATIC.DIALOG),
-    ).toBeVisible()
+    await openSidebar(authorizedPage, isMobile)
+
+    await openDeleteTagDialog(authorizedPage)
 
     await submitForm({
       page: authorizedPage,

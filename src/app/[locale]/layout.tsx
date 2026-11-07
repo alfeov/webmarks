@@ -170,11 +170,22 @@ export default async function RootLayout({
               </Link>
               <div className='flex items-center gap-[20px]'>
                 <Suspense
-                  fallback={<Skeleton className='size-9 rounded-4xl' />}
+                  fallback={
+                    <Skeleton
+                      className='size-9 rounded-4xl'
+                      data-testid={TEST_IDS.STATIC.SKELETON_FALLBACK}
+                    />
+                  }
                 >
                   <ThemeToggleButton />
                 </Suspense>
-                <Suspense fallback={<ProfileSkeleton />}>
+                <Suspense
+                  fallback={
+                    <ProfileSkeleton
+                      data-testid={TEST_IDS.STATIC.SKELETON_FALLBACK}
+                    />
+                  }
+                >
                   <Profile />
                 </Suspense>
               </div>

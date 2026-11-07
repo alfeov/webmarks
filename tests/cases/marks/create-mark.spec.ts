@@ -1,10 +1,11 @@
+import type { Page } from '@playwright/test'
 import { expect, test } from 'tests/fixtures/auth'
 import {
   expectSubmitError,
   expectSubmitSuccess,
   submitForm,
-} from 'tests/utils/formCases'
-import { waitForHydration } from 'tests/utils/hydration'
+} from 'tests/utils/form'
+import { gotoAndWaitForHydration } from 'tests/utils/navigation'
 
 import {
   CREATE_MARK_FORM,
@@ -17,23 +18,24 @@ test.use({
   browserName: 'chromium',
 })
 
+const openCreateMarkDialog = async (page: Page) => {
+  await test.step('open create mark dialog', async () => {
+    await page.getByTestId(TEST_IDS.CLICKABLE.BUTTON.CREATE_MARK).click()
+    await expect(page.getByTestId(TEST_IDS.STATIC.DIALOG)).toBeVisible()
+  })
+}
+
 test.describe('create-mark', () => {
   test('should create mark and show it in interface', async ({
     authorizedPage,
   }) => {
-    await authorizedPage.goto('/')
-    await waitForHydration(authorizedPage)
+    await gotoAndWaitForHydration(authorizedPage)
 
     await authorizedPage.evaluate(() =>
       navigator.clipboard.writeText('https://vitest.dev/'),
     )
 
-    await authorizedPage
-      .getByTestId(TEST_IDS.CLICKABLE.BUTTON.CREATE_MARK)
-      .click()
-    await expect(
-      authorizedPage.getByTestId(TEST_IDS.STATIC.DIALOG),
-    ).toBeVisible()
+    await openCreateMarkDialog(authorizedPage)
 
     await test.step('should paste url from clipboard', async () => {
       await authorizedPage.getByTestId(TEST_IDS.CLICKABLE.BUTTON.PASTE).click()
@@ -87,15 +89,9 @@ test.describe('create-mark', () => {
   })
 
   test('should show corresponding error states', async ({ authorizedPage }) => {
-    await authorizedPage.goto('/')
-    await waitForHydration(authorizedPage)
+    await gotoAndWaitForHydration(authorizedPage)
 
-    await authorizedPage
-      .getByTestId(TEST_IDS.CLICKABLE.BUTTON.CREATE_MARK)
-      .click()
-    await expect(
-      authorizedPage.getByTestId(TEST_IDS.STATIC.DIALOG),
-    ).toBeVisible()
+    await openCreateMarkDialog(authorizedPage)
 
     await test.step('errors for load form', async () => {
       await submitForm({
@@ -125,15 +121,9 @@ test.describe('create-mark', () => {
     authorizedPage,
     tag,
   }) => {
-    await authorizedPage.goto(`/${tag.id}`)
-    await waitForHydration(authorizedPage)
+    await gotoAndWaitForHydration(authorizedPage, `/${tag.id}`)
 
-    await authorizedPage
-      .getByTestId(TEST_IDS.CLICKABLE.BUTTON.CREATE_MARK)
-      .click()
-    await expect(
-      authorizedPage.getByTestId(TEST_IDS.STATIC.DIALOG),
-    ).toBeVisible()
+    await openCreateMarkDialog(authorizedPage)
 
     const url = 'https://some-url.com'
     const title = 'webmark'

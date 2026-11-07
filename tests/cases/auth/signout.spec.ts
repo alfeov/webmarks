@@ -1,11 +1,10 @@
 import { expect, test } from 'tests/fixtures/auth'
-import { waitForHydration } from 'tests/utils/hydration'
+import { gotoAndWaitForHydration } from 'tests/utils/navigation'
 
 import { TEST_IDS } from '@/shared/config/testids'
 
 test('should logout from profile', async ({ authorizedPage }) => {
-  await authorizedPage.goto('/')
-  await waitForHydration(authorizedPage)
+  await gotoAndWaitForHydration(authorizedPage)
 
   await authorizedPage.getByTestId(TEST_IDS.CLICKABLE.BUTTON.PROFILE).click()
 

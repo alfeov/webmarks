@@ -1,3 +1,4 @@
+import { TEST_IDS } from '@/shared/config/testids'
 import {
   Sidebar,
   SidebarContent,
@@ -16,11 +17,13 @@ export function AppSidebar() {
         <SidebarHeader>
           <AllMarksSidebarGroup />
         </SidebarHeader>
-        <SidebarContent>
+        <SidebarContent data-testid={TEST_IDS.STATIC.SIDEBAR_CONTENT}>
           <TagsSidebarGroup />
         </SidebarContent>
       </Sidebar>
-      <SidebarTriggerInset />
+      <SidebarTriggerInset
+        data-testid={TEST_IDS.CLICKABLE.BUTTON.TOGGLE_SIDEBAR}
+      />
     </SidebarProvider>
   )
 }

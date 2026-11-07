@@ -3,23 +3,27 @@ import {
   expectSubmitError,
   expectSubmitSuccess,
   submitForm,
-} from 'tests/utils/formCases'
-import { waitForHydration } from 'tests/utils/hydration'
+} from 'tests/utils/form'
+import { gotoAndWaitForHydration } from 'tests/utils/navigation'
+import { openSidebar } from 'tests/utils/sidebar'
 
 import { CREATE_TAG_FORM } from '@/features/create-tag/lib/constants'
 import { TEST_IDS } from '@/shared/config/testids'
 
 test.describe('create-tag', () => {
-  test.beforeEach(async ({ authorizedPage }) => {
-    await authorizedPage.goto('/')
-    await waitForHydration(authorizedPage)
+  test.beforeEach(async ({ authorizedPage, isMobile }) => {
+    await gotoAndWaitForHydration(authorizedPage)
 
-    await authorizedPage
-      .getByTestId(TEST_IDS.CLICKABLE.BUTTON.CREATE_TAG)
-      .click()
-    await expect(
-      authorizedPage.getByTestId(TEST_IDS.STATIC.DIALOG),
-    ).toBeVisible()
+    await openSidebar(authorizedPage, isMobile)
+
+    await test.step('open create tag dialog', async () => {
+      await authorizedPage
+        .getByTestId(TEST_IDS.CLICKABLE.BUTTON.CREATE_TAG)
+        .click()
+      await expect(
+        authorizedPage.getByTestId(TEST_IDS.STATIC.DIALOG),
+      ).toBeVisible()
+    })
   })
 
   test('should create tag and show it in interface', async ({

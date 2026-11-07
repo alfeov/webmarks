@@ -13,7 +13,7 @@ import { updateUserMark } from './updateUserMark'
 
 export async function editMarkAction(
   markId: WebMark['id'],
-  prevState: EditMarkFormState,
+  _prevState: EditMarkFormState,
   formData: FormData,
 ) {
   // check auth

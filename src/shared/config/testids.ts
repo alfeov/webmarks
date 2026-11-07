@@ -1,12 +1,15 @@
 export const TEST_IDS = {
   STATIC: {
-    DIALOG: 'universal-dialog',
-    FETCHING_INDICATOR: 'fetching-indicator',
-    MARK_ITEM: 'mark-item',
-    MARK_ITEM_TAG_BADGE: 'mark-item-tag-badge',
-    TAG_ITEM: 'tag-item',
-    SKELETON_FALLBACK: 'skeleton-fallback',
-    SIDEBAR_CONTENT: 'sidebar-content',
+    DIALOG: 'static-universal-dialog',
+    FETCHING_INDICATOR: 'static-fetching-indicator',
+    MARK_ITEM: 'static-mark-item',
+    MARK_ITEM_TAG_BADGE: 'static-mark-item-tag-badge',
+    MARK_ITEM_TITLE: 'static-mark-item-title',
+    MARK_ITEM_DESCRIPTION: 'static-mark-item-description',
+    MARK_ITEM_URL: 'static-mark-item-url',
+    TAG_ITEM: 'static-tag-item',
+    SKELETON_FALLBACK: 'static-skeleton-fallback',
+    SIDEBAR_CONTENT: 'static-sidebar-content',
   },
   CLICKABLE: {
     BUTTON: {

@@ -27,12 +27,7 @@ test.describe('delete-tag', () => {
   }) => {
     await gotoAndWaitForHydration(authorizedPage)
 
-    if (isMobile) {
-      await test.step('open sidebar on mobile', () =>
-        authorizedPage
-          .getByTestId(TEST_IDS.CLICKABLE.BUTTON.TOGGLE_SIDEBAR)
-          .click())
-    }
+    await openSidebar(authorizedPage, isMobile)
 
     await expect(
       authorizedPage.getByTestId(TEST_IDS.STATIC.TAG_ITEM),
@@ -73,13 +68,17 @@ test.describe('delete-tag', () => {
 
   test('should remove tag from webmark item on delete', async ({
     authorizedPage,
-    tag: _tag,
+    tag: tag,
     webmark: _webmark,
     isMobile,
   }) => {
     await gotoAndWaitForHydration(authorizedPage)
 
     await openSidebar(authorizedPage, isMobile)
+
+    await expect(
+      authorizedPage.getByTestId(TEST_IDS.STATIC.MARK_ITEM_TAG_BADGE),
+    ).toHaveText(tag.title)
 
     await openDeleteTagDialog(authorizedPage)
 

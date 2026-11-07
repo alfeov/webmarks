@@ -36,14 +36,27 @@ export function MarkItem({
           </Avatar>
         </a>
         <div className='grow overflow-hidden'>
-          <CardTitle className='truncate'>{title}</CardTitle>
-          <CardDescription className='truncate'>
+          <CardTitle
+            className='truncate'
+            data-testid={TEST_IDS.STATIC.MARK_ITEM_TITLE}
+          >
+            {title}
+          </CardTitle>
+          <CardDescription
+            className='truncate'
+            data-testid={TEST_IDS.STATIC.MARK_ITEM_URL}
+          >
             {url.split('://')[1]}
           </CardDescription>
         </div>
         {children}
       </div>
-      <CardContent className='grow'>{description}</CardContent>
+      <CardContent
+        className='grow'
+        data-testid={TEST_IDS.STATIC.MARK_ITEM_DESCRIPTION}
+      >
+        {description}
+      </CardContent>
       <CardFooter className='justify-between gap-[20px] empty:hidden'>
         {Boolean(tags.length) ? (
           <div className='flex flex-wrap gap-[10px]'>

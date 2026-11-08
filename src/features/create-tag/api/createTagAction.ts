@@ -11,7 +11,7 @@ import type { CreateTagFormState } from '../model/types'
 import { createTag } from './createTag'
 
 export async function createTagAction(
-  prevState: CreateTagFormState,
+  _prevState: CreateTagFormState,
   formData: FormData,
 ) {
   // check auth

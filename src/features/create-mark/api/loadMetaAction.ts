@@ -9,7 +9,7 @@ import type { LoadMetaFormState } from '../model/types'
 import { getMetadata } from './getMetadata'
 
 export async function loadMetaAction(
-  prevState: LoadMetaFormState,
+  _prevState: LoadMetaFormState,
   formData: FormData,
 ): Promise<LoadMetaFormState> {
   // check auth

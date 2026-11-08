@@ -11,7 +11,7 @@ import type { EditAvatarFormState } from '../model/types'
 import { updateUserAvatar } from './updateUserAvatar'
 
 export async function editAvatarAction(
-  prevState: EditAvatarFormState,
+  _prevState: EditAvatarFormState,
   formData: FormData,
 ) {
   // check auth

@@ -2,6 +2,7 @@ import { test } from 'tests/fixtures/auth'
 import {
   expectSubmitError,
   expectSubmitSuccess,
+  fillInputs,
   submitForm,
 } from 'tests/utils/form'
 import { gotoAndWaitForHydration } from 'tests/utils/navigation'
@@ -15,11 +16,15 @@ test.describe('signin', () => {
   }) => {
     await gotoAndWaitForHydration(page)
 
-    await submitForm({
+    await fillInputs({
+      page,
       fields: {
         [SIGNIN_FORM.EMAIL]: user.email,
         [SIGNIN_FORM.PASSWORD]: user.password,
       },
+    })
+
+    await submitForm({
       page,
       submitButton: page.getByRole('button', { name: /login/i }),
     })
@@ -32,10 +37,12 @@ test.describe('signin', () => {
 
     await submitForm({
       page,
-      fields: {},
       submitButton: page.getByRole('button', { name: /login/i }),
     })
 
-    await expectSubmitError(page, Object.values(SIGNIN_FORM))
+    await expectSubmitError({
+      page,
+      inputs: Object.values(SIGNIN_FORM),
+    })
   })
 })

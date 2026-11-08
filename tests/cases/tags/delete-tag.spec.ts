@@ -37,7 +37,6 @@ test.describe('delete-tag', () => {
 
     await submitForm({
       page: authorizedPage,
-      fields: {},
     })
 
     await expectSubmitSuccess(authorizedPage)
@@ -51,6 +50,7 @@ test.describe('delete-tag', () => {
     authorizedPage,
     tag: _tag,
     isMobile,
+    baseURL,
   }) => {
     await gotoAndWaitForHydration(authorizedPage)
 
@@ -60,10 +60,9 @@ test.describe('delete-tag', () => {
 
     await submitForm({
       page: authorizedPage,
-      fields: {},
     })
 
-    await expect(authorizedPage).toHaveURL('/en')
+    await expect(authorizedPage).toHaveURL(baseURL ?? '/')
   })
 
   test('should remove tag from webmark item on delete', async ({
@@ -84,7 +83,6 @@ test.describe('delete-tag', () => {
 
     await submitForm({
       page: authorizedPage,
-      fields: {},
     })
 
     await expect(
@@ -112,9 +110,8 @@ test.describe('delete-tag', () => {
 
     await submitForm({
       page: authorizedPage,
-      fields: {},
     })
 
-    await expectSubmitError(authorizedPage, [])
+    await expectSubmitError({ page: authorizedPage })
   })
 })

@@ -2,13 +2,13 @@ import { screen } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 
 import { editMarkAction } from '@/features/manage-mark/api/editMarkAction'
+import { EDIT_MARK_FORM } from '@/features/manage-mark/lib/constants'
 import { MESSAGE_CODES } from '@/shared/api/types'
 import { TEST_IDS } from '@/shared/config/testids'
 import { expectFieldsToBeEnabled } from '@/test/helpers/expectFieldsToBeEnabled'
 import { expectFieldsToHaveValues } from '@/test/helpers/expectFieldsToHaveValues'
 import { renderWithProviders } from '@/test/helpers/renderWithProviders'
 
-import { EDIT_MARK_FORM } from '../lib/constants'
 import { EditMarkForm } from './EditMarkForm'
 
 vi.mock('../api/editMarkAction')

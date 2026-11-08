@@ -30,10 +30,8 @@ test.describe('delete-mark', () => {
 
     await openDeleteMarkTagsDialog(authorizedPage)
 
-    await submitForm({
-      page: authorizedPage,
-      fields: {},
-    })
+    await submitForm({ page: authorizedPage })
+
     await expectSubmitSuccess(authorizedPage)
 
     await test.step('mark item list to be empty', () => {
@@ -57,10 +55,10 @@ test.describe('delete-mark', () => {
 
     await openDeleteMarkTagsDialog(authorizedPage)
 
-    await submitForm({
+    await submitForm({ page: authorizedPage })
+
+    await expectSubmitError({
       page: authorizedPage,
-      fields: {},
     })
-    await expectSubmitError(authorizedPage, [])
   })
 })

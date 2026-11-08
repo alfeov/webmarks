@@ -3,6 +3,7 @@ import { expect, test } from 'tests/fixtures/auth'
 import {
   expectSubmitError,
   expectSubmitSuccess,
+  fillInputs,
   submitForm,
 } from 'tests/utils/form'
 import { gotoAndWaitForHydration } from 'tests/utils/navigation'
@@ -12,6 +13,8 @@ import {
   LOAD_META_FORM,
 } from '@/features/create-mark/lib/constants'
 import { TEST_IDS } from '@/shared/config/testids'
+
+import { NEW_MARK } from './(utils)/constants'
 
 test.use({
   permissions: ['clipboard-read', 'clipboard-write'],
@@ -82,10 +85,17 @@ test.describe('create-mark', () => {
 
     await expectSubmitSuccess(authorizedPage)
 
-    await test.step('show corresponding item on page', () =>
-      expect(authorizedPage.getByTestId(TEST_IDS.STATIC.MARK_ITEM)).toHaveText(
-        /vitest/i,
-      ))
+    await test.step('show corresponding item on page', async () => {
+      await expect(
+        authorizedPage.getByTestId(TEST_IDS.STATIC.MARK_ITEM_TITLE),
+      ).toHaveText('Vitest')
+      await expect(
+        authorizedPage.getByTestId(TEST_IDS.STATIC.MARK_ITEM_DESCRIPTION),
+      ).toHaveText('Next generation testing framework powered by Vite')
+      await expect(
+        authorizedPage.getByTestId(TEST_IDS.STATIC.MARK_ITEM_URL),
+      ).toHaveText('vitest.dev/')
+    })
   })
 
   test('should show corresponding error states', async ({ authorizedPage }) => {
@@ -96,24 +106,28 @@ test.describe('create-mark', () => {
     await test.step('errors for load form', async () => {
       await submitForm({
         page: authorizedPage,
-        fields: {},
         submitButton: authorizedPage.getByTestId(
           TEST_IDS.CLICKABLE.BUTTON.LOAD,
         ),
       })
 
-      await expectSubmitError(authorizedPage, Object.values(LOAD_META_FORM))
+      await expectSubmitError({
+        page: authorizedPage,
+        inputs: Object.values(LOAD_META_FORM),
+      })
     })
 
     await test.step('errors for create form', async () => {
-      await submitForm({
-        page: authorizedPage,
-        fields: {
-          [CREATE_MARK_FORM.LOGO_URL]: 'error',
-        },
-      })
+      await authorizedPage
+        .getByTestId(`${CREATE_MARK_FORM.LOGO_URL}-input`)
+        .fill('error')
 
-      await expectSubmitError(authorizedPage, Object.values(CREATE_MARK_FORM))
+      await submitForm({ page: authorizedPage })
+
+      await expectSubmitError({
+        page: authorizedPage,
+        inputs: Object.values(CREATE_MARK_FORM),
+      })
     })
   })
 
@@ -125,17 +139,17 @@ test.describe('create-mark', () => {
 
     await openCreateMarkDialog(authorizedPage)
 
-    const url = 'https://some-url.com'
-    const title = 'webmark'
-    const desc = 'some webmark description'
-    await submitForm({
+    await fillInputs({
       page: authorizedPage,
       fields: {
-        [CREATE_MARK_FORM.URL]: url,
-        [CREATE_MARK_FORM.TITLE]: title,
-        [CREATE_MARK_FORM.DESCRIPTION]: desc,
+        [CREATE_MARK_FORM.URL]: NEW_MARK.URL,
+        [CREATE_MARK_FORM.TITLE]: NEW_MARK.TITLE,
+        [CREATE_MARK_FORM.DESCRIPTION]: NEW_MARK.DESCRIPTION,
+        [CREATE_MARK_FORM.LOGO_URL]: NEW_MARK.LOGO_URL,
       },
     })
+
+    await submitForm({ page: authorizedPage })
 
     await expectSubmitSuccess(authorizedPage)
 

@@ -3,6 +3,7 @@ import { expect, test } from 'tests/fixtures/auth'
 import {
   expectSubmitError,
   expectSubmitSuccess,
+  fillInputs,
   submitForm,
 } from 'tests/utils/form'
 import { gotoAndWaitForHydration } from 'tests/utils/navigation'
@@ -10,6 +11,8 @@ import { openSidebar } from 'tests/utils/sidebar'
 
 import { EDIT_TAG_FORM } from '@/features/manage-tag/lib/constants'
 import { TEST_IDS } from '@/shared/config/testids'
+
+import { UPDATED_TAG } from './(utils)/constants'
 
 const openEditTagDialog = async (page: Page) => {
   await test.step('open edit tag dialog', async () => {
@@ -35,12 +38,15 @@ test.describe('edit-tag', () => {
 
     await openEditTagDialog(authorizedPage)
 
-    const newTitle = 'New Tag Title'
-    await submitForm({
+    await fillInputs({
       page: authorizedPage,
       fields: {
-        [EDIT_TAG_FORM.TITLE]: newTitle,
+        [EDIT_TAG_FORM.TITLE]: UPDATED_TAG.TITLE,
       },
+    })
+
+    await submitForm({
+      page: authorizedPage,
     })
 
     await expectSubmitSuccess(authorizedPage)
@@ -50,7 +56,7 @@ test.describe('edit-tag', () => {
     ).toHaveCount(1)
     await expect(
       authorizedPage.getByTestId(TEST_IDS.STATIC.TAG_ITEM),
-    ).toHaveText(newTitle)
+    ).toHaveText(UPDATED_TAG.TITLE)
   })
 
   test('should edit tag on webmark item tags', async ({
@@ -69,17 +75,20 @@ test.describe('edit-tag', () => {
 
     await openEditTagDialog(authorizedPage)
 
-    const newTitle = 'New Tag Title'
-    await submitForm({
+    await fillInputs({
       page: authorizedPage,
       fields: {
-        [EDIT_TAG_FORM.TITLE]: newTitle,
+        [EDIT_TAG_FORM.TITLE]: UPDATED_TAG.TITLE,
       },
+    })
+
+    await submitForm({
+      page: authorizedPage,
     })
 
     await expect(
       authorizedPage.getByTestId(TEST_IDS.STATIC.MARK_ITEM_TAG_BADGE),
-    ).toHaveText(newTitle)
+    ).toHaveText(UPDATED_TAG.TITLE)
   })
 
   test('should show corresponding error states', async ({
@@ -95,9 +104,11 @@ test.describe('edit-tag', () => {
 
     await submitForm({
       page: authorizedPage,
-      fields: {},
     })
 
-    await expectSubmitError(authorizedPage, Object.values(EDIT_TAG_FORM))
+    await expectSubmitError({
+      page: authorizedPage,
+      inputs: Object.values(EDIT_TAG_FORM),
+    })
   })
 })

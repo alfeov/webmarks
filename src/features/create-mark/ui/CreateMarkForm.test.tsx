@@ -4,6 +4,7 @@ import { useParams } from 'next/navigation'
 
 import { Providers } from '@/app/[locale]/_providers/Providers'
 import { createMarkAction } from '@/features/create-mark/api/createMarkAction'
+import { CREATE_MARK_FORM } from '@/features/create-mark/lib/constants'
 import { useMetaStateContext } from '@/features/create-mark/model/MetaContext'
 import { MESSAGE_CODES } from '@/shared/api/types'
 import { TEST_IDS } from '@/shared/config/testids'
@@ -11,7 +12,6 @@ import { expectFieldsToBeEnabled } from '@/test/helpers/expectFieldsToBeEnabled'
 import { expectFieldsToHaveValues } from '@/test/helpers/expectFieldsToHaveValues'
 import { renderWithProviders } from '@/test/helpers/renderWithProviders'
 
-import { CREATE_MARK_FORM } from '../lib/constants'
 import { CreateMarkForm } from './CreateMarkForm'
 
 vi.mock('../model/MetaContext')

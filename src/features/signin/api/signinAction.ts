@@ -9,7 +9,7 @@ import type { SigninFormState } from '../model/types'
 import { verifyUser } from './verifyUser'
 
 export async function signinAction(
-  prevState: SigninFormState,
+  _prevState: SigninFormState,
   formData: FormData,
 ) {
   // zod validation

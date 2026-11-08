@@ -3,6 +3,7 @@ import { expect, test } from 'tests/fixtures/auth'
 import {
   expectSubmitError,
   expectSubmitSuccess,
+  fillInputs,
   submitForm,
 } from 'tests/utils/form'
 import { gotoAndWaitForHydration } from 'tests/utils/navigation'
@@ -56,7 +57,7 @@ test.describe('edit-mark', () => {
       ).toHaveValue(webmark.logoUrl ?? '')
     })
 
-    await submitForm({
+    await fillInputs({
       page: authorizedPage,
       fields: {
         [EDIT_MARK_FORM.URL]: UPDATED_MARK.URL,
@@ -65,6 +66,8 @@ test.describe('edit-mark', () => {
         [EDIT_MARK_FORM.LOGO_URL]: UPDATED_MARK.LOGO_URL,
       },
     })
+
+    await submitForm({ page: authorizedPage })
 
     await expectSubmitSuccess(authorizedPage)
 
@@ -89,7 +92,7 @@ test.describe('edit-mark', () => {
 
     await openEditMarkDialog(authorizedPage)
 
-    await submitForm({
+    await fillInputs({
       page: authorizedPage,
       fields: {
         [EDIT_MARK_FORM.URL]: '',
@@ -99,6 +102,11 @@ test.describe('edit-mark', () => {
       },
     })
 
-    await expectSubmitError(authorizedPage, Object.values(EDIT_MARK_FORM))
+    await submitForm({ page: authorizedPage })
+
+    await expectSubmitError({
+      page: authorizedPage,
+      inputs: Object.values(EDIT_MARK_FORM),
+    })
   })
 })

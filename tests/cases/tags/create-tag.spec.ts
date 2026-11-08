@@ -2,6 +2,7 @@ import { expect, test } from 'tests/fixtures/auth'
 import {
   expectSubmitError,
   expectSubmitSuccess,
+  fillInputs,
   submitForm,
 } from 'tests/utils/form'
 import { gotoAndWaitForHydration } from 'tests/utils/navigation'
@@ -9,6 +10,8 @@ import { openSidebar } from 'tests/utils/sidebar'
 
 import { CREATE_TAG_FORM } from '@/features/create-tag/lib/constants'
 import { TEST_IDS } from '@/shared/config/testids'
+
+import { NEW_TAG } from './(utils)/constants'
 
 test.describe('create-tag', () => {
   test.beforeEach(async ({ authorizedPage, isMobile }) => {
@@ -29,12 +32,15 @@ test.describe('create-tag', () => {
   test('should create tag and show it in interface', async ({
     authorizedPage,
   }) => {
-    const title = 'Tag Title'
-    await submitForm({
+    await fillInputs({
       page: authorizedPage,
       fields: {
-        [CREATE_TAG_FORM.TITLE]: title,
+        [CREATE_TAG_FORM.TITLE]: NEW_TAG.TITLE,
       },
+    })
+
+    await submitForm({
+      page: authorizedPage,
     })
 
     await expectSubmitSuccess(authorizedPage)
@@ -44,15 +50,17 @@ test.describe('create-tag', () => {
     ).toHaveCount(1)
     await expect(
       authorizedPage.getByTestId(TEST_IDS.STATIC.TAG_ITEM),
-    ).toHaveText(title)
+    ).toHaveText(NEW_TAG.TITLE)
   })
 
   test('should show corresponding error states', async ({ authorizedPage }) => {
     await submitForm({
       page: authorizedPage,
-      fields: {},
     })
 
-    await expectSubmitError(authorizedPage, Object.values(CREATE_TAG_FORM))
+    await expectSubmitError({
+      page: authorizedPage,
+      inputs: Object.values(CREATE_TAG_FORM),
+    })
   })
 })

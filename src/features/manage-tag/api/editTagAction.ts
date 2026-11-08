@@ -13,7 +13,7 @@ import { updateUserTag } from './updateUserTag'
 
 export async function editTagAction(
   id: Tag['id'],
-  prevState: EditTagFormState,
+  _prevState: EditTagFormState,
   formData: FormData,
 ) {
   // check auth

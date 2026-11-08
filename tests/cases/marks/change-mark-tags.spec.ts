@@ -62,7 +62,6 @@ test.describe('change-mark-tags', () => {
 
     await submitForm({
       page: authorizedPage,
-      fields: {},
     })
 
     await expectSubmitSuccess(authorizedPage)
@@ -90,9 +89,10 @@ test.describe('change-mark-tags', () => {
 
     await submitForm({
       page: authorizedPage,
-      fields: {},
     })
 
-    await expectSubmitError(authorizedPage, [])
+    await expectSubmitError({
+      page: authorizedPage,
+    })
   })
 })

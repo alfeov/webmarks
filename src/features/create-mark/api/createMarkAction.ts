@@ -13,7 +13,7 @@ import { createMark } from './createMark'
 
 export async function createMarkAction(
   defaultTagId: Tag['id'] | undefined,
-  prevState: CreateMarkFormState,
+  _prevState: CreateMarkFormState,
   data: CreateMark,
 ) {
   // check auth

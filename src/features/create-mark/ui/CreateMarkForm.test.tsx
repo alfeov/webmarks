@@ -1,6 +1,7 @@
 import { screen } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import { useParams } from 'next/navigation'
+import { useActionState } from 'react'
 
 import { Providers } from '@/app/[locale]/_providers/Providers'
 import { createMarkAction } from '@/features/create-mark/api/createMarkAction'
@@ -8,8 +9,9 @@ import { CREATE_MARK_FORM } from '@/features/create-mark/lib/constants'
 import { useMetaStateContext } from '@/features/create-mark/model/MetaContext'
 import { MESSAGE_CODES } from '@/shared/api/types'
 import { TEST_IDS } from '@/shared/config/testids'
-import { expectFieldsToBeEnabled } from '@/test/helpers/expectFieldsToBeEnabled'
-import { expectFieldsToHaveValues } from '@/test/helpers/expectFieldsToHaveValues'
+import { expectInputsToBeDisabled } from '@/test/helpers/expectInputsToBeDisabled'
+import { expectInputsToBeEnabled } from '@/test/helpers/expectInputsToBeEnabled'
+import { expectInputsToHaveValues } from '@/test/helpers/expectInputsToHaveValues'
 import { renderWithProviders } from '@/test/helpers/renderWithProviders'
 
 import { CreateMarkForm } from './CreateMarkForm'
@@ -17,6 +19,7 @@ import { CreateMarkForm } from './CreateMarkForm'
 vi.mock('../model/MetaContext')
 vi.mock('../api/createMarkAction')
 vi.mock('next/navigation')
+vi.mock('react', { spy: true })
 
 const tagId = '1'
 
@@ -36,22 +39,31 @@ describe('CreateMarkForm', () => {
   it('should render enabled elements by default with default values', () => {
     renderWithProviders(<CreateMarkForm />)
 
-    expectFieldsToBeEnabled(Object.values(CREATE_MARK_FORM))
+    expectInputsToBeEnabled(Object.values(CREATE_MARK_FORM))
     expect(screen.getByTestId(TEST_IDS.CLICKABLE.BUTTON.SUBMIT)).toBeEnabled()
 
-    expectFieldsToHaveValues({
+    expectInputsToHaveValues({
       [CREATE_MARK_FORM.URL]: '',
       [CREATE_MARK_FORM.TITLE]: '',
       [CREATE_MARK_FORM.DESCRIPTION]: '',
       [CREATE_MARK_FORM.LOGO_URL]: '',
     })
   })
+  it('should disable elements on request', () => {
+    vi.mocked(useActionState).mockReturnValue([{}, vi.fn(), true])
+    renderWithProviders(<CreateMarkForm />)
+
+    expectInputsToBeDisabled(Object.values(CREATE_MARK_FORM))
+    expect(screen.getByTestId(TEST_IDS.CLICKABLE.BUTTON.SUBMIT)).toBeDisabled()
+
+    vi.mocked(useActionState).mockRestore()
+  })
   it('should set values from meta context when it received', () => {
     vi.mocked(useMetaStateContext).mockReturnValue(defaultData)
 
     renderWithProviders(<CreateMarkForm />)
 
-    expectFieldsToHaveValues({
+    expectInputsToHaveValues({
       [CREATE_MARK_FORM.URL]: defaultData.url,
       [CREATE_MARK_FORM.TITLE]: defaultData.title,
       [CREATE_MARK_FORM.DESCRIPTION]: defaultData.description,
@@ -79,7 +91,7 @@ describe('CreateMarkForm', () => {
       </Providers>,
     )
 
-    expectFieldsToHaveValues({
+    expectInputsToHaveValues({
       [CREATE_MARK_FORM.URL]: userInput,
       [CREATE_MARK_FORM.TITLE]: defaultData.title,
       [CREATE_MARK_FORM.DESCRIPTION]: userInput,

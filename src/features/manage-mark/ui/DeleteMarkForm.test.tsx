@@ -1,5 +1,6 @@
 import { screen } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
+import { useActionState } from 'react'
 
 import { deleteMarkAction } from '@/features/manage-mark/api/deleteMarkAction'
 import { MESSAGE_CODES } from '@/shared/api/types'
@@ -9,6 +10,7 @@ import { renderWithProviders } from '@/test/helpers/renderWithProviders'
 import { DeleteMarkForm } from './DeleteMarkForm'
 
 vi.mock('../api/deleteMarkAction')
+vi.mock('react', { spy: true })
 
 const defaultMarkId = '1'
 
@@ -17,6 +19,12 @@ describe('DeleteMarkForm', () => {
     renderWithProviders(<DeleteMarkForm markId={defaultMarkId} />)
 
     expect(screen.getByTestId(TEST_IDS.CLICKABLE.BUTTON.SUBMIT)).toBeEnabled()
+  })
+  it('should disable elements on request', () => {
+    vi.mocked(useActionState).mockReturnValueOnce([{}, vi.fn(), true])
+    renderWithProviders(<DeleteMarkForm markId={defaultMarkId} />)
+
+    expect(screen.getByTestId(TEST_IDS.CLICKABLE.BUTTON.SUBMIT)).toBeDisabled()
   })
   it('should call deleteMarkAction with markId', async () => {
     renderWithProviders(<DeleteMarkForm markId={defaultMarkId} />)

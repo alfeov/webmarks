@@ -1,23 +1,33 @@
 import { screen } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
+import { useActionState } from 'react'
 
 import { createTagAction } from '@/features/create-tag/api/createTagAction'
 import { CREATE_TAG_FORM } from '@/features/create-tag/lib/constants'
 import { MESSAGE_CODES } from '@/shared/api/types'
 import { TEST_IDS } from '@/shared/config/testids'
-import { expectFieldsToBeEnabled } from '@/test/helpers/expectFieldsToBeEnabled'
+import { expectInputsToBeDisabled } from '@/test/helpers/expectInputsToBeDisabled'
+import { expectInputsToBeEnabled } from '@/test/helpers/expectInputsToBeEnabled'
 import { renderWithProviders } from '@/test/helpers/renderWithProviders'
 
 import { CreateTagForm } from './CreateTagForm'
 
 vi.mock('../api/createTagAction')
+vi.mock('react', { spy: true })
 
 describe('CreateTagForm', () => {
   it('should render enabled elements by default with default values', () => {
     renderWithProviders(<CreateTagForm />)
 
-    expectFieldsToBeEnabled(Object.values(CREATE_TAG_FORM))
+    expectInputsToBeEnabled(Object.values(CREATE_TAG_FORM))
     expect(screen.getByTestId(TEST_IDS.CLICKABLE.BUTTON.SUBMIT)).toBeEnabled()
+  })
+  it('should disable elements on request', () => {
+    vi.mocked(useActionState).mockReturnValueOnce([{}, vi.fn(), true])
+    renderWithProviders(<CreateTagForm />)
+
+    expectInputsToBeDisabled(Object.values(CREATE_TAG_FORM))
+    expect(screen.getByTestId(TEST_IDS.CLICKABLE.BUTTON.SUBMIT)).toBeDisabled()
   })
   it('should show validation error if received error', async () => {
     renderWithProviders(<CreateTagForm />)

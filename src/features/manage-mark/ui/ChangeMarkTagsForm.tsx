@@ -53,6 +53,7 @@ export function ChangeMarkTagsForm({
                 key={`${tag.id}-${tag.updatedAt}`}
                 {...tag}
                 defaultChecked={hasTag}
+                disabled={isPending}
               />
             )
           })

@@ -1,10 +1,13 @@
 import { screen } from '@testing-library/react'
+import { useActionState } from 'react'
 
 import { TEST_IDS } from '@/shared/config/testids'
 import type { Tag } from '@/shared/lib/prisma/generated/client'
 import { renderWithProviders } from '@/test/helpers/renderWithProviders'
 
 import { ChangeMarkTagsForm } from './ChangeMarkTagsForm'
+
+vi.mock('react', { spy: true })
 
 const defaultMarkId = '1'
 const defaultMarkTags: Tag[] = [
@@ -43,18 +46,27 @@ describe('ChangeMarkTagsForm', () => {
       />,
     )
 
-    expect(
-      screen.getByTestId(
-        TEST_IDS.CHANGEABLE.INPUT.MARK_TAG_ITEM(defaultTags[0].id),
-      ),
-    ).toBeEnabled()
-    expect(
-      screen.getByTestId(
-        TEST_IDS.CHANGEABLE.INPUT.MARK_TAG_ITEM(defaultTags[1].id),
-      ),
-    ).toBeEnabled()
+    const checkboxes = screen.getAllByRole('checkbox')
+    for (const checkbox of checkboxes) {
+      expect(checkbox).not.toHaveAttribute('aria-disabled', 'true')
+    }
+    expect(screen.getByTestId(TEST_IDS.CLICKABLE.BUTTON.SUBMIT)).toBeEnabled()
+  })
+  it('should disable elements on request', () => {
+    vi.mocked(useActionState).mockReturnValueOnce([{}, vi.fn(), true])
+    renderWithProviders(
+      <ChangeMarkTagsForm
+        markId={defaultMarkId}
+        markTags={defaultMarkTags}
+        tags={defaultTags}
+      />,
+    )
 
-    expect(screen.getByRole('button')).toBeEnabled()
+    const checkboxes = screen.getAllByRole('checkbox')
+    for (const checkbox of checkboxes) {
+      expect(checkbox).toHaveAttribute('aria-disabled', 'true')
+    }
+    expect(screen.getByTestId(TEST_IDS.CLICKABLE.BUTTON.SUBMIT)).toBeDisabled()
   })
   it('should render checked checkbox if mark has it tag', () => {
     renderWithProviders(

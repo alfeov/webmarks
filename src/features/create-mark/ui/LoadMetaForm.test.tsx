@@ -1,5 +1,6 @@
 import { screen, waitFor } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
+import { useActionState } from 'react'
 
 import { loadMetaAction } from '@/features/create-mark/api/loadMetaAction'
 import { LOAD_META_FORM } from '@/features/create-mark/lib/constants'
@@ -11,8 +12,9 @@ import { MESSAGE_CODES } from '@/shared/api/types'
 import { TEST_IDS } from '@/shared/config/testids'
 import { paste } from '@/shared/lib/utils/paste'
 import { showToast } from '@/shared/lib/utils/showToast'
-import { expectFieldsToBeEnabled } from '@/test/helpers/expectFieldsToBeEnabled'
-import { expectFieldsToHaveValues } from '@/test/helpers/expectFieldsToHaveValues'
+import { expectInputsToBeDisabled } from '@/test/helpers/expectInputsToBeDisabled'
+import { expectInputsToBeEnabled } from '@/test/helpers/expectInputsToBeEnabled'
+import { expectInputsToHaveValues } from '@/test/helpers/expectInputsToHaveValues'
 import { renderWithProviders } from '@/test/helpers/renderWithProviders'
 
 import { LoadMetaForm } from './LoadMetaForm'
@@ -21,6 +23,7 @@ vi.mock('@/shared/lib/utils/paste')
 vi.mock('@/shared/lib/utils/showToast')
 vi.mock('@/features/create-mark/api/loadMetaAction')
 vi.mock('../model/MetaContext', { spy: true })
+vi.mock('react', { spy: true })
 
 describe('LoadMetaForm', () => {
   it('should render enabled elements by default with default values', () => {
@@ -30,13 +33,25 @@ describe('LoadMetaForm', () => {
       </MetaProvider>,
     )
 
-    expectFieldsToBeEnabled(Object.values(LOAD_META_FORM))
-    expectFieldsToHaveValues({
+    expectInputsToBeEnabled(Object.values(LOAD_META_FORM))
+    expectInputsToHaveValues({
       [LOAD_META_FORM.URL]: '',
     })
 
     expect(screen.getByTestId(TEST_IDS.CLICKABLE.BUTTON.PASTE)).toBeEnabled()
     expect(screen.getByTestId(TEST_IDS.CLICKABLE.BUTTON.LOAD)).toBeEnabled()
+  })
+  it('should disable elements on request', () => {
+    vi.mocked(useActionState).mockReturnValueOnce([{}, vi.fn(), true])
+    renderWithProviders(
+      <MetaProvider>
+        <LoadMetaForm />
+      </MetaProvider>,
+    )
+
+    expectInputsToBeDisabled(Object.values(LOAD_META_FORM))
+    expect(screen.getByTestId(TEST_IDS.CLICKABLE.BUTTON.PASTE)).toBeDisabled()
+    expect(screen.getByTestId(TEST_IDS.CLICKABLE.BUTTON.LOAD)).toBeDisabled()
   })
   it('should paste url to input from clipboard on paste button click', async () => {
     renderWithProviders(
@@ -51,7 +66,7 @@ describe('LoadMetaForm', () => {
     const pasteBtn = screen.getByTestId(TEST_IDS.CLICKABLE.BUTTON.PASTE)
     await userEvent.click(pasteBtn)
 
-    expectFieldsToHaveValues({
+    expectInputsToHaveValues({
       [LOAD_META_FORM.URL]: clipText,
     })
   })
@@ -67,7 +82,7 @@ describe('LoadMetaForm', () => {
     const pasteBtn = screen.getByTestId(TEST_IDS.CLICKABLE.BUTTON.PASTE)
     await userEvent.click(pasteBtn)
 
-    expectFieldsToHaveValues({
+    expectInputsToHaveValues({
       [LOAD_META_FORM.URL]: '',
     })
     expect(showToast).toHaveBeenCalledWith('errorTitle', 'PASTE_ERROR', false)
@@ -83,7 +98,7 @@ describe('LoadMetaForm', () => {
     const input = screen.getByPlaceholderText(/url/i)
     await userEvent.type(input, url)
 
-    expectFieldsToHaveValues({
+    expectInputsToHaveValues({
       [LOAD_META_FORM.URL]: url,
     })
   })

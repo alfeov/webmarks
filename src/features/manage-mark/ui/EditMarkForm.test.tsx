@@ -1,17 +1,20 @@
 import { screen } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
+import { useActionState } from 'react'
 
 import { editMarkAction } from '@/features/manage-mark/api/editMarkAction'
 import { EDIT_MARK_FORM } from '@/features/manage-mark/lib/constants'
 import { MESSAGE_CODES } from '@/shared/api/types'
 import { TEST_IDS } from '@/shared/config/testids'
-import { expectFieldsToBeEnabled } from '@/test/helpers/expectFieldsToBeEnabled'
-import { expectFieldsToHaveValues } from '@/test/helpers/expectFieldsToHaveValues'
+import { expectInputsToBeDisabled } from '@/test/helpers/expectInputsToBeDisabled'
+import { expectInputsToBeEnabled } from '@/test/helpers/expectInputsToBeEnabled'
+import { expectInputsToHaveValues } from '@/test/helpers/expectInputsToHaveValues'
 import { renderWithProviders } from '@/test/helpers/renderWithProviders'
 
 import { EditMarkForm } from './EditMarkForm'
 
 vi.mock('../api/editMarkAction')
+vi.mock('react', { spy: true })
 
 const defaultData = {
   id: '1',
@@ -38,15 +41,22 @@ describe('EditMarkForm', () => {
   it('should render enabled elements by default with default values', () => {
     renderWithProviders(<EditMarkForm {...defaultData} />)
 
-    expectFieldsToBeEnabled(Object.values(EDIT_MARK_FORM))
+    expectInputsToBeEnabled(Object.values(EDIT_MARK_FORM))
     expect(screen.getByTestId(TEST_IDS.CLICKABLE.BUTTON.SUBMIT)).toBeEnabled()
 
-    expectFieldsToHaveValues({
+    expectInputsToHaveValues({
       [EDIT_MARK_FORM.URL]: defaultData.url,
       [EDIT_MARK_FORM.TITLE]: defaultData.title,
       [EDIT_MARK_FORM.DESCRIPTION]: defaultData.description,
       [EDIT_MARK_FORM.LOGO_URL]: defaultData.logoUrl,
     })
+  })
+  it('should disable elements on request', () => {
+    vi.mocked(useActionState).mockReturnValueOnce([{}, vi.fn(), true])
+    renderWithProviders(<EditMarkForm {...defaultData} />)
+
+    expectInputsToBeDisabled(Object.values(EDIT_MARK_FORM))
+    expect(screen.getByTestId(TEST_IDS.CLICKABLE.BUTTON.SUBMIT)).toBeDisabled()
   })
   it('should call Action with mark id received from props', async () => {
     renderWithProviders(<EditMarkForm {...defaultData} />)

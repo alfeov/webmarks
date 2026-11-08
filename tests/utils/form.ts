@@ -58,7 +58,7 @@ export const expectSubmitError = async ({
     expect(page.getByText(/something went wrong!/i).first()).toBeVisible())
 
   for (const input of inputs) {
-    await test.step(`show error for ${input} field`, () =>
+    await test.step(`show error for ${input} input`, () =>
       expect(page.getByTestId(`${input}-error`)).toBeVisible())
   }
 }

@@ -10,12 +10,14 @@ import { Field, FieldLabel } from '@/shared/ui/field'
 
 type MarkTagItemProps = Pick<Tag, 'id' | 'title'> & {
   defaultChecked?: boolean
+  disabled: boolean
 }
 
 export const MarkTagItem = memo(function Memoized({
   id,
   title,
   defaultChecked = false,
+  disabled,
 }: MarkTagItemProps) {
   const [checked, setChecked] = useState(defaultChecked)
 
@@ -26,13 +28,18 @@ export const MarkTagItem = memo(function Memoized({
       <Field
         orientation='horizontal'
         aria-label={t('ariaLabel')}
-        onClick={() => setChecked(!checked)}
+        onClick={() => {
+          if (!disabled) {
+            setChecked(!checked)
+          }
+        }}
       >
         <Checkbox
           name={`tagId-${id}`}
           value={id}
           checked={checked}
           data-testid={TEST_IDS.CHANGEABLE.INPUT.MARK_TAG_ITEM(id)}
+          disabled={disabled}
         />
         <FieldLabel>{title}</FieldLabel>
       </Field>

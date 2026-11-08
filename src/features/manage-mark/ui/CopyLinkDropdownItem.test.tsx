@@ -31,8 +31,8 @@ describe('CopyLinkDropdownItem', () => {
     await userEvent.click(button)
 
     expect(copy).toHaveBeenCalledWith(url)
-    expect(await screen.findByText('successTitle')).toBeInTheDocument()
-    expect(await screen.findByText(message)).toBeInTheDocument()
+    expect(await screen.findByText('toast.successTitle')).toBeInTheDocument()
+    expect(await screen.findByText(`codes.${message}`)).toBeInTheDocument()
   })
   it('should show error toast on copy error', async () => {
     renderWithProviders(
@@ -52,7 +52,7 @@ describe('CopyLinkDropdownItem', () => {
 
     expect(copy).toHaveBeenCalledWith(url)
     const toast = await screen.findByRole('alert')
-    expect(toast).toHaveTextContent('errorTitle')
-    expect(toast).toHaveTextContent(message)
+    expect(toast).toHaveTextContent('toast.errorTitle')
+    expect(toast).toHaveTextContent(`codes.${message}`)
   })
 })

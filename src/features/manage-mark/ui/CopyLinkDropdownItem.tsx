@@ -8,13 +8,12 @@ import { showToast } from '@/shared/lib/utils/showToast'
 import { DropdownMenuItem } from '@/shared/ui/dropdown-menu'
 
 export function CopyLinkDropdownItem({ url }: { url: string }) {
-  const tToast = useTranslations('toast')
-  const tMarkDropdownMenu = useTranslations('MarkDropdownMenu')
+  const t = useTranslations()
 
   const handleClick = async () => {
     const { isSuccess, message } = await copy(url)
-    const title = isSuccess ? tToast('successTitle') : tToast('errorTitle')
-    showToast(title, message, isSuccess)
+    const title = isSuccess ? t('toast.successTitle') : t('toast.errorTitle')
+    showToast(title, t(`codes.${message}`), isSuccess)
   }
 
   return (
@@ -22,7 +21,7 @@ export function CopyLinkDropdownItem({ url }: { url: string }) {
       onClick={handleClick}
       data-testid={TEST_IDS.CLICKABLE.BUTTON.COPY_MARK_LINK}
     >
-      {tMarkDropdownMenu('items.copy')}
+      {t('MarkDropdownMenu.items.copy')}
     </DropdownMenuItem>
   )
 }

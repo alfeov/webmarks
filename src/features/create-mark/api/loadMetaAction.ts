@@ -1,6 +1,6 @@
 'use server'
 
-import { MESSAGE_CODES } from '@/shared/api/types'
+import { MESSAGE_CODES } from '@/shared/api/constants'
 import { verifySession } from '@/shared/lib/session'
 import { validateFormData } from '@/shared/lib/utils/validateFormData'
 

@@ -2,7 +2,7 @@ import { screen } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 
 import { editTagAction } from '@/features/manage-tag/api/editTagAction'
-import { MESSAGE_CODES } from '@/shared/api/types'
+import { MESSAGE_CODES } from '@/shared/api/constants'
 import { renderWithProviders } from '@/test/helpers/renderWithProviders'
 
 import { EditTagForm } from './EditTagForm'

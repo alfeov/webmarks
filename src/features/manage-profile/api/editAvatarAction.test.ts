@@ -1,7 +1,7 @@
 import { updateTag } from 'next/cache'
 
 import { EDIT_AVATAR_FORM } from '@/features/manage-profile/lib/constants'
-import { MESSAGE_CODES } from '@/shared/api/types'
+import { MESSAGE_CODES } from '@/shared/api/constants'
 import { verifySession } from '@/shared/lib/session'
 
 import { editAvatarAction } from './editAvatarAction'

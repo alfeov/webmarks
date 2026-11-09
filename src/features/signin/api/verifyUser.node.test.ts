@@ -1,6 +1,6 @@
 import bcrypt from 'bcrypt'
 
-import { MESSAGE_CODES } from '@/shared/api/types'
+import { MESSAGE_CODES } from '@/shared/api/constants'
 import { saltOrRounds } from '@/shared/lib/session/constants'
 import { createRandomUser } from '@/test/factories/createRandomUser'
 

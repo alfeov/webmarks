@@ -1,5 +1,5 @@
 import { LOAD_META_FORM } from '@/features/create-mark/lib/constants'
-import { MESSAGE_CODES } from '@/shared/api/types'
+import { MESSAGE_CODES } from '@/shared/api/constants'
 import { verifySession } from '@/shared/lib/session'
 
 import { getMetadata } from './getMetadata'

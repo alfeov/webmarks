@@ -4,7 +4,7 @@ import { useActionState } from 'react'
 
 import { createTagAction } from '@/features/create-tag/api/createTagAction'
 import { CREATE_TAG_FORM } from '@/features/create-tag/lib/constants'
-import { MESSAGE_CODES } from '@/shared/api/types'
+import { MESSAGE_CODES } from '@/shared/api/constants'
 import { TEST_IDS } from '@/shared/config/testids'
 import { expectInputsToBeDisabled } from '@/test/helpers/expectInputsToBeDisabled'
 import { expectInputsToBeEnabled } from '@/test/helpers/expectInputsToBeEnabled'

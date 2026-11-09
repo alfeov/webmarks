@@ -1,6 +1,6 @@
 import { updateTag } from 'next/cache'
 
-import { MESSAGE_CODES } from '@/shared/api/types'
+import { MESSAGE_CODES } from '@/shared/api/constants'
 import { verifySession } from '@/shared/lib/session'
 
 import { deleteMarkAction } from './deleteMarkAction'

@@ -1,4 +1,4 @@
-import { MESSAGE_CODES, type MessageCode } from '@/shared/api/types'
+import { MESSAGE_CODES, type MessageCode } from '@/shared/api/constants'
 import { showToast } from '@/shared/lib/utils/showToast'
 import { renderHookWithProviders } from '@/test/helpers/renderHookWithProviders'
 

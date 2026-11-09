@@ -3,7 +3,7 @@
 import { updateTag } from 'next/cache'
 import type { Locale } from 'next-intl'
 
-import { MESSAGE_CODES } from '@/shared/api/types'
+import { MESSAGE_CODES } from '@/shared/api/constants'
 import { redirect } from '@/shared/i18n/navigation'
 import type { Tag } from '@/shared/lib/prisma/generated/client'
 import { verifySession } from '@/shared/lib/session'

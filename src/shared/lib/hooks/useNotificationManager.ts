@@ -1,7 +1,7 @@
 import { useTranslations } from 'next-intl'
 import { useEffect } from 'react'
 
-import type { MessageCode } from '@/shared/api/types'
+import type { MessageCode } from '@/shared/api/constants'
 import { showToast } from '@/shared/lib/utils/showToast'
 
 export function useNotificationManager(

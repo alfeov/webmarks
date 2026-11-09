@@ -1,6 +1,6 @@
 import 'server-only'
 
-import { MESSAGE_CODES } from '@/shared/api/types'
+import { MESSAGE_CODES } from '@/shared/api/constants'
 import { prisma } from '@/shared/lib/prisma'
 import { Prisma, type WebMark } from '@/shared/lib/prisma/generated/client'
 

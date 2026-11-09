@@ -1,7 +1,7 @@
 import { PrismaClientKnownRequestError } from '@prisma/client/runtime/client'
 import bcrypt from 'bcrypt'
 
-import { MESSAGE_CODES } from '@/shared/api/types'
+import { MESSAGE_CODES } from '@/shared/api/constants'
 import { prisma } from '@/shared/lib/prisma'
 import { spyOnConsoleError } from '@/test/helpers/spyOnConsoleError'
 

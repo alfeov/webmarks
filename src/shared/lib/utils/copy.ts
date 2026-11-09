@@ -1,4 +1,4 @@
-import { MESSAGE_CODES } from '@/shared/api/types'
+import { MESSAGE_CODES } from '@/shared/api/constants'
 
 export async function copy(value: string) {
   try {

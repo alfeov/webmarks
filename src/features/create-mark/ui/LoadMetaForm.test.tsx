@@ -8,7 +8,7 @@ import {
   MetaProvider,
   useMetaActionContext,
 } from '@/features/create-mark/model/MetaContext'
-import { MESSAGE_CODES } from '@/shared/api/types'
+import { MESSAGE_CODES } from '@/shared/api/constants'
 import { TEST_IDS } from '@/shared/config/testids'
 import { paste } from '@/shared/lib/utils/paste'
 import { showToast } from '@/shared/lib/utils/showToast'

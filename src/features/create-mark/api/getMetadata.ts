@@ -3,7 +3,7 @@ import 'server-only'
 import { scrape } from 'web-meta-scraper'
 
 import { MAX_MARK_DESC_LENGTH } from '@/entities/mark/lib/MarkDescriptionSchema'
-import { MESSAGE_CODES } from '@/shared/api/types'
+import { MESSAGE_CODES } from '@/shared/api/constants'
 
 export async function getMetadata(url: string) {
   try {

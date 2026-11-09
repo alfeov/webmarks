@@ -1,7 +1,7 @@
 import 'server-only'
 
 import { SafeUserData } from '@/entities/user/lib/SafeUserData'
-import { MESSAGE_CODES } from '@/shared/api/types'
+import { MESSAGE_CODES } from '@/shared/api/constants'
 import { prisma } from '@/shared/lib/prisma'
 import { Prisma, type User } from '@/shared/lib/prisma/generated/client'
 import type { UserUpdateInput } from '@/shared/lib/prisma/generated/models'

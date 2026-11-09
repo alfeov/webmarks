@@ -10,6 +10,7 @@ import {
   MAX_TAG_TITLE_LENGTH,
   MIN_TAG_TITLE_LENGTH,
 } from '@/entities/tag/lib/TagTitleSchema'
+import { MESSAGE_CODES } from '@/shared/api/constants'
 import {
   MAX_PASSWORD_LENGTH,
   MIN_PASSWORD_LENGTH,
@@ -24,72 +25,81 @@ import { extractNumber, messages } from '@/test/helpers/messages'
 describe('translations', () => {
   it.each(messages)(
     'should have path for errors in locale message',
-    (locale) => {
-      expect(locale.errors.email.invalid).toBeTruthy()
+    (message) => {
+      expect(message.errors.email.invalid).toBeTruthy()
 
-      expect(locale.errors.id).toBeTruthy()
+      expect(message.errors.id).toBeTruthy()
 
-      expect(locale.errors.password.allowed).toBeTruthy()
-      expect(locale.errors.password.capital).toBeTruthy()
-      expect(locale.errors.password.digit).toBeTruthy()
-      expect(locale.errors.password.minLength).toBeTruthy()
-      expect(locale.errors.password.maxLength).toBeTruthy()
+      expect(message.errors.password.allowed).toBeTruthy()
+      expect(message.errors.password.capital).toBeTruthy()
+      expect(message.errors.password.digit).toBeTruthy()
+      expect(message.errors.password.minLength).toBeTruthy()
+      expect(message.errors.password.maxLength).toBeTruthy()
 
-      expect(locale.errors.url.invalid).toBeTruthy()
-      expect(locale.errors.url.maxLength).toBeTruthy()
+      expect(message.errors.url.invalid).toBeTruthy()
+      expect(message.errors.url.maxLength).toBeTruthy()
 
-      expect(locale.errors.username.minLength).toBeTruthy()
-      expect(locale.errors.username.maxLength).toBeTruthy()
-      expect(locale.errors.username.allowed).toBeTruthy()
+      expect(message.errors.username.minLength).toBeTruthy()
+      expect(message.errors.username.maxLength).toBeTruthy()
+      expect(message.errors.username.allowed).toBeTruthy()
 
-      expect(locale.errors.markDescription.minLength).toBeTruthy()
-      expect(locale.errors.markDescription.maxLength).toBeTruthy()
+      expect(message.errors.markDescription.minLength).toBeTruthy()
+      expect(message.errors.markDescription.maxLength).toBeTruthy()
 
-      expect(locale.errors.markTitle.minLength).toBeTruthy()
-      expect(locale.errors.markTitle.maxLength).toBeTruthy()
+      expect(message.errors.markTitle.minLength).toBeTruthy()
+      expect(message.errors.markTitle.maxLength).toBeTruthy()
 
-      expect(locale.errors.tagTitle.minLength).toBeTruthy()
-      expect(locale.errors.tagTitle.maxLength).toBeTruthy()
+      expect(message.errors.tagTitle.minLength).toBeTruthy()
+      expect(message.errors.tagTitle.maxLength).toBeTruthy()
+    },
+  )
+
+  it.each(messages)(
+    'should have path for codes in locale message',
+    (message) => {
+      for (const MESSAGE_CODE of Object.values(MESSAGE_CODES)) {
+        expect(message.codes[MESSAGE_CODE]).toBeTruthy()
+      }
     },
   )
 
   it.each(messages)(
     'should have length according to locale message',
-    (locale) => {
-      expect(extractNumber(locale.errors.password.minLength)).toBe(
+    (message) => {
+      expect(extractNumber(message.errors.password.minLength)).toBe(
         MIN_PASSWORD_LENGTH,
       )
-      expect(extractNumber(locale.errors.password.maxLength)).toBe(
+      expect(extractNumber(message.errors.password.maxLength)).toBe(
         MAX_PASSWORD_LENGTH,
       )
 
-      expect(extractNumber(locale.errors.url.maxLength)).toBe(MAX_URL_LENGTH)
+      expect(extractNumber(message.errors.url.maxLength)).toBe(MAX_URL_LENGTH)
 
-      expect(extractNumber(locale.errors.username.minLength)).toBe(
+      expect(extractNumber(message.errors.username.minLength)).toBe(
         MIN_USERNAME_LENGTH,
       )
-      expect(extractNumber(locale.errors.username.maxLength)).toBe(
+      expect(extractNumber(message.errors.username.maxLength)).toBe(
         MAX_USERNAME_LENGTH,
       )
 
-      expect(extractNumber(locale.errors.markDescription.minLength)).toBe(
+      expect(extractNumber(message.errors.markDescription.minLength)).toBe(
         MIN_MARK_DESC_LENGTH,
       )
-      expect(extractNumber(locale.errors.markDescription.maxLength)).toBe(
+      expect(extractNumber(message.errors.markDescription.maxLength)).toBe(
         MAX_MARK_DESC_LENGTH,
       )
 
-      expect(extractNumber(locale.errors.markTitle.minLength)).toBe(
+      expect(extractNumber(message.errors.markTitle.minLength)).toBe(
         MIN_MARK_TITLE_LENGTH,
       )
-      expect(extractNumber(locale.errors.markTitle.maxLength)).toBe(
+      expect(extractNumber(message.errors.markTitle.maxLength)).toBe(
         MAX_MARK_TITLE_LENGTH,
       )
 
-      expect(extractNumber(locale.errors.tagTitle.minLength)).toBe(
+      expect(extractNumber(message.errors.tagTitle.minLength)).toBe(
         MIN_TAG_TITLE_LENGTH,
       )
-      expect(extractNumber(locale.errors.tagTitle.maxLength)).toBe(
+      expect(extractNumber(message.errors.tagTitle.maxLength)).toBe(
         MAX_TAG_TITLE_LENGTH,
       )
     },

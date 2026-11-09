@@ -3,7 +3,7 @@ import 'server-only'
 import bcrypt from 'bcrypt'
 
 import { SafeUserData } from '@/entities/user/lib/SafeUserData'
-import { MESSAGE_CODES } from '@/shared/api/types'
+import { MESSAGE_CODES } from '@/shared/api/constants'
 import { prisma } from '@/shared/lib/prisma'
 import { Prisma } from '@/shared/lib/prisma/generated/client'
 import type { UserCreateInput } from '@/shared/lib/prisma/generated/models'

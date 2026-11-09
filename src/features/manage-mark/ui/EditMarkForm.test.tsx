@@ -4,7 +4,7 @@ import { useActionState } from 'react'
 
 import { editMarkAction } from '@/features/manage-mark/api/editMarkAction'
 import { EDIT_MARK_FORM } from '@/features/manage-mark/lib/constants'
-import { MESSAGE_CODES } from '@/shared/api/types'
+import { MESSAGE_CODES } from '@/shared/api/constants'
 import { TEST_IDS } from '@/shared/config/testids'
 import { expectInputsToBeDisabled } from '@/test/helpers/expectInputsToBeDisabled'
 import { expectInputsToBeEnabled } from '@/test/helpers/expectInputsToBeEnabled'

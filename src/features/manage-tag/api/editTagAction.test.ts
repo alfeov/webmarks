@@ -1,7 +1,7 @@
 import { updateTag } from 'next/cache'
 
 import { EDIT_TAG_FORM } from '@/features/manage-tag/lib/constants'
-import { MESSAGE_CODES } from '@/shared/api/types'
+import { MESSAGE_CODES } from '@/shared/api/constants'
 import { verifySession } from '@/shared/lib/session'
 
 import { editTagAction } from './editTagAction'

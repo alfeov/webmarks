@@ -3,7 +3,7 @@ import userEvent from '@testing-library/user-event'
 import { useActionState } from 'react'
 
 import { deleteMarkAction } from '@/features/manage-mark/api/deleteMarkAction'
-import { MESSAGE_CODES } from '@/shared/api/types'
+import { MESSAGE_CODES } from '@/shared/api/constants'
 import { TEST_IDS } from '@/shared/config/testids'
 import { renderWithProviders } from '@/test/helpers/renderWithProviders'
 

@@ -1,4 +1,4 @@
-import { MESSAGE_CODES } from '@/shared/api/types'
+import { MESSAGE_CODES } from '@/shared/api/constants'
 import { spyOnConsoleError } from '@/test/helpers/spyOnConsoleError'
 
 import { copy } from './copy'

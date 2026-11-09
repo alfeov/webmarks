@@ -1,5 +1,5 @@
 import { SIGNIN_FORM } from '@/features/signin/lib/constants'
-import { MESSAGE_CODES } from '@/shared/api/types'
+import { MESSAGE_CODES } from '@/shared/api/constants'
 import { createSession } from '@/shared/lib/session'
 
 import { signinAction } from './signinAction'

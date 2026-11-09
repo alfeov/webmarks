@@ -4,7 +4,7 @@ import { useActionState } from 'react'
 
 import { editAvatarAction } from '@/features/manage-profile/api/editAvatarAction'
 import { EDIT_AVATAR_FORM } from '@/features/manage-profile/lib/constants'
-import { MESSAGE_CODES } from '@/shared/api/types'
+import { MESSAGE_CODES } from '@/shared/api/constants'
 import { TEST_IDS } from '@/shared/config/testids'
 import { expectInputsToBeDisabled } from '@/test/helpers/expectInputsToBeDisabled'
 import { expectInputsToBeEnabled } from '@/test/helpers/expectInputsToBeEnabled'

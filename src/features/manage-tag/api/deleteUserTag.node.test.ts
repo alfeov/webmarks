@@ -1,6 +1,6 @@
 import { PrismaClientKnownRequestError } from '@prisma/client/runtime/client'
 
-import { MESSAGE_CODES } from '@/shared/api/types'
+import { MESSAGE_CODES } from '@/shared/api/constants'
 import { prisma } from '@/shared/lib/prisma'
 import { createRandomTag } from '@/test/factories/createRandomTag'
 import { createRandomUser } from '@/test/factories/createRandomUser'

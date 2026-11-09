@@ -1,5 +1,5 @@
 import { SIGNUP_FORM } from '@/features/signup/lib/constants'
-import { MESSAGE_CODES } from '@/shared/api/types'
+import { MESSAGE_CODES } from '@/shared/api/constants'
 import { createSession } from '@/shared/lib/session'
 
 import { createUser } from './createUser'

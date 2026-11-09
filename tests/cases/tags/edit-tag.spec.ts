@@ -31,9 +31,10 @@ test('should edit tag and show it in interface', async ({
 
   await openSidebar(authorizedPage, isMobile)
 
-  await expect(authorizedPage.getByTestId(TEST_IDS.STATIC.TAG_ITEM)).toHaveText(
-    tag.title,
-  )
+  await test.step('tag has initial name', () =>
+    expect(
+      authorizedPage.getByTestId(TEST_IDS.STATIC.TAG_ITEM(tag.id)),
+    ).toHaveText(tag.title))
 
   await openEditTagDialog(authorizedPage)
 
@@ -50,14 +51,10 @@ test('should edit tag and show it in interface', async ({
 
   await expectSubmitSuccess(authorizedPage)
 
-  await test.step('tag list has corresponding items', async () => {
-    await expect(
-      authorizedPage.getByTestId(TEST_IDS.STATIC.TAG_ITEM),
-    ).toHaveCount(1)
-    await expect(
-      authorizedPage.getByTestId(TEST_IDS.STATIC.TAG_ITEM),
-    ).toHaveText(UPDATED_TAG.TITLE)
-  })
+  await test.step('tag has updated name', () =>
+    expect(
+      authorizedPage.getByTestId(TEST_IDS.STATIC.TAG_ITEM(tag.id)),
+    ).toHaveText(UPDATED_TAG.TITLE))
 })
 
 test('should edit tag on webmark item tags', async ({
@@ -68,9 +65,9 @@ test('should edit tag on webmark item tags', async ({
 }) => {
   await gotoAndWaitForHydration(authorizedPage)
 
-  await test.step('tag has initial title', () =>
+  await test.step('webmark tag badge has initial title', () =>
     expect(
-      authorizedPage.getByTestId(TEST_IDS.STATIC.MARK_ITEM_TAG_BADGE),
+      authorizedPage.getByTestId(TEST_IDS.STATIC.MARK_ITEM_TAG_BADGE(tag.id)),
     ).toHaveText(tag.title))
 
   await openSidebar(authorizedPage, isMobile)
@@ -88,9 +85,9 @@ test('should edit tag on webmark item tags', async ({
     page: authorizedPage,
   })
 
-  await test.step('tag has new title', () =>
+  await test.step('webmark tag badge has updated title', () =>
     expect(
-      authorizedPage.getByTestId(TEST_IDS.STATIC.MARK_ITEM_TAG_BADGE),
+      authorizedPage.getByTestId(TEST_IDS.STATIC.MARK_ITEM_TAG_BADGE(tag.id)),
     ).toHaveText(UPDATED_TAG.TITLE))
 })
 

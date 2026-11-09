@@ -31,7 +31,11 @@ test('should create tag and show it in interface', async ({
   authorizedPage,
 }) => {
   await test.step('tag list is empty', () =>
-    expect(authorizedPage.getByTestId(TEST_IDS.STATIC.TAG_ITEM)).toBeHidden())
+    expect(
+      authorizedPage
+        .getByTestId(TEST_IDS.STATIC.TAG_LIST)
+        .getByRole('listitem'),
+    ).toHaveCount(0))
 
   await openCreateTagDialog(authorizedPage)
 
@@ -48,10 +52,12 @@ test('should create tag and show it in interface', async ({
 
   await expectSubmitSuccess(authorizedPage)
 
-  await test.step('tag list has new tag', () =>
-    expect(authorizedPage.getByTestId(TEST_IDS.STATIC.TAG_ITEM)).toHaveText(
-      NEW_TAG.TITLE,
-    ))
+  await test.step('tag list has tag with corresponding title', () =>
+    expect(
+      authorizedPage
+        .getByTestId(TEST_IDS.STATIC.TAG_LIST)
+        .getByRole('listitem'),
+    ).toHaveText(NEW_TAG.TITLE))
 })
 
 test('should show corresponding error states', async ({ authorizedPage }) => {

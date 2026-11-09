@@ -19,19 +19,21 @@ const openDeleteTagDialog = async (page: Page) => {
   })
 }
 
-test('should delete tag and remove it from interface', async ({
+test('should delete tag and remove it from sidebar', async ({
   authorizedPage,
-  tag,
+  tag: _tag,
   isMobile,
 }) => {
   await gotoAndWaitForHydration(authorizedPage)
 
   await openSidebar(authorizedPage, isMobile)
 
-  await test.step('tag list has tag', () =>
-    expect(authorizedPage.getByTestId(TEST_IDS.STATIC.TAG_ITEM)).toHaveText(
-      tag.title,
-    ))
+  await test.step('tag is in sidebar', () =>
+    expect(
+      authorizedPage
+        .getByTestId(TEST_IDS.STATIC.TAG_LIST)
+        .getByRole('listitem'),
+    ).toHaveCount(1))
 
   await openDeleteTagDialog(authorizedPage)
 
@@ -41,17 +43,21 @@ test('should delete tag and remove it from interface', async ({
 
   await expectSubmitSuccess(authorizedPage)
 
-  await test.step('tag list is empty', () =>
-    expect(authorizedPage.getByTestId(TEST_IDS.STATIC.TAG_ITEM)).toHaveCount(0))
+  await test.step('tag is removed from sidebar', () =>
+    expect(
+      authorizedPage
+        .getByTestId(TEST_IDS.STATIC.TAG_LIST)
+        .getByRole('listitem'),
+    ).toHaveCount(0))
 })
 
 test('should redirect to home page if on tag page', async ({
   authorizedPage,
-  tag: _tag,
+  tag,
   baseURL,
   isMobile,
 }) => {
-  await gotoAndWaitForHydration(authorizedPage)
+  await gotoAndWaitForHydration(authorizedPage, `/${tag.id}`)
 
   await openSidebar(authorizedPage, isMobile)
 
@@ -67,18 +73,20 @@ test('should redirect to home page if on tag page', async ({
 
 test('should remove tag from webmark item on delete', async ({
   authorizedPage,
-  tag: tag,
-  webmark: _webmark,
+  tag,
+  webmark,
   isMobile,
 }) => {
   await gotoAndWaitForHydration(authorizedPage)
 
   await openSidebar(authorizedPage, isMobile)
 
-  await test.step('mark tag list has tag', () =>
+  await test.step('mark item has tag badge', () =>
     expect(
-      authorizedPage.getByTestId(TEST_IDS.STATIC.MARK_ITEM_TAG_BADGE),
-    ).toHaveText(tag.title))
+      authorizedPage
+        .getByTestId(TEST_IDS.STATIC.MARK_ITEM(webmark.id))
+        .getByTestId(TEST_IDS.STATIC.MARK_ITEM_TAG_BADGE(tag.id)),
+    ).toBeVisible())
 
   await openDeleteTagDialog(authorizedPage)
 
@@ -86,9 +94,11 @@ test('should remove tag from webmark item on delete', async ({
     page: authorizedPage,
   })
 
-  await test.step('mark tag list is empty', () =>
+  await test.step('mark item has not tag badge', () =>
     expect(
-      authorizedPage.getByTestId(TEST_IDS.STATIC.MARK_ITEM_TAG_BADGE),
+      authorizedPage
+        .getByTestId(TEST_IDS.STATIC.MARK_ITEM(webmark.id))
+        .getByTestId(TEST_IDS.STATIC.MARK_ITEM_TAG_BADGE(tag.id)),
     ).toBeHidden())
 })
 

@@ -2,6 +2,7 @@ import { getTranslations } from 'next-intl/server'
 
 import { getAllUserTags } from '@/entities/tag/api/getAllUserTags'
 import { EmptyMessage } from '@/shared/components/EmptyMessage'
+import { TEST_IDS } from '@/shared/config/testids'
 import { verifySession } from '@/shared/lib/session'
 import { SidebarMenu } from '@/shared/ui/sidebar'
 
@@ -14,7 +15,7 @@ export async function TagsSidebarMenu() {
   const t = await getTranslations('TagsSidebarMenu')
 
   return (
-    <SidebarMenu>
+    <SidebarMenu data-testid={TEST_IDS.STATIC.TAG_LIST}>
       {!session && (
         <EmptyMessage className='pt-4'>{t('unauthorizedMessage')}</EmptyMessage>
       )}

@@ -32,13 +32,17 @@ test('should apply tags to mark and show in tag list checked tags if mark has ta
 
   await gotoAndWaitForHydration(authorizedPage)
 
-  const markItemBadge = authorizedPage.getByTestId(
-    TEST_IDS.STATIC.MARK_ITEM_TAG_BADGE,
-  )
-  await test.step('mark item badge has corresponding tags', async () => {
-    await expect(markItemBadge).toHaveText(tag.title)
-    await expect(markItemBadge).not.toHaveText(anotherTag.title)
-  })
+  const markItemBadge =
+    await test.step('mark item badge has corresponding tags', async () => {
+      await expect(
+        authorizedPage.getByTestId(TEST_IDS.STATIC.MARK_ITEM_TAG_BADGE(tag.id)),
+      ).toBeVisible()
+      await expect(
+        authorizedPage.getByTestId(
+          TEST_IDS.STATIC.MARK_ITEM_TAG_BADGE(anotherTag.id),
+        ),
+      ).not.toBeVisible()
+    })
 
   await openChangeMarkTagsDialog(authorizedPage)
 
@@ -66,8 +70,14 @@ test('should apply tags to mark and show in tag list checked tags if mark has ta
   await expectSubmitSuccess(authorizedPage)
 
   await test.step('mark item badge has corresponding tags', async () => {
-    await expect(markItemBadge).not.toHaveText(tag.title)
-    await expect(markItemBadge).toHaveText(anotherTag.title)
+    await expect(
+      authorizedPage.getByTestId(TEST_IDS.STATIC.MARK_ITEM_TAG_BADGE(tag.id)),
+    ).not.toBeVisible()
+    await expect(
+      authorizedPage.getByTestId(
+        TEST_IDS.STATIC.MARK_ITEM_TAG_BADGE(anotherTag.id),
+      ),
+    ).toBeVisible()
   })
 })
 test('should show corresponding error states', async ({

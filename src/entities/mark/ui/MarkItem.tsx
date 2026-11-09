@@ -64,7 +64,7 @@ export function MarkItem({
             {tags.map((tag) => (
               <Badge
                 key={`${tag.id}-${tag.updatedAt}`}
-                data-testid={TEST_IDS.STATIC.MARK_ITEM_TAG_BADGE}
+                data-testid={TEST_IDS.STATIC.MARK_ITEM_TAG_BADGE(tag.id)}
               >
                 {tag.title}
               </Badge>

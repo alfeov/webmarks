@@ -20,7 +20,7 @@ export const TagSidebarMenuItem = memo(function Memoized({
   const handleClick = useCloseMobileSidebarOnClick()
 
   return (
-    <SidebarMenuItem data-testid={TEST_IDS.STATIC.TAG_ITEM}>
+    <SidebarMenuItem data-testid={TEST_IDS.STATIC.TAG_ITEM(tag.id)}>
       <Link
         href={tag.id}
         prefetch

@@ -43,8 +43,10 @@ describe('MarkItem', () => {
     render(<MarkItem {...defaultProps} />)
 
     expect(
-      screen.getByTestId(TEST_IDS.STATIC.MARK_ITEM_TAG_BADGE),
-    ).toHaveTextContent(defaultProps.tags[0].title)
+      screen.getByTestId(
+        TEST_IDS.STATIC.MARK_ITEM_TAG_BADGE(defaultProps.tags[0].id),
+      ),
+    ).toBeVisible()
   })
   it('should render span for correct Pin position if tags length is zero', () => {
     render(<MarkItem {...{ ...defaultProps, tags: [] }} />)

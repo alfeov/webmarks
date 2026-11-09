@@ -152,7 +152,7 @@ test('should create mark with corresponding tag if on tag page', async ({
 
   await test.step('show webmark with tag on page', async () => {
     await expect(
-      authorizedPage.getByTestId(TEST_IDS.STATIC.MARK_ITEM_TAG_BADGE),
+      authorizedPage.getByTestId(TEST_IDS.STATIC.MARK_ITEM_TAG_BADGE(tag.id)),
     ).toHaveText(tag.title)
   })
 })

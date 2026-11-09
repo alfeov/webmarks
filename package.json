@@ -83,7 +83,7 @@
     "vitest-matchmedia-mock": "^2.0.4"
   },
   "nano-staged": {
-    "src/**/*.{js,ts,jsx,tsx}": [
+    "{src,tests}/**/*.{js,ts,jsx,tsx}": [
       "eslint --fix",
       "prettier --write"
     ]

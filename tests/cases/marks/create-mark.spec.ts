@@ -9,7 +9,6 @@ import {
 import { gotoAndWaitForHydration } from 'tests/utils/navigation'
 import {
   expectFetchingIndicatorToBeHidden,
-  expectFetchingIndicatorToBeVisible,
   expectSuccessToastToBeVisible,
 } from 'tests/utils/tooltip'
 

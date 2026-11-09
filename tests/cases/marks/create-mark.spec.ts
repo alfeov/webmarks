@@ -94,6 +94,9 @@ test('should create mark and show it in interface', async ({
     await expect(
       authorizedPage.getByTestId(TEST_IDS.STATIC.MARK_ITEM_URL),
     ).toHaveText('vitest.dev/')
+    await expect(
+      authorizedPage.getByTestId(TEST_IDS.STATIC.MARK_ITEM_AVATAR),
+    ).toHaveAttribute('src', 'https://vitest.dev/favicon.ico')
   })
 })
 

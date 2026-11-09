@@ -5,7 +5,7 @@ export const UPDATED_MARK: Record<keyof typeof EDIT_MARK_FORM, string> = {
   URL: 'https://new-url.com',
   TITLE: 'New Webmark Title',
   DESCRIPTION: 'Some new cool description',
-  LOGO_URL: '',
+  LOGO_URL: 'https://vitest.dev/favicon.ico',
 }
 
 export const NEW_MARK: Record<keyof typeof CREATE_MARK_FORM, string> = {

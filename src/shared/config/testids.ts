@@ -10,6 +10,8 @@ export const TEST_IDS = {
     MARK_ITEM_TITLE: 'static-mark-item-title',
     MARK_ITEM_DESCRIPTION: 'static-mark-item-description',
     MARK_ITEM_URL: 'static-mark-item-url',
+    MARK_ITEM_AVATAR: 'static-mark-item-avatar',
+    MARK_ITEM_AVATAR_FALLBACK: 'static-mark-item-avatar-fallback',
     PIN_ICON: 'static-pin-icon',
     TAG_LIST: 'static-tag-list',
     TAG_ITEM: (id: string) => `static-tag-item-${id}`,

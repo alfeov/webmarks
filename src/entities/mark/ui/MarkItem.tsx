@@ -32,8 +32,16 @@ export function MarkItem({
       <div className='flex items-center gap-[10px] px-(--card-spacing)'>
         <a href={url} target='_blank' className='rounded-[50%]'>
           <Avatar size='lg'>
-            <AvatarImage src={logoUrl || undefined} alt={title} />
-            <AvatarFallback>{title.charAt(0)}</AvatarFallback>
+            <AvatarImage
+              src={logoUrl || undefined}
+              alt={title}
+              data-testid={TEST_IDS.STATIC.MARK_ITEM_AVATAR}
+            />
+            <AvatarFallback
+              data-testid={TEST_IDS.STATIC.MARK_ITEM_AVATAR_FALLBACK}
+            >
+              {title.charAt(0).toUpperCase()}
+            </AvatarFallback>
           </Avatar>
         </a>
         <div className='grow overflow-hidden'>

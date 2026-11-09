@@ -37,6 +37,9 @@ test('should edit mark and show it in interface', async ({
     await expect(
       authorizedPage.getByTestId(TEST_IDS.STATIC.MARK_ITEM_DESCRIPTION),
     ).toHaveText(webmark.description)
+    await expect(
+      authorizedPage.getByTestId(TEST_IDS.STATIC.MARK_ITEM_AVATAR_FALLBACK),
+    ).toHaveText(webmark.title.charAt(0).toUpperCase())
   })
 
   await openEditMarkDialog(authorizedPage)
@@ -80,6 +83,9 @@ test('should edit mark and show it in interface', async ({
     await expect(
       authorizedPage.getByTestId(TEST_IDS.STATIC.MARK_ITEM_DESCRIPTION),
     ).toHaveText(UPDATED_MARK.DESCRIPTION)
+    await expect(
+      authorizedPage.getByTestId(TEST_IDS.STATIC.MARK_ITEM_AVATAR),
+    ).toHaveAttribute('src', UPDATED_MARK.LOGO_URL)
   })
 })
 

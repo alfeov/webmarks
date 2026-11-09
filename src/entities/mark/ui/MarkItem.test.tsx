@@ -30,7 +30,9 @@ describe('MarkItem', () => {
   it('should render fallback with first letter of title if passed empty logoUrl', () => {
     render(<MarkItem {...{ ...defaultProps, logoUrl: '' }} />)
 
-    expect(screen.getByRole('link').textContent).toBe('V')
+    expect(
+      screen.getByTestId(TEST_IDS.STATIC.MARK_ITEM_AVATAR_FALLBACK).textContent,
+    ).toBe('V')
   })
   it('should render rest of url', () => {
     render(<MarkItem {...defaultProps} />)

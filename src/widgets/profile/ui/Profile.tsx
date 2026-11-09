@@ -22,7 +22,7 @@ import { SigninDropdownItem } from './SigninDropdownItem'
 import { SignoutDropdownItem } from './SignoutDropdownItem'
 import { SignupDropdownItem } from './SignupDropdownItem'
 
-import { FaceSlightlyFrowning, FaceSlightlySmiling } from 'lucide-react'
+import { FaceSlightlyFrowning } from 'lucide-react'
 
 export async function Profile() {
   const session = await verifySession()
@@ -43,11 +43,18 @@ export async function Profile() {
           >
             <Avatar size='lg'>
               <AvatarImage
-                src={user?.avatarUrl || 'errorSrc'} // to handle AvatarFallback if url is ''
+                src={user?.avatarUrl || undefined} // to handle AvatarFallback if url is ''
                 alt={user?.username || 'system user avatar'}
+                data-testid={TEST_IDS.STATIC.PROFILE_AVATAR}
               />
-              <AvatarFallback>
-                {session ? <FaceSlightlySmiling /> : <FaceSlightlyFrowning />}
+              <AvatarFallback
+                data-testid={TEST_IDS.STATIC.PROFILE_AVATAR_FALLBACK}
+              >
+                {session && user ? (
+                  user.username.charAt(0).toUpperCase()
+                ) : (
+                  <FaceSlightlyFrowning />
+                )}
               </AvatarFallback>
             </Avatar>
           </Button>

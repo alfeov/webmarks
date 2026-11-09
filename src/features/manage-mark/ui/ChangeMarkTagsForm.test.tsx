@@ -79,12 +79,12 @@ describe('ChangeMarkTagsForm', () => {
 
     expect(
       screen.getByTestId(
-        TEST_IDS.CHANGEABLE.INPUT.MARK_TAG_ITEM(defaultTags[0].id),
+        TEST_IDS.CHANGEABLE.INPUT.MARK_TAG_CHECKBOX(defaultTags[0].id),
       ),
     ).toBeChecked()
     expect(
       screen.getByTestId(
-        TEST_IDS.CHANGEABLE.INPUT.MARK_TAG_ITEM(defaultTags[1].id),
+        TEST_IDS.CHANGEABLE.INPUT.MARK_TAG_CHECKBOX(defaultTags[1].id),
       ),
     ).not.toBeChecked()
   })

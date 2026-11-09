@@ -47,10 +47,10 @@ test('should apply tags to mark and show in tag list checked tags if mark has ta
   await openChangeMarkTagsDialog(authorizedPage)
 
   const tagCheckbox = authorizedPage.getByTestId(
-    TEST_IDS.CHANGEABLE.INPUT.MARK_TAG_ITEM(tag.id),
+    TEST_IDS.CHANGEABLE.INPUT.MARK_TAG_CHECKBOX(tag.id),
   )
   const anotherTagCheckbox = authorizedPage.getByTestId(
-    TEST_IDS.CHANGEABLE.INPUT.MARK_TAG_ITEM(anotherTag.id),
+    TEST_IDS.CHANGEABLE.INPUT.MARK_TAG_CHECKBOX(anotherTag.id),
   )
 
   await test.step('tags should have corresponding checked/unchecked states', async () => {

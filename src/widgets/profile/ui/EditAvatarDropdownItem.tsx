@@ -15,7 +15,7 @@ export function EditAvatarDropdownItem({ avatarUrl }: Pick<User, 'avatarUrl'>) {
 
   return (
     <DropdownMenuItem
-      data-testid={TEST_IDS.CLICKABLE.BUTTON.CHANGE_AVATAR}
+      data-testid={TEST_IDS.CLICKABLE.BUTTON.EDIT_AVATAR}
       onClick={() => openDialog(<EditAvatarForm avatarUrl={avatarUrl} />)}
     >
       {t('items.editAvatar')}

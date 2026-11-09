@@ -29,7 +29,10 @@ export const test = base.extend<Fixtures>({
     const password = 'TestPass123'
     const hashedPassword = await bcrypt.hash(password, saltOrRounds)
 
-    const user = await createRandomUser({ password: hashedPassword })
+    const user = await createRandomUser({
+      password: hashedPassword,
+      avatarUrl: 'https://avatars.githubusercontent.com/u/152028606?v=4&s=200',
+    })
 
     await use({
       ...user,

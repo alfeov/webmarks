@@ -38,7 +38,7 @@ export const MarkTagItem = memo(function Memoized({
           name={`tagId-${id}`}
           value={id}
           checked={checked}
-          data-testid={TEST_IDS.CHANGEABLE.INPUT.MARK_TAG_ITEM(id)}
+          data-testid={TEST_IDS.CHANGEABLE.INPUT.MARK_TAG_CHECKBOX(id)}
           disabled={disabled}
         />
         <FieldLabel>{title}</FieldLabel>

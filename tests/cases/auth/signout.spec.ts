@@ -9,7 +9,7 @@ test('should logout from profile', async ({ authorizedPage }) => {
   await test.step('authorized buttons to be visible', async () => {
     await authorizedPage.getByTestId(TEST_IDS.CLICKABLE.BUTTON.PROFILE).click()
     await expect(
-      authorizedPage.getByTestId(TEST_IDS.CLICKABLE.BUTTON.CHANGE_AVATAR),
+      authorizedPage.getByTestId(TEST_IDS.CLICKABLE.BUTTON.EDIT_AVATAR),
     ).toBeVisible()
     await expect(
       authorizedPage.getByTestId(TEST_IDS.CLICKABLE.BUTTON.LOGOUT),
@@ -23,7 +23,7 @@ test('should logout from profile', async ({ authorizedPage }) => {
   await test.step('authorized buttons not to be visible', async () => {
     await authorizedPage.getByTestId(TEST_IDS.CLICKABLE.BUTTON.PROFILE).click()
     await expect(
-      authorizedPage.getByTestId(TEST_IDS.CLICKABLE.BUTTON.CHANGE_AVATAR),
+      authorizedPage.getByTestId(TEST_IDS.CLICKABLE.BUTTON.EDIT_AVATAR),
     ).toBeHidden()
     await expect(
       authorizedPage.getByTestId(TEST_IDS.CLICKABLE.BUTTON.LOGOUT),

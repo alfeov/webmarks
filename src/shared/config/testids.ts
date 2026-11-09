@@ -2,6 +2,8 @@ export const TEST_IDS = {
   STATIC: {
     DIALOG: 'static-universal-dialog',
     FETCHING_INDICATOR: 'static-fetching-indicator',
+    PROFILE_AVATAR: 'static-profile-avatar',
+    PROFILE_AVATAR_FALLBACK: 'static-profile-avatar-fallback',
     MARK_LIST: 'static-mark-list',
     MARK_ITEM: (id: string) => `static-mark-item-${id}`,
     MARK_ITEM_TAG_BADGE: (id: string) => `static-mark-item-tag-badge-${id}`,
@@ -21,7 +23,7 @@ export const TEST_IDS = {
       SIGNIN: 'clickable-button-signin',
       SIGNUP: 'clickable-button-signup',
       LOGOUT: 'clickable-button-logout',
-      CHANGE_AVATAR: 'clickable-button-change-avatar',
+      EDIT_AVATAR: 'clickable-button-change-avatar',
       CREATE_MARK: 'clickable-button-create-mark',
       MANAGE_MARK: 'clickable-button-manage-mark',
       COPY_MARK_LINK: 'clickable-button-copy-mark-link',
@@ -43,7 +45,7 @@ export const TEST_IDS = {
   },
   CHANGEABLE: {
     INPUT: {
-      MARK_TAG_ITEM: (id: string) => `mark-tag-item-${id}`,
+      MARK_TAG_CHECKBOX: (id: string) => `mark-tag-checkbox-${id}`,
     },
   },
 } as const

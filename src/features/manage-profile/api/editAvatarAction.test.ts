@@ -1,6 +1,6 @@
 import { updateTag } from 'next/cache'
 
-import { EDIT_AVATAR_FORMDATA } from '@/features/manage-profile/lib/constants'
+import { EDIT_AVATAR_FORM } from '@/features/manage-profile/lib/constants'
 import { MESSAGE_CODES } from '@/shared/api/types'
 import { verifySession } from '@/shared/lib/session'
 
@@ -13,7 +13,7 @@ vi.mock('./updateUserAvatar')
 const prevState = { isSuccess: false }
 
 const defaultFormData = new FormData()
-defaultFormData.set(EDIT_AVATAR_FORMDATA.AVATAR_URL, 'https://some-url.com')
+defaultFormData.set(EDIT_AVATAR_FORM.AVATAR_URL, 'https://some-url.com')
 
 const userId = 'id-1'
 
@@ -51,7 +51,7 @@ describe('editAvatarAction', () => {
   })
   it('should not return error when logoUrl is empty string', async () => {
     const formData = new FormData()
-    formData.set(EDIT_AVATAR_FORMDATA.AVATAR_URL, '')
+    formData.set(EDIT_AVATAR_FORM.AVATAR_URL, '')
     const result = await editAvatarAction(prevState, formData)
 
     expect(updateUserAvatar).toHaveBeenCalledWith({

@@ -4,7 +4,7 @@ import { Skeleton } from '@/shared/ui/skeleton'
 
 export function MarkItemSkeleton() {
   return (
-    <Card>
+    <Card role='listitem'>
       <CardHeader>
         <div className='flex items-center gap-[10px]'>
           <AvatarSkeleton size='lg' />

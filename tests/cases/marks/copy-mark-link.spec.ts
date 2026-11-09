@@ -1,6 +1,10 @@
 import type { Page } from '@playwright/test'
 import { expect, test } from 'tests/fixtures/auth'
 import { gotoAndWaitForHydration } from 'tests/utils/navigation'
+import {
+  expectErrorToastToBeVisible,
+  expectSuccessToastToBeVisible,
+} from 'tests/utils/tooltip'
 
 import { TEST_IDS } from '@/shared/config/testids'
 
@@ -21,13 +25,14 @@ test('should copy mark link ', async ({ authorizedPage, webmark }) => {
 
   await clickCopyMarkLinkButton(authorizedPage)
 
-  await test.step('show success toast', () =>
-    expect(authorizedPage.getByText(/success!/i).first()).toBeVisible())
+  await expectSuccessToastToBeVisible(authorizedPage)
 
-  const clipboardText = await authorizedPage.evaluate(() =>
-    navigator.clipboard.readText(),
-  )
-  expect(clipboardText).toBe(webmark.url)
+  await test.step('clipboard text should be webmark url', async () => {
+    const clipboardText = await authorizedPage.evaluate(() =>
+      navigator.clipboard.readText(),
+    )
+    expect(clipboardText).toBe(webmark.url)
+  })
 })
 
 test('should show error if browser does not support copy API', async ({
@@ -44,8 +49,5 @@ test('should show error if browser does not support copy API', async ({
 
   await clickCopyMarkLinkButton(authorizedPage)
 
-  await test.step('show error toast', () =>
-    expect(
-      authorizedPage.getByText(/something went wrong!/i).first(),
-    ).toBeVisible())
+  await expectErrorToastToBeVisible(authorizedPage)
 })

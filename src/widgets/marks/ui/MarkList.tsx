@@ -6,6 +6,7 @@ import { getUserMarks } from '@/entities/mark/api/getUserMarks'
 import { MarkItem } from '@/entities/mark/ui/MarkItem'
 import { getUserTag } from '@/entities/tag/api/getUserTag'
 import { MarkDropdownMenu } from '@/features/manage-mark/ui/MarkDropdownMenu'
+import { TEST_IDS } from '@/shared/config/testids'
 import type { Tag } from '@/shared/lib/prisma/generated/client'
 import { verifySession } from '@/shared/lib/session'
 import {
@@ -65,7 +66,7 @@ export async function MarkList({ params, searchParams }: MarkListProps) {
   if (tagId && !tag) return notFound()
 
   return Boolean(marks.length) ? (
-    <MarkGrid>
+    <MarkGrid data-testid={TEST_IDS.STATIC.MARK_LIST}>
       {marks.map((mark) => (
         <ViewTransition
           name={mark.id}

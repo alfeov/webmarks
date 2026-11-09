@@ -37,7 +37,7 @@ export const test = base.extend<Fixtures>({
     })
   },
   tag: async ({ user }, use) => {
-    const title = 'Tag Title'
+    const title = 'Testing'
     const tag = await createRandomTag(user.id, {
       title,
     })
@@ -45,9 +45,11 @@ export const test = base.extend<Fixtures>({
     await use(tag)
   },
   webmark: async ({ user, tag }, use) => {
-    const title = 'WebMark'
     const webmark = await createRandomMark(user.id, tag.id, {
-      title,
+      title: 'Playwright',
+      url: 'https://playwright.dev/',
+      description:
+        'Playwright enables reliable web automation for testing, scripting, and AI agents',
     })
 
     await use(webmark)

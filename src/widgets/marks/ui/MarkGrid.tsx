@@ -1,7 +1,14 @@
-export function MarkGrid({ children }: { children: React.ReactNode }) {
+import { cn } from '@/shared/lib/utils'
+
+export function MarkGrid({ className, ...props }: React.ComponentProps<'div'>) {
   return (
-    <div className='grid content-start gap-[30px] not-empty:pb-[30px] lg:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4'>
-      {children}
-    </div>
+    <div
+      role='list'
+      className={cn(
+        'grid content-start gap-[30px] not-empty:pb-[30px] lg:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4',
+        className,
+      )}
+      {...props}
+    />
   )
 }

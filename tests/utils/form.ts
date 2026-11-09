@@ -3,6 +3,13 @@ import { expect, test } from '@playwright/test'
 
 import { TEST_IDS } from '@/shared/config/testids'
 
+import {
+  expectErrorToastToBeVisible,
+  expectFetchingIndicatorToBeHidden,
+  expectFetchingIndicatorToBeVisible,
+  expectSuccessToastToBeVisible,
+} from './tooltip'
+
 interface FillInputsParams {
   page: Page
   fields: Record<string, string>
@@ -27,19 +34,16 @@ export const submitForm = async ({ page, submitButton }: SubmitFormParams) => {
       ? submitButton.click()
       : page.getByTestId(TEST_IDS.CLICKABLE.BUTTON.SUBMIT).click())
 
-  await test.step('show fetching indicator during submitting', () =>
-    expect(page.getByTestId(TEST_IDS.STATIC.FETCHING_INDICATOR)).toBeVisible())
+  await expectFetchingIndicatorToBeVisible(page)
 }
 
 export const expectSubmitSuccess = async (page: Page) => {
   await test.step('close dialog', () =>
     expect(page.getByTestId(TEST_IDS.STATIC.DIALOG)).toBeHidden())
 
-  await test.step('hide fetching indicator', () =>
-    expect(page.getByTestId(TEST_IDS.STATIC.FETCHING_INDICATOR)).toBeHidden())
+  await expectFetchingIndicatorToBeHidden(page)
 
-  await test.step('show success toast', () =>
-    expect(page.getByText(/success!/i).first()).toBeVisible())
+  await expectSuccessToastToBeVisible(page)
 }
 
 interface ExpectSubmitErrorParams {
@@ -51,11 +55,9 @@ export const expectSubmitError = async ({
   page,
   inputs = [],
 }: ExpectSubmitErrorParams) => {
-  await test.step('hide fetching indicator', () =>
-    expect(page.getByTestId(TEST_IDS.STATIC.FETCHING_INDICATOR)).toBeHidden())
+  await expectFetchingIndicatorToBeHidden(page)
 
-  await test.step('show error toast', () =>
-    expect(page.getByText(/something went wrong!/i).first()).toBeVisible())
+  await expectErrorToastToBeVisible(page)
 
   for (const input of inputs) {
     await test.step(`show error for ${input} input`, () =>

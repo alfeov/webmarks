@@ -19,80 +19,78 @@ const openChangeMarkTagsDialog = async (page: Page) => {
   })
 }
 
-test.describe('change-mark-tags', () => {
-  test('should apply tags to mark and show in tag list checked tags if mark has tag', async ({
-    authorizedPage,
-    user,
-    webmark: _webmark,
-    tag,
-  }) => {
-    const anotherTagTitle = 'Another Tag'
-    const anotherTag = await createRandomTag(user.id, {
-      title: anotherTagTitle,
-    })
-
-    await gotoAndWaitForHydration(authorizedPage)
-
-    const markItemBadge = authorizedPage.getByTestId(
-      TEST_IDS.STATIC.MARK_ITEM_TAG_BADGE,
-    )
-    await test.step('mark item badge has corresponding tags', async () => {
-      await expect(markItemBadge).toHaveText(tag.title)
-      await expect(markItemBadge).not.toHaveText(anotherTag.title)
-    })
-
-    await openChangeMarkTagsDialog(authorizedPage)
-
-    const tagCheckbox = authorizedPage.getByTestId(
-      TEST_IDS.CHANGEABLE.INPUT.MARK_TAG_ITEM(tag.id),
-    )
-    const anotherTagCheckbox = authorizedPage.getByTestId(
-      TEST_IDS.CHANGEABLE.INPUT.MARK_TAG_ITEM(anotherTag.id),
-    )
-
-    await test.step('checked/unchecked tags depends on mark', async () => {
-      await expect(tagCheckbox).toBeChecked()
-      await expect(anotherTagCheckbox).not.toBeChecked()
-    })
-
-    await test.step('toggle checkboxes', async () => {
-      await tagCheckbox.click()
-      await anotherTagCheckbox.click()
-    })
-
-    await submitForm({
-      page: authorizedPage,
-    })
-
-    await expectSubmitSuccess(authorizedPage)
-
-    await test.step('mark item badge has corresponding tags', async () => {
-      await expect(markItemBadge).not.toHaveText(tag.title)
-      await expect(markItemBadge).toHaveText(anotherTag.title)
-    })
+test('should apply tags to mark and show in tag list checked tags if mark has tag', async ({
+  authorizedPage,
+  user,
+  webmark: _webmark,
+  tag,
+}) => {
+  const anotherTagTitle = 'Another Tag'
+  const anotherTag = await createRandomTag(user.id, {
+    title: anotherTagTitle,
   })
-  test('should show corresponding error states', async ({
-    authorizedPage,
-    tag,
-    webmark: _webmark,
-  }) => {
-    await gotoAndWaitForHydration(authorizedPage)
 
-    // delete tag from db to emulate error
-    await prisma.tag.delete({
+  await gotoAndWaitForHydration(authorizedPage)
+
+  const markItemBadge = authorizedPage.getByTestId(
+    TEST_IDS.STATIC.MARK_ITEM_TAG_BADGE,
+  )
+  await test.step('mark item badge has corresponding tags', async () => {
+    await expect(markItemBadge).toHaveText(tag.title)
+    await expect(markItemBadge).not.toHaveText(anotherTag.title)
+  })
+
+  await openChangeMarkTagsDialog(authorizedPage)
+
+  const tagCheckbox = authorizedPage.getByTestId(
+    TEST_IDS.CHANGEABLE.INPUT.MARK_TAG_ITEM(tag.id),
+  )
+  const anotherTagCheckbox = authorizedPage.getByTestId(
+    TEST_IDS.CHANGEABLE.INPUT.MARK_TAG_ITEM(anotherTag.id),
+  )
+
+  await test.step('tags should have corresponding checked/unchecked states', async () => {
+    await expect(tagCheckbox).toBeChecked()
+    await expect(anotherTagCheckbox).not.toBeChecked()
+  })
+
+  await test.step('toggle checkboxes', async () => {
+    await tagCheckbox.click()
+    await anotherTagCheckbox.click()
+  })
+
+  await submitForm({
+    page: authorizedPage,
+  })
+
+  await expectSubmitSuccess(authorizedPage)
+
+  await test.step('mark item badge has corresponding tags', async () => {
+    await expect(markItemBadge).not.toHaveText(tag.title)
+    await expect(markItemBadge).toHaveText(anotherTag.title)
+  })
+})
+test('should show corresponding error states', async ({
+  authorizedPage,
+  tag,
+  webmark: _webmark,
+}) => {
+  await gotoAndWaitForHydration(authorizedPage)
+
+  await test.step('delete tag from db to emulate error', () =>
+    prisma.tag.delete({
       where: {
         id: tag.id,
       },
-    })
+    }))
 
-    await openChangeMarkTagsDialog(authorizedPage)
+  await openChangeMarkTagsDialog(authorizedPage)
 
-    await submitForm({
-      page: authorizedPage,
-    })
+  await submitForm({
+    page: authorizedPage,
+  })
 
-    await expectSubmitError({
-      page: authorizedPage,
-    })
+  await expectSubmitError({
+    page: authorizedPage,
   })
 })

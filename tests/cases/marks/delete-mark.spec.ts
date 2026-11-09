@@ -18,47 +18,45 @@ const openDeleteMarkTagsDialog = async (page: Page) => {
   })
 }
 
-test.describe('delete-mark', () => {
-  test('should delete mark', async ({ authorizedPage, webmark: _webmark }) => {
-    await gotoAndWaitForHydration(authorizedPage)
+test('should delete mark', async ({ authorizedPage, webmark }) => {
+  await gotoAndWaitForHydration(authorizedPage)
 
-    await test.step('mark item to be visible', () => {
-      expect(
-        authorizedPage.getByTestId(TEST_IDS.STATIC.MARK_ITEM),
-      ).toBeVisible()
-    })
-
-    await openDeleteMarkTagsDialog(authorizedPage)
-
-    await submitForm({ page: authorizedPage })
-
-    await expectSubmitSuccess(authorizedPage)
-
-    await test.step('mark item list to be empty', () => {
-      expect(authorizedPage.getByTestId(TEST_IDS.STATIC.MARK_ITEM)).toHaveCount(
-        0,
-      )
-    })
+  await test.step('mark item to be visible', () => {
+    expect(
+      authorizedPage.getByTestId(TEST_IDS.STATIC.MARK_ITEM(webmark.id)),
+    ).toBeVisible()
   })
-  test('should show corresponding error states', async ({
-    authorizedPage,
-    webmark,
-  }) => {
-    await gotoAndWaitForHydration(authorizedPage)
 
-    // delete webmark from db to emulate error
-    await prisma.webMark.delete({
+  await openDeleteMarkTagsDialog(authorizedPage)
+
+  await submitForm({ page: authorizedPage })
+
+  await expectSubmitSuccess(authorizedPage)
+
+  await test.step('mark item to be hidden', () => {
+    expect(
+      authorizedPage.getByTestId(TEST_IDS.STATIC.MARK_ITEM(webmark.id)),
+    ).toBeHidden()
+  })
+})
+test('should show corresponding error states', async ({
+  authorizedPage,
+  webmark,
+}) => {
+  await gotoAndWaitForHydration(authorizedPage)
+
+  await test.step('delete webmark from db to emulate error', () =>
+    prisma.webMark.delete({
       where: {
         id: webmark.id,
       },
-    })
+    }))
 
-    await openDeleteMarkTagsDialog(authorizedPage)
+  await openDeleteMarkTagsDialog(authorizedPage)
 
-    await submitForm({ page: authorizedPage })
+  await submitForm({ page: authorizedPage })
 
-    await expectSubmitError({
-      page: authorizedPage,
-    })
+  await expectSubmitError({
+    page: authorizedPage,
   })
 })

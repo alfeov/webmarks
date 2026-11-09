@@ -1,3 +1,4 @@
+import type { Page } from '@playwright/test'
 import { expect, test } from 'tests/fixtures/auth'
 import {
   expectSubmitError,
@@ -13,54 +14,55 @@ import { TEST_IDS } from '@/shared/config/testids'
 
 import { NEW_TAG } from './(utils)/constants'
 
-test.describe('create-tag', () => {
-  test.beforeEach(async ({ authorizedPage, isMobile }) => {
-    await gotoAndWaitForHydration(authorizedPage)
+const openCreateTagDialog = async (page: Page) => {
+  await test.step('open create tag dialog', async () => {
+    await page.getByTestId(TEST_IDS.CLICKABLE.BUTTON.CREATE_TAG).click()
+    await expect(page.getByTestId(TEST_IDS.STATIC.DIALOG)).toBeVisible()
+  })
+}
 
-    await openSidebar(authorizedPage, isMobile)
+test.beforeEach(async ({ authorizedPage, isMobile }) => {
+  await gotoAndWaitForHydration(authorizedPage)
 
-    await test.step('open create tag dialog', async () => {
-      await authorizedPage
-        .getByTestId(TEST_IDS.CLICKABLE.BUTTON.CREATE_TAG)
-        .click()
-      await expect(
-        authorizedPage.getByTestId(TEST_IDS.STATIC.DIALOG),
-      ).toBeVisible()
-    })
+  await openSidebar(authorizedPage, isMobile)
+})
+
+test('should create tag and show it in interface', async ({
+  authorizedPage,
+}) => {
+  await test.step('tag list is empty', () =>
+    expect(authorizedPage.getByTestId(TEST_IDS.STATIC.TAG_ITEM)).toBeHidden())
+
+  await openCreateTagDialog(authorizedPage)
+
+  await fillInputs({
+    page: authorizedPage,
+    fields: {
+      [CREATE_TAG_FORM.TITLE]: NEW_TAG.TITLE,
+    },
   })
 
-  test('should create tag and show it in interface', async ({
-    authorizedPage,
-  }) => {
-    await fillInputs({
-      page: authorizedPage,
-      fields: {
-        [CREATE_TAG_FORM.TITLE]: NEW_TAG.TITLE,
-      },
-    })
-
-    await submitForm({
-      page: authorizedPage,
-    })
-
-    await expectSubmitSuccess(authorizedPage)
-
-    await expect(
-      authorizedPage.getByTestId(TEST_IDS.STATIC.TAG_ITEM),
-    ).toHaveCount(1)
-    await expect(
-      authorizedPage.getByTestId(TEST_IDS.STATIC.TAG_ITEM),
-    ).toHaveText(NEW_TAG.TITLE)
+  await submitForm({
+    page: authorizedPage,
   })
 
-  test('should show corresponding error states', async ({ authorizedPage }) => {
-    await submitForm({
-      page: authorizedPage,
-    })
+  await expectSubmitSuccess(authorizedPage)
 
-    await expectSubmitError({
-      page: authorizedPage,
-      inputs: Object.values(CREATE_TAG_FORM),
-    })
+  await test.step('tag list has new tag', () =>
+    expect(authorizedPage.getByTestId(TEST_IDS.STATIC.TAG_ITEM)).toHaveText(
+      NEW_TAG.TITLE,
+    ))
+})
+
+test('should show corresponding error states', async ({ authorizedPage }) => {
+  await openCreateTagDialog(authorizedPage)
+
+  await submitForm({
+    page: authorizedPage,
+  })
+
+  await expectSubmitError({
+    page: authorizedPage,
+    inputs: Object.values(CREATE_TAG_FORM),
   })
 })

@@ -1,5 +1,7 @@
 import { render, screen } from '@testing-library/react'
 
+import { TEST_IDS } from '@/shared/config/testids'
+
 import { MarkItem, type MarkItemProps } from './MarkItem'
 
 const defaultProps: MarkItemProps = {
@@ -30,19 +32,24 @@ describe('MarkItem', () => {
 
     expect(screen.getByRole('link').textContent).toBe('V')
   })
-  it('should render rest of url as description', () => {
+  it('should render rest of url', () => {
     render(<MarkItem {...defaultProps} />)
 
-    expect(screen.getByText(/.com/i)).toBeInTheDocument()
+    expect(screen.getByTestId(TEST_IDS.STATIC.MARK_ITEM_URL)).toHaveTextContent(
+      'some-url.com',
+    )
   })
   it('should render tags if passed', () => {
     render(<MarkItem {...defaultProps} />)
 
-    expect(screen.getByText(/Tag/i)).toBeInTheDocument()
+    expect(
+      screen.getByTestId(TEST_IDS.STATIC.MARK_ITEM_TAG_BADGE),
+    ).toHaveTextContent(defaultProps.tags[0].title)
   })
   it('should render span for correct Pin position if tags length is zero', () => {
     render(<MarkItem {...{ ...defaultProps, tags: [] }} />)
 
     expect(screen.getByTestId('span')).toBeInTheDocument()
+    expect(screen.getByTestId(TEST_IDS.STATIC.PIN_ICON)).toBeInTheDocument()
   })
 })

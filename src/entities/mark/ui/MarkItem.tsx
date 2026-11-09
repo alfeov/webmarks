@@ -18,6 +18,7 @@ export type MarkItemProps = WebMarkWithTags & {
 }
 
 export function MarkItem({
+  id,
   title,
   description,
   pinned,
@@ -27,7 +28,7 @@ export function MarkItem({
   children,
 }: MarkItemProps) {
   return (
-    <Card data-testid={TEST_IDS.STATIC.MARK_ITEM}>
+    <Card data-testid={TEST_IDS.STATIC.MARK_ITEM(id)} role='listitem'>
       <div className='flex items-center gap-[10px] px-(--card-spacing)'>
         <a href={url} target='_blank' className='rounded-[50%]'>
           <Avatar size='lg'>
@@ -72,7 +73,12 @@ export function MarkItem({
         ) : (
           <span data-testid='span'></span>
         )}
-        {pinned && <PinIcon className='mr-[7px] size-[20px]' />}
+        {pinned && (
+          <PinIcon
+            className='mr-[7px] size-[20px]'
+            data-testid={TEST_IDS.STATIC.PIN_ICON}
+          />
+        )}
       </CardFooter>
     </Card>
   )

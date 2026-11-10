@@ -63,7 +63,11 @@ export async function Profile() {
       <DropdownMenuContent>
         <DropdownMenuGroup>
           <DropdownMenuSub>
-            <DropdownMenuSubTrigger>{t('translate')}</DropdownMenuSubTrigger>
+            <DropdownMenuSubTrigger
+              data-testid={TEST_IDS.CLICKABLE.BUTTON.SWITCH_LOCALE}
+            >
+              {t('translate')}
+            </DropdownMenuSubTrigger>
             <DropdownMenuSubContent>
               <SwitchLocaleMenuGroup />
             </DropdownMenuSubContent>

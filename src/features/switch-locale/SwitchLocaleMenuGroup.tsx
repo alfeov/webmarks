@@ -2,6 +2,7 @@
 
 import { useTranslations } from 'next-intl'
 
+import { TEST_IDS } from '@/shared/config/testids'
 import { usePathname, useRouter } from '@/shared/i18n/navigation'
 import { routing } from '@/shared/i18n/routing'
 import { DropdownMenuGroup, DropdownMenuItem } from '@/shared/ui/dropdown-menu'
@@ -16,7 +17,7 @@ export function SwitchLocaleMenuGroup() {
     <DropdownMenuGroup>
       {routing.locales.map((locale) => (
         <DropdownMenuItem
-          data-testid='locale-item'
+          data-testid={TEST_IDS.CLICKABLE.BUTTON.LOCALE(locale)}
           key={locale}
           onClick={() =>
             router.replace(

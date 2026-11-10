@@ -26,6 +26,8 @@ export const TEST_IDS = {
       SIGNUP: 'clickable-button-signup',
       LOGOUT: 'clickable-button-logout',
       EDIT_AVATAR: 'clickable-button-change-avatar',
+      SWITCH_LOCALE: 'clickable-button-switch-locale',
+      LOCALE: (id: string) => `clickable-button-switch-locale-${id}`,
       SEARCH_MARK: 'clickable-button-search-mark',
       CREATE_MARK: 'clickable-button-create-mark',
       MANAGE_MARK: 'clickable-button-manage-mark',

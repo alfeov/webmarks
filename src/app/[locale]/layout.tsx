@@ -3,6 +3,7 @@ import localFont from 'next/font/local'
 import { getLocale, getTranslations } from 'next-intl/server'
 import { Suspense } from 'react'
 
+import { themeKey } from '@/features/toggle-theme/lib/constants'
 import { ThemeToggleButton } from '@/features/toggle-theme/ui/ThemeToggleButton'
 import { TEST_IDS } from '@/shared/config/testids'
 import { Link } from '@/shared/i18n/navigation'
@@ -135,6 +136,7 @@ export default async function RootLayout({
       className={cn('h-full', 'antialiased', fontExcalidraw.variable)}
       data-scroll-behavior='smooth'
       suppressHydrationWarning // suppressing dark theme class application
+      data-testid={TEST_IDS.STATIC.HTML}
     >
       <head>
         <script
@@ -142,7 +144,7 @@ export default async function RootLayout({
             __html: `
 							(function () {
 								try {
-									const storedTheme = JSON.parse(localStorage.getItem('webmarks/theme')) ?? 'system'
+									const storedTheme = JSON.parse(localStorage.getItem('${themeKey}')) ?? 'system'
 									const isPreferredDarkTheme = window.matchMedia(
 										'(prefers-color-scheme: dark)',
 									).matches

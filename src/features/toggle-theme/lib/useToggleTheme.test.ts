@@ -67,9 +67,11 @@ describe('useToggleTheme', () => {
 
     const { result } = renderHook(useToggleTheme)
     expect(result.current.theme).toBe('light')
+    expect(document.documentElement.classList.contains('dark')).toBe(false)
 
     act(() => result.current.toggleTheme())
     expect(result.current.theme).toBe('system')
+    expect(document.documentElement.classList.contains('dark')).toBe(false)
     expect(spy).toHaveBeenCalledTimes(0)
   })
   it('should toggle html class on preference changing', () => {

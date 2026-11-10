@@ -1,5 +1,6 @@
 export const TEST_IDS = {
   STATIC: {
+    HTML: 'static-html',
     DIALOG: 'static-universal-dialog',
     FETCHING_INDICATOR: 'static-fetching-indicator',
     PROFILE_AVATAR: 'static-profile-avatar',

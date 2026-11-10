@@ -7,12 +7,12 @@ import {
   setLocalStorageData,
 } from '@/shared/lib/utils/localStorage'
 
+import { themeKey } from './constants'
 import { isThemeDark } from './isThemeDark'
 
 // ! if changing it, then change in script also
-export const themeKey = 'webmarks/theme'
 
-type Theme = 'system' | 'dark' | 'light'
+export type Theme = 'system' | 'dark' | 'light'
 
 const NEXT_THEME: Record<Theme, Theme> = {
   system: 'dark',

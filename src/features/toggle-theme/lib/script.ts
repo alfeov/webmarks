@@ -3,7 +3,7 @@
 
 // (function () {
 //   try {
-//     const storedTheme = localStorage.getItem(${themeKey}) ?? 'system'
+//     const storedTheme = localStorage.getItem('${themeKey}') ?? 'system'
 //     const isPreferredDarkTheme = window.matchMedia(
 //       '(prefers-color-scheme: dark)',
 //     ).matches

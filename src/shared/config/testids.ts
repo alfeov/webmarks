@@ -26,6 +26,7 @@ export const TEST_IDS = {
       SIGNUP: 'clickable-button-signup',
       LOGOUT: 'clickable-button-logout',
       EDIT_AVATAR: 'clickable-button-change-avatar',
+      SEARCH_MARK: 'clickable-button-search-mark',
       CREATE_MARK: 'clickable-button-create-mark',
       MANAGE_MARK: 'clickable-button-manage-mark',
       COPY_MARK_LINK: 'clickable-button-copy-mark-link',
@@ -47,7 +48,8 @@ export const TEST_IDS = {
   },
   CHANGEABLE: {
     INPUT: {
-      MARK_TAG_CHECKBOX: (id: string) => `mark-tag-checkbox-${id}`,
+      MARK_TAG_CHECKBOX: (id: string) =>
+        `changeable-input-mark-tag-checkbox-${id}`,
     },
   },
 } as const

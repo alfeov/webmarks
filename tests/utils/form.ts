@@ -16,11 +16,10 @@ interface FillInputsParams {
 }
 
 export const fillInputs = async ({ page, fields }: FillInputsParams) => {
-  await test.step('fill inputs', async () => {
-    for (const [name, value] of Object.entries(fields)) {
-      await page.getByTestId(`${name}-input`).fill(value)
-    }
-  })
+  for (const [name, value] of Object.entries(fields)) {
+    await test.step(`fill input ${name}`, () =>
+      page.getByTestId(`${name}-input`).fill(value))
+  }
 }
 
 interface SubmitFormParams {

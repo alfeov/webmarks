@@ -12,6 +12,8 @@ const nextConfig: NextConfig = {
 
   cacheComponents: true,
   partialPrefetching: true,
+
+  // svgr
   turbopack: {
     rules: {
       '*.svg': {
@@ -20,6 +22,7 @@ const nextConfig: NextConfig = {
       },
     },
   },
+
   poweredByHeader: false,
   reactStrictMode: true,
   productionBrowserSourceMaps: false,

@@ -48,6 +48,7 @@ export const TEST_IDS = {
     },
     LINK: {
       OPEN_MARK: 'clickable-link-open-mark',
+      OPEN_TAG_PAGE: (id: string) => `clickable-link-open-tag-page-${id}`,
     },
   },
   CHANGEABLE: {

@@ -26,6 +26,7 @@ export const TagSidebarMenuItem = memo(function Memoized({
         prefetch
         className='w-full rounded-xl'
         onClick={handleClick}
+        data-testid={TEST_IDS.CLICKABLE.LINK.OPEN_TAG_PAGE(tag.id)}
       >
         <SidebarMenuButton
           className='pr-8'

@@ -4,6 +4,7 @@ import { useTranslations } from 'next-intl'
 import { useActionState } from 'react'
 
 import { InputField } from '@/shared/components/InputField'
+import { TEST_IDS } from '@/shared/config/testids'
 import { useCloseDialogOn } from '@/shared/lib/hooks/useCloseDialogOn'
 import { useFetchingIndicatorManager } from '@/shared/lib/hooks/useFetchingIndicatorManager'
 import { useNotificationManager } from '@/shared/lib/hooks/useNotificationManager'
@@ -23,6 +24,7 @@ export function SigninForm() {
     SigninFormState,
     FormData
   >(signinAction, initialState)
+
   useFetchingIndicatorManager(isPending)
   useNotificationManager(state.message, state.isSuccess, !isPending)
   useCloseDialogOn(state.isSuccess)
@@ -48,7 +50,9 @@ export function SigninForm() {
           name={SIGNIN_FORM.PASSWORD}
           errors={state?.errors?.signinPassword}
         />
-        <Button type='submit'>{tSigninForm('submit')}</Button>
+        <Button type='submit' data-testid={TEST_IDS.CLICKABLE.BUTTON.SUBMIT}>
+          {tSigninForm('submit')}
+        </Button>
       </FieldSet>
     </form>
   )

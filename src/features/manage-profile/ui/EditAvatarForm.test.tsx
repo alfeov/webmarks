@@ -10,7 +10,6 @@ import { renderWithProviders } from '@/test/helpers/renderWithProviders'
 
 import { EditAvatarForm } from './EditAvatarForm'
 
-vi.mock('../api/editAvatarAction')
 vi.mock('react', { spy: true })
 
 const defaultData = {

@@ -5,6 +5,7 @@ import { Activity, useState } from 'react'
 
 import { SigninForm } from '@/features/signin/ui/SigninForm'
 import { SignupForm } from '@/features/signup/ui/SignupForm'
+import { TEST_IDS } from '@/shared/config/testids'
 import { Button } from '@/shared/ui/button'
 import { FieldDescription, FieldLegend, FieldSet } from '@/shared/ui/field'
 
@@ -37,6 +38,7 @@ export function Auth({ initialMode }: { initialMode: Mode }) {
                 : () => setMode('signin')
             }
             className='h-auto'
+            data-testid={TEST_IDS.CLICKABLE.BUTTON.TOGGLE_AUTH_MODE}
           >
             {mode === 'signin' ? t('signinButton') : t('signupButton')}
           </Button>

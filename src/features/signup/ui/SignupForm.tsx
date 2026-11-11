@@ -4,6 +4,7 @@ import { useTranslations } from 'next-intl'
 import { useActionState } from 'react'
 
 import { InputField } from '@/shared/components/InputField'
+import { TEST_IDS } from '@/shared/config/testids'
 import { useCloseDialogOn } from '@/shared/lib/hooks/useCloseDialogOn'
 import { useFetchingIndicatorManager } from '@/shared/lib/hooks/useFetchingIndicatorManager'
 import { useNotificationManager } from '@/shared/lib/hooks/useNotificationManager'
@@ -62,7 +63,9 @@ export function SignupForm() {
           name={SIGNUP_FORM.CONFIRM_PASSWORD}
           errors={state?.errors?.confirmPassword}
         />
-        <Button type='submit'>{tSignupForm('submit')}</Button>
+        <Button type='submit' data-testid={TEST_IDS.CLICKABLE.BUTTON.SUBMIT}>
+          {tSignupForm('submit')}
+        </Button>
       </FieldSet>
     </form>
   )

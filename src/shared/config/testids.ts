@@ -22,6 +22,7 @@ export const TEST_IDS = {
   CLICKABLE: {
     BUTTON: {
       TOGGLE_SIDEBAR: 'clickable-button-toggle-sidebar',
+      TOGGLE_AUTH_MODE: 'clickable-button-toggle-auth-mode',
       PROFILE: 'clickable-button-profile',
       SIGNIN: 'clickable-button-signin',
       SIGNUP: 'clickable-button-signup',

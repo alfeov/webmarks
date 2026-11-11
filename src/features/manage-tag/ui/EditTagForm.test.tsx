@@ -9,7 +9,6 @@ import { renderWithProviders } from '@/test/helpers/renderWithProviders'
 
 import { EditTagForm } from './EditTagForm'
 
-vi.mock('../api/editTagAction')
 vi.mock('react', { spy: true })
 
 const defaultData = {

@@ -15,7 +15,6 @@ import { renderWithProviders } from '@/test/helpers/renderWithProviders'
 import { CreateMarkForm } from './CreateMarkForm'
 
 vi.mock('../model/MetaContext')
-vi.mock('../api/createMarkAction')
 vi.mock('next/navigation')
 vi.mock('react', { spy: true })
 

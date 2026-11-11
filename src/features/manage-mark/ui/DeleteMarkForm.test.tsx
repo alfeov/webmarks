@@ -6,7 +6,6 @@ import { renderWithProviders } from '@/test/helpers/renderWithProviders'
 
 import { DeleteMarkForm } from './DeleteMarkForm'
 
-vi.mock('../api/deleteMarkAction')
 vi.mock('react', { spy: true })
 
 const defaultMarkId = '1'

@@ -10,7 +10,6 @@ import { renderWithProviders } from '@/test/helpers/renderWithProviders'
 
 import { EditMarkForm } from './EditMarkForm'
 
-vi.mock('../api/editMarkAction')
 vi.mock('react', { spy: true })
 
 const defaultData = {

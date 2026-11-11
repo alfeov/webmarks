@@ -9,7 +9,6 @@ import { renderWithProviders } from '@/test/helpers/renderWithProviders'
 
 import { CreateTagForm } from './CreateTagForm'
 
-vi.mock('../api/createTagAction')
 vi.mock('react', { spy: true })
 
 describe('CreateTagForm', () => {

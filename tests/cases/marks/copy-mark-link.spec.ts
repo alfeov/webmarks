@@ -15,10 +15,7 @@ test.use({
 
 const clickCopyMarkLinkButton = async (page: Page) => {
   await test.step('click copy mark link button', async () => {
-    await page
-      .getByTestId(TEST_IDS.CLICKABLE.BUTTON.MANAGE_MARK)
-      .first()
-      .click()
+    await page.getByTestId(TEST_IDS.CLICKABLE.BUTTON.MANAGE_MARK).click()
     await page.getByTestId(TEST_IDS.CLICKABLE.BUTTON.COPY_MARK_LINK).click()
   })
 }

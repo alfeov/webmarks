@@ -19,7 +19,6 @@ const clickPinMarkButton = async (page: Page, webmarkId: WebMark['id']) => {
     await page
       .getByTestId(TEST_IDS.STATIC.MARK_ITEM(webmarkId))
       .getByTestId(TEST_IDS.CLICKABLE.BUTTON.MANAGE_MARK)
-      .first()
       .click()
     await page.getByTestId(TEST_IDS.CLICKABLE.BUTTON.PIN_MARK).click()
   })

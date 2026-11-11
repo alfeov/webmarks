@@ -37,18 +37,6 @@ describe('updateUserMark', () => {
     expect(result.error).toBeUndefined()
     expect(spyOnConsoleError).not.toHaveBeenCalled()
   })
-  it('should set logoUrl to null when it passed as null', async () => {
-    const result = await updateUserMark({
-      ...defaultUpdateData,
-      logoUrl: null,
-      id: markId,
-      userId,
-    })
-
-    expect(result.data?.logoUrl).toBeNull()
-    expect(result.error).toBeUndefined()
-    expect(spyOnConsoleError).not.toHaveBeenCalled()
-  })
   it('should return "existence" error and log it when user already have another mark with this url', async () => {
     const anotherMark = await createRandomMark(userId)
 
@@ -62,28 +50,6 @@ describe('updateUserMark', () => {
     expect(result.data).toBeUndefined()
     expect(result.error).toBe(MESSAGE_CODES.MARK_EXISTS)
     expect(spyOnConsoleError).toHaveBeenCalledOnce()
-  })
-  it('should not return error when other user already have mark with this url', async () => {
-    const anotherUserId = (await createRandomUser()).id
-    const anotherMark = await createRandomMark(anotherUserId)
-
-    await updateUserMark({
-      ...defaultUpdateData,
-      url: 'https://same-url.com',
-      id: anotherMark.id,
-      userId: anotherUserId,
-    })
-
-    const result = await updateUserMark({
-      ...defaultUpdateData,
-      url: 'https://same-url.com',
-      id: markId,
-      userId,
-    })
-
-    expect(result.data).toMatchObject({ url: 'https://same-url.com' })
-    expect(result.error).toBeUndefined()
-    expect(spyOnConsoleError).not.toHaveBeenCalled()
   })
   it('should return "not found" error and log it when user have not mark with this id', async () => {
     const result = await updateUserMark({

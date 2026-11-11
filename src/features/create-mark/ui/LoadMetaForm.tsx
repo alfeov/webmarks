@@ -43,15 +43,12 @@ export function LoadMetaForm() {
   useNotificationManager(state.message, state.isSuccess, !isPending)
   useFetchingIndicatorManager(isPending)
 
-  const tLoadMetaForm = useTranslations('LoadMetaForm')
-  const tToast = useTranslations('toast')
-  const tCodes = useTranslations('codes')
-  const tErrors = useTranslations('errors')
+  const t = useTranslations()
 
   const handlePasteClick = async () => {
     const { clipText, error } = await paste()
     if (error) {
-      showToast(tToast('errorTitle'), tCodes(error), false)
+      showToast(t('toast.errorTitle'), t(`codes.${error}`), false)
       return
     }
     setUrl(clipText)
@@ -61,21 +58,21 @@ export function LoadMetaForm() {
     <form className='grid gap-[30px]' action={formAction}>
       <fieldset disabled={isPending}>
         <Field data-invalid={Boolean(state.errors)}>
-          <FieldLabel>{tLoadMetaForm('fields.url.label')}</FieldLabel>
+          <FieldLabel>{t('LoadMetaForm.fields.url.label')}</FieldLabel>
           <InputGroup>
             <InputGroupAddon>
               <InputGroupButton
-                aria-label={tLoadMetaForm('buttons.paste.ariaLabel')}
+                aria-label={t('LoadMetaForm.buttons.paste.ariaLabel')}
                 onClick={handlePasteClick}
                 data-testid={TEST_IDS.CLICKABLE.BUTTON.PASTE}
               >
-                <ClipboardPaste /> {tLoadMetaForm('buttons.paste.title')}
+                <ClipboardPaste /> {t('LoadMetaForm.buttons.paste.title')}
               </InputGroupButton>
             </InputGroupAddon>
 
             <InputGroupInput
               autoFocus
-              placeholder={tLoadMetaForm('fields.url.placeholder')}
+              placeholder={t('LoadMetaForm.fields.url.placeholder')}
               name={LOAD_META_FORM.URL}
               aria-invalid={Boolean(state.errors)}
               value={url}
@@ -85,12 +82,12 @@ export function LoadMetaForm() {
 
             <InputGroupAddon align='inline-end'>
               <InputGroupButton
-                aria-label={tLoadMetaForm('buttons.load.ariaLabel')}
+                aria-label={t('LoadMetaForm.buttons.load.ariaLabel')}
                 type='submit'
                 disabled={isPending}
                 data-testid={TEST_IDS.CLICKABLE.BUTTON.LOAD}
               >
-                {tLoadMetaForm('buttons.load.title')}
+                {t('LoadMetaForm.buttons.load.title')}
                 <CloudDownload data-icon='inline-end' />
               </InputGroupButton>
             </InputGroupAddon>
@@ -98,7 +95,7 @@ export function LoadMetaForm() {
           <FieldError
             data-testid={`${LOAD_META_FORM.URL}-error`}
             errors={state.errors?.loadUrl?.map((code) => ({
-              message: tErrors(code),
+              message: t(`errors.${code}`),
             }))}
           />
         </Field>

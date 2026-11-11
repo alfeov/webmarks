@@ -9,11 +9,10 @@ export async function getMetadata(url: string) {
   try {
     const { metadata } = await scrape(url, {
       postProcess: {
-        maxDescriptionLength: MAX_MARK_DESC_LENGTH - 3, // 3 chars is '...'
+        maxDescriptionLength: MAX_MARK_DESC_LENGTH - 3,
       },
     })
 
-    // check at least one field existence
     const { url: receivedUrl, title, description, favicon } = metadata
     if (!receivedUrl && !title && !description && !favicon)
       throw new Error('Metadata not complete')

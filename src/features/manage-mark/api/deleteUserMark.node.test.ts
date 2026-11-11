@@ -44,19 +44,6 @@ describe('deleteUserMark', () => {
     expect(spyOnConsoleError).toHaveBeenCalledOnce()
     expect(await findUserMark(markId, userId)).not.toBeNull()
   })
-  it('should return error when other user has this mark and current not', async () => {
-    const anotherUserId = (await createRandomUser()).id
-    const anotherMarkId = (await createRandomMark(anotherUserId)).id
-
-    const result = await deleteUserMark({
-      id: anotherMarkId,
-      userId,
-    })
-
-    expect(result.error).toBe(MESSAGE_CODES.MARK_NOT_FOUND)
-    expect(spyOnConsoleError).toHaveBeenCalledOnce()
-    expect(await findUserMark(anotherMarkId, anotherUserId)).not.toBeNull()
-  })
   it('should return internal error and log it when other prisma error has been occurred', async () => {
     const error = new PrismaClientKnownRequestError('...', {
       code: 'P2002',

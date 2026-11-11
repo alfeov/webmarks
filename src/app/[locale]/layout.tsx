@@ -3,7 +3,7 @@ import localFont from 'next/font/local'
 import { getLocale, getTranslations } from 'next-intl/server'
 import { Suspense } from 'react'
 
-import { themeKey } from '@/features/toggle-theme/lib/constants'
+import { themeScript } from '@/features/toggle-theme/lib/script'
 import { ThemeToggleButton } from '@/features/toggle-theme/ui/ThemeToggleButton'
 import { TEST_IDS } from '@/shared/config/testids'
 import { Link } from '@/shared/i18n/navigation'
@@ -141,22 +141,7 @@ export default async function RootLayout({
       <head>
         <script
           dangerouslySetInnerHTML={{
-            __html: `
-							(function () {
-								try {
-									const storedTheme = JSON.parse(localStorage.getItem('${themeKey}')) ?? 'system'
-									const isPreferredDarkTheme = window.matchMedia(
-										'(prefers-color-scheme: dark)',
-									).matches
-
-									const isCurrentThemeDark =
-										storedTheme === 'system' ? isPreferredDarkTheme : storedTheme === 'dark'
-
-									const root = window.document.documentElement
-									root.classList.toggle('dark', isCurrentThemeDark)
-								} catch (e) {}
-							})()
-						`,
+            __html: themeScript,
           }}
         />
       </head>

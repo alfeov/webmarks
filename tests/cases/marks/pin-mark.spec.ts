@@ -19,6 +19,7 @@ const clickPinMarkButton = async (page: Page, webmarkId: WebMark['id']) => {
     await page
       .getByTestId(TEST_IDS.STATIC.MARK_ITEM(webmarkId))
       .getByTestId(TEST_IDS.CLICKABLE.BUTTON.MANAGE_MARK)
+      .first()
       .click()
     await page.getByTestId(TEST_IDS.CLICKABLE.BUTTON.PIN_MARK).click()
   })
@@ -35,7 +36,7 @@ test.beforeEach(async ({ authorizedPage, user }) => {
   ).toContainText([webmark2.title, webmark1.title])
 })
 
-test('should pin mark', async ({ authorizedPage }) => {
+test('should pin and unpin mark', async ({ authorizedPage }) => {
   await clickPinMarkButton(authorizedPage, webmark1.id)
 
   await expectFetchingIndicatorToBeVisible(authorizedPage)
@@ -46,6 +47,19 @@ test('should pin mark', async ({ authorizedPage }) => {
         .getByTestId(TEST_IDS.STATIC.MARK_LIST)
         .getByRole('listitem'),
     ).toContainText([webmark1.title, webmark2.title]))
+
+  await expectFetchingIndicatorToBeHidden(authorizedPage)
+
+  await clickPinMarkButton(authorizedPage, webmark1.id)
+
+  await expectFetchingIndicatorToBeVisible(authorizedPage)
+
+  await test.step('marks order in list is changed again', () =>
+    expect(
+      authorizedPage
+        .getByTestId(TEST_IDS.STATIC.MARK_LIST)
+        .getByRole('listitem'),
+    ).toContainText([webmark2.title, webmark1.title]))
 
   await expectFetchingIndicatorToBeHidden(authorizedPage)
 })

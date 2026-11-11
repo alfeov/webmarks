@@ -18,7 +18,6 @@ export async function toggleMarkPinnedAction({
   if (!session) return
 
   // toggling webmark pinned state
-  // ! provide the current pinned state
   const { error } = await toggleUserMarkPinned({
     id,
     pinned,

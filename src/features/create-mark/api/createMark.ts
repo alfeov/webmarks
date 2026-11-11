@@ -28,7 +28,7 @@ export async function createMark({
         title,
         url,
         description,
-        logoUrl: logoUrl ?? null,
+        logoUrl: logoUrl,
         tags: tagId
           ? {
               connect: {

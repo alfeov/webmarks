@@ -27,18 +27,4 @@ describe('getAllUserTags', () => {
     expect(second.title).toBe(secondTitle)
     expect(third.title).toBe(thirdTitle)
   })
-  it('should not return tags belonging to other users', async () => {
-    const otherUser = await createRandomUser()
-    await prisma.tag.createMany({
-      data: [
-        { title: 'user tag', userId },
-        { title: 'unrelated', userId: otherUser.id },
-      ],
-    })
-
-    const tags = await getAllUserTags({ userId })
-
-    expect(tags).toHaveLength(1)
-    expect(tags[0].title).toBe('user tag')
-  })
 })

@@ -37,7 +37,7 @@ test('should create new account, show toast and close dialog on creation', async
   await expectSubmitSuccess(page)
 })
 
-test('should show field errors and toast', async ({ page }) => {
+test('should show corresponding error states', async ({ page }) => {
   await fillInputs({
     page,
     fields: {

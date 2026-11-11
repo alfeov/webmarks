@@ -32,17 +32,6 @@ describe('changeMarkTagsAction', () => {
     )
   })
 
-  it('should return error when markId is not defined', async () => {
-    const result = await changeMarkTagsAction(
-      undefined,
-      prevState,
-      defaultFormData,
-    )
-
-    expect(setUserMarkTags).not.toHaveBeenCalled()
-    expect(result.isSuccess).toBe(false)
-    expect(result.message).toBe(MESSAGE_CODES.INVALID_ID)
-  })
   it('should return error when user is not authorized', async () => {
     vi.mocked(verifySession).mockResolvedValueOnce(null)
 

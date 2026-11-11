@@ -1,6 +1,11 @@
 import type { Page } from '@playwright/test'
 import { expect, test } from 'tests/fixtures/auth'
-import { expectSubmitSuccess, fillInputs, submitForm } from 'tests/utils/form'
+import {
+  expectSubmitError,
+  expectSubmitSuccess,
+  fillInputs,
+  submitForm,
+} from 'tests/utils/form'
 import { gotoAndWaitForHydration } from 'tests/utils/navigation'
 
 import { EDIT_AVATAR_FORM } from '@/features/manage-profile/lib/constants'
@@ -75,4 +80,26 @@ test('should apply empty string as valid and show fallback avatar', async ({
     expect(
       authorizedPage.getByTestId(TEST_IDS.STATIC.PROFILE_AVATAR_FALLBACK),
     ).toHaveText(user.username.charAt(0).toUpperCase()))
+})
+
+test('should show corresponding error states', async ({ authorizedPage }) => {
+  await gotoAndWaitForHydration(authorizedPage)
+
+  await openEditProfileAvatarDialog(authorizedPage)
+
+  await fillInputs({
+    page: authorizedPage,
+    fields: {
+      [EDIT_AVATAR_FORM.AVATAR_URL]: 'error',
+    },
+  })
+
+  await submitForm({
+    page: authorizedPage,
+  })
+
+  await expectSubmitError({
+    page: authorizedPage,
+    inputs: Object.values(EDIT_AVATAR_FORM),
+  })
 })

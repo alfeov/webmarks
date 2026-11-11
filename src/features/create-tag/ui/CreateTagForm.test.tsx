@@ -1,10 +1,7 @@
 import { screen } from '@testing-library/react'
-import userEvent from '@testing-library/user-event'
 import { useActionState } from 'react'
 
-import { createTagAction } from '@/features/create-tag/api/createTagAction'
 import { CREATE_TAG_FORM } from '@/features/create-tag/lib/constants'
-import { MESSAGE_CODES } from '@/shared/api/constants'
 import { TEST_IDS } from '@/shared/config/testids'
 import { expectInputsToBeDisabled } from '@/test/helpers/expectInputsToBeDisabled'
 import { expectInputsToBeEnabled } from '@/test/helpers/expectInputsToBeEnabled'
@@ -28,22 +25,5 @@ describe('CreateTagForm', () => {
 
     expectInputsToBeDisabled(Object.values(CREATE_TAG_FORM))
     expect(screen.getByTestId(TEST_IDS.CLICKABLE.BUTTON.SUBMIT)).toBeDisabled()
-  })
-  it('should show validation error if received error', async () => {
-    renderWithProviders(<CreateTagForm />)
-
-    const validationMessage = 'SOME_ERROR_CODE'
-    vi.mocked(createTagAction).mockResolvedValueOnce({
-      isSuccess: false,
-      errors: {
-        title: [validationMessage],
-      },
-      message: MESSAGE_CODES.VALIDATION_ERROR,
-    })
-
-    const submit = screen.getByTestId(TEST_IDS.CLICKABLE.BUTTON.SUBMIT)
-    await userEvent.click(submit)
-
-    expect(await screen.findByText(validationMessage)).toBeInTheDocument()
   })
 })

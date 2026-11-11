@@ -85,7 +85,11 @@ describe('LoadMetaForm', () => {
     expectInputsToHaveValues({
       [LOAD_META_FORM.URL]: '',
     })
-    expect(showToast).toHaveBeenCalledWith('errorTitle', 'PASTE_ERROR', false)
+    expect(showToast).toHaveBeenCalledWith(
+      'toast.errorTitle',
+      'codes.PASTE_ERROR',
+      false,
+    )
   })
   it('should set url on input type', async () => {
     renderWithProviders(
@@ -132,7 +136,7 @@ describe('LoadMetaForm', () => {
       expect(setMetadata).toHaveBeenCalledWith(metadata)
     })
   })
-  it('should not call setMetadata and show validation error when received error', async () => {
+  it('should not call setMetadata when received error', async () => {
     const setMetadata = vi.fn()
     vi.mocked(useMetaActionContext).mockReturnValue(setMetadata)
 
@@ -142,13 +146,9 @@ describe('LoadMetaForm', () => {
       </MetaProvider>,
     )
 
-    const validationMessage = 'SOME_ERROR_CODE'
     vi.mocked(loadMetaAction).mockResolvedValueOnce({
       isSuccess: false,
-      errors: {
-        loadUrl: [validationMessage],
-      },
-      message: MESSAGE_CODES.VALIDATION_ERROR,
+      message: MESSAGE_CODES.INTERNAL_ERROR,
     })
 
     const loadBtn = screen.getByTestId(TEST_IDS.CLICKABLE.BUTTON.LOAD)
@@ -156,9 +156,5 @@ describe('LoadMetaForm', () => {
 
     expect(loadMetaAction).toHaveBeenCalled()
     expect(setMetadata).not.toHaveBeenCalled()
-
-    expect(screen.getByTestId(`${LOAD_META_FORM.URL}-error`)).toHaveTextContent(
-      validationMessage,
-    )
   })
 })

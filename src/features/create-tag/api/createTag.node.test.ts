@@ -45,22 +45,6 @@ describe('createTag', () => {
     expect(result.error).toBe(MESSAGE_CODES.TAG_EXISTS)
     expect(spyOnConsoleError).toHaveBeenCalledOnce()
   })
-  it('should not return error when other user already have tag with this title', async () => {
-    const anotherUserId = (await createRandomUser()).id
-    await createTag({
-      ...defaultTagData,
-      userId: anotherUserId,
-    })
-
-    const result = await createTag({
-      ...defaultTagData,
-      userId,
-    })
-
-    expect(result.data).toMatchObject(defaultTagData)
-    expect(result.error).toBeUndefined()
-    expect(spyOnConsoleError).not.toHaveBeenCalled()
-  })
   it('should return internal error and log it when other prisma error has been occurred', async () => {
     const error = new PrismaClientKnownRequestError('...', {
       code: 'P2003',

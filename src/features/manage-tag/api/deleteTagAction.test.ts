@@ -61,7 +61,7 @@ describe('deleteTagAction', () => {
     expect(result.isSuccess).toBe(true)
     expect(result.message).toBe(MESSAGE_CODES.TAG_DELETE_SUCCESS)
   })
-  it('should redirect to the home page when tag is deleted from the tag page', async () => {
+  it('should call redirect to the home page when tag is deleted from the tag page', async () => {
     await deleteTagAction(tagId, true, locale)
 
     expect(redirect).toHaveBeenCalledWith({

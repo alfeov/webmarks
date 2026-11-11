@@ -9,15 +9,15 @@ import { getMetadata } from './getMetadata'
 vi.mock('web-meta-scraper')
 
 const url = 'https://some-url.com'
+const metadata = {
+  url,
+  title: 'Title',
+  description: 'Description for url',
+  favicon: 'https://favicon.png',
+}
 
 describe('getMetadata', async () => {
   it('should return metadata on success', async () => {
-    const metadata = {
-      url,
-      title: 'Title',
-      description: 'Description for url',
-      favicon: 'https://favicon.png',
-    }
     vi.mocked(scrape, { partial: true }).mockResolvedValue({
       metadata,
     })
@@ -32,7 +32,7 @@ describe('getMetadata', async () => {
     })
     expect(result.error).toBeUndefined()
   })
-  it('should call function with length argument that is 3 less that accept zod', async () => {
+  it('should call function with length argument that is 3 less that accept zod (adds ... to the end)', async () => {
     await getMetadata(url)
 
     expect(scrape).toHaveBeenCalledWith(url, {
@@ -41,27 +41,22 @@ describe('getMetadata', async () => {
       },
     })
   })
-  it.each([
-    { url: '' }, // '' or undefined can returned
-    { title: undefined },
-    { description: '' },
-    { favicon: undefined },
-  ])(
-    'should return error and log it when one of fields is absent: field-data: %s',
-    async (field) => {
-      vi.mocked(scrape, { partial: true }).mockResolvedValue({
-        metadata: {
-          ...field,
-        },
-      })
+  it('should return error and log it when all fields is empty or not defined', async () => {
+    vi.mocked(scrape, { partial: true }).mockResolvedValue({
+      metadata: {
+        url: '',
+        title: undefined,
+        description: '',
+        favicon: undefined,
+      },
+    })
 
-      const result = await getMetadata(url)
+    const result = await getMetadata(url)
 
-      expect(spyOnConsoleError).toHaveBeenCalled()
-      expect(result.data).toBeUndefined()
-      expect(result.error).toBe(MESSAGE_CODES.LOAD_META_ERROR)
-    },
-  )
+    expect(spyOnConsoleError).toHaveBeenCalled()
+    expect(result.data).toBeUndefined()
+    expect(result.error).toBe(MESSAGE_CODES.LOAD_META_ERROR)
+  })
   it('should return error and log it on error', async () => {
     const error = new Error('some error message')
     vi.mocked(scrape).mockRejectedValue(error)

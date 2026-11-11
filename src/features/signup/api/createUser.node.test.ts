@@ -27,7 +27,7 @@ describe('createUser', () => {
     expect(result.error).toBeUndefined()
     expect(spyOnConsoleError).not.toHaveBeenCalled()
   })
-  it('should hashed password', async () => {
+  it('should hash password', async () => {
     await createUser(defaultUserData)
 
     expect(spyOnBcrypt).toHaveBeenCalledOnce()

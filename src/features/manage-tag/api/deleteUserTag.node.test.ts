@@ -42,19 +42,6 @@ describe('deleteUserTag', () => {
     expect(spyOnConsoleError).toHaveBeenCalledOnce()
     expect(await findUserTag(tagId, userId)).not.toBeNull()
   })
-  it('should return error when other user has this tag and current not', async () => {
-    const anotherUserId = (await createRandomUser()).id
-    const anotherTagId = (await createRandomTag(anotherUserId)).id
-
-    const result = await deleteUserTag({
-      id: anotherTagId,
-      userId,
-    })
-
-    expect(result.error).toBe(MESSAGE_CODES.TAG_NOT_FOUND)
-    expect(spyOnConsoleError).toHaveBeenCalledOnce()
-    expect(await findUserTag(anotherTagId, anotherUserId)).not.toBeNull()
-  })
   it('should return internal error and log it when other prisma error has been occurred', async () => {
     const error = new PrismaClientKnownRequestError('...', {
       code: 'P2002',

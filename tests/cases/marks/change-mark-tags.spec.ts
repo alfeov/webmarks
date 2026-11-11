@@ -32,17 +32,16 @@ test('should apply tags to mark and show in tag list checked tags if mark has ta
 
   await gotoAndWaitForHydration(authorizedPage)
 
-  const markItemBadge =
-    await test.step('mark item badge has corresponding tags', async () => {
-      await expect(
-        authorizedPage.getByTestId(TEST_IDS.STATIC.MARK_ITEM_TAG_BADGE(tag.id)),
-      ).toBeVisible()
-      await expect(
-        authorizedPage.getByTestId(
-          TEST_IDS.STATIC.MARK_ITEM_TAG_BADGE(anotherTag.id),
-        ),
-      ).not.toBeVisible()
-    })
+  await test.step('mark item badge has corresponding tags', async () => {
+    await expect(
+      authorizedPage.getByTestId(TEST_IDS.STATIC.MARK_ITEM_TAG_BADGE(tag.id)),
+    ).toBeVisible()
+    await expect(
+      authorizedPage.getByTestId(
+        TEST_IDS.STATIC.MARK_ITEM_TAG_BADGE(anotherTag.id),
+      ),
+    ).not.toBeVisible()
+  })
 
   await openChangeMarkTagsDialog(authorizedPage)
 

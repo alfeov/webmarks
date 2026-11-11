@@ -11,16 +11,10 @@ import type { ChangeMarkTagsFormState } from '../model/types'
 import { setUserMarkTags } from './setUserMarkTags'
 
 export async function changeMarkTagsAction(
-  markId: WebMark['id'] | undefined,
+  markId: WebMark['id'],
   _prevState: ChangeMarkTagsFormState,
   formData: FormData,
 ) {
-  if (!markId)
-    return {
-      isSuccess: false,
-      message: MESSAGE_CODES.INVALID_ID,
-    }
-
   // check auth
   const session = await verifySession()
   if (!session)

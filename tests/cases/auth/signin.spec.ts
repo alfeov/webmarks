@@ -31,7 +31,7 @@ test('should login to existing account, show toast and close dialog on creation'
   await expectSubmitSuccess(page)
 })
 
-test('should show field errors and toast', async ({ page }) => {
+test('should show corresponding error states', async ({ page }) => {
   await gotoAndWaitForHydration(page)
 
   await submitForm({

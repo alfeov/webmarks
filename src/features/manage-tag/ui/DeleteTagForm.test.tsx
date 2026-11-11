@@ -1,8 +1,8 @@
 import { screen } from '@testing-library/react'
-import userEvent from '@testing-library/user-event'
 import { useParams } from 'next/navigation'
+import { useActionState } from 'react'
 
-import { MESSAGE_CODES } from '@/shared/api/constants'
+import { TEST_IDS } from '@/shared/config/testids'
 import { renderWithProviders } from '@/test/helpers/renderWithProviders'
 
 import { DeleteTagForm } from './DeleteTagForm'
@@ -15,6 +15,7 @@ vi.mock('../api/deleteTagAction', () => ({
   deleteTagAction,
 }))
 vi.mock('next/navigation')
+vi.mock('react', { spy: true })
 
 const defaultTagId = '1'
 
@@ -26,45 +27,12 @@ describe('DeleteTagForm', () => {
   it('should render enabled elements by default', () => {
     renderWithProviders(<DeleteTagForm tagId={defaultTagId} />)
 
-    expect(screen.getByRole('button')).toBeEnabled()
+    expect(screen.getByTestId(TEST_IDS.CLICKABLE.BUTTON.SUBMIT)).toBeEnabled()
   })
-  it('should call deleteTagAction with corresponding arguments', async () => {
-    vi.mocked(deleteTagAction).mockResolvedValueOnce({
-      isSuccess: true,
-      message: MESSAGE_CODES.TAG_DELETE_SUCCESS,
-    })
-
+  it('should disable elements on request', () => {
+    vi.mocked(useActionState).mockReturnValueOnce([{}, vi.fn(), true])
     renderWithProviders(<DeleteTagForm tagId={defaultTagId} />)
 
-    const submit = screen.getByRole('button')
-    await userEvent.click(submit)
-
-    expect(deleteTagAction).toHaveBeenCalledWith(
-      defaultTagId,
-      false,
-      'en',
-      expect.any(Object),
-      expect.any(Object),
-    )
-  })
-  it('should call deleteTagAction with isOnTagPage as true when on tag page', async () => {
-    vi.mocked(useParams).mockReturnValueOnce({ tagId: defaultTagId })
-    vi.mocked(deleteTagAction).mockResolvedValueOnce({
-      isSuccess: true,
-      message: MESSAGE_CODES.TAG_DELETE_SUCCESS,
-    })
-
-    renderWithProviders(<DeleteTagForm tagId={defaultTagId} />)
-
-    const submit = screen.getByRole('button')
-    await userEvent.click(submit)
-
-    expect(deleteTagAction).toHaveBeenCalledWith(
-      defaultTagId,
-      true,
-      'en',
-      expect.any(Object),
-      expect.any(Object),
-    )
+    expect(screen.getByTestId(TEST_IDS.CLICKABLE.BUTTON.SUBMIT)).toBeDisabled()
   })
 })

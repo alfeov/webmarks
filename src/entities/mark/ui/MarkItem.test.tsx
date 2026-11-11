@@ -7,7 +7,7 @@ import { MarkItem, type MarkItemProps } from './MarkItem'
 const defaultProps: MarkItemProps = {
   id: '1',
   userId: '1',
-  title: 'Vercel',
+  title: 'vercel',
   description: 'Description',
   logoUrl: 'https://some-url.com',
   url: 'https://some-url.com',

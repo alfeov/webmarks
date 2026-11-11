@@ -41,7 +41,6 @@ export async function createMarkAction(
     userId: session.userId,
     ...validatedData,
     logoUrl: validatedData.logoUrl ?? null,
-    // if on the tag page then connect to tag
     tagId: defaultTagId,
   })
   if (!result.data)

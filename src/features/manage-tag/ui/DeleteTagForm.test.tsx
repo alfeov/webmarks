@@ -7,6 +7,9 @@ import { renderWithProviders } from '@/test/helpers/renderWithProviders'
 
 import { DeleteTagForm } from './DeleteTagForm'
 
+vi.mock('@/features/manage-tag/api/deleteTagAction', () => ({
+  deleteTagAction: vi.fn(),
+}))
 vi.mock('next/navigation')
 vi.mock('react', { spy: true })
 

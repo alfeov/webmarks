@@ -4,6 +4,8 @@ import { useParams } from 'next/navigation'
 import { useLocale, useTranslations } from 'next-intl'
 import { useActionState } from 'react'
 
+import { deleteTagAction } from '@/features/manage-tag/api/deleteTagAction'
+import type { DeleteTagFormState } from '@/features/manage-tag/model/types'
 import { TEST_IDS } from '@/shared/config/testids'
 import { useCloseDialogOn } from '@/shared/lib/hooks/useCloseDialogOn'
 import { useFetchingIndicatorManager } from '@/shared/lib/hooks/useFetchingIndicatorManager'
@@ -11,9 +13,6 @@ import { useNotificationManager } from '@/shared/lib/hooks/useNotificationManage
 import type { Tag } from '@/shared/lib/prisma/generated/client'
 import { Button } from '@/shared/ui/button'
 import { FieldDescription, FieldLegend, FieldSet } from '@/shared/ui/field'
-
-import { deleteTagAction } from '../api/deleteTagAction'
-import type { DeleteTagFormState } from '../model/types'
 
 const initialState: DeleteTagFormState = {
   isSuccess: false,

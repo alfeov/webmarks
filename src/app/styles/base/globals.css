@@ -12,6 +12,19 @@ html {
   }
 }
 
+/* Prevent ViewTransition animation overflowing */
+
+@supports (view-transition-group: contain) {
+  .scroll-container {
+    view-transition-name: content-scroll;
+    view-transition-group: contain;
+  }
+
+  ::view-transition-group-children(content-scroll) {
+    overflow: clip;
+  }
+}
+
 /* Exit-Enter */
 
 @supports (view-transition-name: unset) {

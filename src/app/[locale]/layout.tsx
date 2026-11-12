@@ -183,7 +183,9 @@ export default async function RootLayout({
             <nav className='h-full'>
               <AppSidebar />
             </nav>
-            <ScrollArea className='h-full w-full'>{children}</ScrollArea>
+            <ScrollArea className='scroll-container h-full w-full'>
+              {children}
+            </ScrollArea>
           </main>
         </Providers>
       </body>

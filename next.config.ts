@@ -21,6 +21,13 @@ const nextConfig: NextConfig = {
         as: '*.js',
       },
     },
+    ignoreIssue: [
+      {
+        // Bundler does not know about ::view-transition-group-children()
+        path: /globals\.css$/,
+        description: /view-transition-group-children/,
+      },
+    ],
   },
 
   poweredByHeader: false,

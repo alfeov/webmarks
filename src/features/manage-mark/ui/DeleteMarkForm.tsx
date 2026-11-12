@@ -3,6 +3,8 @@
 import { useTranslations } from 'next-intl'
 import { useActionState } from 'react'
 
+import { deleteMarkAction } from '@/features/manage-mark/api/deleteMarkAction'
+import type { DeleteMarkFormState } from '@/features/manage-mark/model/types'
 import { TEST_IDS } from '@/shared/config/testids'
 import { useCloseDialogOn } from '@/shared/lib/hooks/useCloseDialogOn'
 import { useFetchingIndicatorManager } from '@/shared/lib/hooks/useFetchingIndicatorManager'
@@ -10,9 +12,6 @@ import { useNotificationManager } from '@/shared/lib/hooks/useNotificationManage
 import type { WebMark } from '@/shared/lib/prisma/generated/client'
 import { Button } from '@/shared/ui/button'
 import { FieldDescription, FieldLegend, FieldSet } from '@/shared/ui/field'
-
-import { deleteMarkAction } from '../api/deleteMarkAction'
-import type { DeleteMarkFormState } from '../model/types'
 
 const initialState: DeleteMarkFormState = {
   isSuccess: false,

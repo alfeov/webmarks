@@ -1,6 +1,6 @@
 import { useEffect } from 'react'
 
-import { useFetchingIndicatorContext } from '../contexts/FetchingIndicatorContext'
+import { useFetchingIndicatorContext } from '@/shared/lib/contexts/FetchingIndicatorContext'
 
 export const hidingDelay = 1000
 

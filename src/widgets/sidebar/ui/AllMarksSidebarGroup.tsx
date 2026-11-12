@@ -10,8 +10,7 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
 } from '@/shared/ui/sidebar'
-
-import { useCloseMobileSidebarOnClick } from '../lib/useCloseMobileSidebarOnClick'
+import { useCloseMobileSidebarOnClick } from '@/widgets/sidebar/lib/useCloseMobileSidebarOnClick'
 
 export function AllMarksSidebarGroup() {
   const pathname = usePathname()

@@ -3,6 +3,12 @@ import nextVitals from 'eslint-config-next/core-web-vitals'
 import nextTs from 'eslint-config-next/typescript'
 import simpleImportSort from 'eslint-plugin-simple-import-sort'
 
+const noParentImports = {
+  group: ['../**/*'],
+  message:
+    'Relative imports from parent directories are disabled. Please use an absolute path or alias instead.',
+}
+
 const eslintConfig = defineConfig([
   ...nextVitals,
   ...nextTs,
@@ -43,13 +49,7 @@ const eslintConfig = defineConfig([
       'no-restricted-imports': [
         'warn',
         {
-          patterns: [
-            {
-              group: ['../**'],
-              message:
-                'Relative imports from parent directories are disabled. Please use an absolute path or alias instead.',
-            },
-          ],
+          patterns: [noParentImports],
         },
       ],
     },
@@ -66,6 +66,7 @@ const eslintConfig = defineConfig([
               group: ['@/test/*', 'tests/*'],
               message: 'Testing utility can not be used in non test files',
             },
+            noParentImports,
           ],
         },
       ],

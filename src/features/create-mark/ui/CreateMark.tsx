@@ -2,9 +2,9 @@
 
 import { useTranslations } from 'next-intl'
 
+import { MetaProvider } from '@/features/create-mark/model/MetaContext'
 import { FieldDescription, FieldLegend, FieldSet } from '@/shared/ui/field'
 
-import { MetaProvider } from '../model/MetaContext'
 import { CreateMarkForm } from './CreateMarkForm'
 import { LoadMetaForm } from './LoadMetaForm'
 

@@ -1,6 +1,5 @@
+import { cn } from '@/shared/lib/utils'
 import { Button } from '@/shared/ui/button'
-
-import { cn } from '../lib/utils'
 
 import { X } from 'lucide-react'
 

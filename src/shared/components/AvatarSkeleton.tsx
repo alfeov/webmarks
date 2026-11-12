@@ -1,6 +1,5 @@
+import { cn } from '@/shared/lib/utils'
 import { Skeleton } from '@/shared/ui/skeleton'
-
-import { cn } from '../lib/utils'
 
 interface AvatarSkeletonProps extends React.ComponentProps<typeof Skeleton> {
   size?: 'default' | 'sm' | 'lg'

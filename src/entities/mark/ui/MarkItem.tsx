@@ -1,3 +1,4 @@
+import type { WebMarkWithTags } from '@/entities/mark/model/types'
 import { TEST_IDS } from '@/shared/config/testids'
 import { Avatar, AvatarFallback, AvatarImage } from '@/shared/ui/avatar'
 import { Badge } from '@/shared/ui/badge'
@@ -8,8 +9,6 @@ import {
   CardFooter,
   CardTitle,
 } from '@/shared/ui/card'
-
-import type { WebMarkWithTags } from '../model/types'
 
 import PinIcon from '@/shared/assets/icons/pin.svg'
 

@@ -3,6 +3,9 @@
 import { useTranslations } from 'next-intl'
 import { useActionState } from 'react'
 
+import { createTagAction } from '@/features/create-tag/api/createTagAction'
+import { CREATE_TAG_FORM } from '@/features/create-tag/lib/constants'
+import type { CreateTagFormState } from '@/features/create-tag/model/types'
 import { InputField } from '@/shared/components/InputField'
 import { TEST_IDS } from '@/shared/config/testids'
 import { useCloseDialogOn } from '@/shared/lib/hooks/useCloseDialogOn'
@@ -10,10 +13,6 @@ import { useFetchingIndicatorManager } from '@/shared/lib/hooks/useFetchingIndic
 import { useNotificationManager } from '@/shared/lib/hooks/useNotificationManager'
 import { Button } from '@/shared/ui/button'
 import { FieldDescription, FieldLegend, FieldSet } from '@/shared/ui/field'
-
-import { createTagAction } from '../api/createTagAction'
-import { CREATE_TAG_FORM } from '../lib/constants'
-import type { CreateTagFormState } from '../model/types'
 
 const initialState: CreateTagFormState = {
   isSuccess: false,

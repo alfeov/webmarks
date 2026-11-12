@@ -4,6 +4,9 @@ import { useTranslations } from 'next-intl'
 import { useActionState, useEffect, useState } from 'react'
 
 import { loadMetaAction } from '@/features/create-mark/api/loadMetaAction'
+import { LOAD_META_FORM } from '@/features/create-mark/lib/constants'
+import { useMetaActionContext } from '@/features/create-mark/model/MetaContext'
+import type { LoadMetaFormState } from '@/features/create-mark/model/types'
 import { TEST_IDS } from '@/shared/config/testids'
 import { useFetchingIndicatorManager } from '@/shared/lib/hooks/useFetchingIndicatorManager'
 import { useNotificationManager } from '@/shared/lib/hooks/useNotificationManager'
@@ -16,10 +19,6 @@ import {
   InputGroupButton,
   InputGroupInput,
 } from '@/shared/ui/input-group'
-
-import { LOAD_META_FORM } from '../lib/constants'
-import { useMetaActionContext } from '../model/MetaContext'
-import type { LoadMetaFormState } from '../model/types'
 
 import { ClipboardPaste, CloudDownload } from 'lucide-react'
 

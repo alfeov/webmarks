@@ -3,8 +3,7 @@
 import { createContext, useCallback, useMemo, useState } from 'react'
 
 import { FetchingIndicator } from '@/shared/components/FetchingIndicator'
-
-import { createUseContextHook } from '../utils/createUseContextHook'
+import { createUseContextHook } from '@/shared/lib/utils/createUseContextHook'
 
 type FetchingIndicatorContextValue = {
   showFetchingIndicator: () => void

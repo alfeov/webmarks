@@ -3,7 +3,7 @@
 import { Suspense, use } from 'react'
 import { browser, createPortal } from 'react-dom'
 
-import { cn } from '../lib/utils'
+import { cn } from '@/shared/lib/utils'
 
 interface PortalWrapper {
   children: React.ReactNode

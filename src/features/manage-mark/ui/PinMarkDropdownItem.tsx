@@ -3,12 +3,11 @@
 import { useTranslations } from 'next-intl'
 import { startTransition, useActionState } from 'react'
 
+import { toggleMarkPinnedAction } from '@/features/manage-mark/api/toggleMarkPinnedAction'
 import { TEST_IDS } from '@/shared/config/testids'
 import { useFetchingIndicatorManager } from '@/shared/lib/hooks/useFetchingIndicatorManager'
 import type { WebMark } from '@/shared/lib/prisma/generated/client'
 import { DropdownMenuItem } from '@/shared/ui/dropdown-menu'
-
-import { toggleMarkPinnedAction } from '../api/toggleMarkPinnedAction'
 
 type PinMarkDropdownItemProps = Pick<WebMark, 'id' | 'pinned'>
 

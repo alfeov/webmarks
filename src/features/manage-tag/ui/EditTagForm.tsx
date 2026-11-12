@@ -3,6 +3,9 @@
 import { useTranslations } from 'next-intl'
 import { useActionState } from 'react'
 
+import { editTagAction } from '@/features/manage-tag/api/editTagAction'
+import { EDIT_TAG_FORM } from '@/features/manage-tag/lib/constants'
+import type { EditTagFormState } from '@/features/manage-tag/model/types'
 import { InputField } from '@/shared/components/InputField'
 import { TEST_IDS } from '@/shared/config/testids'
 import { useCloseDialogOn } from '@/shared/lib/hooks/useCloseDialogOn'
@@ -11,10 +14,6 @@ import { useNotificationManager } from '@/shared/lib/hooks/useNotificationManage
 import type { Tag } from '@/shared/lib/prisma/generated/client'
 import { Button } from '@/shared/ui/button'
 import { FieldDescription, FieldLegend, FieldSet } from '@/shared/ui/field'
-
-import { editTagAction } from '../api/editTagAction'
-import { EDIT_TAG_FORM } from '../lib/constants'
-import type { EditTagFormState } from '../model/types'
 
 type EditTagFormProps = Tag
 

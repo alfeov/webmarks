@@ -3,6 +3,9 @@
 import { useTranslations } from 'next-intl'
 import { useActionState } from 'react'
 
+import { editMarkAction } from '@/features/manage-mark/api/editMarkAction'
+import { EDIT_MARK_FORM } from '@/features/manage-mark/lib/constants'
+import type { EditMarkFormState } from '@/features/manage-mark/model/types'
 import { InputField } from '@/shared/components/InputField'
 import { TextareaField } from '@/shared/components/TextareaField'
 import { TEST_IDS } from '@/shared/config/testids'
@@ -12,10 +15,6 @@ import { useNotificationManager } from '@/shared/lib/hooks/useNotificationManage
 import type { WebMark } from '@/shared/lib/prisma/generated/client'
 import { Button } from '@/shared/ui/button'
 import { FieldDescription, FieldLegend, FieldSet } from '@/shared/ui/field'
-
-import { editMarkAction } from '../api/editMarkAction'
-import { EDIT_MARK_FORM } from '../lib/constants'
-import type { EditMarkFormState } from '../model/types'
 
 type EditMarkFormProps = WebMark
 

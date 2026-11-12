@@ -2,12 +2,12 @@
 
 import { updateTag } from 'next/cache'
 
+import { CreateTagFormSchema } from '@/features/create-tag/lib/CreateTagFormSchema'
+import type { CreateTagFormState } from '@/features/create-tag/model/types'
 import { MESSAGE_CODES } from '@/shared/api/constants'
 import { verifySession } from '@/shared/lib/session'
 import { validateFormData } from '@/shared/lib/utils/validateFormData'
 
-import { CreateTagFormSchema } from '../lib/CreateTagFormSchema'
-import type { CreateTagFormState } from '../model/types'
 import { createTag } from './createTag'
 
 export async function createTagAction(

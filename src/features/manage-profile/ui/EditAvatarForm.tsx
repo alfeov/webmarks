@@ -3,6 +3,9 @@
 import { useTranslations } from 'next-intl'
 import { useActionState } from 'react'
 
+import { editAvatarAction } from '@/features/manage-profile/api/editAvatarAction'
+import { EDIT_AVATAR_FORM } from '@/features/manage-profile/lib/constants'
+import type { EditAvatarFormState } from '@/features/manage-profile/model/types'
 import { InputField } from '@/shared/components/InputField'
 import { TEST_IDS } from '@/shared/config/testids'
 import { useCloseDialogOn } from '@/shared/lib/hooks/useCloseDialogOn'
@@ -11,10 +14,6 @@ import { useNotificationManager } from '@/shared/lib/hooks/useNotificationManage
 import type { User } from '@/shared/lib/prisma/generated/client'
 import { Button } from '@/shared/ui/button'
 import { FieldDescription, FieldLegend, FieldSet } from '@/shared/ui/field'
-
-import { editAvatarAction } from '../api/editAvatarAction'
-import { EDIT_AVATAR_FORM } from '../lib/constants'
-import type { EditAvatarFormState } from '../model/types'
 
 const initialState: EditAvatarFormState = {
   isSuccess: false,

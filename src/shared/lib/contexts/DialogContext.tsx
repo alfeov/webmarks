@@ -3,8 +3,7 @@
 import { createContext, useCallback, useMemo, useState } from 'react'
 
 import { UniversalDialog } from '@/shared/components/UniversalDialog'
-
-import { createUseContextHook } from '../utils/createUseContextHook'
+import { createUseContextHook } from '@/shared/lib/utils/createUseContextHook'
 
 type DialogContextValue = {
   openDialog: (dialogContent: React.ReactNode) => void

@@ -1,4 +1,4 @@
-import type { User } from '../prisma/generated/client'
+import type { User } from '@/shared/lib/prisma/generated/client'
 
 export type SessionPayload = {
   userId: User['id']

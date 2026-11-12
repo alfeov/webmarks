@@ -2,12 +2,12 @@
 
 import { updateTag } from 'next/cache'
 
+import { IdsSchema } from '@/features/manage-mark/lib/IdsSchema'
+import type { ChangeMarkTagsFormState } from '@/features/manage-mark/model/types'
 import { MESSAGE_CODES } from '@/shared/api/constants'
 import type { WebMark } from '@/shared/lib/prisma/generated/client'
 import { verifySession } from '@/shared/lib/session'
 
-import { IdsSchema } from '../lib/IdsSchema'
-import type { ChangeMarkTagsFormState } from '../model/types'
 import { setUserMarkTags } from './setUserMarkTags'
 
 export async function changeMarkTagsAction(

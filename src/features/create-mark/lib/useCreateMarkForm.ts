@@ -4,11 +4,11 @@ import { useParams } from 'next/navigation'
 import { startTransition, useActionState } from 'react'
 import { useForm } from 'react-hook-form'
 
+import { createMarkAction } from '@/features/create-mark/api/createMarkAction'
+import { useMetaStateContext } from '@/features/create-mark/model/MetaContext'
+import type { CreateMarkFormState } from '@/features/create-mark/model/types'
 import type { Tag } from '@/shared/lib/prisma/generated/client'
 
-import { createMarkAction } from '../api/createMarkAction'
-import { useMetaStateContext } from '../model/MetaContext'
-import type { CreateMarkFormState } from '../model/types'
 import { CREATE_MARK_FORM } from './constants'
 
 export const initialState: CreateMarkFormState = {

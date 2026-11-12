@@ -3,6 +3,9 @@
 import { useTranslations } from 'next-intl'
 import { useActionState } from 'react'
 
+import { signinAction } from '@/features/signin/api/signinAction'
+import { SIGNIN_FORM } from '@/features/signin/lib/constants'
+import type { SigninFormState } from '@/features/signin/model/types'
 import { InputField } from '@/shared/components/InputField'
 import { TEST_IDS } from '@/shared/config/testids'
 import { useCloseDialogOn } from '@/shared/lib/hooks/useCloseDialogOn'
@@ -10,10 +13,6 @@ import { useFetchingIndicatorManager } from '@/shared/lib/hooks/useFetchingIndic
 import { useNotificationManager } from '@/shared/lib/hooks/useNotificationManager'
 import { Button } from '@/shared/ui/button'
 import { FieldSet } from '@/shared/ui/field'
-
-import { signinAction } from '../api/signinAction'
-import { SIGNIN_FORM } from '../lib/constants'
-import type { SigninFormState } from '../model/types'
 
 export const initialState: SigninFormState = {
   isSuccess: false,

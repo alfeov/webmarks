@@ -1,11 +1,11 @@
 'use server'
 
+import { SignupFormSchema } from '@/features/signup/lib/SignupFormSchema'
+import type { SignupFormState } from '@/features/signup/model/types'
 import { MESSAGE_CODES } from '@/shared/api/constants'
 import { createSession } from '@/shared/lib/session'
 import { validateFormData } from '@/shared/lib/utils/validateFormData'
 
-import { SignupFormSchema } from '../lib/SignupFormSchema'
-import type { SignupFormState } from '../model/types'
 import { createUser } from './createUser'
 
 export async function signupAction(_: SignupFormState, formData: FormData) {

@@ -2,12 +2,12 @@
 
 import { updateTag } from 'next/cache'
 
+import { EditAvatarFormSchema } from '@/features/manage-profile/lib/EditAvatarFormSchema'
+import type { EditAvatarFormState } from '@/features/manage-profile/model/types'
 import { MESSAGE_CODES } from '@/shared/api/constants'
 import { verifySession } from '@/shared/lib/session'
 import { validateFormData } from '@/shared/lib/utils/validateFormData'
 
-import { EditAvatarFormSchema } from '../lib/EditAvatarFormSchema'
-import type { EditAvatarFormState } from '../model/types'
 import { updateUserAvatar } from './updateUserAvatar'
 
 export async function editAvatarAction(

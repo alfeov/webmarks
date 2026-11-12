@@ -19,7 +19,7 @@ import { AppSidebar } from '@/widgets/sidebar/ui/AppSidebar'
 
 import { Providers } from './_providers/Providers'
 
-import '../styles/index.css'
+import '@/app/styles/index.css'
 
 const fontExcalidraw = localFont({
   src: '../Excalifont-Regular.woff2',

@@ -1,11 +1,11 @@
 'use server'
 
+import { SigninFormSchema } from '@/features/signin/lib/SigninFormSchema'
+import type { SigninFormState } from '@/features/signin/model/types'
 import { MESSAGE_CODES } from '@/shared/api/constants'
 import { createSession } from '@/shared/lib/session'
 import { validateFormData } from '@/shared/lib/utils/validateFormData'
 
-import { SigninFormSchema } from '../lib/SigninFormSchema'
-import type { SigninFormState } from '../model/types'
 import { verifyUser } from './verifyUser'
 
 export async function signinAction(

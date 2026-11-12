@@ -4,6 +4,8 @@ import { useTranslations } from 'next-intl'
 import { useActionState } from 'react'
 
 import type { WebMarkWithTags } from '@/entities/mark/model/types'
+import { changeMarkTagsAction } from '@/features/manage-mark/api/changeMarkTagsAction'
+import type { ChangeMarkTagsFormState } from '@/features/manage-mark/model/types'
 import { TEST_IDS } from '@/shared/config/testids'
 import { useCloseDialogOn } from '@/shared/lib/hooks/useCloseDialogOn'
 import { useFetchingIndicatorManager } from '@/shared/lib/hooks/useFetchingIndicatorManager'
@@ -12,8 +14,6 @@ import type { Tag } from '@/shared/lib/prisma/generated/client'
 import { Button } from '@/shared/ui/button'
 import { FieldDescription, FieldLegend, FieldSet } from '@/shared/ui/field'
 
-import { changeMarkTagsAction } from '../api/changeMarkTagsAction'
-import type { ChangeMarkTagsFormState } from '../model/types'
 import { MarkTagItem } from './MarkTagItem'
 
 const initialState: ChangeMarkTagsFormState = {

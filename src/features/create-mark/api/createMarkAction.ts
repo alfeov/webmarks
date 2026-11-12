@@ -2,13 +2,16 @@
 
 import { updateTag } from 'next/cache'
 
+import { CreateMarkFormSchema } from '@/features/create-mark/lib/CreateMarkFormSchema'
+import type {
+  CreateMark,
+  CreateMarkFormState,
+} from '@/features/create-mark/model/types'
 import { MESSAGE_CODES } from '@/shared/api/constants'
 import type { Tag } from '@/shared/lib/prisma/generated/client'
 import { verifySession } from '@/shared/lib/session'
 import { validateFormData } from '@/shared/lib/utils/validateFormData'
 
-import { CreateMarkFormSchema } from '../lib/CreateMarkFormSchema'
-import type { CreateMark, CreateMarkFormState } from '../model/types'
 import { createMark } from './createMark'
 
 export async function createMarkAction(

@@ -2,6 +2,8 @@
 
 import { useTranslations } from 'next-intl'
 
+import { CREATE_MARK_FORM } from '@/features/create-mark/lib/constants'
+import { useCreateMarkForm } from '@/features/create-mark/lib/useCreateMarkForm'
 import { InputField } from '@/shared/components/InputField'
 import { TextareaField } from '@/shared/components/TextareaField'
 import { TEST_IDS } from '@/shared/config/testids'
@@ -10,9 +12,6 @@ import { useFetchingIndicatorManager } from '@/shared/lib/hooks/useFetchingIndic
 import { useNotificationManager } from '@/shared/lib/hooks/useNotificationManager'
 import { Button } from '@/shared/ui/button'
 import { FieldLegend, FieldSet } from '@/shared/ui/field'
-
-import { CREATE_MARK_FORM } from '../lib/constants'
-import { useCreateMarkForm } from '../lib/useCreateMarkForm'
 
 export function CreateMarkForm() {
   const { state, isPending, onSubmit, register } = useCreateMarkForm()

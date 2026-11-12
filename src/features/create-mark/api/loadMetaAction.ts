@@ -1,11 +1,11 @@
 'use server'
 
+import { LoadMetaFormSchema } from '@/features/create-mark/lib/LoadMetaFormSchema'
+import type { LoadMetaFormState } from '@/features/create-mark/model/types'
 import { MESSAGE_CODES } from '@/shared/api/constants'
 import { verifySession } from '@/shared/lib/session'
 import { validateFormData } from '@/shared/lib/utils/validateFormData'
 
-import { LoadMetaFormSchema } from '../lib/LoadMetaFormSchema'
-import type { LoadMetaFormState } from '../model/types'
 import { getMetadata } from './getMetadata'
 
 export async function loadMetaAction(

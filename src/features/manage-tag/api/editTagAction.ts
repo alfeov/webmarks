@@ -2,13 +2,13 @@
 
 import { updateTag } from 'next/cache'
 
+import { EditTagFormSchema } from '@/features/manage-tag/lib/EditTagFormSchema'
+import type { EditTagFormState } from '@/features/manage-tag/model/types'
 import { MESSAGE_CODES } from '@/shared/api/constants'
 import type { Tag } from '@/shared/lib/prisma/generated/client'
 import { verifySession } from '@/shared/lib/session'
 import { validateFormData } from '@/shared/lib/utils/validateFormData'
 
-import { EditTagFormSchema } from '../lib/EditTagFormSchema'
-import type { EditTagFormState } from '../model/types'
 import { updateUserTag } from './updateUserTag'
 
 export async function editTagAction(

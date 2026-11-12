@@ -8,8 +8,7 @@ import { TEST_IDS } from '@/shared/config/testids'
 import { Link } from '@/shared/i18n/navigation'
 import type { Tag } from '@/shared/lib/prisma/generated/client'
 import { SidebarMenuButton, SidebarMenuItem } from '@/shared/ui/sidebar'
-
-import { useCloseMobileSidebarOnClick } from '../lib/useCloseMobileSidebarOnClick'
+import { useCloseMobileSidebarOnClick } from '@/widgets/sidebar/lib/useCloseMobileSidebarOnClick'
 
 type TagSidebarMenuItemProps = Tag
 

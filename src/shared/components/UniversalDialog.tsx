@@ -2,12 +2,12 @@
 
 import { useTranslations } from 'next-intl'
 
+import { TEST_IDS } from '@/shared/config/testids'
+import { useDialogContext } from '@/shared/lib/contexts/DialogContext'
+import { useClickOutside } from '@/shared/lib/hooks/useClickOutside'
 import { Button } from '@/shared/ui/button'
 import { Dialog, DialogContent } from '@/shared/ui/dialog'
 
-import { TEST_IDS } from '../config/testids'
-import { useDialogContext } from '../lib/contexts/DialogContext'
-import { useClickOutside } from '../lib/hooks/useClickOutside'
 import { CloseDialogButton } from './CloseDialogButton'
 
 export function UniversalDialog({

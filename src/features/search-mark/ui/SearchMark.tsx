@@ -1,13 +1,13 @@
 import Form from 'next/form'
 import { useTranslations } from 'next-intl'
 
+import { SEARCH_MARK_FORM } from '@/features/search-mark/lib/constants'
 import {
   InputGroup,
   InputGroupAddon,
   InputGroupInput,
 } from '@/shared/ui/input-group'
 
-import { SEARCH_MARK_FORM } from '../lib/constants'
 import { SearchButton } from './SearchButton'
 
 export function SearchMark() {

@@ -7,6 +7,7 @@ import {
   submitForm,
 } from 'tests/utils/form'
 import { gotoAndWaitForHydration } from 'tests/utils/navigation'
+import { dialogScreenshot } from 'tests/utils/screenshot'
 import { openSidebar } from 'tests/utils/sidebar'
 
 import { CREATE_TAG_FORM } from '@/features/create-tag/lib/constants'
@@ -38,6 +39,8 @@ test('should create tag and show it in interface', async ({
     ).toHaveCount(0))
 
   await openCreateTagDialog(authorizedPage)
+
+  await dialogScreenshot(authorizedPage)
 
   await fillInputs({
     page: authorizedPage,

@@ -6,6 +6,7 @@ import {
   submitForm,
 } from 'tests/utils/form'
 import { gotoAndWaitForHydration } from 'tests/utils/navigation'
+import { dialogScreenshot } from 'tests/utils/screenshot'
 
 import { TEST_IDS } from '@/shared/config/testids'
 import { prisma } from '@/shared/lib/prisma'
@@ -45,6 +46,8 @@ test('should apply tags to mark and show in tag list checked tags if mark has ta
 
   await openChangeMarkTagsDialog(authorizedPage)
 
+  await dialogScreenshot(authorizedPage)
+
   const tagCheckbox = authorizedPage.getByTestId(
     TEST_IDS.CHANGEABLE.INPUT.MARK_TAG_CHECKBOX(tag.id),
   )
@@ -79,6 +82,7 @@ test('should apply tags to mark and show in tag list checked tags if mark has ta
     ).toBeVisible()
   })
 })
+
 test('should show corresponding error states', async ({
   authorizedPage,
   tag,

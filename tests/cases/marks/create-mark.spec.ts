@@ -7,6 +7,7 @@ import {
   submitForm,
 } from 'tests/utils/form'
 import { gotoAndWaitForHydration } from 'tests/utils/navigation'
+import { dialogScreenshot } from 'tests/utils/screenshot'
 import {
   expectFetchingIndicatorToBeHidden,
   expectSuccessToastToBeVisible,
@@ -42,6 +43,8 @@ test('should create mark and show it in interface', async ({
   )
 
   await openCreateMarkDialog(authorizedPage)
+
+  await dialogScreenshot(authorizedPage)
 
   await test.step('should paste url from clipboard', async () => {
     await authorizedPage.getByTestId(TEST_IDS.CLICKABLE.BUTTON.PASTE).click()

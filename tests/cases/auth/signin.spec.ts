@@ -6,6 +6,7 @@ import {
   submitForm,
 } from 'tests/utils/form'
 import { gotoAndWaitForHydration } from 'tests/utils/navigation'
+import { dialogScreenshot } from 'tests/utils/screenshot'
 
 import { SIGNIN_FORM } from '@/features/signin/lib/constants'
 import { TEST_IDS } from '@/shared/config/testids'
@@ -20,6 +21,8 @@ test('should login to existing account, show toast and close dialog on creation'
   page,
   user,
 }) => {
+  await dialogScreenshot(page)
+
   await fillInputs({
     page,
     fields: {

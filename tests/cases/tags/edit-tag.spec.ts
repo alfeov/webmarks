@@ -7,6 +7,7 @@ import {
   submitForm,
 } from 'tests/utils/form'
 import { gotoAndWaitForHydration } from 'tests/utils/navigation'
+import { dialogScreenshot } from 'tests/utils/screenshot'
 import { openSidebar } from 'tests/utils/sidebar'
 
 import { EDIT_TAG_FORM } from '@/features/manage-tag/lib/constants'
@@ -37,6 +38,8 @@ test('should edit tag and show it in interface', async ({
     ).toHaveText(tag.title))
 
   await openEditTagDialog(authorizedPage)
+
+  await dialogScreenshot(authorizedPage)
 
   await fillInputs({
     page: authorizedPage,

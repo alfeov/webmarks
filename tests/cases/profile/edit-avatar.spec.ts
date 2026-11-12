@@ -7,6 +7,7 @@ import {
   submitForm,
 } from 'tests/utils/form'
 import { gotoAndWaitForHydration } from 'tests/utils/navigation'
+import { dialogScreenshot } from 'tests/utils/screenshot'
 
 import { EDIT_AVATAR_FORM } from '@/features/manage-profile/lib/constants'
 import { TEST_IDS } from '@/shared/config/testids'
@@ -30,6 +31,8 @@ test('should edit profile avatar', async ({ authorizedPage, user }) => {
     ).toHaveAttribute('src', user.avatarUrl ?? ''))
 
   await openEditProfileAvatarDialog(authorizedPage)
+
+  await dialogScreenshot(authorizedPage)
 
   await fillInputs({
     page: authorizedPage,

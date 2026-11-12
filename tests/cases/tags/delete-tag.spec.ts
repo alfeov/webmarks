@@ -6,6 +6,7 @@ import {
   submitForm,
 } from 'tests/utils/form'
 import { gotoAndWaitForHydration } from 'tests/utils/navigation'
+import { dialogScreenshot } from 'tests/utils/screenshot'
 import { openSidebar } from 'tests/utils/sidebar'
 
 import { TEST_IDS } from '@/shared/config/testids'
@@ -36,6 +37,8 @@ test('should delete tag and remove it from sidebar', async ({
     ).toHaveCount(1))
 
   await openDeleteTagDialog(authorizedPage)
+
+  await dialogScreenshot(authorizedPage)
 
   await submitForm({
     page: authorizedPage,

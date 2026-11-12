@@ -6,6 +6,7 @@ import {
   submitForm,
 } from 'tests/utils/form'
 import { gotoAndWaitForHydration } from 'tests/utils/navigation'
+import { dialogScreenshot } from 'tests/utils/screenshot'
 
 import { SIGNUP_FORM } from '@/features/signup/lib/constants'
 import { TEST_IDS } from '@/shared/config/testids'
@@ -28,6 +29,8 @@ test.beforeEach(async ({ page }) => {
 test('should create new account, show toast and close dialog on creation', async ({
   page,
 }) => {
+  await dialogScreenshot(page)
+
   await fillInputs({
     page,
     fields: {

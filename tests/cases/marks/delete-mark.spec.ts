@@ -6,6 +6,7 @@ import {
   submitForm,
 } from 'tests/utils/form'
 import { gotoAndWaitForHydration } from 'tests/utils/navigation'
+import { dialogScreenshot } from 'tests/utils/screenshot'
 
 import { TEST_IDS } from '@/shared/config/testids'
 import { prisma } from '@/shared/lib/prisma'
@@ -28,6 +29,8 @@ test('should delete mark', async ({ authorizedPage, webmark }) => {
   })
 
   await openDeleteMarkTagsDialog(authorizedPage)
+
+  await dialogScreenshot(authorizedPage)
 
   await submitForm({ page: authorizedPage })
 

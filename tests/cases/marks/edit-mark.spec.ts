@@ -7,6 +7,7 @@ import {
   submitForm,
 } from 'tests/utils/form'
 import { gotoAndWaitForHydration } from 'tests/utils/navigation'
+import { dialogScreenshot } from 'tests/utils/screenshot'
 
 import { EDIT_MARK_FORM } from '@/features/manage-mark/lib/constants'
 import { TEST_IDS } from '@/shared/config/testids'
@@ -43,6 +44,8 @@ test('should edit mark and show it in interface', async ({
   })
 
   await openEditMarkDialog(authorizedPage)
+
+  await dialogScreenshot(authorizedPage)
 
   await test.step('inputs have values from webmark', async () => {
     await expect(

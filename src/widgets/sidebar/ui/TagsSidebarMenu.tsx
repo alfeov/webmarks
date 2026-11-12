@@ -1,4 +1,5 @@
 import { getTranslations } from 'next-intl/server'
+import { ViewTransition } from 'react'
 
 import { getAllUserTags } from '@/entities/tag/api/getAllUserTags'
 import { EmptyMessage } from '@/shared/components/EmptyMessage'
@@ -26,7 +27,16 @@ export async function TagsSidebarMenu() {
       )}
       {Boolean(tags.length) &&
         tags.map((tag) => (
-          <TagSidebarMenuItem key={`${tag.id}-${tag.updatedAt}`} {...tag} />
+          <ViewTransition
+            name={tag.id}
+            // to animate on update
+            key={`${tag.id}-${tag.updatedAt}`}
+            update='auto'
+            share='auto'
+            default='none'
+          >
+            <TagSidebarMenuItem {...tag} />
+          </ViewTransition>
         ))}
       {session && !tags.length && (
         <EmptyMessage

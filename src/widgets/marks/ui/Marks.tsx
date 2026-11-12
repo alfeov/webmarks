@@ -2,6 +2,7 @@ import { Suspense, ViewTransition } from 'react'
 
 import { CreateMarkButton } from '@/features/create-mark/ui/CreateMarkButton'
 import { SearchMark } from '@/features/search-mark/ui/SearchMark'
+import { TEST_IDS } from '@/shared/config/testids'
 import type { Tag } from '@/shared/lib/prisma/generated/client'
 
 import { MarkList } from './MarkList'
@@ -18,7 +19,10 @@ interface MarksProps {
 
 export async function Marks({ params, searchParams }: MarksProps) {
   return (
-    <div className='flex h-full flex-col gap-[30px] p-[30px]'>
+    <div
+      className='flex h-full flex-col gap-[30px] p-[30px]'
+      data-testid={TEST_IDS.STATIC.MARKS_WIDGET}
+    >
       <div className='flex flex-col-reverse justify-between gap-[15px] sm:flex-row'>
         <SearchMark />
         <CreateMarkButton />

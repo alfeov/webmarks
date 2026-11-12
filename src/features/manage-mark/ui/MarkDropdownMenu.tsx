@@ -44,7 +44,7 @@ export async function MarkDropdownMenu({ ...mark }: MarkDropDownMenuProps) {
           </Button>
         }
       />
-      <DropdownMenuContent>
+      <DropdownMenuContent data-testid={TEST_IDS.STATIC.MARK_DROPDOWN_CONTENT}>
         <DropdownMenuGroup>
           <OpenMarkDropdownItem url={mark.url} />
           <CopyLinkDropdownItem url={mark.url} />

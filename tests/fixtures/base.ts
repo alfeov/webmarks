@@ -1,7 +1,11 @@
 /* eslint-disable react-hooks/rules-of-hooks */
-import { test as base } from '@playwright/test'
+import { type Page, test as base } from '@playwright/test'
 
-export const test = base.extend({
+type Fixtures = {
+  page: Page
+}
+
+export const test = base.extend<Fixtures>({
   page: async ({ page }, use) => {
     await page.addInitScript(() => {
       // @ts-expect-error disable ViewTransition to prevent errors and test delay

@@ -40,7 +40,10 @@ export async function MarkList({ params, searchParams }: MarkListProps) {
   const session = await verifySession()
   if (!session) {
     return (
-      <Empty className='h-full'>
+      <Empty
+        className='h-full'
+        data-testid={TEST_IDS.STATIC.MARKS_UNAUTHORIZED_MESSAGE}
+      >
         <EmptyHeader>
           <EmptyMedia variant='icon'>
             <FaceSlightlyFrowning />
@@ -83,7 +86,10 @@ export async function MarkList({ params, searchParams }: MarkListProps) {
       ))}
     </MarkGrid>
   ) : (
-    <Empty className='h-full'>
+    <Empty
+      className='h-full'
+      data-testid={TEST_IDS.STATIC.MARKS_NOT_FOUND_MESSAGE}
+    >
       <EmptyHeader>
         <EmptyMedia variant='icon'>
           <FaceSlightlyFrowning />

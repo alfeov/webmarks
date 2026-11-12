@@ -31,7 +31,10 @@ export function UniversalDialog({
           className='gap-3'
           data-testid={TEST_IDS.STATIC.DIALOG}
         >
-          <CloseDialogButton onClick={closeDialog} />
+          <CloseDialogButton
+            onClick={closeDialog}
+            data-testid={TEST_IDS.CLICKABLE.BUTTON.CLOSE_DIALOG}
+          />
           <div className='no-scrollbar grid max-h-[70vh] gap-[10px] overflow-y-auto px-1 md:max-h-[90vh]'>
             {dialogContent}
             <Button variant='outline' onClick={closeDialog}>

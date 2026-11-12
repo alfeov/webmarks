@@ -110,7 +110,7 @@
     }
   },
   "TagsSidebarMenu": {
-    "unauthorizedMessage": "To view marks you must be authenticated",
+    "unauthorizedMessage": "To view tags you must be authenticated",
     "notFoundMessage": "There are no Tags yet"
   },
   "SearchButton": {

@@ -37,7 +37,7 @@ export function TagDropdownMenu({ ...tag }: TagDropdownMenuProps) {
           </Button>
         }
       />
-      <DropdownMenuContent>
+      <DropdownMenuContent data-testid={TEST_IDS.STATIC.TAG_DROPDOWN_CONTENT}>
         <DropdownMenuGroup>
           <EditTagDropdownItem {...tag} />
           <DeleteTagDropdownItem tagId={tag.id} />

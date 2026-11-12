@@ -17,14 +17,24 @@ export async function TagsSidebarMenu() {
   return (
     <SidebarMenu data-testid={TEST_IDS.STATIC.TAG_LIST}>
       {!session && (
-        <EmptyMessage className='pt-4'>{t('unauthorizedMessage')}</EmptyMessage>
+        <EmptyMessage
+          className='pt-4'
+          data-testid={TEST_IDS.STATIC.TAGS_UNAUTHORIZED_MESSAGE}
+        >
+          {t('unauthorizedMessage')}
+        </EmptyMessage>
       )}
       {Boolean(tags.length) &&
         tags.map((tag) => (
           <TagSidebarMenuItem key={`${tag.id}-${tag.updatedAt}`} {...tag} />
         ))}
       {session && !tags.length && (
-        <EmptyMessage className='pt-4'>{t('notFoundMessage')}</EmptyMessage>
+        <EmptyMessage
+          className='pt-4'
+          data-testid={TEST_IDS.STATIC.TAGS_NOT_FOUND_MESSAGE}
+        >
+          {t('notFoundMessage')}
+        </EmptyMessage>
       )}
     </SidebarMenu>
   )

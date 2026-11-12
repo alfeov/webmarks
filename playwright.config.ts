@@ -18,7 +18,7 @@ export default defineConfig({
   testDir: './tests',
   tsconfig: './tsconfig.test.json',
   snapshotPathTemplate:
-    '{testDir}/{testFileDir}/(snapshots)/{testFileName}/{arg}-{projectName}-{platform}{ext}',
+    '{testDir}/{testFileDir}/(snapshots)/{testFileName}/{arg}-{projectName}{ext}',
   /* Run tests in files in parallel */
   fullyParallel: false,
   /* Fail the build on CI if you accidentally left test.only in the source code. */

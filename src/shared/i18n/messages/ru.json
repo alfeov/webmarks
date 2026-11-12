@@ -110,7 +110,7 @@
     }
   },
   "TagsSidebarMenu": {
-    "unauthorizedMessage": "Чтобы просматривать закладки, необходимо авторизоваться",
+    "unauthorizedMessage": "Чтобы просматривать теги, необходимо авторизоваться",
     "notFoundMessage": "Здесь пока нет тегов"
   },
   "SearchButton": {

@@ -60,7 +60,9 @@ export async function Profile() {
           </Button>
         }
       />
-      <DropdownMenuContent>
+      <DropdownMenuContent
+        data-testid={TEST_IDS.STATIC.PROFILE_DROPDOWN_CONTENT}
+      >
         <DropdownMenuGroup>
           <DropdownMenuSub>
             <DropdownMenuSubTrigger

@@ -1,6 +1,7 @@
 import { useTranslations } from 'next-intl'
 import { Suspense } from 'react'
 
+import { TEST_IDS } from '@/shared/config/testids'
 import { SidebarGroup, SidebarGroupLabel } from '@/shared/ui/sidebar'
 
 import { SidebarMenuListSkeleton } from './SidebarMenuListSkeleton'
@@ -11,7 +12,7 @@ export function TagsSidebarGroup() {
   const t = useTranslations('TagsSidebarGroup')
 
   return (
-    <SidebarGroup>
+    <SidebarGroup data-testid={TEST_IDS.STATIC.TAGS_WIDGET}>
       <SidebarGroupLabel className='text-[16px]'>
         {t('label')}
       </SidebarGroupLabel>

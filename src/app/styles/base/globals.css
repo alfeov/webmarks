@@ -1,3 +1,7 @@
+html {
+  overflow-y: hidden;
+}
+
 /* Prevent ViewTransition with prefers-reduced-motion setting */
 
 @media (prefers-reduced-motion) {

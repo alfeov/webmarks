@@ -23,7 +23,7 @@ jobs:
         run: pnpm ci
 
       - name: Lint
-        run: pnpm lint
+        run: pnpm exec eslint
 
       - name: Prettier
         run: pnpm exec prettier --check "**/*.{js,ts,jsx,tsx,json,css,md}"
@@ -41,4 +41,4 @@ jobs:
         run: pnpm test:db:prepare
 
       - name: Run dom and node tests
-        run: test:run
+        run: pnpm test:run

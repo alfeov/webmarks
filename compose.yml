@@ -1,3 +1,4 @@
+name: webmarks
 services:
   db:
     image: postgres:18.3
@@ -15,16 +16,6 @@ services:
       interval: 5s
       timeout: 5s
       retries: 5
-
-  test-db:
-    image: postgres:18.3
-    restart: unless-stopped
-    environment:
-      - POSTGRES_USER=prisma
-      - POSTGRES_PASSWORD=prisma
-      - POSTGRES_DB=tests
-    ports:
-      - '5433:5432'
 
   nextjs-app:
     build:

@@ -9,12 +9,14 @@ on:
 jobs:
   ci:
     runs-on: ubuntu-latest
+    container:
+      image: node:22-alpine
     steps:
       - name: Checkout
         uses: actions/checkout@v6
 
       - name: pnpm
-        uses: pnpm/action-setup@v6
+        uses: pnpm/setup@v1
         with:
           cache: true
 
@@ -35,3 +37,9 @@ jobs:
 
       - name: TypeScript type check
         run: pnpm type
+
+      - name: Prepare database
+        run: pnpm test:db:prepare
+
+      - name: Run dom and node tests
+        run: test:run

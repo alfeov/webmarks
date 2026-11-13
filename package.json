@@ -25,7 +25,7 @@
     "prisma:view": "prisma studio",
     "prisma:apply-migrations": "prisma migrate deploy",
     "docker:up-db": "docker compose up db -d",
-    "docker:up-test-db": "docker compose up test-db -d",
+    "docker:up-test-db": "docker compose -f compose.test.yml --env-file .env.test up test-db -d",
     "prepare": "husky"
   },
   "dependencies": {

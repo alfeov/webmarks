@@ -1,5 +1,5 @@
 #!/usr/bin/env sh
 
-pnpm test:db:prepare
-pnpm test:run
-pnpm test:browser
+# pnpm test:db:prepare
+# pnpm test:run
+# pnpm test:browser

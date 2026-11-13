@@ -1,0 +1,17 @@
+name: Check
+on:
+  push:
+    branches:
+      - main
+      - dev
+      - ci/cd
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7
+      - name: Install deps
+        run: pnpm ci
+      - name: Lint
+        run: pnpm run lint

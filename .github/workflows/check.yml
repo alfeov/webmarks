@@ -40,5 +40,8 @@ jobs:
       - name: Prepare database
         run: pnpm test:db:prepare
 
-      - name: Run dom and node tests
+      - name: Tests (dom and node)
         run: pnpm test:run
+
+      - name: Tests (browser)
+        run: pnpm test:browser

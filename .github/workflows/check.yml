@@ -5,17 +5,33 @@ on:
       - main
       - dev
       - ci/cd
+
 jobs:
-  lint:
+  ci:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v6
+
       - name: pnpm
         uses: pnpm/action-setup@v6
         with:
           cache: true
+
       - name: Install deps
         run: pnpm ci
+
       - name: Lint
-        run: pnpm run lint
+        run: pnpm lint
+
+      - name: Prettier
+        run: pnpm exec prettier --check "**/*.{js,ts,jsx,tsx,json,css,md}"
+
+      - name: Generate Prisma types
+        run: pnpm exec prisma generate
+
+      - name: Generate Next types
+        run: pnpm exec next typegen
+
+      - name: TypeScript type check
+        run: pnpm type

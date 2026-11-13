@@ -9,8 +9,6 @@ on:
 jobs:
   ci:
     runs-on: ubuntu-latest
-    container:
-      image: node:22-alpine
     steps:
       - name: Checkout
         uses: actions/checkout@v6
@@ -18,6 +16,7 @@ jobs:
       - name: pnpm
         uses: pnpm/setup@v1
         with:
+          runtime: node@22
           cache: true
 
       - name: Install deps

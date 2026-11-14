@@ -1,4 +1,4 @@
-name: Check
+name: CI
 on:
   push:
     branches:
@@ -6,25 +6,14 @@ on:
       - ci/cd
 
 jobs:
-  ci:
+  check:
     runs-on: ubuntu-latest
-    strategy:
-      fail-fast: false
-      matrix:
-        shardIndex: [1, 2, 3, 4]
-        shardTotal: [4]
     steps:
       - name: Checkout
         uses: actions/checkout@v6
 
-      - name: pnpm
-        uses: pnpm/setup@v3
-        with:
-          runtime: node@22
-          cache: true
-
-      - name: Install deps
-        run: pnpm ci
+      - name: Setup
+        uses: ./.github/actions/setup
 
       - name: Lint
         run: pnpm exec eslint
@@ -36,19 +25,45 @@ jobs:
         run: pnpm exec prisma generate
 
       - name: Generate Next types
-        run: pnpm exec next typegen
+        run: pnpm exec dotenv -e .env.test -- next typegen
 
       - name: TypeScript type check
         run: pnpm type
 
-      - name: Build app
-        run: pnpm exec next build
+  test-dom-node:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+
+      - name: Setup
+        uses: ./.github/actions/setup
 
       - name: Prepare database
         run: pnpm test:db:prepare
 
       - name: Tests (dom and node)
         run: pnpm test:run
+
+  test-browser:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        shardIndex: [1, 2, 3, 4]
+        shardTotal: [4]
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+
+      - name: Setup
+        uses: ./.github/actions/setup
+
+      - name: Build app
+        run: pnpm exec dotenv -e .env.test next build
+
+      - name: Prepare database
+        run: pnpm test:db:prepare
 
       - name: Install Playwright Browsers
         run: pnpm exec playwright install --with-deps
@@ -66,20 +81,14 @@ jobs:
 
   merge-reports:
     if: ${{ !cancelled() }}
-    needs: [ci]
+    needs: [test-browser]
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v6
 
-      - name: pnpm
-        uses: pnpm/setup@v3
-        with:
-          runtime: node@22
-          cache: true
-
-      - name: Install deps
-        run: pnpm ci
+      - name: Setup
+        uses: ./.github/actions/setup
 
       - name: Download blob reports from GitHub Actions Artifacts
         uses: actions/download-artifact@v5

@@ -6,7 +6,7 @@ on:
       - ci/cd
 
 jobs:
-  check:
+  check-and-test:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -30,15 +30,6 @@ jobs:
       - name: TypeScript type check
         run: pnpm type
 
-  test-dom-node:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v6
-
-      - name: Setup
-        uses: ./.github/actions/setup
-
       - name: Prepare database
         run: pnpm test:db:prepare
 
@@ -58,6 +49,9 @@ jobs:
 
       - name: Setup
         uses: ./.github/actions/setup
+
+      - name: Generate Prisma types
+        run: pnpm exec prisma generate
 
       - name: Build app
         run: pnpm exec dotenv -e .env.test next build

@@ -18,7 +18,7 @@ export default defineConfig({
   testDir: './tests',
   tsconfig: './tsconfig.test.json',
   snapshotPathTemplate:
-    '{testDir}/{testFileDir}/(snapshots)/{testFileName}/{arg}-{projectName}{ext}',
+    '{testDir}/{testFileDir}/(snapshots)/{testFileName}/{arg}-{projectName}.{platform}{ext}',
   /* Run tests in files in parallel */
   fullyParallel: false,
   /* Fail the build on CI if you accidentally left test.only in the source code. */
@@ -46,7 +46,10 @@ export default defineConfig({
     screenshot: 'only-on-failure',
   },
 
-  timeout: 10_000,
+  // Fail the run after an hour, so that the reporters still produce a report.
+  globalTimeout: 60 * 60 * 1000,
+
+  // expect() settings
   expect: {
     timeout: 10_000,
     toHaveScreenshot: { maxDiffPixelRatio: 0.01, threshold: 0.1 },

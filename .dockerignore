@@ -19,11 +19,9 @@ dist/
 build/
 .vercel/
 
-# Tests and testing output (not needed in production images)
+# Testing output
 coverage/
 .nyc_output/
-__tests__/
-__mocks__/
 jest/
 cypress/
 cypress/screenshots/
@@ -31,12 +29,6 @@ cypress/videos/
 playwright-report/
 test-results/
 .vitest/
-vitest.config.*
-jest.config.*
-cypress.config.*
-playwright.config.*
-*.test.*
-*.spec.*
 
 # Local development and editor files
 .git/
@@ -58,14 +50,13 @@ playwright.config.*
 .env
 .env*.local
 .env.development
-.env.test
 .env.production.local
 
 # Docker configuration files (not needed inside build context)
 Dockerfile*
 .dockerignore
-compose.yaml
-compose.yml
+compose*.yaml
+compose*.yml
 docker-compose*.yaml
 docker-compose*.yml
 

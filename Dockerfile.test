@@ -1,0 +1,15 @@
+FROM mcr.microsoft.com/playwright:v1.64.1-jammy
+
+RUN npm install -g --force corepack && corepack enable
+
+WORKDIR /app
+
+COPY package.json pnpm-lock.yaml pnpm-workspace.yaml ./
+
+RUN pnpm ci
+
+COPY . .
+
+ENV PATH="/app/node_modules/.bin:${PATH}"
+
+CMD ["dotenv", "-e", ".env.test", "--", "playwright", "test"]

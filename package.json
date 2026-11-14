@@ -11,7 +11,7 @@
     "test:run": "dotenv -e .env.test -- vitest run",
     "test:dom": "vitest --project dom",
     "test:node": "dotenv -e .env.test -- vitest --project node",
-    "test:db:prepare": "pn docker:up-test-db && dotenv -e .env.test -- prisma migrate deploy",
+    "test:db:prepare": "pn docker:up:test-db && dotenv -e .env.test -- prisma migrate deploy",
     "test:coverage": "dotenv -e .env.test -- vitest run --coverage",
     "test:browser": "dotenv -e .env.test -- playwright test",
     "test:browser:ui": "dotenv -e .env.test -- playwright test --ui",
@@ -24,8 +24,9 @@
     "prisma:seed": "tsx prisma/seeds.ts",
     "prisma:view": "prisma studio",
     "prisma:apply-migrations": "prisma migrate deploy",
-    "docker:up-db": "docker compose up db -d",
-    "docker:up-test-db": "docker compose -f compose.test.yml --env-file .env.test up test-db -d --wait",
+    "docker:up:db": "docker compose up db -d",
+    "docker:up:test-db": "docker compose -f compose.test.yml --env-file .env.test up test-db -d --wait",
+    "docker:up:test-runner": "docker compose -f compose.test.yml --env-file .env.test up --abort-on-container-exit --exit-code-from test-runner",
     "prepare": "husky"
   },
   "dependencies": {

@@ -14,3 +14,19 @@ services:
       interval: 5s
       timeout: 5s
       retries: 5
+
+  test-runner:
+    build:
+      context: .
+      dockerfile: ./Dockerfile.test
+    init: true
+    env_file:
+      - .env.test
+    environment:
+      CI: 1
+      DATABASE_URL: postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@test-db:5432/${POSTGRES_DB}
+    depends_on:
+      test-db:
+        condition: service_healthy
+    volumes:
+      - ./tests:/app/tests

@@ -28,7 +28,7 @@ export default defineConfig({
   /* To prevent database incoherence */
   workers: 1,
   /* Reporter to use. See https://playwright.dev/docs/test-reporters */
-  reporter: process.env.CI ? 'dot' : 'html',
+  reporter: process.env.CI ? 'blob' : 'html',
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
   use: {
     /* Base URL to use in actions like `await page.goto('')`. */
@@ -95,7 +95,7 @@ export default defineConfig({
 
   /* Run your local dev server before starting the tests */
   webServer: {
-    command: 'pnpm build && dotenv -e .env.test pnpm start',
+    command: 'dotenv -e .env.test pnpm start',
     url: baseURL,
     reuseExistingServer: !process.env.CI,
   },

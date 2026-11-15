@@ -2,8 +2,8 @@ import type { NextConfig } from 'next'
 import createNextIntlPlugin from 'next-intl/plugin'
 
 const nextConfig: NextConfig = {
-  // uncomment to deploy with Docker
-  // output: 'standalone',
+  // For deploy with Docker
+  output: 'standalone',
 
   // increase build speed
   typescript: {

@@ -59,26 +59,8 @@ jobs:
       - name: Prepare database
         run: pnpm test:db:prepare
 
-      - name: Get Playwright version
-        id: playwright-version
-        run: |
-          VERSION=$(node -p "require('@playwright/test/package.json').version")
-          echo "version=$VERSION" >> "$GITHUB_OUTPUT"
-
-      - name: Cache Playwright browsers
-        uses: actions/cache@v6
-        id: playwright-cache
-        with:
-          path: ~/.cache/ms-playwright
-          key: playwright-${{ runner.os }}-${{ steps.playwright-version.outputs.version }}
-
-      - name: Install Playwright browsers
-        if: steps.playwright-cache.outputs.cache-hit != 'true'
+      - name: Install Playwright Browsers
         run: pnpm exec playwright install --with-deps
-
-      - name: Install Playwright system deps only
-        if: steps.playwright-cache.outputs.cache-hit == 'true'
-        run: pnpm exec playwright install-deps
 
       - name: Tests (browser)
         run: pnpm exec dotenv -e .env.test -- playwright test --shard=${{ matrix.shardIndex }}/${{ matrix.shardTotal }}

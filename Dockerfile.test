@@ -6,10 +6,8 @@ WORKDIR /app
 
 COPY package.json pnpm-lock.yaml pnpm-workspace.yaml ./
 
-RUN pnpm ci
+RUN --mount=type=cache,id=pnpm,target=/var/cache/pnpm pnpm ci --store-dir /var/cache/pnpm
 
 COPY . .
 
-ENV PATH="/app/node_modules/.bin:${PATH}"
-
-CMD ["sh", "-c", "pnpm build && dotenv -e .env.test -- playwright test"]
+CMD ["sh", "-c", "pnpm exec prisma migrate deploy && pnpm exec next build && pnpm exec playwright test"]

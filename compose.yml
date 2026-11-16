@@ -1,5 +1,20 @@
 name: webmarks
 services:
+  migrator:
+    profiles: ['tools']
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+      target: migrator
+    env_file:
+      - .env
+    environment:
+      COREPACK_ENABLE_DOWNLOAD_PROMPT: '0'
+      DATABASE_URL: postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@db:5432/${POSTGRES_DB}
+    depends_on:
+      db:
+        condition: service_healthy
+
   db:
     image: postgres:18.3
     restart: unless-stopped

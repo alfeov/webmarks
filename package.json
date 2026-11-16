@@ -25,7 +25,8 @@
     "prisma:view": "prisma studio",
     "prisma:apply-migrations": "prisma migrate deploy",
     "docker:up:db": "docker compose up db -d --wait",
-    "docker:up:nextjs-app": "docker compose up --abort-on-container-exit --exit-code-from nextjs-app",
+    "docker:up:nextjs-app": "docker compose up nextjs-app",
+    "docker:run:migrator": "docker compose run --rm migrator",
     "docker:up:test-db": "docker compose -f compose.test.yml --env-file .env.test up test-db -d --wait",
     "docker:up:test-runner": "docker compose -f compose.test.yml --env-file .env.test up --abort-on-container-exit --exit-code-from test-runner",
     "prepare": "husky"

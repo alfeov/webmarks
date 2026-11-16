@@ -10,6 +10,13 @@ COPY package.json pnpm-lock.yaml pnpm-workspace.yaml ./
 
 RUN --mount=type=cache,id=pnpm,target=/var/cache/pnpm pnpm install --store-dir /var/cache/pnpm --frozen-lockfile
 
+FROM deps AS migrator
+
+COPY prisma ./prisma
+COPY prisma.config.ts ./
+
+CMD ["sh", "-c", "pnpm exec prisma migrate deploy"]
+
 FROM base AS build
 
 ARG NEXT_PUBLIC_SITE_URL
@@ -19,6 +26,10 @@ ENV NODE_ENV=production
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .
 
+# Prisma
+RUN pnpm exec prisma generate
+
+# Build
 RUN pnpm run build
 
 FROM base AS runner

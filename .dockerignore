@@ -116,6 +116,9 @@ ehthumbs.db
 Thumbs.db
 Desktop.ini
 
+# Prisma
+prisma/generated/
+
 # AI/ML tool metadata and configs
 .cursor/
 .cursorrules

@@ -82,7 +82,7 @@ test('should apply empty string as valid and show fallback avatar', async ({
   await test.step('profile avatar fallback to have corresponding text', () =>
     expect(
       authorizedPage.getByTestId(TEST_IDS.STATIC.PROFILE_AVATAR_FALLBACK),
-    ).toHaveText(user.username.charAt(0).toUpperCase()))
+    ).toHaveText(user.username?.charAt(0).toUpperCase() ?? 'U'))
 })
 
 test('should show corresponding error states', async ({ authorizedPage }) => {

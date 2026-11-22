@@ -51,7 +51,7 @@ export async function Profile() {
                 data-testid={TEST_IDS.STATIC.PROFILE_AVATAR_FALLBACK}
               >
                 {session && user ? (
-                  user.username.charAt(0).toUpperCase()
+                  user.username?.charAt(0).toUpperCase()
                 ) : (
                   <FaceSlightlyFrowning />
                 )}
